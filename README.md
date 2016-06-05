@@ -18,7 +18,7 @@
 * [Typelevel Cats]
 * [Scalaz]
 * [Structures]
-
+* [Taming Cats]
 
 [Typelevel Cats]: https://github.com/typelevel/cats
 [Scalaz]: https://github.com/scalaz/scalaz
