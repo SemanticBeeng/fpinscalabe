@@ -6,5 +6,7 @@
 2. Compare implementations of concepts across [a number of frameworks](#frameworks).
 
 
-### Frameworks used [frameworks] ##
-1. [cats]: https://github.com/typelevel/cats "Typelevel Cats"
+### <a name="frameworks">Frameworks used</a>
+* [cats]
+
+[cats]: https://github.com/typelevel/cats "Typelevel Cats"
