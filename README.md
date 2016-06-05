@@ -14,19 +14,18 @@
 
 1. Determine if [Specs2] is indeed a net superior way to do [literate programming] in Scala when compared with [Scalatex], [Tut], [Dotlit], [Literator] and [Docco]
 
+### Why?
+
+Not trying to say more about functional programming in Scala but to increase the density of knowledge (per pixel, neuron, electron, click, etc) by
+
+1. Aggregating and cross-referencing between code, textual semantics and [resources](#resources)
+2. Using literate programming and deliberate learning
+
 ### <a name="resources">Resources used: frameworks, code bases, books, presentations, blogs, etc</a>
 * [Typelevel Cats]
 * [Scalaz]
 * [Structures]
 * [Taming Cats]
-
-### Why?
-
-Not trying to say more about functional programming in Scala but to increase the density of knowledge (per pixel, neuron, electron, click, etc) by
-1. Aggregating and cross-referencing between code, textual semantics and [resources](#resources)
-2. Using literate programming and deliberate learning
-
-
 
 [Typelevel Cats]: https://github.com/typelevel/cats
 [Scalaz]: https://github.com/scalaz/scalaz
