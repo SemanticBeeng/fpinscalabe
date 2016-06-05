@@ -8,10 +8,11 @@ scalaVersion := "2.11.8"
 /** Shell */
 shellPrompt := { state => "fpinscalabe> " }
 
-libraryDependencies ++= 
+libraryDependencies ++=
   Seq(
-    "org.specs2"      %% "specs2-core"    % "2.3.7",
-    "org.specs2"      %% "specs2-html"    % "2.3.7",
+    "org.specs2"      %% "specs2-core"    % "3.7",
+    "org.specs2"      %% "specs2-form"   % "3.7",
+    "org.specs2"      %% "specs2-html"    % "3.7",
     "org.scalaz"      %% "scalaz-core"    % "7.2.3",
     "com.chuusai"     %% "shapeless"      % "2.3.1"
   )
