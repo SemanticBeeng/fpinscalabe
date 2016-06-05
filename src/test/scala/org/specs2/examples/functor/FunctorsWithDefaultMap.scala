@@ -1,5 +1,6 @@
 package org.specs2.examples.functor
 
+import org.specs2.concepts._
 import org.specs2.common.SourceType.{CatsSpec, ScalazSpec}
 import org.specs2.ugbase.UserGuidePage
 
@@ -10,7 +11,7 @@ object FunctorsWithDefaultMap extends UserGuidePage {
 
   def is = "Using functors with 'anything that has map'".title ^ s2"""
 
-  [[Functor]] mapping (of a function) preserves the type/shape of the [[Functor]]: ${snippet{
+  $functor mapping (of a function) preserves the type/shape of the $functor: ${snippet{
 
   /**
    *

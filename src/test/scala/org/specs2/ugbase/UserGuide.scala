@@ -1,6 +1,6 @@
 package org.specs2.ugbase
 
-import org.specs2.examples.functor.{FunctorsWithCustomMap, FunctorsWithDefaultMap}
+import org.specs2.examples.functor.{FunctorFunctionLifting, FunctorsWithCustomMap, FunctorsWithDefaultMap}
 
 object UserGuide extends UserGuidePage { def is = "Functional Programming in Scala - by Example".title ^ s2"""
 
@@ -10,6 +10,7 @@ object UserGuide extends UserGuidePage { def is = "Functional Programming in Sca
   ## Functor examples
   ${link(FunctorsWithDefaultMap).hide}
   ${link(FunctorsWithCustomMap).hide}
+  ${link(FunctorFunctionLifting).hide}
 
   ## Applicative examples
 """
