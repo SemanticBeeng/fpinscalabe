@@ -4,7 +4,12 @@ import org.specs2._
 import org.specs2.common.SourceType.{CatsSpec, ScalazSpec}
 import org.specs2.ugbase.UserGuidePage
 
-object FunctorsWithDefaultMap extends UserGuidePage { def is = "Functor Examples".title ^ s2"""
+/**
+  *
+  */
+object FunctorsWithDefaultMap extends UserGuidePage {
+
+  def is = "Using functors with 'anything that has map'".title ^ s2"""
 
   [[Functor]] mapping (of a function) preserves the type/shape of the [[Functor]]: ${snippet{
 
@@ -23,7 +28,8 @@ object FunctorsWithDefaultMap extends UserGuidePage { def is = "Functor Examples
     // 8<--
 
     /**
-      * Source https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FunctorUsage.scala#L35-L41
+      * Source
+      * //https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FunctorUsage.scala#L35-L41
       */
     "Scalaz examples for [[Functor]]s like Option and List ".p
     eg { Functor[Option].map(Some("adsf"))(len)           must_== Some(4)   }
