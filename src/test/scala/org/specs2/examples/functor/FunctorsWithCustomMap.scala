@@ -16,7 +16,7 @@ object FunctorsWithCustomMap extends UserGuidePage {
   /**
    *
    */
-  class ScalazSpecification extends mutable.Specification with ScalazSpec {
+  class ScalazSpecification extends mutable.Spec with org.specs2.specification.dsl.mutable.TextDsl with ScalazSpec {
 
     // 8<--
     import scalaz.Functor
@@ -28,17 +28,15 @@ object FunctorsWithCustomMap extends UserGuidePage {
     case class Couple[A](a: A, b: A) extends Amount[A]
     case class Few[A](a: A, b: A, c: A) extends Amount[A]
 
-    object Amount {
-      implicit val functor: Functor[Amount] =
-        new Functor[Amount] {
-          def map[A, B](fa: Amount[A])(f: A => B): Amount[B] =
-            fa match {
-              case One(a) => One(f(a))
-              case Couple(a, b) => Couple(f(a), f(b))
-              case Few(a, b, c) => Few(f(a), f(b), f(c))
-            }
-        }
-    }
+    implicit val functor: Functor[Amount] =
+      new Functor[Amount] {
+        def map[A, B](fa: Amount[A])(f: A => B): Amount[B] =
+          fa match {
+            case One(a) => One(f(a))
+            case Couple(a, b) => Couple(f(a), f(b))
+            case Few(a, b, c) => Few(f(a), f(b), f(c))
+          }
+      }
 
     /**
       * Source
@@ -47,7 +45,6 @@ object FunctorsWithCustomMap extends UserGuidePage {
     "Scalaz examples for custom [[Functor]]s".p
 
     eg { Functor[Amount].map(One(6)) { x: Int => x * 7 } must_== One(42)   }
-    //eg { (One(6): Amount[Int]).map { x: Int => x * 7 } must_== One(42)   }
 
   }
 

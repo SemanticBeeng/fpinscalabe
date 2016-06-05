@@ -16,7 +16,7 @@ object FunctorsWithDefaultMap extends UserGuidePage {
   /**
    *
    */
-  class ScalazSpecification extends mutable.Specification with ScalazSpec {
+  class ScalazSpecification extends mutable.Spec with org.specs2.specification.dsl.mutable.TextDsl with ScalazSpec {
 
     // 8<--
     import scalaz.{Functor, std}
