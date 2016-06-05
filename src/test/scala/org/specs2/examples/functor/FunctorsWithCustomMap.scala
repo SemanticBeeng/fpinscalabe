@@ -1,7 +1,7 @@
 package org.specs2.examples.functor
 
+import org.fp.concepts._
 import org.specs2.common.SourceType.ScalazSpec
-import org.specs2.concepts._
 import org.specs2.examples.util.AmountExampleScalazSpec
 import org.specs2.ugbase.UserGuidePage
 

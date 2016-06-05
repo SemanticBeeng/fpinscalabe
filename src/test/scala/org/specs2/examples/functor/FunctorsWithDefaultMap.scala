@@ -1,6 +1,6 @@
 package org.specs2.examples.functor
 
-import org.specs2.concepts._
+import org.fp.concepts._
 import org.specs2.common.SourceType.{CatsSpec, ScalazSpec}
 import org.specs2.ugbase.UserGuidePage
 

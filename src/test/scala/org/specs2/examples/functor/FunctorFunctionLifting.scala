@@ -1,5 +1,6 @@
 package org.specs2.examples.functor
 
+import org.fp.concepts._
 import org.specs2.common.SourceType.ScalazSpec
 import org.specs2.examples.util.AmountExampleScalazSpec
 import org.specs2.ugbase.UserGuidePage
@@ -11,7 +12,7 @@ object FunctorFunctionLifting extends UserGuidePage {
 
   def is = "Lift functions in functors".title ^ s2"""
 
-  [[Functor]] function lifting makes sense for single argument functions: ${snippet{
+  $functor function lifting makes sense for single argument functions: ${snippet{
 
   /**
    *
@@ -22,12 +23,10 @@ object FunctorFunctionLifting extends UserGuidePage {
     import scalaz.Functor
 
     /**
-      * Source
       * //https://hyp.is/hI15eiZ4EeaiWYOVMxLWcA/archive.is/O43Km
       */
     override def is = s2"""
-      "Scalaz examples for custom [[Functor]]s"
-
+      "Scalaz examples for custom functor"
       ${
         //val inc = (x: Int) => x + 1
         val timesTwo = (x: Int) => x * 2
