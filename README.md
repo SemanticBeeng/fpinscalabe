@@ -12,20 +12,29 @@
 
 ### Technically
 
-1. Determine if [Specs2] is indeed a net superior way to do [literate programming] in Scala when compared with [Scalatex], [Tut], [Dotlit], [Literator] and [Docco]
+1. Show that [Specs2] is indeed *the* net superior way to do [literate programming] in Scala when compared with [Scalatex], [Tut], [Dotlit], [Literator] and [Docco]
+2. Advance some ideas about interlinking code and knowledge resources.
 
 ## Why?
 
 Not trying to say more about functional programming in Scala but to increase the density of knowledge (per pixel, neuron, electron, click, etc) by
 
-1. Aggregating and cross-referencing between code, textual semantics and [resources](#resources)
+1. Aggregating and cross-referencing between code, concepts (in wiki, ontologies, topic maps) and [unstructured resources](#unstructured_resources)
 2. Using literate programming and deliberate learning
 
 #### <a name="resources">Resources used: frameworks, code bases, books, presentations, blogs, etc</a>
+
+##### Structured resources (projects, frameworks, libraries, etc)
 * [Typelevel Cats]
 * [Scalaz]
 * [Structures]
 * [Taming Cats]
+
+##### <a name="unstructured_resources"> Unstructured resources (books, blogs, videos, evernotes, wikis, etc) </a>
+* [Learning Scalaz]
+* [Apocalisp]
+* [Higher Order]
+* etc
 
 #### License
 
@@ -45,3 +54,7 @@ See the LICENSE file for details.
 [Literator]: https://github.com/laughedelic/literator
 [Literati]: https://github.com/non/literati
 [Docco]: http://jashkenas.github.io/docco/
+
+[Learning Scalaz] http://eed3si9n.com/learning-scalaz/
+[Apocalisp] https://apocalisp.wordpress.com/
+[Higher Order] http://blog.higher-order.com/

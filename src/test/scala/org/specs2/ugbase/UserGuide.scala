@@ -1,17 +1,17 @@
 package org.specs2.ugbase
 
-object UserGuide extends UserGuidePage { def is = "User Guide".title ^ s2"""
+import org.specs2.examples.functor.{FunctorsWithCustomMap, FunctorsWithDefaultMap}
+
+object UserGuide extends UserGuidePage { def is = "Functional Programming in Scala - by Example".title ^ s2"""
 
  $specs2 is a library for writing executable software specifications in Scala.
-
- With $specs2 you can write:
-
- * specifications for simple classes (*unit* specifications)
- * specifications for full features (*acceptance* specifications)
-
   In this user guide, you will find:
 
-  TODO
+  ## Functor examples
+  ${link(FunctorsWithDefaultMap).hide}
+  ${link(FunctorsWithCustomMap).hide}
+
+  ## Applicative examples
 """
 
 }
