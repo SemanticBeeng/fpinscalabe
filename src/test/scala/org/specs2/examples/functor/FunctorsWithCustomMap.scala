@@ -1,6 +1,5 @@
 package org.specs2.examples.functor
 
-//import org.specs2._
 import org.specs2.common.SourceType.ScalazSpec
 import org.specs2.ugbase.UserGuidePage
 
