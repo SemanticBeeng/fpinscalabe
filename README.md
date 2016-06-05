@@ -27,6 +27,11 @@ Not trying to say more about functional programming in Scala but to increase the
 * [Structures]
 * [Taming Cats]
 
+#### License
+
+All code in this repository is [MIT-licensed](http://opensource.org/licenses/mit-license.php).
+See the LICENSE file for details.
+
 [Typelevel Cats]: https://github.com/typelevel/cats
 [Scalaz]: https://github.com/scalaz/scalaz
 [Structures]: https://github.com/mpilquist/Structures
