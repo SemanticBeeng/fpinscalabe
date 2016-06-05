@@ -1,6 +1,5 @@
 package org.specs2.examples.functor
 
-import org.specs2._
 import org.specs2.common.SourceType.{CatsSpec, ScalazSpec}
 import org.specs2.ugbase.UserGuidePage
 
@@ -16,7 +15,8 @@ object FunctorsWithDefaultMap extends UserGuidePage {
   /**
    *
    */
-  class ScalazSpecification extends mutable.Spec with org.specs2.specification.dsl.mutable.TextDsl with ScalazSpec {
+  class ScalazSpecification extends org.specs2.mutable.Spec
+                            with org.specs2.specification.dsl.mutable.TextDsl with ScalazSpec {
 
     // 8<--
     import scalaz.{Functor, std}
@@ -43,7 +43,8 @@ object FunctorsWithDefaultMap extends UserGuidePage {
   /**
     *
     */
-  class CatsSpecification extends mutable.Specification with CatsSpec {
+  class CatsSpecification extends org.specs2.mutable.Spec
+                          with org.specs2.specification.dsl.mutable.TextDsl with CatsSpec {
 
     // 8<--
     import cats.Functor

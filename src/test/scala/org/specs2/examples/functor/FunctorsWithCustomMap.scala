@@ -1,6 +1,6 @@
 package org.specs2.examples.functor
 
-import org.specs2._
+//import org.specs2._
 import org.specs2.common.SourceType.ScalazSpec
 import org.specs2.ugbase.UserGuidePage
 
@@ -16,7 +16,8 @@ object FunctorsWithCustomMap extends UserGuidePage {
   /**
    *
    */
-  class ScalazSpecification extends mutable.Spec with org.specs2.specification.dsl.mutable.TextDsl with ScalazSpec {
+  class ScalazSpecification extends org.specs2.mutable.Spec
+                            with org.specs2.specification.dsl.mutable.TextDsl with ScalazSpec {
 
     // 8<--
     import scalaz.Functor
@@ -44,10 +45,13 @@ object FunctorsWithCustomMap extends UserGuidePage {
       */
     "Scalaz examples for custom [[Functor]]s".p
 
-    eg { Functor[Amount].map(One(6)) { x: Int => x * 7 } must_== One(42)   }
-
+    eg { Functor[Amount].map(One(6)) { x: Int => x * 7 } must_== One(42) }
+//    eq {
+//      import org.specs2.matcher.{MustExpectations1=>_,ShouldExpectations=>_, _}
+//      import org.specs2.matcher.{_=>_}
+//      (One(6): Amount[Int]).map { x: Int => x * 7 } /*must_== One(42)*/
+//    }
   }
-
 
 }}
 
