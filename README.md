@@ -3,9 +3,8 @@
 ## Purpose
 
 1. Cover functional programming from principles
-2. Compare implementations of concepts across [a number of frameworks][#frameworks].
+2. Compare implementations of concepts across [a number of frameworks](#frameworks).
 
 
-
-## <a name="frameworks"> Frameworks covered
+## <a name="frameworks">Frameworks covered</a>
 * [cats]: https://github.com/typelevel/cats "Typelevel Cats"
