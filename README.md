@@ -12,7 +12,7 @@
 
 ### Technically
 
-1. Determine if [Specs2] is indeed a net superior way to do [literate programming] in Scala when compared with [Scalatex], [Tut] and [Dotlit]
+1. Determine if [Specs2] is indeed a net superior way to do [literate programming] in Scala when compared with [Scalatex], [Tut], [Dotlit], [Literator] and [Docco]
 
 ### <a name="resources">Resources used: frameworks, code bases, books, presentations, blogs, etc</a>
 * [Typelevel Cats]
@@ -29,3 +29,5 @@
 [Scalatex] https://github.com/lihaoyi/Scalatex
 [Tut] https://github.com/tpolecat/tut
 [Dotlit] https://github.com/zoopdoop/dotlit/blob/master/README.lit.md
+[Literator] https://github.com/laughedelic/literator
+[Docco] http://jashkenas.github.io/docco/
