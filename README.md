@@ -55,6 +55,6 @@ See the LICENSE file for details.
 [Literati]: https://github.com/non/literati
 [Docco]: http://jashkenas.github.io/docco/
 
-[Learning Scalaz] http://eed3si9n.com/learning-scalaz/
-[Apocalisp] https://apocalisp.wordpress.com/
-[Higher Order] http://blog.higher-order.com/
+[Learning Scalaz]: http://eed3si9n.com/learning-scalaz/
+[Apocalisp]: https://apocalisp.wordpress.com/
+[Higher Order]: http://blog.higher-order.com/
