@@ -6,7 +6,7 @@
 
 1. Cover functional programming from principles
 2. Document FP concepts in a semantically rich way
-3. Demonstrate FP concepts through implementations from [a number of frameworks and other sources](#resources)
+3. Demonstrate FP concepts through implementations from [a number of frameworks and other resources](#resources)
 4. Cross reference between code and FP concepts in order to strengthen the understanding
 5. Cross reference between code and FP concepts and resources for the same reason (longer term)
 
@@ -19,6 +19,13 @@
 * [Scalaz]
 * [Structures]
 * [Taming Cats]
+
+### Why?
+
+Not trying to say more about functional programming in Scala but to increase the density of knowledge (per pixel, neuron, electron, click, etc) by
+1. Aggregating and cross-referencing between code, textual semantics and [resources](#resources)
+2. Using literate programming and deliberate learning
+
 
 
 [Typelevel Cats]: https://github.com/typelevel/cats
