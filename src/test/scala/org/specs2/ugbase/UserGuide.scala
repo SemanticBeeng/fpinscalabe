@@ -1,4 +1,4 @@
-package org.specs2.examples
+package org.specs2.ugbase
 
 object UserGuide extends UserGuidePage { def is = "User Guide".title ^ s2"""
 

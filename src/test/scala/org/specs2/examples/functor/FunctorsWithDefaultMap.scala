@@ -1,11 +1,12 @@
-package org.specs2.examples
+package org.specs2.examples.functor
 
 import org.specs2._
 import org.specs2.common.SourceType.{CatsSpec, ScalazSpec}
+import org.specs2.ugbase.UserGuidePage
 
-object FunctorExamples extends UserGuidePage { def is = "Functor Examples".title ^ s2"""
+object FunctorsWithDefaultMap extends UserGuidePage { def is = "Functor Examples".title ^ s2"""
 
-  Mapping a function to a [[Functor]] preserves the type/shape of the [[Functor]].: ${snippet{
+  [[Functor]] mapping (of a function) preserves the type/shape of the [[Functor]]: ${snippet{
 
   /**
    *
@@ -13,9 +14,9 @@ object FunctorExamples extends UserGuidePage { def is = "Functor Examples".title
   class ScalazSpecification extends mutable.Specification with ScalazSpec {
 
     // 8<--
-    import scalaz.{std, Functor}
-    import std.option._
+    import scalaz.{Functor, std}
     import std.list._
+    import std.option._
 
 
     val len: String => Int = _.length
@@ -27,6 +28,7 @@ object FunctorExamples extends UserGuidePage { def is = "Functor Examples".title
     "Scalaz examples for [[Functor]]s like Option and List ".p
     eg { Functor[Option].map(Some("adsf"))(len)           must_== Some(4)   }
     eg { Functor[Option].map(None)(len)                   must_== None      }
+
     eg { Functor[List]  .map(List("qwer", "adsfg"))(len)  must_== List(4,5) }
     eg { Functor[List].  map(List(1, 2, 3))(_ * 2)        must_== List(2, 4, 6)}
 
@@ -50,6 +52,7 @@ object FunctorExamples extends UserGuidePage { def is = "Functor Examples".title
     "Cats examples for [[Functor]]s like Option and List ".p
     eg { Functor[Option].map(Some("adsf"))(len)           must_== Some(4)   }
     eg { Functor[Option].map(None)(len)                   must_== None      }
+
     eg { Functor[List]  .map(List("qwer", "adsfg"))(len)  must_== List(4,5) }
     eg { Functor[List].  map(List(1, 2, 3))(_ * 2)        must_== List(2, 4, 6)}
   }

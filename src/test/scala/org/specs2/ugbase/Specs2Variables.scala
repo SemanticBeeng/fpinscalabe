@@ -1,4 +1,4 @@
-package org.specs2.examples
+package org.specs2.ugbase
 
 //import info.guide.BuildInfo
 

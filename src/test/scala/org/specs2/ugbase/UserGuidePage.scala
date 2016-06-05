@@ -1,4 +1,4 @@
-package org.specs2.examples
+package org.specs2.ugbase
 
 import org.specs2._
 import org.specs2.form.Card

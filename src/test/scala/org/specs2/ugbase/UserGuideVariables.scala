@@ -1,4 +1,4 @@
-package org.specs2.examples
+package org.specs2.ugbase
 
 trait UserGuideVariables extends Specs2Variables {
   val specs2 = "<s2>specs2</s2>"
