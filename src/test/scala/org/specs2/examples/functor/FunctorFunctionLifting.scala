@@ -3,6 +3,7 @@ package org.specs2.examples.functor
 import org.fp.concepts._
 import org.specs2.common.SourceType.ScalazSpec
 import org.specs2.examples.util.AmountExampleScalazSpec
+import org.specs2.execute.SnippetParams
 import org.specs2.ugbase.UserGuidePage
 
 /**
@@ -10,34 +11,33 @@ import org.specs2.ugbase.UserGuidePage
   */
 object FunctorFunctionLifting extends UserGuidePage {
 
+  implicit val snippetParams = SnippetParams(evalCode = true)
+
   def is = "Lift functions in functors".title ^ s2"""
 
   $functor function lifting makes sense for single argument functions: ${snippet{
 
-  /**
-   *
-   */
-  class ScalazSpecification extends AmountExampleScalazSpec
-                            with org.specs2.specification.dsl.mutable.TextDsl with ScalazSpec {
+    sealed trait Amount[A]
+    case class One[A](a: A) extends Amount[A]
+    case class Couple[A](a: A, b: A) extends Amount[A]
+    case class Few[A](a: A, b: A, c: A) extends Amount[A]
 
     import scalaz.Functor
-
-    /**
-      * //https://hyp.is/hI15eiZ4EeaiWYOVMxLWcA/archive.is/O43Km
-      */
-    override def is = s2"""
-      "Scalaz examples for custom functor"
-      ${
-        //val inc = (x: Int) => x + 1
-        val timesTwo = (x: Int) => x * 2
-        val amountTimesTwo = Functor[Amount].lift(timesTwo)
-
-        amountTimesTwo(Few(1,2,3)) must_== Few(2,4,6)
+    implicit val functor: Functor[Amount] =
+      new Functor[Amount] {
+        def map[A, B](fa: Amount[A])(f: A => B): Amount[B] =
+          fa match {
+            case One(a) => One(f(a))
+            case Couple(a, b) => Couple(f(a), f(b))
+            case Few(a, b, c) => Few(f(a), f(b), f(c))
+          }
       }
-      """
-  }
+    val timesTwo = (x: Int) => x * 2
+    val amountTimesTwo = Functor[Amount].lift(timesTwo)
 
-}}
+    amountTimesTwo(Few(1,2,3)) must_== Few(3,4,6)
+
+}.eval}
 
 """
 }

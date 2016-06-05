@@ -1,6 +1,7 @@
 package org.specs2.ugbase
 
 import org.specs2._
+import org.specs2.execute.SnippetParams
 import org.specs2.form.Card
 import org.specs2.specification.core.Fragments
 import org.specs2.specification.{Forms, Snippets}
@@ -9,6 +10,8 @@ import org.specs2.specification.{Forms, Snippets}
  * base class for creating specs2 user guide pages.
  */
 abstract class UserGuidePage extends Specification with UserGuideVariables with Snippets with Forms {
+
+  //implicit val snippetParams = SnippetParams(evalCode = true)
   override def map(fs: =>Fragments) = super.map(fs.compact)
 }
 
