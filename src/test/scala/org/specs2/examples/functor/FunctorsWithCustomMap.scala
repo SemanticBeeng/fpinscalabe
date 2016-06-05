@@ -44,9 +44,10 @@ object FunctorsWithCustomMap extends UserGuidePage {
       * Source
       * //https://hyp.is/hI15eiZ4EeaiWYOVMxLWcA/archive.is/O43Km
       */
-    "Scalaz examples for [[Functor]]s like Option and List ".p
+    "Scalaz examples for custom [[Functor]]s".p
 
-    eg { (One(6): Amount[Int]).map { x: Int => x * 7 } must_== One(42)   }
+    eg { Functor[Amount].map(One(6)) { x: Int => x * 7 } must_== One(42)   }
+    //eg { (One(6): Amount[Int]).map { x: Int => x * 7 } must_== One(42)   }
 
   }
 
