@@ -8,5 +8,5 @@
 
 
 ## Details
-* [1] : Frameworks covered
-   * [cats]: https://github.com/typelevel/cats "Typelevel Cats"
+[1] : Frameworks covered
+[cats]: https://github.com/typelevel/cats "Typelevel Cats"
