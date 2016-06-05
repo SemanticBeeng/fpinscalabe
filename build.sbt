@@ -11,9 +11,12 @@ shellPrompt := { state => "fpinscalabe> " }
 libraryDependencies ++=
   Seq(
     "org.specs2"      %% "specs2-core"    % "3.7",
-    "org.specs2"      %% "specs2-form"   % "3.7",
+    "org.specs2"      %% "specs2-form"    % "3.7",
     "org.specs2"      %% "specs2-html"    % "3.7",
+    // Scalaz
     "org.scalaz"      %% "scalaz-core"    % "7.2.3",
+    // Cats
+    "org.typelevel"   %% "cats"           % "0.6.0-M1",
     "com.chuusai"     %% "shapeless"      % "2.3.1"
   )
 
