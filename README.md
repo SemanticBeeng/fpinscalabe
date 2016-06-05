@@ -20,9 +20,11 @@
 * [Structures]
 * [Taming Cats]
 
+
 [Typelevel Cats]: https://github.com/typelevel/cats
 [Scalaz]: https://github.com/scalaz/scalaz
 [Structures]: https://github.com/mpilquist/Structures
+[Taming Cats]: https://github.com/lemastero/taming_cats
 
 [literate programming]: https://en.wikipedia.org/wiki/Literate_programming
 [Specs2]: https://github.com/etorreborre/specs2
