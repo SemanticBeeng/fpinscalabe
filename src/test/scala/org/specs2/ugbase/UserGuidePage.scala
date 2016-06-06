@@ -11,7 +11,8 @@ import org.specs2.specification.{Forms, Snippets}
  */
 abstract class UserGuidePage extends Specification with UserGuideVariables with Snippets with Forms {
 
-  //implicit val snippetParams = SnippetParams(evalCode = true)
+  implicit def snippetParams[T]: SnippetParams[T] = defaultSnippetParameters[T].copy(evalCode = true)
+
   override def map(fs: =>Fragments) = super.map(fs.compact)
 }
 

@@ -1,17 +1,12 @@
 package org.specs2.examples.functor
 
 import org.fp.concepts._
-import org.specs2.common.SourceType.ScalazSpec
-import org.specs2.examples.util.AmountExampleScalazSpec
-import org.specs2.execute.SnippetParams
 import org.specs2.ugbase.UserGuidePage
 
 /**
   *
   */
 object FunctorFunctionLifting extends UserGuidePage {
-
-  implicit val snippetParams = SnippetParams(evalCode = true)
 
   def is = "Lift functions in functors".title ^ s2"""
 
@@ -35,9 +30,9 @@ object FunctorFunctionLifting extends UserGuidePage {
     val timesTwo = (x: Int) => x * 2
     val amountTimesTwo = Functor[Amount].lift(timesTwo)
 
-    amountTimesTwo(Few(1,2,3)) must_== Few(3,4,6)
+    amountTimesTwo(Few(1,2,3)) must_== Few(2,4,6)
 
-}.eval}
+}}
 
 """
 }
