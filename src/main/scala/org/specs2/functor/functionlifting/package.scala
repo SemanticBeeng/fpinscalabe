@@ -2,8 +2,6 @@ package org.specs2.functor
 
 import org.specs2.common.SourceType.{CatsSpec, ScalazSpec}
 import org.specs2.functor.withcustommap.AmountExample
-import org.specs2.functor.withcustommap.CatsSpec._
-import org.specs2.functor.withcustommap.ScalazSpec._
 
 /**
   *
