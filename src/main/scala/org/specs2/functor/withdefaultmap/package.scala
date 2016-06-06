@@ -49,8 +49,7 @@ package object withdefaultmap {
     // 8<--
 
     /**
-      * Source
-      * //https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FunctorUsage.scala#L35-L41
+      * Source https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FunctorUsage.scala#L35-L41
       */
     "Scalaz examples for [[Functor]]s like Option and List ".p
     eg { Functor[Option].map(Some("adsf"))(len)           must_== Some(4)   }

@@ -1,6 +1,6 @@
 package org.specs2.examples.functor
 
-import org.fp.concepts._
+import org.fp._
 import org.specs2.functor.withdefaultmap.{CatsSpec, ScalazSpec}
 import org.specs2.ugbase.UserGuidePage
 
@@ -11,11 +11,14 @@ object FunctorsWithDefaultMap extends UserGuidePage {
 
   def is = "Using functors with 'anything that has map'".title ^ s2"""
 
-  $functor mapping (of a function) preserves the type/shape of the $functor
+  ${concepts.functor} mapping (of a function) preserves the type/shape of the ${concepts.functor}
 
-    in Scalaz ${ScalazSpec.is}
+    Examples for "${concepts.functor}"-like ${concepts.higherKindedType}-s like Option and List (things that have a default map).
+    Note that there is no need to declare a dedicated ${concepts.functor} but one is created ad-hoc.
 
-    in Cats ${CatsSpec.is}
+    * in ${resources.Scalaz}  ${ScalazSpec.is}
+
+    * in ${resources.Cats} ${CatsSpec.is}
 
 """
 }
