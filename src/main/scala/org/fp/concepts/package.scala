@@ -5,10 +5,10 @@ package org.fp
   */
 package object concepts {
 
-  val higherKindedType = "higherKindedType"
+  val higherKindedType = "Higher-Kinded type"
   val functor = "Functor"
-  val applicative = "applicative"
-  val functionLifting = "functionLifting"
+  val applicative = "Applicative"
+  val functionLifting = "Function lifting"
 }
 
 package object rules {
