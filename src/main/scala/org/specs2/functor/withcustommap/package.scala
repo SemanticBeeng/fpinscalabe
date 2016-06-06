@@ -1,6 +1,6 @@
 package org.specs2.functor
 
-import org.specs2.common.SourceType.{CatsSpec, ScalazSpec}
+import org.specs2.common.SourceType.{CatsSpecific, ScalazSpecific}
 
 
 /**
@@ -11,24 +11,15 @@ package object withcustommap {
   /**
     *
     */
-  //package object common {
+  trait AmountExample {
 
-    /**
-      *
-      */
-    trait AmountExample {
+    sealed trait Amount[A]
+    case class One[A](a: A) extends Amount[A]
+    case class Couple[A](a: A, b: A) extends Amount[A]
+    case class Few[A](a: A, b: A, c: A) extends Amount[A]
+  }
 
-      sealed trait Amount[A]
-      case class One[A](a: A) extends Amount[A]
-      case class Couple[A](a: A, b: A) extends Amount[A]
-      case class Few[A](a: A, b: A, c: A) extends Amount[A]
-    }
-
-  //}
-
-  //import org.specs2.functor.withcustommap.common.AmountExample
-
-  object ScalazSpec extends org.specs2.mutable.Specification with AmountExample with ScalazSpec {
+  trait AmountExample_FunctorScalaz extends AmountExample with ScalazSpecific {
 
     import scalaz.Functor
 
@@ -41,15 +32,9 @@ package object withcustommap {
             case Few(a, b, c) => Few(f(a), f(b), f(c))
           }
       }
-
-    eg { Functor[Amount].map(One(6)) { x: Int => x * 7 } must_== One(42) }
-    //todo eq { (One(6): Amount[Int]).map { x: Int => x * 7 } must_== One(42)}
-
   }
 
-  //import org.specs2.functor.withcustommap.common.AmountExample
-
-  object CatsSpec extends org.specs2.mutable.Specification with AmountExample with CatsSpec {
+  trait AmountExample_FunctorCats extends AmountExample with CatsSpecific {
 
     import cats.Functor
 
@@ -62,6 +47,26 @@ package object withcustommap {
             case Few(a, b, c) => Few(f(a), f(b), f(c))
           }
       }
+  }
+
+  /**
+    *
+    */
+  object ScalazSpec extends org.specs2.mutable.Specification with AmountExample_FunctorScalaz with ScalazSpecific {
+
+    import scalaz.Functor
+
+    eg { Functor[Amount].map(One(6)) { x: Int => x * 7 } must_== One(42) }
+    //todo eq { (One(6): Amount[Int]).map { x: Int => x * 7 } must_== One(42)}
+
+  }
+
+  /**
+    *
+    */
+  object CatsSpec extends org.specs2.mutable.Specification with AmountExample_FunctorCats with CatsSpecific {
+
+    import cats.Functor
 
     eg { Functor[Amount].map(One(6)) { x: Int => x * 7 } must_== One(42) }
     //todo eq { (One(6): Amount[Int]).map { x: Int => x * 7 } must_== One(42)}

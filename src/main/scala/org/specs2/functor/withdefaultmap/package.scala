@@ -1,6 +1,6 @@
 package org.specs2.functor
 
-import org.specs2.common.SourceType.{ScalazSpec, CatsSpec}
+import org.specs2.common.SourceType.{ScalazSpecific, CatsSpecific}
 import org.specs2.specification.dsl.mutable.{AutoExamples, TextDsl}
 
 
@@ -13,7 +13,7 @@ package object withdefaultmap {
     *
     */
   object CatsSpec extends org.specs2.mutable.Spec
-                  with TextDsl with AutoExamples with CatsSpec {
+                  with TextDsl with AutoExamples with CatsSpecific {
 
     // 8<--
     import cats.Functor
@@ -37,7 +37,7 @@ package object withdefaultmap {
     *
     */
   object ScalazSpec extends org.specs2.mutable.Spec
-                    with TextDsl with AutoExamples with ScalazSpec {
+                    with TextDsl with AutoExamples with ScalazSpecific {
 
     // 8<--
     import scalaz.{Functor, std}

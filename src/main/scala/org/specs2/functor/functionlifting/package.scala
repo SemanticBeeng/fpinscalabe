@@ -1,26 +1,19 @@
 package org.specs2.functor
 
-import org.specs2.common.SourceType.{CatsSpec, ScalazSpec}
-import org.specs2.functor.withcustommap.AmountExample
+import org.specs2.common.SourceType.{CatsSpecific, ScalazSpecific}
+import org.specs2.functor.withcustommap.{AmountExample_FunctorScalaz, AmountExample_FunctorCats}
 
 /**
   *
   */
 package object functionlifting {
 
-  object ScalazSpec extends org.specs2.mutable.Specification with AmountExample with ScalazSpec {
+  /**
+    *
+    */
+  object ScalazSpec extends org.specs2.mutable.Specification with AmountExample_FunctorScalaz with ScalazSpecific {
 
     import scalaz.Functor
-
-    implicit val functor: Functor[Amount] =
-      new Functor[Amount] {
-        def map[A, B](fa: Amount[A])(f: A => B): Amount[B] =
-          fa match {
-            case One(a) => One(f(a))
-            case Couple(a, b) => Couple(f(a), f(b))
-            case Few(a, b, c) => Few(f(a), f(b), f(c))
-          }
-      }
 
     val timesTwo = (x: Int) => x * 2
     val amountTimesTwo = Functor[Amount].lift(timesTwo)
@@ -29,26 +22,16 @@ package object functionlifting {
 
   }
 
-  //import org.specs2.functor.withcustommap.common.AmountExample
-
-  object CatsSpec extends org.specs2.mutable.Specification with AmountExample with CatsSpec {
+  /**
+    *
+    */
+  object CatsSpec extends org.specs2.mutable.Specification with AmountExample_FunctorCats with CatsSpecific {
 
     import cats.Functor
-
-    implicit val functor: Functor[Amount] =
-      new Functor[Amount] {
-        def map[A, B](fa: Amount[A])(f: A => B): Amount[B] =
-          fa match {
-            case One(a) => One(f(a))
-            case Couple(a, b) => Couple(f(a), f(b))
-            case Few(a, b, c) => Few(f(a), f(b), f(c))
-          }
-      }
 
     val timesTwo = (x: Int) => x * 2
     val amountTimesTwo = Functor[Amount].lift(timesTwo)
 
     amountTimesTwo(Few(1,2,3)) must_== Few(2,4,6)
-
   }
 }
