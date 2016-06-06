@@ -9,6 +9,7 @@ package object concepts {
   val functor = "Functor"
   val applicative = "Applicative"
   val functionLifting = "Function lifting"
+  val functionComposition = "Function composition"
 }
 
 package object rules {
