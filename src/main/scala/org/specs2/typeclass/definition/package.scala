@@ -1,6 +1,6 @@
 package org.specs2.typeclass
 
-import org.specs2.specification.{script, Snippets}
+import org.specs2.specification.{Grouped, script, Snippets}
 
 /**
   *
@@ -11,7 +11,7 @@ package object definition {
     * @see [[org.fp.resources.Scala]] [[org.fp.resources.Scalaz]]
     * @source https://hyp.is/6TGlfiwMEea_38vRFJt4xQ/archive.is/jnGcW
     */
-  object ScalaSpec extends script.Spec with Snippets { def is = sequential ^ s2"""
+  object ScalaSpec extends script.Spec with Snippets with Grouped { def is = sequential ^ s2"""
 
      Boiler plate code to define the type class related stuff manually ${snippet{
 
@@ -45,56 +45,76 @@ package object definition {
             implicit def F: CanTruthy[A] = ev
           }
       }
+
+      /**
+       * @todo these need to "see" the definitions above
+       */
+      "usages" - new group {
+        eg := { s2""" Here’s how we can define typeclass instances for Int: ${snippet{
+
+          implicit val intCanTruthy: CanTruthy[Int] = CanTruthy.truthys({
+            case 0 => false
+            case _ => true})
+
+          import ToCanIsTruthyOps._
+          10.truthy must_== true
+
+        }} """}
+
+        eg := { s2""" Next is for List[A]:${snippet{
+
+          implicit def listCanTruthy[A]: CanTruthy[List[A]] = CanTruthy.truthys({
+            case Nil => false
+            case _ => true
+          })
+
+          import ToCanIsTruthyOps._
+          List ("foo").truthy must_== true
+
+        }} """}
+
+        eg := { s2""" It looks like we need to treat Nil specially because of the nonvariance.${snippet{
+
+          implicit val nilCanTruthy: CanTruthy[scala.collection.immutable.Nil.type] = CanTruthy.truthys(_ => false)
+
+          import ToCanIsTruthyOps._
+          Nil.truthy must_== false
+
+        }}"""}
+
+        eg := { s2"""         And for Boolean using identity: ${snippet{
+
+          implicit val booleanCanTruthy: CanTruthy[Boolean] = CanTruthy.truthys(identity)
+
+          import ToCanIsTruthyOps._
+          false.truthy must_== false
+
+        }} """}
+
+        eg := { s2""" Using CanTruthy typeclass, let’s define truthyIf like LYAHFGG:
+            <i>Now let’s make a function that mimics the if statement, but that works with YesNo values.</i>
+        To delay the evaluation of the passed arguments, we can use pass-by-name: ${snippet{
+
+          import ToCanIsTruthyOps._
+          def truthyIf[A: CanTruthy, B, C](cond: A)(ifyes: => B)(ifno: => C) =
+            if (cond.truthy) ifyes
+            else ifno
+
+          // @todo duplicate
+          implicit def listCanTruthy[A]: CanTruthy[List[A]] = CanTruthy.truthys({
+            case Nil => false
+            case _ => true
+          })
+          // @todo duplicate
+          implicit val booleanCanTruthy: CanTruthy[Boolean] = CanTruthy.truthys(identity)
+
+          truthyIf (Nil:List[String]) {"YEAH!"} {"NO!"} must_== "NO!"
+          truthyIf (2 :: 3 :: 4 :: Nil) {"YEAH!"} {"NO!"} must_== "YEAH!"
+          truthyIf (true) {"YEAH!"} {"NO!"} must_== "YEAH!"
+
+        }}"""}
+      }
      }}
-
-    Here’s how we can define typeclass instances for Int:${snippet{
-//        implicit val intCanTruthy: CanTruthy[Int] = CanTruthy.truthys({
-//          case 0 => false
-//          case _ => true
-//        })
-//
-//        import ToCanIsTruthyOps._
-//
-//        10.truthy must_== true
-
-    }}
-
-    Next is for List[A]:${snippet{
-
-//        implicit def listCanTruthy[A]: CanTruthy[List[A]] = CanTruthy.truthys({
-//          case Nil => false
-//          case _   => true
-//        })
-//
-//        List("foo").truthy must_== true
-    }}
-
-    It looks like we need to treat Nil specially because of the nonvariance.${snippet{
-
-//      implicit val nilCanTruthy: CanTruthy[scala.collection.immutable.Nil.type] = CanTruthy.truthys(_ => false)
-//      Nil.truthy must_== false
-
-    }}
-
-    And for Boolean using identity: ${snippet{
-//      implicit val booleanCanTruthy: CanTruthy[Boolean] = CanTruthy.truthys(identity)
-//
-//      false.truthy must_== false
-    }}
-
-    Using CanTruthy typeclass, let’s define truthyIf like LYAHFGG:
-        Now let’s make a function that mimics the if statement, but that works with YesNo values.
-    To delay the evaluation of the passed arguments, we can use pass-by-name: ${snippet{
-
-//      def truthyIf[A: CanTruthy, B, C](cond: A)(ifyes: => B)(ifno: => C) =
-//        if (cond.truthy) ifyes
-//        else ifno
-//
-//      truthyIf (Nil:List[String]) {"YEAH!"} {"NO!"} must_== "NO!"
-//      truthyIf (2 :: 3 :: 4 :: Nil) {"YEAH!"} {"NO!"} must_== "YEAH!"
-//      truthyIf (true) {"YEAH!"} {"NO!"} must_== "YEAH!"
-
-    }}
     """
   }
 
