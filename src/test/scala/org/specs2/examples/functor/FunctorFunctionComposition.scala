@@ -9,7 +9,7 @@ import org.specs2.ugbase.UserGuidePage
   */
 object FunctorFunctionComposition extends UserGuidePage {
 
-  def is = "Composing functins through functors".title ^ s2"""
+  def is = "Composing functions through functors".title ^ s2"""
 
   ${concepts.functor}s enable ${concepts.functionComposition}
 

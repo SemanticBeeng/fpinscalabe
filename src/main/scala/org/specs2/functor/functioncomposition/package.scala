@@ -28,6 +28,7 @@ package object functioncomposition {
     */
   object CatsSpec extends org.specs2.mutable.Specification with CatsSpecific {
 
+    //@todo
 //    import cats.{std, syntax}
 //    //import std.AllInstances._
 //    import syntax.functor._

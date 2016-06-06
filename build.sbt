@@ -17,7 +17,10 @@ libraryDependencies ++=
     "org.scalaz"      %% "scalaz-core"    % "7.2.3",
     // Cats
     "org.typelevel"   %% "cats"           % "0.6.0-M1",
-    "com.chuusai"     %% "shapeless"      % "2.3.1"
+    "com.chuusai"     %% "shapeless"      % "2.3.1",
+    // Simulacrum
+    "com.github.mpilquist" % "simulacrum_2.11" % "0.7.0"
+
   )
 
 scalacOptions ++= Seq("-Yrangepos", "-deprecation", "-unchecked", "-feature", "-language:_")
