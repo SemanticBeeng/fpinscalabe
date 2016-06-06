@@ -9,7 +9,7 @@ import org.specs2.common.SourceType.{CatsSpecific, ScalazSpecific}
 package object withcustommap {
 
   /**
-    *
+    * Source https://hyp.is/GnoRUCvdEea3T6skHMRxAw/archive.is/O43Km
     */
   trait AmountExample {
 
@@ -32,6 +32,11 @@ package object withcustommap {
             case Few(a, b, c) => Few(f(a), f(b), f(c))
           }
       }
+
+    //todo
+//    private val one: Functor[Amount[Int]] = One(6)
+//    private val intToInt: (Int) => Int = { x: Int => x * 7 }
+//    one map intToInt
   }
 
   trait AmountExample_FunctorCats extends AmountExample with CatsSpecific {
@@ -57,7 +62,11 @@ package object withcustommap {
     import scalaz.Functor
 
     eg { Functor[Amount].map(One(6)) { x: Int => x * 7 } must_== One(42) }
-    //todo eq { (One(6): Amount[Int]).map { x: Int => x * 7 } must_== One(42)}
+
+//    import org.specs2.matcher.{ShouldExpectations =>_,_}
+//    import org.specs2.matcher.{MustExpectations1 =>_,_}
+//    import org.specs2.matcher.{_ =>_}
+//    eq { (One(6): Amount[Int]).map { x: Int => x * 7 } must_== One(42)}
 
   }
 

@@ -4,7 +4,7 @@ import org.specs2.common.SourceType.{CatsSpecific, ScalazSpecific}
 import org.specs2.functor.withcustommap.{AmountExample_FunctorScalaz, AmountExample_FunctorCats}
 
 /**
-  *
+  * Source https://hyp.is/-9XDGibxEeaaDnsg0VK0XA/archive.is/O43Km
   */
 package object functionlifting {
 
