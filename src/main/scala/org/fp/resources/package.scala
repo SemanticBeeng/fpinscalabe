@@ -5,7 +5,7 @@ package org.fp
   */
 package object resources {
 
-  val Scalaz = "Scalaz"
-  val Cats = "Cats"
+  val Scalaz = "Scalaz" //@@ "Framework"
+  val Cats = "Cats"     //@@ "Framework"
 
 }
