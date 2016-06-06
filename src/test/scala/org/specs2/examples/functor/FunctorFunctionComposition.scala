@@ -9,9 +9,9 @@ import org.specs2.ugbase.UserGuidePage
   */
 object FunctorFunctionComposition extends UserGuidePage {
 
-  def is = "Composing functions through functors".title ^ s2"""
+  def is = "Defining type classes".title ^ s2"""
 
-  ${concepts.functor}s enable ${concepts.functionComposition}
+  ${concepts.typeClass}s can be defined manually, the default ${resources.Scala} way, or automated using ${resources.Simulacrum}
 
     * in ${resources.Scalaz} ${ScalazSpec.is}
 

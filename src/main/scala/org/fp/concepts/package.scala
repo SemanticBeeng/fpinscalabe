@@ -5,6 +5,7 @@ package org.fp
   */
 package object concepts {
 
+  val typeClass = "type class"
   val higherKindedType = "Higher-Kinded type"
   val functor = "Functor"
   val applicative = "Applicative"
