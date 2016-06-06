@@ -20,5 +20,7 @@ object FunctorsWithDefaultMap extends UserGuidePage {
 
     * in ${resources.Cats} ${CatsSpec.is}
 
+  See ${"examples with custom functors" ~/ FunctorsWithCustomMap}
+
 """
 }
