@@ -45,7 +45,8 @@ package object functioncomposition {
       val inc = (x: Int) => x + 1
       val timesTwo = (x: Int) => x * 2
 
-      (inc map timesTwo)(3) must_== 8
+      val res: Int = (inc map timesTwo) (3)
+      res must_== 8
     }
 
     eg {
@@ -53,7 +54,8 @@ package object functioncomposition {
       val func2 = (y: Double) => y * 2
       val func3 = func1 map func2
 
-      func3(1) must_== 2.0
+      val res: Double = func3(1)
+      res must_== 2.0
     }
   }
 
