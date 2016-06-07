@@ -21,7 +21,7 @@ package object definition {
        ${incl[manual.Definitions]}
 
        And now usages to exemplify
-       ${manual.Usage.is} //@todo this does not work ++++++++++++++++++++++++++++
+       ${manual.Usages.is} //@todo this does not work ++++++++++++++++++++++++++++
       """
   }
 
@@ -42,11 +42,11 @@ package object definition {
        magically generates most of steps 2-4 just by putting @typeclass annotation. By chance, Stew O’Connor (@stewoconnor/@stew)’s #294 got merged,
        which refactors Cats to use it.
 
-       ${incl[auto.TypeclassDefinitionSnippet]}
+       ${incl[auto.Definitions]}
 
        And now usages to exemplify
 
-       ${manual.Usage.is} //@todo this does not work ++++++++++++++++++++++++++++
+       ${manual.Usages.is} //@todo this does not work ++++++++++++++++++++++++++++
       """
   }
 
