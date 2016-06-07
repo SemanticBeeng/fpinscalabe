@@ -68,7 +68,6 @@ package object manual {
 
       import CanTruthy.ops._
       10.truthy must_== true
-
     }
 
     eg {
@@ -81,7 +80,6 @@ package object manual {
 
       import CanTruthy.ops._
       List("foo").truthy must_== true
-
     }
 
     eg {
@@ -91,7 +89,6 @@ package object manual {
 
       import CanTruthy.ops._
       Nil.truthy must_== false
-
     }
 
     eg {
@@ -101,7 +98,6 @@ package object manual {
 
       import CanTruthy.ops._
       false.truthy must_== false
-
     }
 
     eg {
@@ -126,7 +122,6 @@ package object manual {
       truthyIf(Nil: List[String]) { "YEAH!" } { "NO!" } must_== "NO!"
       truthyIf(2 :: 3 :: 4 :: Nil) { "YEAH!" } { "NO!" } must_== "YEAH!"
       truthyIf(true) { "YEAH!" } { "NO!" } must_== "YEAH!"
-
     }
   }
 }

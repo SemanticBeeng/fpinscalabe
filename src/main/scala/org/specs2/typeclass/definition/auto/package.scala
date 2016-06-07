@@ -38,6 +38,7 @@ package object auto {
     import auto.Definitions._
 
     "Some examples of usages".p
+
     eg {
       "Here’s how we can define typeclass instances for Int:".p
 
@@ -48,7 +49,6 @@ package object auto {
 
       import CanTruthy.ops._
       10.truthy must_== true
-
     }
 
     eg {
@@ -61,7 +61,6 @@ package object auto {
 
       import CanTruthy.ops._
       List("foo").truthy must_== true
-
     }
 
     eg {
@@ -71,7 +70,6 @@ package object auto {
 
       import CanTruthy.ops._
       Nil.truthy must_== false
-
     }
 
     eg {
@@ -82,7 +80,6 @@ package object auto {
       import CanTruthy.ops._
 
       false.truthy must_== false
-
     }
 
     eg {
@@ -108,7 +105,6 @@ package object auto {
       truthyIf(Nil: List[String]) { "YEAH!" } { "NO!" } must_== "NO!"
       truthyIf(2 :: 3 :: 4 :: Nil) { "YEAH!" } { "NO!" } must_== "YEAH!"
       truthyIf(true) { "YEAH!" } { "NO!" } must_== "YEAH!"
-
     }
   }
 }
