@@ -1,5 +1,9 @@
 package org.specs2.typeclass
 
+import org.specs2.specification.core.mutable.SpecificationStructure
+
+//import org.specs2.specification.core.SpecificationStructure
+
 /**
   *
   */
@@ -11,7 +15,7 @@ package object definition {
     */
   object ScalaSpec extends org.specs2.mutable.Specification {
 
-    object defs {
+    object defs /*extends SpecificationStructure*/ {
       "Boiler plate code to define the type class related stuff manually".p
 
       trait CanTruthy[A] {
@@ -46,7 +50,11 @@ package object definition {
       }
     }
 
+    object defsSpec extends org.specs2.mutable.Specification {
+      def is = defs
+    }
     //todo: how do I inline/print "defs" here?
+    s2"""${defsSpec} """
 
     eg {
       "Here’s how we can define typeclass instances for Int:".p
