@@ -39,7 +39,7 @@ package object resources {
   case class Annotation[R <: ResourceTypeVal](resource: Resource[R], reference: String) extends intf.Annotation[R]
 
   /**
-    *
+    * Resources specific to this project about "functional programming in Scala"
     */
 
   val Scala = Resource[framework]("Scala", "https://github.com/scala/scala")
@@ -49,8 +49,6 @@ package object resources {
 
   val learningScalaz = Resource[blog]("Learning Scalaz", "http://eed3si9n.com/learning-scalaz/")
   val learningScalazFromLearningScalaz = Resource[blog]("Learning Scalaz from Learning Scalaz", "https://earldouglas.com/notes/learning-scalaz.html")
-
   val herdingCats = Resource[blog]("Herding Cats", "http://eed3si9n.com/herding-cats/")
-
 }
 
