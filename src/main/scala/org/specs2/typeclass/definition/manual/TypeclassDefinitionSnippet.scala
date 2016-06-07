@@ -1,4 +1,4 @@
-package org.specs2.typeclass.definition
+package org.specs2.typeclass.definition.manual
 
 /**
   *

@@ -8,6 +8,8 @@ scalaVersion := "2.11.8"
 /** Shell */
 shellPrompt := { state => "fpinscalabe> " }
 
+addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full)
+
 libraryDependencies ++=
   Seq(
     "org.specs2"      %% "specs2-core"    % "3.7",
