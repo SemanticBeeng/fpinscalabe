@@ -13,9 +13,9 @@ object TypeclassDefinition extends UserGuidePage {
 
   ${concepts.functor}s enable ${concepts.functionComposition}
 
-    * in ${resources.Scala} ${ScalaSpec.is}
+    * in ${resources.Scala.id} ${ScalaSpec.is}
 
-    * in ${resources.Simulacrum} ${SimulacrumSpec.is}
+    * in ${resources.Simulacrum.id} ${SimulacrumSpec.is}
 
 """
 }

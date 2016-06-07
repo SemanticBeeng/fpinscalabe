@@ -14,9 +14,9 @@ object FunctorsWithCustomMap extends UserGuidePage {
   ${concepts.functor} mapping (of a function) preserves the type/shape of the ${concepts.functor}
   Examples for a 'custom' ${concepts.functor}
 
-    * in ${resources.Scalaz} ${ScalazSpec.is}
+    * in ${resources.Scalaz.id} ${ScalazSpec.is}
 
-    * in ${resources.Cats} ${CatsSpec.is}
+    * in ${resources.Cats.id} ${CatsSpec.is}
 
   See ${"examples with functors that have a 'default map'" ~/ FunctorsWithDefaultMap}
 }

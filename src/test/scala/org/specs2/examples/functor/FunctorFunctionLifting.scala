@@ -13,9 +13,9 @@ object FunctorFunctionLifting extends UserGuidePage {
 
   ${concepts.functor} ${concepts.functionLifting} makes sense for single argument functions
 
-    * in ${resources.Scalaz} ${ScalazSpec.is}
+    * in ${resources.Scalaz.id} ${ScalazSpec.is}
 
-    * in ${resources.Cats} ${CatsSpec.is}
+    * in ${resources.Cats.id} ${CatsSpec.is}
 
 """
 }

@@ -1,7 +1,7 @@
 package org.specs2.functor
 
 import org.specs2.common.SourceType.{CatsSpecific, ScalazSpecific}
-
+import org.fp.bookmarks._
 
 /**
   *
@@ -9,7 +9,7 @@ import org.specs2.common.SourceType.{CatsSpecific, ScalazSpecific}
 package object withcustommap {
 
   /**
-    * Source https://hyp.is/GnoRUCvdEea3T6skHMRxAw/archive.is/O43Km
+    * @see [[ann_FunctionComposition]]
     */
   trait AmountExample {
 

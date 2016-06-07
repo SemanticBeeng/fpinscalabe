@@ -2,7 +2,7 @@ package org.specs2.functor
 
 import org.specs2.common.SourceType.{ScalazSpecific, CatsSpecific}
 import org.specs2.specification.dsl.mutable.{AutoExamples, TextDsl}
-
+import org.fp.bookmarks._
 
 /**
   *
@@ -36,7 +36,7 @@ package object withdefaultmap {
   }
 
   /**
-    * Source https://hyp.is/7jPreCwBEeagtMfxykENBg/archive.is/xhOwY
+    * @see [[ann_FunctionSyntax]]
     */
   object CatsSpec extends org.specs2.mutable.Spec with TextDsl with AutoExamples with CatsSpecific {
 

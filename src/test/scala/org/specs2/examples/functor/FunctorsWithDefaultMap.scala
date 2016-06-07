@@ -16,9 +16,9 @@ object FunctorsWithDefaultMap extends UserGuidePage {
     Examples for "${concepts.functor}"-like ${concepts.higherKindedType}-s like Option and List (things that have a default map).
     Note that there is no need to declare a dedicated ${concepts.functor} but one is created ad-hoc.
 
-    * in ${resources.Scalaz}  ${ScalazSpec.is}
+    * in ${resources.Scalaz.id}  ${ScalazSpec.is}
 
-    * in ${resources.Cats} ${CatsSpec.is}
+    * in ${resources.Cats.id} ${CatsSpec.is}
 
   See ${"examples with custom functors" ~/ FunctorsWithCustomMap}
 

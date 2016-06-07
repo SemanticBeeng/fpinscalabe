@@ -1,7 +1,7 @@
 package org.specs2.typeclass
 
 import org.specs2.common.SnippetHelper.incl
-import org.specs2.typeclass.definition._
+import org.fp.bookmarks._
 
 /**
   *
@@ -10,7 +10,7 @@ package object definition {
 
   /**
     * @see [[org.fp.resources.Scala]] [[org.fp.resources.Scalaz]]
-    * @source https://hyp.is/6TGlfiwMEea_38vRFJt4xQ/archive.is/jnGcW
+    * @see [[ann_makeYourOwnTypeClasses]]
     */
   object ScalaSpec extends org.specs2.Specification /*with Snippets*/ {
 

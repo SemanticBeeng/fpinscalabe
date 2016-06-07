@@ -2,9 +2,11 @@ package org.specs2.functor
 
 import org.specs2.common.SourceType.{CatsSpecific, ScalazSpecific}
 import org.specs2.functor.withcustommap.{AmountExample_FunctorScalaz, AmountExample_FunctorCats}
+import org.fp.bookmarks._
+
 
 /**
-  * Source https://hyp.is/-9XDGibxEeaaDnsg0VK0XA/archive.is/O43Km
+  * @see [[ann_FunctionLifting]]
   */
 package object functionlifting {
 
