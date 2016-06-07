@@ -46,7 +46,7 @@ package object definition {
 
        And now usages to exemplify
 
-       ${manual.Usages.is} //@todo this does not work ++++++++++++++++++++++++++++
+       ${auto.Usages.is} //@todo this does not work ++++++++++++++++++++++++++++
       """
   }
 
