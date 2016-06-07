@@ -1,8 +1,7 @@
 package org.specs2.typeclass
 
-import org.specs2.specification.Snippets
-//import org.specs2.specification.core.SpecStructure
 import org.specs2.common.SnippetHelper.incl
+import org.specs2.specification.core.SpecStructure
 
 /**
   *
@@ -20,15 +19,15 @@ package object definition {
 
         ${incl[TypeclassDefinitionSnippet]}
 START +++++++++++++++
-        ${Usage.is}
+        $a1
 DONE +++++++++++++++
       """
 
-//    lazy val uses = Usage.is
-//    lazy val s2 = S2.is
-//
-//    def a1 =
-//      SpecStructure.dependsOn(uses, s2) and SpecStructure.dependsOn(s2, uses).not
+    lazy val uses = Usage.is
+    lazy val thisSpec = ScalaSpec.is
+
+    def a1 =
+      SpecStructure.dependsOn(thisSpec, uses) and SpecStructure.dependsOn(uses, thisSpec).not
 
     import TypeclassDefinitionSnippet._
     object Usage extends org.specs2.mutable.Specification /*with Snippets */{
@@ -116,4 +115,3 @@ DONE +++++++++++++++
   }
 }
 
-object S2 extends org.specs2.Specification { def is = "text" ^ tag("s2")}
