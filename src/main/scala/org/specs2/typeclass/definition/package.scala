@@ -1,6 +1,7 @@
 package org.specs2.typeclass
 
-import org.specs2.specification.core.SpecStructure
+import org.specs2.specification.Snippets
+//import org.specs2.specification.core.SpecStructure
 import org.specs2.common.SnippetHelper.incl
 
 /**
@@ -12,7 +13,7 @@ package object definition {
     * @see [[org.fp.resources.Scala]] [[org.fp.resources.Scalaz]]
     * @source https://hyp.is/6TGlfiwMEea_38vRFJt4xQ/archive.is/jnGcW
     */
-  object ScalaSpec extends org.specs2.Specification {
+  object ScalaSpec extends org.specs2.Specification /*with Snippets*/ {
 
     def is = "Defining typeclasses manually".title ^ s"""
          Boiler plate code to define the type class related stuff manually
@@ -20,20 +21,17 @@ package object definition {
         ${incl[TypeclassDefinitionSnippet]}
 START +++++++++++++++
         ${Usage.is}
-        ${S2.is}
-        $a1
 DONE +++++++++++++++
       """
-    object S2 extends org.specs2.Specification { def is = "text" ^ tag("s2")}
 
-    lazy val uses = Usage.is
-    lazy val s2 = S2.is
-
-    def a1 =
-      SpecStructure.dependsOn(uses, s2) and SpecStructure.dependsOn(s2, uses).not
+//    lazy val uses = Usage.is
+//    lazy val s2 = S2.is
+//
+//    def a1 =
+//      SpecStructure.dependsOn(uses, s2) and SpecStructure.dependsOn(s2, uses).not
 
     import TypeclassDefinitionSnippet._
-    object Usage extends org.specs2.mutable.Specification {
+    object Usage extends org.specs2.mutable.Specification /*with Snippets */{
 
       "Some examples of usages".p
       eg {
@@ -116,6 +114,6 @@ DONE +++++++++++++++
 
     success
   }
-
-
 }
+
+object S2 extends org.specs2.Specification { def is = "text" ^ tag("s2")}
