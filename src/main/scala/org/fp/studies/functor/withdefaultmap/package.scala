@@ -1,4 +1,4 @@
-package org.specs2.functor
+package org.fp.studies.functor
 
 import org.specs2.common.SourceType.{ScalazSpecific, CatsSpecific}
 import org.specs2.specification.dsl.mutable.{AutoExamples, TextDsl}

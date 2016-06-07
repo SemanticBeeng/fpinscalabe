@@ -1,5 +1,6 @@
-package org.specs2.functor
+package org.fp.studies.functor
 
+import org.specs2.specification.dsl.mutable.AutoExamples
 import org.specs2.common.SourceType.{CatsSpecific, ScalazSpecific}
 import org.fp.bookmarks._
 
@@ -57,7 +58,7 @@ package object withcustommap {
   /**
     *
     */
-  object ScalazSpec extends org.specs2.mutable.Specification with AmountExample_FunctorScalaz with ScalazSpecific {
+  object ScalazSpec extends org.specs2.mutable.Spec with AutoExamples with AmountExample_FunctorScalaz with ScalazSpecific {
 
     import scalaz.Functor
 
@@ -73,7 +74,7 @@ package object withcustommap {
   /**
     *
     */
-  object CatsSpec extends org.specs2.mutable.Specification with AmountExample_FunctorCats with CatsSpecific {
+  object CatsSpec extends org.specs2.mutable.Spec with AutoExamples with AmountExample_FunctorCats with CatsSpecific {
 
     import cats.Functor
 

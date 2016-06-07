@@ -1,7 +1,7 @@
 package org.specs2.examples.functor
 
 import org.fp._
-import org.specs2.functor.functionlifting.{CatsSpec, ScalazSpec}
+import org.fp.studies.functor.functionlifting.{CatsSpec, ScalazSpec}
 import org.specs2.ugbase.UserGuidePage
 
 /**
