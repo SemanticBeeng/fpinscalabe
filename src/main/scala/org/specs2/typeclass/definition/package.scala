@@ -1,5 +1,6 @@
 package org.specs2.typeclass
 
+import org.specs2.{mutable, Specification}
 import org.specs2.common.SnippetHelper.incl
 
 /**
@@ -11,90 +12,92 @@ package object definition {
     * @see [[org.fp.resources.Scala]] [[org.fp.resources.Scalaz]]
     * @source https://hyp.is/6TGlfiwMEea_38vRFJt4xQ/archive.is/jnGcW
     */
-  object ScalaSpec extends org.specs2.mutable.Specification {
+  object ScalaSpec extends mutable.Specification {
     override def is = "Defining typeclasses manually".title ^ s"""
          Boiler plate code to define the type class related stuff manually
 
-    |    ${incl[TypeclassDefinitionSnippet]}
+        ${incl[TypeclassDefinitionSnippet]}
+START +++++++++++++++
+        ${Usage.is}
+        ${S2.is}
+DONE +++++++++++++++
       """
+    object S2 extends Specification { def is = "text" ^ tag("s2")}
 
     import TypeclassDefinitionSnippet._
+    object Usage extends mutable.Specification {
 
-    eg {
-      "Here’s how we can define typeclass instances for Int:".p
+      "Some examples of usages".p
+      eg {
+        "Here’s how we can define typeclass instances for Int:".p
 
-      //import defs._
-      implicit val intCanTruthy: CanTruthy[Int] = CanTruthy.truthys({
-        case 0 => false
-        case _ => true
-      })
+        implicit val intCanTruthy: CanTruthy[Int] = CanTruthy.truthys({
+          case 0 => false
+          case _ => true
+        })
 
-      import ToCanIsTruthyOps._
-      10.truthy must_== true
+        import ToCanIsTruthyOps._
+        10.truthy must_== true
 
-    }
+      }
 
-    eg {
-      "Next is for List[A]: ".p
+      eg {
+        "Next is for List[A]: ".p
 
-      //import defs._
-      implicit def listCanTruthy[A]: CanTruthy[List[A]] = CanTruthy.truthys({
-        case Nil => false
-        case _ => true
-      })
+        implicit def listCanTruthy[A]: CanTruthy[List[A]] = CanTruthy.truthys({
+          case Nil => false
+          case _ => true
+        })
 
-      import ToCanIsTruthyOps._
-      List("foo").truthy must_== true
+        import ToCanIsTruthyOps._
+        List("foo").truthy must_== true
 
-    }
+      }
 
-    eg {
-      "It looks like we need to treat Nil specially because of the nonvariance.".p
+      eg {
+        "It looks like we need to treat Nil specially because of the nonvariance.".p
 
-      //import defs._
-      implicit val nilCanTruthy: CanTruthy[scala.collection.immutable.Nil.type] = CanTruthy.truthys(_ => false)
+        implicit val nilCanTruthy: CanTruthy[scala.collection.immutable.Nil.type] = CanTruthy.truthys(_ => false)
 
-      import ToCanIsTruthyOps._
-      Nil.truthy must_== false
+        import ToCanIsTruthyOps._
+        Nil.truthy must_== false
 
-    }
+      }
 
-    eg {
-      "And for Boolean using identity: ".p
+      eg {
+        "And for Boolean using identity: ".p
 
-      //import defs._
-      implicit val booleanCanTruthy: CanTruthy[Boolean] = CanTruthy.truthys(identity)
+        implicit val booleanCanTruthy: CanTruthy[Boolean] = CanTruthy.truthys(identity)
 
-      import ToCanIsTruthyOps._
-      false.truthy must_== false
+        import ToCanIsTruthyOps._
+        false.truthy must_== false
 
-    }
+      }
 
-    eg {
-      "Using CanTruthy typeclass, let’s define truthyIf like LYAHFGG ".p
-      "<i>Now let’s make a function that mimics the if statement, but that works with YesNo values.</i>".p
-      "To delay the evaluation of the passed arguments, we can use pass-by-name: ".p
+      eg {
+        "Using CanTruthy typeclass, let’s define truthyIf like LYAHFGG ".p
+        "<i>Now let’s make a function that mimics the if statement, but that works with YesNo values.</i>".p
+        "To delay the evaluation of the passed arguments, we can use pass-by-name: ".p
 
-      //import defs._
+        import ToCanIsTruthyOps._
+        def truthyIf[A: CanTruthy, B, C](cond: A)(ifyes: => B)(ifno: => C) =
+          if (cond.truthy) ifyes
+          else ifno
 
-      import ToCanIsTruthyOps._
-      def truthyIf[A: CanTruthy, B, C](cond: A)(ifyes: => B)(ifno: => C) =
-        if (cond.truthy) ifyes
-        else ifno
+        // duplicate but good to see what needs to be in scope
+        implicit def listCanTruthy[A]: CanTruthy[List[A]] = CanTruthy.truthys({
+          case Nil => false
+          case _ => true
+        })
 
-      // duplicate but good to see what needs to be in scope
-      implicit def listCanTruthy[A]: CanTruthy[List[A]] = CanTruthy.truthys({
-        case Nil => false
-        case _ => true
-      })
+        // duplicate but good to see what needs to be in scope
+        implicit val booleanCanTruthy: CanTruthy[Boolean] = CanTruthy.truthys(identity)
 
-      // duplicate but good to see what needs to be in scope
-      implicit val booleanCanTruthy: CanTruthy[Boolean] = CanTruthy.truthys(identity)
+        truthyIf(Nil: List[String]) { "YEAH!" } { "NO!" } must_== "NO!"
+        truthyIf(2 :: 3 :: 4 :: Nil) { "YEAH!" } { "NO!" } must_== "YEAH!"
+        truthyIf(true) { "YEAH!" } { "NO!" } must_== "YEAH!"
 
-      truthyIf(Nil: List[String]) { "YEAH!" } { "NO!" } must_== "NO!"
-      truthyIf(2 :: 3 :: 4 :: Nil) { "YEAH!" } { "NO!" } must_== "YEAH!"
-      truthyIf(true) { "YEAH!" } { "NO!" } must_== "YEAH!"
-
+      }
     }
   }
 
