@@ -51,18 +51,5 @@ package object resources {
   val herdingCats = Resource[blog]("Herding Cats", "http://eed3si9n.com/herding-cats/")
 
   val timperrett = Resource[blog]("timperrett blog", "http://timperrett.com/")
-
-  //  import scalaz.Tags._
-//  import scalaz.Tag
-//
-//  type Tagged[U] = { type Tag = U }
-//  type @@[T, U] = T with Tagged[U]
-//
-//  sealed trait Scalaz
-//
-//  sealed trait KiloGram
-//  def KiloGram[A](a: A): A @@ KiloGram = Tag[A, KiloGram](a)
-//  val mass = KiloGram(20.0)
-
 }
 

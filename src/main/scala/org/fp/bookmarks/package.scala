@@ -9,7 +9,7 @@ package object bookmarks {
   /**
     * Bookmarks for [[learningScalaz]]
     */
-
+  val ann_newType = Annotation(learningScalaz, "https://hyp.is/qEArpi17EeaSGQvCBfOHEw/archive.is/eGwcT")
 
   /**
     * Bookmarks for [[learningScalazFromLearningScalaz]]
