@@ -31,6 +31,17 @@ package object basic {
       10 |+| 20 must_== 30
     }
 
+    /**
+      * @see [[ann_unboxNewTypesInScalaz]]
+      */
+    s"$keyPoint Use multiple $monoid-s for the same type and different 'combination' operations :".p
+    eg {
+      import scalaz._, syntax.semigroup._, std.anyVal._
+      import Tags._
+
+      Multiplication(2) |+| Multiplication(5) must_== 10
+    }
+
   }
 
   /**

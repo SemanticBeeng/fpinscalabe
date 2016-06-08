@@ -50,7 +50,9 @@ package object resources {
   val learningScalazFromLearningScalaz = Resource[blog]("Learning Scalaz from Learning Scalaz", "https://earldouglas.com/notes/learning-scalaz.html")
   val herdingCats = Resource[blog]("Herding Cats", "http://eed3si9n.com/herding-cats/")
 
-//  import scalaz.Tags._
+  val timperrett = Resource[blog]("timperrett blog", "http://timperrett.com/")
+
+  //  import scalaz.Tags._
 //  import scalaz.Tag
 //
 //  type Tagged[U] = { type Tag = U }
