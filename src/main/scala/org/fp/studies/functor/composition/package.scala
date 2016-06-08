@@ -8,12 +8,12 @@ import org.specs2.specification.dsl.mutable.{TextDsl, AutoExamples}
 
 /**
   *
-  * @see [[Scalaz]]
   * @see [[functorComposition]]
   */
 package object composition {
 
   /**
+    * @see [[Scalaz]]
     * Note the [[org.fp.resources.Scalaz]] dual syntax for function composition: 'map and '∘'
     */
   object ScalazSpec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {

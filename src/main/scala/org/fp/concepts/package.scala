@@ -19,6 +19,9 @@ package object concepts {
 
   //
   val applicative = "[applicative]"
+
+  //
+  val monoid = "[monoid]"
 }
 
 package object rules {
