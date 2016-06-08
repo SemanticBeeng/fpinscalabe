@@ -9,7 +9,7 @@ import org.specs2.ugbase.UserGuidePage
   */
 object TypeclassDefinition extends UserGuidePage {
 
-  def is = "Composing functions through functors".title ^ s2"""
+  def is = s"Defining type classes".title ^ s2"""
 
   ${concepts.functor}s enable ${concepts.functorComposition}
 

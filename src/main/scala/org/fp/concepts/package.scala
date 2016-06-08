@@ -10,7 +10,10 @@ package object concepts {
   //
   val selfType = "self-type"
   val structuralType = "structural type" //@todo https://hyp.is/iJIsfC2GEeam8q-I4gf9FA/archive.is/KAdCc
+
+  //
   val typeClass = "[type class]"
+  val taggedType = "[tagged type]"
   val higherKindedType = "[higher-Kinded type]"
 
   //

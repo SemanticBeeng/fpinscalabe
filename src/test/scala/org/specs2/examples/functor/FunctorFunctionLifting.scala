@@ -9,7 +9,7 @@ import org.specs2.ugbase.UserGuidePage
   */
 object FunctorFunctionLifting extends UserGuidePage {
 
-  def is = "Lift functions in functors".title ^ s2"""
+  def is = "Functor function lifting".title ^ s2"""
 
   ${concepts.functor} ${concepts.functionLifting} makes sense for single argument functions
 

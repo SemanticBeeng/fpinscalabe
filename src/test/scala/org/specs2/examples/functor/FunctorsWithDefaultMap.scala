@@ -9,7 +9,7 @@ import org.specs2.ugbase.UserGuidePage
   */
 object FunctorsWithDefaultMap extends UserGuidePage {
 
-  def is = "Using functors with 'anything that has map'".title ^ s2"""
+  def is = "A functor is 'anything that has map'".title ^ s2"""
 
   ${concepts.functor} mapping (of a function) preserves the type/shape of the ${concepts.functor}
 

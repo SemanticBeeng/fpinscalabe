@@ -9,7 +9,7 @@ import org.specs2.ugbase.UserGuidePage
   */
 object FunctorsWithCustomMap extends UserGuidePage {
 
-  def is = "Creating custom functors".title ^ s2"""
+  def is = "Custom functors".title ^ s2"""
 
   ${concepts.functor} mapping (of a function) preserves the type/shape of the ${concepts.functor}
   Examples for a 'custom' ${concepts.functor}
