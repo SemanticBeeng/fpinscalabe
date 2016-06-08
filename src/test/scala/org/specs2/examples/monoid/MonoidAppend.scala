@@ -5,13 +5,13 @@ import org.fp.concepts._
 import org.fp.resources._
 import org.fp.bookmarks._
 //
-import org.fp.studies.monoid.basic.{CatsSpec, ScalazSpec}
+import org.fp.studies.monoid.append.{CatsSpec, ScalazSpec}
 import org.specs2.ugbase.UserGuidePage
 
 /**
   *
   */
-object MonoidBasics extends UserGuidePage {
+object MonoidAppend extends UserGuidePage {
 
   def is = s"Basic use of $monoid-s".title ^ s2"""
 

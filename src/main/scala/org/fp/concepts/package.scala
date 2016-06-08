@@ -22,6 +22,7 @@ package object concepts {
 
   //
   val monoid = "[monoid]"
+  val operatorAppend = "[append]"
 }
 
 package object rules {
