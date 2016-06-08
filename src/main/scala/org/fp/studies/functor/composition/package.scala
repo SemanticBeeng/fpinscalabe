@@ -1,11 +1,12 @@
 package org.fp.studies.functor
 
+import org.fp.concepts._
 import org.specs2.common.SourceType.{CatsSpecific, ScalazSpecific}
 import org.specs2.specification.dsl.mutable.{TextDsl, AutoExamples}
 
 /**
   *
-  * [[org.fp.concepts.functorComposition]]
+  * [[functorComposition]]
   *
   */
 package object composition {
@@ -40,7 +41,7 @@ package object composition {
       res must_== 2.0
     }
 
-    "Given any Functor F[_] and any Functor G[_] we can compose the two Functors to create a new Functor on F[G[_]]:".p
+    s"We can compose any two $functor-s F[_] and G[_] to create a new $functor F[G[_]]:".p
     eg {
       import scalaz.Functor
       import scalaz.std
@@ -58,6 +59,7 @@ package object composition {
   object CatsSpec extends org.specs2.mutable.Spec with AutoExamples with TextDsl with CatsSpecific {
 
 
+    "A function f : A => B can be composed with g : B => C by first lifting into a functor ".p
     eg {
       import cats.syntax.functor._
       import cats.std.function._
@@ -81,7 +83,21 @@ package object composition {
       res must_== 2.0
     }
 
-    "Given any Functor F[_] and any Functor G[_] we can compose the two Functors to create a new Functor on F[G[_]]:".p
+    eg {
+      import cats.syntax.functor._
+      import cats.std.function._
+
+      val func1 = (x: String) => x.length
+      val func2 = (y: Int) => y > 0
+      val func3 = func1 map func2
+
+      func3("abc") must_== true
+
+      List("abc", "", "def") map func1 map func2 must_== List(true, false, true)
+      List("abc", "", "def") map func3           must_== List(true, false, true)
+    }
+
+    s"We can compose any two $functor-s F[_] and G[_] to create a new $functor F[G[_]]:".p
     eg {
 
       import cats.Functor
@@ -89,6 +105,7 @@ package object composition {
       import cats.std.list._
 
       val listOpt = Functor[List] compose Functor[Option]
+
       listOpt.map(List(Some(1), None, Some(3)))(_ + 1) must_== List(Some(2), None, Some(4))
     }
   }
