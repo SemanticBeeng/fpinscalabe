@@ -1,6 +1,7 @@
 package org.fp.studies.functor
 
 import org.fp.concepts._
+import org.fp.resources._
 import org.specs2.common.SourceType.{CatsSpecific, ScalazSpecific}
 import org.specs2.specification.dsl.mutable.{TextDsl, AutoExamples}
 
@@ -58,40 +59,35 @@ package object composition {
     */
   object CatsSpec extends org.specs2.mutable.Spec with AutoExamples with TextDsl with CatsSpecific {
 
-
-    "A function f : A => B can be composed with g : B => C by first lifting into a functor ".p
+    s"A function f : A => B can be composed with g : B => C by first lifting into a $functor ".p
     eg {
-      import cats.syntax.functor._
-      import cats.std.function._
 
       val inc = (x: Int) => x + 1
       val timesTwo = (x: Int) => x * 2
 
-      val res: Int = (inc map timesTwo) (3)
-      res must_== 8
-    }
-
-    eg {
-      import cats.syntax.functor._
-      import cats.std.function._
-
       val func1 = (x: Int) => x.toDouble
       val func2 = (y: Double) => y * 2
-      val func3 = func1 map func2
 
-      val res: Double = func3(1)
-      res must_== 2.0
-    }
-
-    eg {
       import cats.syntax.functor._
       import cats.std.function._
 
+      ((inc map timesTwo) (3): Int) must_== 8
+
+      val func3 = func1 map func2
+      (func3(1) : Double) must_== 2.0
+    }
+
+    s"We can combine a $functor-s $operatorMap with the $Scala collection map function:".p
+    eg {
       val func1 = (x: String) => x.length
       val func2 = (y: Int) => y > 0
+
+      import cats.syntax.functor._
+      import cats.std.function._
+
       val func3 = func1 map func2
 
-      func3("abc") must_== true
+      (func3("abc") : Boolean) must_== true
 
       List("abc", "", "def") map func1 map func2 must_== List(true, false, true)
       List("abc", "", "def") map func3           must_== List(true, false, true)
