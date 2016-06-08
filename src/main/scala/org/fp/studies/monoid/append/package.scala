@@ -40,7 +40,7 @@ package object append {
       import scalaz._, syntax.semigroup._, std.anyVal._
       import Tags._
 
-      Multiplication(2) |+| Multiplication(5) must_== 10
+      Multiplication(2) |+| Multiplication(5) must_== Monoid[Int].multiply(2,5)
     }
 
   }
