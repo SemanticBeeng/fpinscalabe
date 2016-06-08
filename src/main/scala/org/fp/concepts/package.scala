@@ -8,6 +8,8 @@ package object concepts {
   val keyPoint = "$$key point$$>>"
 
   //
+  val selfType = "self-type"
+  val structuralType = "structural type" //@todo https://hyp.is/iJIsfC2GEeam8q-I4gf9FA/archive.is/KAdCc
   val typeClass = "[type class]"
   val higherKindedType = "[higher-Kinded type]"
 
@@ -22,7 +24,7 @@ package object concepts {
 
   //
   val monoid = "[monoid]"
-  val operatorAppend = "[append]"
+  val operatorAppend = "[append operand]"
 }
 
 package object rules {

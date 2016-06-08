@@ -35,13 +35,12 @@ package object append {
     /**
       * @see [[ann_unboxNewTypesInScalaz]]
       */
-    s"$keyPoint Use multiple $monoid-s for the same type and different $operatorAppend :".p
+    s"$keyPoint Use multiple $operatorAppend-s for the same $monoid-s:".p
     eg {
       import scalaz._, syntax.semigroup._, std.anyVal._
       import Tags._
 
       Multiplication(2) |+| Multiplication(5) must_== 10
-      //Max(2) |+| Max(5) must_== 10
     }
 
   }
