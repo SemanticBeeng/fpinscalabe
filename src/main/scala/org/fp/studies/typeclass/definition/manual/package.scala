@@ -1,31 +1,51 @@
-package org.specs2.typeclass.definition
+package org.fp.studies.typeclass.definition
 
 /**
   *
   */
-package object auto {
+package object manual {
 
   /**
     *
     */
   trait Definitions {
 
-    import simulacrum._
-
-    @typeclass trait CanTruthy[A] { self =>
-      /** Return true, if `a` is truthy. */
-      def truthy(a: A): Boolean
+    // 8<---
+    trait CanTruthy[A] {
+      self =>
+      /** @return true, if `a` is truthy. */
+      def truthys(a: A): Boolean
     }
 
     object CanTruthy {
+      def apply[A](implicit ev: CanTruthy[A]): CanTruthy[A] = ev
+
       def fromTruthy[A](f: A => Boolean): CanTruthy[A] = new CanTruthy[A] {
-        def truthy(a: A): Boolean = f(a)
+        def truthys(a: A): Boolean = f(a)
+      }
+
+      trait CanTruthyOps[A] {
+        def self: A
+
+        implicit def F: CanTruthy[A]
+
+        final def truthy: Boolean = F.truthys(self)
+      }
+
+      object ops {
+        implicit def toCanIsTruthyOps[A](v: A)(implicit ev: CanTruthy[A]) =
+          new CanTruthyOps[A] {
+            def self = v
+
+            implicit def F: CanTruthy[A] = ev
+          }
       }
     }
+
+    // 8<---
   }
 
   object Definitions extends Definitions
-
 
   /**
     * ----------------
@@ -35,10 +55,9 @@ package object auto {
     */
   object Usages extends org.specs2.mutable.Specification /*with Snippets */{
 
-    import auto.Definitions._
+    import manual.Definitions._
 
     "Some examples of usages".p
-
     eg {
       "Here’s how we can define typeclass instances for Int:".p
 
@@ -78,7 +97,6 @@ package object auto {
       implicit val booleanCanTruthy: CanTruthy[Boolean] = CanTruthy.fromTruthy(identity)
 
       import CanTruthy.ops._
-
       false.truthy must_== false
     }
 
@@ -88,7 +106,6 @@ package object auto {
       "To delay the evaluation of the passed arguments, we can use pass-by-name: ".p
 
       import CanTruthy.ops._
-
       def truthyIf[A: CanTruthy, B, C](cond: A)(ifyes: => B)(ifno: => C) =
         if (cond.truthy) ifyes
         else ifno
@@ -108,3 +125,4 @@ package object auto {
     }
   }
 }
+

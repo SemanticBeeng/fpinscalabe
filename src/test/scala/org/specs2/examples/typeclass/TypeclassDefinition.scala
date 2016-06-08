@@ -1,7 +1,7 @@
 package org.specs2.examples.typeclass
 
 import org.fp._
-import org.specs2.typeclass.definition.{SimulacrumSpec, ScalaSpec}
+import org.fp.studies.typeclass.definition.{SimulacrumSpec, ScalaSpec}
 import org.specs2.ugbase.UserGuidePage
 
 /**

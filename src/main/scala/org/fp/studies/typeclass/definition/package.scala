@@ -1,7 +1,8 @@
-package org.specs2.typeclass
+package org.fp.studies.typeclass
 
-import org.specs2.common.SnippetHelper.incl
 import org.fp.bookmarks._
+import org.fp.studies.typeclass.definition._
+import org.specs2.common.SnippetHelper.incl
 
 /**
   *
