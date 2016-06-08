@@ -11,7 +11,7 @@ object TypeclassDefinition extends UserGuidePage {
 
   def is = "Composing functions through functors".title ^ s2"""
 
-  ${concepts.functor}s enable ${concepts.functionComposition}
+  ${concepts.functor}s enable ${concepts.functorComposition}
 
     * in ${resources.Scala.id} ${ScalaSpec.is}
 

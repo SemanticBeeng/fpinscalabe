@@ -4,8 +4,10 @@ import org.specs2.common.SourceType.{CatsSpecific, ScalazSpecific}
 import org.fp.studies.functor.withcustommap.{AmountExample_FunctorScalaz, AmountExample_FunctorCats}
 import org.fp.bookmarks._
 
-
 /**
+  *
+  * [[org.fp.concepts.functorComposition]]
+  *
   * @see [[ann_FunctionLifting]]
   */
 package object functionlifting {

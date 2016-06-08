@@ -4,7 +4,9 @@ import org.specs2.common.SourceType.{CatsSpecific, ScalazSpecific}
 import org.specs2.specification.dsl.mutable.{TextDsl, AutoExamples}
 
 /**
-  * [[org.fp.concepts.functor]]
+  *
+  * [[org.fp.concepts.functorComposition]]
+  *
   */
 package object composition {
 

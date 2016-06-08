@@ -6,6 +6,8 @@ import org.fp.bookmarks._
 
 /**
   *
+  * [[org.fp.concepts.operatorMap]]
+  *
   */
 package object withcustommap {
 

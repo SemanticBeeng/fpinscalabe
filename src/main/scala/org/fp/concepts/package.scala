@@ -7,10 +7,15 @@ package object concepts {
 
   val typeClass = "type class"
   val higherKindedType = "Higher-Kinded type"
+
+  //
   val functor = "Functor"
-  val applicative = "Applicative"
   val functionLifting = "Function lifting"
-  val functionComposition = "Function composition"
+  val functorComposition = "Functor composition"
+  val operatorMap = "Map operator"
+
+  //
+  val applicative = "Applicative"
 }
 
 package object rules {
