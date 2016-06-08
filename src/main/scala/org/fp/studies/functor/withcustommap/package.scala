@@ -1,12 +1,14 @@
 package org.fp.studies.functor
 
-import org.specs2.specification.dsl.mutable.AutoExamples
-import org.specs2.common.SourceType.{CatsSpecific, ScalazSpecific}
+import org.fp.concepts._
+import org.fp.resources._
 import org.fp.bookmarks._
+//
+import org.specs2.specification.dsl.mutable.AutoExamples
 
 /**
   *
-  * [[org.fp.concepts.operatorMap]]
+  * @see [[operatorMap]]
   *
   */
 package object withcustommap {
@@ -22,7 +24,10 @@ package object withcustommap {
     case class Few[A](a: A, b: A, c: A) extends Amount[A]
   }
 
-  trait AmountExample_FunctorScalaz extends AmountExample with ScalazSpecific {
+  /**
+    * @see [[Scalaz]]
+    */
+  trait AmountExample_FunctorScalaz extends AmountExample {
 
     import scalaz.Functor
 
@@ -42,7 +47,10 @@ package object withcustommap {
 //    one map intToInt
   }
 
-  trait AmountExample_FunctorCats extends AmountExample with CatsSpecific {
+  /**
+    * @see [[Cats]]
+    */
+  trait AmountExample_FunctorCats extends AmountExample {
 
     import cats.Functor
 
@@ -58,9 +66,9 @@ package object withcustommap {
   }
 
   /**
-    *
+    * @see [[Scalaz]]
     */
-  object ScalazSpec extends org.specs2.mutable.Spec with AutoExamples with AmountExample_FunctorScalaz with ScalazSpecific {
+  object ScalazSpec extends org.specs2.mutable.Spec with AutoExamples with AmountExample_FunctorScalaz {
 
     import scalaz.Functor
 
@@ -74,9 +82,9 @@ package object withcustommap {
   }
 
   /**
-    *
+    *  @see [[Cats]]
     */
-  object CatsSpec extends org.specs2.mutable.Spec with AutoExamples with AmountExample_FunctorCats with CatsSpecific {
+  object CatsSpec extends org.specs2.mutable.Spec with AutoExamples with AmountExample_FunctorCats {
 
     import cats.Functor
 

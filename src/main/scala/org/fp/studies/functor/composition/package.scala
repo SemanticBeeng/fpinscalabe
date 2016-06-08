@@ -2,22 +2,23 @@ package org.fp.studies.functor
 
 import org.fp.concepts._
 import org.fp.resources._
-import org.specs2.common.SourceType.{CatsSpecific, ScalazSpecific}
+import org.fp.bookmarks._
+//
 import org.specs2.specification.dsl.mutable.{TextDsl, AutoExamples}
 
 /**
   *
-  * [[functorComposition]]
-  *
+  * @see [[Scalaz]]
+  * @see [[functorComposition]]
   */
 package object composition {
 
   /**
     * Note the [[org.fp.resources.Scalaz]] dual syntax for function composition: 'map and '∘'
     */
-  object ScalazSpec extends org.specs2.mutable.Spec with AutoExamples with TextDsl with ScalazSpecific {
+  object ScalazSpec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
 
-    s"A function f : A => B can be composed with g : B => C by first lifting into a $functor ".p
+    s"$keyPoint Compose a function f : A => B with g : B => C by first lifting into a $functor:".p
     eg {
 
       val inc = (x: Int) => x + 1
@@ -36,7 +37,7 @@ package object composition {
       (func3(1) : Double) must_== 2.0
     }
 
-    s"We can combine a $functor-s $operatorMap with the ${Scala.id} collection map function:".p
+    s"$keyPoint Combine a $functor-s $operatorMap with the ${Scala.id} collection map function:".p
     eg {
       val func1 = (x: String) => x.length
       val func2 = (y: Int) => y > 0
@@ -53,7 +54,7 @@ package object composition {
       List("abc", "", "def") map func3           must_== List(true, false, true)
     }
 
-    s"We can compose any two $functor-s F[_] and G[_] to create a new $functor F[G[_]]:".p
+    s"$keyPoint Compose any two $functor-s F[_] and G[_] to create a new $functor F[G[_]]:".p
     eg {
 
       import scalaz.Functor
@@ -68,11 +69,11 @@ package object composition {
   }
 
   /**
-    *
+    * @see [[Cats]]
     */
-  object CatsSpec extends org.specs2.mutable.Spec with AutoExamples with TextDsl with CatsSpecific {
+  object CatsSpec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
 
-    s"A function f : A => B can be composed with g : B => C by first lifting into a $functor ".p
+    s"$keyPoint Compose a function f : A => B with g : B => C by first lifting into a $functor:".p
     eg {
 
       val inc = (x: Int) => x + 1
@@ -90,7 +91,7 @@ package object composition {
       (func3(1) : Double) must_== 2.0
     }
 
-    s"We can combine a $functor-s $operatorMap with the ${Scala.id} collection map function:".p
+    s"$keyPoint Combine a $functor-s $operatorMap with the ${Scala.id} collection map function:".p
     eg {
       val func1 = (x: String) => x.length
       val func2 = (y: Int) => y > 0
@@ -106,7 +107,7 @@ package object composition {
       List("abc", "", "def") map func3           must_== List(true, false, true)
     }
 
-    s"We can compose any two $functor-s F[_] and G[_] to create a new $functor F[G[_]]:".p
+    s"$keyPoint Compose any two $functor-s F[_] and G[_] to create a new $functor F[G[_]]:".p
     eg {
 
       import cats.Functor

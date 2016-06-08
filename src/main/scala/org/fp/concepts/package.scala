@@ -5,6 +5,9 @@ package org.fp
   */
 package object concepts {
 
+  val keyPoint = "$$key point$$>>"
+
+  //
   val typeClass = "[type class]"
   val higherKindedType = "[higher-Kinded type]"
 

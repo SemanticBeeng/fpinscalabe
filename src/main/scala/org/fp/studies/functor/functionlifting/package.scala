@@ -1,21 +1,24 @@
 package org.fp.studies.functor
 
-import org.specs2.common.SourceType.{CatsSpecific, ScalazSpecific}
-import org.fp.studies.functor.withcustommap.{AmountExample_FunctorScalaz, AmountExample_FunctorCats}
+import org.fp.concepts._
+import org.fp.resources._
 import org.fp.bookmarks._
+//
+//
+import org.fp.studies.functor.withcustommap.{AmountExample_FunctorScalaz, AmountExample_FunctorCats}
 
 /**
   *
-  * [[org.fp.concepts.functorComposition]]
+  * [[functorComposition]]
   *
   * @see [[ann_FunctionLifting]]
   */
 package object functionlifting {
 
   /**
-    *
+    * @see [[Scalaz]]
     */
-  object ScalazSpec extends org.specs2.mutable.Spec with AmountExample_FunctorScalaz with ScalazSpecific {
+  object ScalazSpec extends org.specs2.mutable.Spec with AmountExample_FunctorScalaz {
 
     import scalaz.Functor
 
@@ -27,9 +30,9 @@ package object functionlifting {
   }
 
   /**
-    *
+    * @see [[Cats]]
     */
-  object CatsSpec extends org.specs2.mutable.Spec with AmountExample_FunctorCats with CatsSpecific {
+  object CatsSpec extends org.specs2.mutable.Spec with AmountExample_FunctorCats {
 
     import cats.Functor
 
