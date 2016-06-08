@@ -5,17 +5,17 @@ package org.fp
   */
 package object concepts {
 
-  val typeClass = "type class"
-  val higherKindedType = "Higher-Kinded type"
+  val typeClass = "[type class]"
+  val higherKindedType = "[higher-Kinded type]"
 
   //
-  val functor = "Functor"
-  val functionLifting = "Function lifting"
-  val functorComposition = "Functor composition"
-  val operatorMap = "Map operator"
+  val functor = "[functor]"
+  val functionLifting = "[function lifting]"
+  val functorComposition = "[functor composition]"
+  val operatorMap = "[map operator]"
 
   //
-  val applicative = "Applicative"
+  val applicative = "[applicative]"
 }
 
 package object rules {
