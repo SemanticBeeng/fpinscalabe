@@ -35,6 +35,7 @@ package object concepts {
   val operatorLift = "[lift operator]"
   val operatorVoid = "[void operator]"
   val operatorFproduct = "[fproduct operator]"
+  val operatorAs = "[as operator]"
 
   //
   val applicative = "[applicative]"

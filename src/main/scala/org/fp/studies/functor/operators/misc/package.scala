@@ -39,6 +39,15 @@ package object misc {
 
       Functor[Option].void(Some(1)) must_== Some(())
     }
+
+    s"$keyPoint The $operatorAs transforms F[A] into a F[B].".p
+    eg {
+      import scalaz.std.list._
+      import scalaz.syntax.functor._
+      // 8<--
+
+      List("a", "b", "c").as("-") must_== List("-", "-", "-")
+    }
   }
 
   /**
@@ -67,6 +76,15 @@ package object misc {
       // 8<--
 
       Functor[Option].void(Some(1)) must_== Some(())
+    }
+
+    s"$keyPoint The $operatorAs transforms F[A] into a F[B].".p
+    eg {
+      import cats.std.list._
+      import cats.syntax.functor._
+      // 8<--
+
+      List("a", "b", "c").as("-") must_== List("-", "-", "-")
     }
   }
 }

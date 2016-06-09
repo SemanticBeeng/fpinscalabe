@@ -11,7 +11,7 @@ object FunctorMiscOperators extends UserGuidePage {
 
   def is = "Functor misc operators".title ^ s2"""
 
-  A ${concepts.functor} has other operators besides ${concepts.operatorMap}: ${concepts.operatorVoid}, ${concepts.operatorFproduct}
+  A ${concepts.functor} has other operators besides ${concepts.operatorMap}: ${concepts.operatorVoid}, ${concepts.operatorFproduct}, ${concepts.operatorAs}
   See examples:
 
     * in ${resources.Scalaz.id} ${ScalazSpec.is}
