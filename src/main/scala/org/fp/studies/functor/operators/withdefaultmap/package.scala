@@ -6,7 +6,6 @@ import org.fp.bookmarks._
 //
 import org.specs2.specification.dsl.mutable.{AutoExamples, TextDsl}
 
-
 /**
   *
   * [[operatorMap]]
@@ -55,6 +54,10 @@ package object withdefaultmap {
       import std.list._
       Functor[List]  .map(List("qwer", "adsfg"))(len)  must_== List(4,5)
       Functor[List]  .map(List(1, 2, 3))(_ * 2)        must_== List(2, 4, 6)
+
+//      import cats.syntax.functor._
+//      Functor[Either[String, Int]].map(Right(1)) { _ + 1 } must_== Right(2)
+//      (Right(1): Either[String, Int]) map { _ + 1 } must_== Right(2)
     }
   }
 }
