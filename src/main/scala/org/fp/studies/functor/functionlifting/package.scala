@@ -4,7 +4,7 @@ import org.fp.concepts._
 import org.fp.resources._
 import org.fp.bookmarks._
 //
-import org.fp.studies.functor.withcustommap.{AmountExample_FunctorScalaz, AmountExample_FunctorCats}
+import org.fp.studies.functor.mapping.withcustommap.{AmountExample_FunctorScalaz, AmountExample_FunctorCats}
 
 /**
   *

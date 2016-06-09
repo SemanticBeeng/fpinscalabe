@@ -1,4 +1,4 @@
-package org.fp.studies.functor
+package org.fp.studies.functor.mapping
 
 import org.fp.concepts._
 import org.fp.resources._

@@ -1,13 +1,13 @@
 package org.specs2.examples.functor
 
 import org.fp._
-import org.fp.studies.functor.withcustommap.{ScalazSpec, CatsSpec}
+import org.fp.studies.functor.mapping.withcustommap.{ScalazSpec, CatsSpec}
 import org.specs2.ugbase.UserGuidePage
 
 /**
   *
   */
-object FunctorsWithCustomMap extends UserGuidePage {
+object FunctorsMappingWithCustomMap extends UserGuidePage {
 
   def is = "Custom functors".title ^ s2"""
 
@@ -18,7 +18,7 @@ object FunctorsWithCustomMap extends UserGuidePage {
 
     * in ${resources.Cats.id} ${CatsSpec.is}
 
-  See ${"examples with functors that have a 'default map'" ~/ FunctorsWithDefaultMap}
+  See ${"examples with functors that have a 'default map'" ~/ FunctorsMappingWithDefaultMap}
 }
 
 """

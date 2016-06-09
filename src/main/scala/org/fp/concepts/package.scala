@@ -21,7 +21,7 @@ package object concepts {
   val functor = "[functor]"
   val functionLifting = "[function lifting]"
   val functorComposition = "[functor composition]"
-  val operatorMap = "[map operator]"
+  val operatorMap = "[map operator]" //"fmap" in Haskell
 
   //
   val applicative = "[applicative]"

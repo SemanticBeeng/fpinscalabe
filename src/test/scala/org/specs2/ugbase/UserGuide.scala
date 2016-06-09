@@ -1,6 +1,6 @@
 package org.specs2.ugbase
 
-import org.specs2.examples.functor.{FunctorFunctionComposition, FunctorFunctionLifting, FunctorsWithCustomMap, FunctorsWithDefaultMap}
+import org.specs2.examples.functor.{FunctorFunctionComposition, FunctorFunctionLifting, FunctorsMappingWithCustomMap, FunctorsMappingWithDefaultMap}
 //import org.specs2.execute.SnippetParams
 
 object UserGuide extends UserGuidePage {
@@ -12,8 +12,8 @@ object UserGuide extends UserGuidePage {
   In this user guide, you will find:
 
   ## Functor examples
-  ${link(FunctorsWithDefaultMap).hide}
-  ${link(FunctorsWithCustomMap).hide}
+  ${link(FunctorsMappingWithDefaultMap).hide}
+  ${link(FunctorsMappingWithCustomMap).hide}
   ${link(FunctorFunctionLifting).hide}
   ${link(FunctorFunctionComposition).hide}
 

@@ -25,6 +25,11 @@ package object bookmarks {
   //@todo
   val ann_FunctorFunctionSyntax = Annotation(herdingCats, "https://hyp.is/by87XCzEEea1Ji828vRqGQ/archive.is/xhOwY")
   val ann_Function1asMap = Annotation(herdingCats, "https://hyp.is/qSesJC39Eea6nN_Zplb3RA/archive.is/xhOwY")
+  /**
+    * @todo more highlights for the same point
+    *       https://hyp.is/THoz1i4AEea6nrMYtlxH2w/archive.is/xhOwY
+    *       https://hyp.is/a2Tu0C4AEeaSjEONTgCqaA/archive.is/xhOwY
+    */
   val ann_MapOperatorCompositionOrder = Annotation(herdingCats, "https://hyp.is/CoRoHC3_Eea6um8KQ6ynmA/archive.is/xhOwY")
 
   //
