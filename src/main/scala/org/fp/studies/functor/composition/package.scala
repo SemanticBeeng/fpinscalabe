@@ -31,13 +31,17 @@ package object composition {
       import std.function._
       import syntax.functor._
 
+      "Function1 can be thought as infinite map from the domain to the range. ".p
       ((inc map timesTwo) (3): Int) must_== 8
+
+      "Order is opposed to regular 'compose'".p
+      ((inc compose timesTwo) (3): Int) must_== 7
 
       val func3 = func1 map func2
       (func3(1) : Double) must_== 2.0
     }
 
-    s"$keyPoint Combine a $functor-s $operatorMap with the ${Scala.id} collection map function:".p
+    s"$keyPoint Compose a function f : A => B with g : B => C by first lifting into a $functor:".p
     eg {
       val func1 = (x: String) => x.length
       val func2 = (y: Int) => y > 0
@@ -85,7 +89,11 @@ package object composition {
       import cats.syntax.functor._
       import cats.std.function._
 
+      "Function1 can be thought as infinite map from the domain to the range. ".p
       ((inc map timesTwo) (3): Int) must_== 8
+
+      "Order is opposed to regular 'compose'".p
+      ((inc compose timesTwo) (3): Int) must_== 7
 
       val func3 = func1 map func2
       (func3(1) : Double) must_== 2.0
