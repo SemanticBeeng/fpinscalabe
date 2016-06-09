@@ -31,7 +31,7 @@ package object withdefaultmap {
     /**
       * Source https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FunctorUsage.scala#L35-L41
       */
-    "Scalaz examples for [[Functor]]s like Option and List ".p
+    s"$keyPoint Examples for $functor-s like Option and List ".p
     eg { Functor[Option].map(Some("adsf"))(len)           must_== Some(4)   }
     eg { Functor[Option].map(None)(len)                   must_== None      }
 
@@ -56,7 +56,7 @@ package object withdefaultmap {
     /**
       * Source
       */
-    "Cats examples for [[Functor]]s like Option and List ".p
+    s"$keyPoint Examples for $functor-s like Option and List ".p
     eg { Functor[Option].map(Some("adsf"))(len)           must_== Some(4)   }
     eg { Functor[Option].map(None)(len)                   must_== None      }
 

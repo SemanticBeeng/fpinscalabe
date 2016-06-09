@@ -21,6 +21,7 @@ package object functionlifting {
     */
   object ScalazSpec extends org.specs2.mutable.Spec with AutoExamples with TextDsl with AmountExample_FunctorScalaz {
 
+    s"$keyPoint Explicit $functionLifting".p
     eg {
       import scalaz.Functor
 
@@ -36,7 +37,8 @@ package object functionlifting {
     */
   object CatsSpec extends org.specs2.mutable.Spec with AutoExamples with TextDsl with AmountExample_FunctorCats {
 
-    eg {
+    s"$keyPoint Explicit $functionLifting".p
+      eg {
       import cats.Functor
 
       val timesTwo = (x: Int) => x * 2
