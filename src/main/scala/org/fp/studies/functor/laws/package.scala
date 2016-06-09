@@ -4,17 +4,11 @@ import org.fp.concepts._
 import org.fp.resources._
 import org.fp.bookmarks._
 //
-
-import org.scalacheck.Arbitrary
-import org.scalacheck.Gen._
-import org.scalacheck._
-
-//
 import org.specs2.specification.dsl.mutable.{TextDsl, AutoExamples}
 
 /**
   *
-  * @see [[operatorVoid]], [[operatorFproduct]]
+  * @see [[lawIdentity]], [[lawComposition]]
   */
 package object laws {
 
@@ -24,13 +18,19 @@ package object laws {
   object ScalazSpec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
 
     s"$keyPoint Mapping Identity function has leaves the $functor unchanged ".p
+    s"see $lawIdentity"
     eg {
+      import scalaz.Functor
       import scalaz.syntax.functor._
       import scalaz.std.list._
 
-      val anyList = Arbitrary {
-        listOf(oneOf(1, 2, 3, listOf(oneOf('a', 'b, 'c'))))
-      }
+      val identity: Int => Int = x => x
+
+      import org.scalacheck.Arbitrary
+      import org.scalacheck.Prop.forAll
+
+      import org.scalacheck.Arbitrary
+      val anyList = Arbitrary.arbitrary[Int].sample
       anyList map identity must_== anyList
     }
   }
@@ -41,13 +41,13 @@ package object laws {
   object CatsSpec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
 
     s"$keyPoint Mapping Identity function has leaves the $functor unchanged ".p
+    s"see $lawIdentity"
     eg {
       import cats.syntax.functor._
       import cats.std.list._
 
-      val anyList = Arbitrary {
-        listOf(oneOf(1, 2, 3, listOf(oneOf('a', 'b, 'c'))))
-      }
+      import org.scalacheck.Arbitrary
+      val anyList = Arbitrary.arbitrary[Int].sample
       anyList map identity must_== anyList
     }
   }

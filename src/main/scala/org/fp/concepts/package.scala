@@ -38,6 +38,8 @@ package object concepts {
   val operatorVoid = "[void operator]"
   val operatorFproduct = "[fproduct operator]"
   val operatorAs = "[as operator]"
+  val lawIdentity = "[identity law]"
+  val lawComposition = "[composition law]"
 
   //
   val applicative = "[applicative]"
