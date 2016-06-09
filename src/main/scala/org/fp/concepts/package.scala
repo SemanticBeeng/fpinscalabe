@@ -10,7 +10,10 @@ package object concepts {
 
   //
   val selfType = "self-type"
-  val structuralType = "structural type" //@todo https://hyp.is/iJIsfC2GEeam8q-I4gf9FA/archive.is/KAdCc
+  /**
+    * @todo https://hyp.is/iJIsfC2GEeam8q-I4gf9FA/archive.is/KAdCc
+    */
+  val structuralType = "structural type"
 
   //
   val typeClass = "[type class]"
@@ -19,9 +22,19 @@ package object concepts {
 
   //
   val functor = "[functor]"
-  val functionLifting = "[function lifting]"
   val functorComposition = "[functor composition]"
-  val operatorMap = "[map operator]" //"fmap" in Haskell
+  /**
+    * @todo related to [[operatorLift]]
+    */
+  val functionLifting = "[function lifting]"
+
+  /**
+    * @todo "fmap" in Haskell
+    */
+  val operatorMap = "[map operator]"
+  val operatorLift = "[lift operator]"
+  val operatorVoid = "[void operator]"
+  val operatorFproduct = "[fproduct operator]"
 
   //
   val applicative = "[applicative]"
