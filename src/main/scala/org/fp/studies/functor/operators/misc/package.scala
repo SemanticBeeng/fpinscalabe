@@ -20,9 +20,8 @@ package object misc {
     s"$keyPoint The $operatorFproduct pairs a value with the result of applying a function to that value.".p
     eg {
       // 8<--
-      import scalaz.{std, syntax}
-      import syntax.functor._
-      import std.list._
+      import scalaz.std.list._
+      import scalaz.syntax.functor._
 
       val len: String => Int = _.length
       // 8<--
@@ -40,9 +39,8 @@ package object misc {
     s"$keyPoint The $operatorFproduct pairs a value with the result of applying a function to that value.".p
     eg {
       // 8<--
-      import cats.{std, syntax}
-      import syntax.functor._
-      import std.list._
+      import cats.std.list._
+      import cats.syntax.functor._
 
       val len: String => Int = _.length
       // 8<--
