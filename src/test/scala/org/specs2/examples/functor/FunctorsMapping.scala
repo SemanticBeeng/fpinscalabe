@@ -18,8 +18,8 @@ object FunctorsMapping extends UserGuidePage {
 
     * in ${resources.Cats.id} ${withcustommap.CatsSpec.is}
 
-    Examples for "${concepts.functor}"-like ${concepts.higherKindedType}-s (see Option and List aka 'things that have a default map').
-    Note that there is no need to declare a dedicated ${concepts.functor} but one is created ad-hoc.
+  Examples for "${concepts.functor}"-like ${concepts.higherKindedType}-s (see Option and List aka 'things that have a default map').
+  Note that there is no need to declare a dedicated ${concepts.functor} but one is created ad-hoc.
 
     * in ${resources.Scalaz.id} ${withdefaultmap.ScalazSpec.is}
 
