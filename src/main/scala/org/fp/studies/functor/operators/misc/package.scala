@@ -23,12 +23,21 @@ package object misc {
       // 8<--
       import scalaz.std.list._
       import scalaz.syntax.functor._
-
-      val len: String => Int = _.length
       // 8<--
+      val len: String => Int = _.length
 
       List("a",      "aa",      "b",       "ccccc").fproduct(len).toMap must_==
        Map("a" -> 1, "aa" -> 2, "b" ->  1, "ccccc" -> 5)
+    }
+
+    s"$keyPoint The $operatorVoid transforms F[A] into a F[Unit].".p
+    eg {
+      // 8<--
+      import scalaz.Functor
+      import scalaz.std.option._
+      // 8<--
+
+      Functor[Option].void(Some(1)) must_== Some(())
     }
   }
 
@@ -43,12 +52,21 @@ package object misc {
       // 8<--
       import cats.std.list._
       import cats.syntax.functor._
-
-      val len: String => Int = _.length
       // 8<--
+      val len: String => Int = _.length
 
       List("a",       "aa",      "b",       "ccccc").fproduct(len).toMap must_==
         Map("a" -> 1, "aa" -> 2, "b" ->  1, "ccccc" -> 5)
+    }
+
+    s"$keyPoint The $operatorVoid transforms F[A] into a F[Unit].".p
+    eg {
+      // 8<--
+      import cats.Functor
+      import cats.std.option._
+      // 8<--
+
+      Functor[Option].void(Some(1)) must_== Some(())
     }
   }
 }

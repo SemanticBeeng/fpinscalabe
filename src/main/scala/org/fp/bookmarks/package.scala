@@ -31,9 +31,14 @@ package object bookmarks {
     *       https://hyp.is/a2Tu0C4AEeaSjEONTgCqaA/archive.is/xhOwY
     */
   val ann_MapOperatorCompositionOrder = Annotation(herdingCats, "https://hyp.is/CoRoHC3_Eea6um8KQ6ynmA/archive.is/xhOwY")
+  val ann_FProductEx2 = Annotation(herdingCats, "https://hyp.is/qlp3EC4XEeaYRVPnJsP_4Q/archive.is/xhOwY")
 
   //
   val ann_unboxNewTypesInScalaz = Annotation(timperrett, "https://hyp.is/_XD7IC1-Eea_sPMAraQN2w/archive.is/KAdCc")
 
+  /**
+    * Bookmarks for [[Scalaz]]
+    */
+  val ann_FProductEx1 = Annotation(Scalaz, "https://github.com/scalaz/scalaz/blob/9eeccf5f2634c6dd91127ccca3409d7aec4998e3/example/src/main/scala/scalaz/example/FunctorUsage.scala#L66-L75")
 
 }
