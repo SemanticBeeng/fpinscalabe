@@ -24,6 +24,7 @@ package object bookmarks {
   val ann_FunctionSyntax = Annotation(herdingCats, "http://archive.is/xhOwY#annotations:7jPreCwBEeagtMfxykENBg")
   //@todo
   val ann_FunctorFunctionSyntax = Annotation(herdingCats, "https://hyp.is/by87XCzEEea1Ji828vRqGQ/archive.is/xhOwY")
+  val ann_Function1asMap = Annotation(herdingCats, "https://hyp.is/qSesJC39Eea6nN_Zplb3RA/archive.is/xhOwY")
 
   //
   val ann_unboxNewTypesInScalaz = Annotation(timperrett, "https://hyp.is/_XD7IC1-Eea_sPMAraQN2w/archive.is/KAdCc")
