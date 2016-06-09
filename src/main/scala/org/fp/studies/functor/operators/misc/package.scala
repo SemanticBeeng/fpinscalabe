@@ -18,6 +18,7 @@ package object misc {
   object ScalazSpec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
 
     s"$keyPoint The $operatorFproduct pairs a value with the result of applying a function to that value.".p
+    s"$bookmarks: $ann_FProductEx1, $ann_FProductEx2"
     eg {
       // 8<--
       import scalaz.std.list._
@@ -37,6 +38,7 @@ package object misc {
   object CatsSpec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
 
     s"$keyPoint The $operatorFproduct pairs a value with the result of applying a function to that value.".p
+    s"$bookmarks: $ann_FProductEx1, $ann_FProductEx2"
     eg {
       // 8<--
       import cats.std.list._
