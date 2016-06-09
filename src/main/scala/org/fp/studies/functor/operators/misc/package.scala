@@ -17,9 +17,18 @@ package object misc {
     */
   object ScalazSpec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
 
-    s"$keyPoint ...".p
+    s"$keyPoint The $operatorFproduct pairs a value with the result of applying a function to that value.".p
     eg {
-      success
+      // 8<--
+      import scalaz.{std, syntax}
+      import syntax.functor._
+      import std.list._
+
+      val len: String => Int = _.length
+      // 8<--
+
+      List("a",      "aa",      "b",       "ccccc").fproduct(len).toMap must_==
+       Map("a" -> 1, "aa" -> 2, "b" ->  1, "ccccc" -> 5)
     }
   }
 
@@ -28,9 +37,18 @@ package object misc {
     */
   object CatsSpec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
 
-    s"$keyPoint ...".p
+    s"$keyPoint The $operatorFproduct pairs a value with the result of applying a function to that value.".p
     eg {
-      success
+      // 8<--
+      import cats.{std, syntax}
+      import syntax.functor._
+      import std.list._
+
+      val len: String => Int = _.length
+      // 8<--
+
+      List("a",       "aa",      "b",       "ccccc").fproduct(len).toMap must_==
+        Map("a" -> 1, "aa" -> 2, "b" ->  1, "ccccc" -> 5)
     }
   }
 }
