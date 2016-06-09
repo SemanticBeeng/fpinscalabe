@@ -37,8 +37,10 @@ package object laws {
     s"see $lawComposition"
     eg {
       import scalaz.Functor
-      //import scalaz.syntax.functor._
-      import scalaz.std.list._
+      import scalaz.{std, syntax}
+      import syntax.functor._
+      import std.list._
+      import std.function._
 
       val f = (_: Int) * 3
       val g = (_: Int) + 1
@@ -46,8 +48,7 @@ package object laws {
       import org.scalacheck.Arbitrary
       val anyList:List[Int] = Arbitrary.arbitrary[List[Int]].sample.get
 
-      //@note g compose f and not the other way around
-      Functor[List].map(anyList)(g compose f) must_== Functor[List].map(anyList)(f).map(g)
+      Functor[List].map(anyList)(f map g) must_== Functor[List].map(anyList)(f).map(g)
     }
 
   }
@@ -66,6 +67,24 @@ package object laws {
       import org.scalacheck.Arbitrary
       val anyList:List[Int] = Arbitrary.arbitrary[List[Int]].sample.get
       anyList map identity must_== anyList
+    }
+
+    s"$keyPoint Mapping a composed function on a $functor is same as the mapping the functions one by one ".p
+    s"see $lawComposition"
+    eg {
+      import cats.Functor
+      import cats.{std, syntax}
+      import syntax.functor._
+      import std.list._
+      import std.function._
+
+      val f = (_: Int) * 3
+      val g = (_: Int) + 1
+
+      import org.scalacheck.Arbitrary
+      val anyList:List[Int] = Arbitrary.arbitrary[List[Int]].sample.get
+
+      Functor[List].map(anyList)(f map g) must_== Functor[List].map(anyList)(f).map(g)
     }
   }
 }
