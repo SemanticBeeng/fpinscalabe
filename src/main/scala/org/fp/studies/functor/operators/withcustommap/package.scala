@@ -70,15 +70,19 @@ package object withcustommap {
     */
   object ScalazSpec extends org.specs2.mutable.Spec with AutoExamples with AmountExample_FunctorScalaz {
 
-    import scalaz.Functor
-
     s"$keyPoint Explicit conversion to $functor applies here:"
-    eg { Functor[Amount].map(One(6)) { x: Int => x * 7 } must_== One(42) }
+    eg {
+      import scalaz.Functor
 
-    import scalaz.syntax.functor._
+      Functor[Amount].map(One(6)) { x: Int => x * 7 } must_== One(42)
+    }
 
     s"$keyPoint Implicit conversion to $functor applies here:"
-    eq { (One(6): Amount[Int]) map { x: Int => x * 7 } must_== One(42)}
+    eq {
+      import scalaz.syntax.functor._
+
+      (One(6): Amount[Int]) map { x: Int => x * 7 } must_== One(42)
+    }
 
   }
 
@@ -87,16 +91,18 @@ package object withcustommap {
     */
   object CatsSpec extends org.specs2.mutable.Spec with AutoExamples with AmountExample_FunctorCats {
 
-    import cats.Functor
-
     s"$keyPoint Explicit conversion to $functor applies here:"
-    eg { Functor[Amount].map(One(6)) { x: Int => x * 7 } must_== One(42) }
+    eg {
+      import cats.Functor
 
-    import cats.syntax.functor._
+      Functor[Amount].map(One(6)) { x: Int => x * 7 } must_== One(42)
+    }
 
     s"$keyPoint Implicit conversion to $functor applies here:"
-    eq { (One(6): Amount[Int]) map { x: Int => x * 7 } must_== One(42)}
+    eq {
+      import cats.syntax.functor._
 
+      (One(6): Amount[Int]) map { x: Int => x * 7 } must_== One(42)
+    }
   }
-
 }

@@ -32,12 +32,13 @@ package object withdefaultmap {
       * Source https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FunctorUsage.scala#L35-L41
       */
     s"$keyPoint Examples for $functor-s like Option and List ".p
-    eg { Functor[Option].map(Some("adsf"))(len)           must_== Some(4)   }
-    eg { Functor[Option].map(None)(len)                   must_== None      }
+    eg {
+      Functor[Option].map(Some("adsf"))(len)           must_== Some(4)
+      Functor[Option].map(None)(len)                   must_== None
 
-    eg { Functor[List]  .map(List("qwer", "adsfg"))(len)  must_== List(4,5) }
-    eg { Functor[List]  .map(List(1, 2, 3))(_ * 2)        must_== List(2, 4, 6)}
-
+      Functor[List]  .map(List("qwer", "adsfg"))(len)  must_== List(4,5)
+      Functor[List]  .map(List(1, 2, 3))(_ * 2)        must_== List(2, 4, 6)
+    }
   }
 
   /**
@@ -57,11 +58,12 @@ package object withdefaultmap {
       * Source
       */
     s"$keyPoint Examples for $functor-s like Option and List ".p
-    eg { Functor[Option].map(Some("adsf"))(len)           must_== Some(4)   }
-    eg { Functor[Option].map(None)(len)                   must_== None      }
+    eg {
+      Functor[Option].map(Some("adsf"))(len)           must_== Some(4)
+      Functor[Option].map(None)(len)                   must_== None
 
-    eg { Functor[List]  .map(List("qwer", "adsfg"))(len)  must_== List(4,5) }
-    eg { Functor[List]  .map(List(1, 2, 3))(_ * 2)        must_== List(2, 4, 6)}
+      Functor[List]  .map(List("qwer", "adsfg"))(len)  must_== List(4,5)
+      Functor[List]  .map(List(1, 2, 3))(_ * 2)        must_== List(2, 4, 6)
+    }
   }
-
 }
