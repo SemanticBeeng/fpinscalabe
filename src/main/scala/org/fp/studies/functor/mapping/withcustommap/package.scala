@@ -72,12 +72,13 @@ package object withcustommap {
 
     import scalaz.Functor
 
+    s"$keyPoint Explicit conversion to $functor applies here:"
     eg { Functor[Amount].map(One(6)) { x: Int => x * 7 } must_== One(42) }
 
-//    import org.specs2.matcher.{ShouldExpectations =>_,_}
-//    import org.specs2.matcher.{MustExpectations1 =>_,_}
-//    import org.specs2.matcher.{_ =>_}
-//    eq { (One(6): Amount[Int]).map { x: Int => x * 7 } must_== One(42)}
+    import scalaz.syntax.functor._
+
+    s"$keyPoint Implicit conversion to $functor applies here:"
+    eq { (One(6): Amount[Int]) map { x: Int => x * 7 } must_== One(42)}
 
   }
 
@@ -88,8 +89,13 @@ package object withcustommap {
 
     import cats.Functor
 
+    s"$keyPoint Explicit conversion to $functor applies here:"
     eg { Functor[Amount].map(One(6)) { x: Int => x * 7 } must_== One(42) }
-    //todo eq { (One(6): Amount[Int]).map { x: Int => x * 7 } must_== One(42)}
+
+    import cats.syntax.functor._
+
+    s"$keyPoint Implicit conversion to $functor applies here:"
+    eq { (One(6): Amount[Int]) map { x: Int => x * 7 } must_== One(42)}
 
   }
 
