@@ -32,10 +32,11 @@ package object composition {
       import syntax.functor._
 
       s"Function1 can be thought as infinite $operatorMap from the domain to the range. ".p
-      s"bookmarks: $ann_Function1asMap".p
+      s"$bookmarks: $ann_Function1asMap".p
       ((inc map timesTwo) (3): Int) must_== 8
 
-      "Order is opposed to regular 'compose'".p
+      s"Order of composition for the $operatorMap is opposite to regular 'compose'".p
+      s"$bookmarks: $ann_MapOperatorCompositionOrder".p
       ((inc compose timesTwo) (3): Int) must_== 7
 
       val func3 = func1 map func2
@@ -91,10 +92,11 @@ package object composition {
       import cats.std.function._
 
       s"Function1 can be thought as infinite $operatorMap from the domain to the range. ".p
-      s"bookmarks: $ann_Function1asMap".p
+      s"$bookmarks: $ann_Function1asMap".p
       ((inc map timesTwo) (3): Int) must_== 8
 
-      "Order is opposed to regular 'compose'".p
+      s"Order of composition for the $operatorMap is opposite to regular 'compose'".p
+      s"$bookmarks: $ann_MapOperatorCompositionOrder".p
       ((inc compose timesTwo) (3): Int) must_== 7
 
       val func3 = func1 map func2

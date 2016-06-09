@@ -6,6 +6,7 @@ package org.fp
 package object concepts {
 
   val keyPoint = "$$key point$$>>"
+  val bookmarks = "$$bookmarks$$>>"
 
   //
   val selfType = "self-type"
@@ -27,7 +28,7 @@ package object concepts {
 
   //
   val monoid = "[monoid]"
-  val operatorAppend = "[append operand]"
+  val operatorAppend = "[append operator]"
 }
 
 package object rules {
