@@ -19,23 +19,18 @@ package object withdefaultmap {
     */
   object ScalazSpec extends org.specs2.mutable.Spec with TextDsl with AutoExamples {
 
-    // 8<--
-    import scalaz.{Functor, std}
-    import std.list._
-    import std.option._
-
-
-    val len: String => Int = _.length
-    // 8<--
-
-    /**
-      * Source https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FunctorUsage.scala#L35-L41
-      */
     s"$keyPoint Examples for $functor-s like Option and List ".p
+    s"$bookmarks: $ann_functorsOptionAndList"
     eg {
+      import scalaz.{Functor, std}
+
+      val len: String => Int = _.length
+
+      import std.option._
       Functor[Option].map(Some("adsf"))(len)           must_== Some(4)
       Functor[Option].map(None)(len)                   must_== None
 
+      import std.list._
       Functor[List]  .map(List("qwer", "adsfg"))(len)  must_== List(4,5)
       Functor[List]  .map(List(1, 2, 3))(_ * 2)        must_== List(2, 4, 6)
     }
@@ -47,21 +42,17 @@ package object withdefaultmap {
     */
   object CatsSpec extends org.specs2.mutable.Spec with TextDsl with AutoExamples {
 
-    // 8<--
-    import cats.{Functor, std}
-    import std.list._
-    import std.option._
-    val len: String => Int = _.length
-    // 8<--
-
-    /**
-      * Source
-      */
     s"$keyPoint Examples for $functor-s like Option and List ".p
+    s"$bookmarks: $ann_functorsOptionAndList"
     eg {
+      import cats.{Functor, std}
+      val len: String => Int = _.length
+
+      import std.option._
       Functor[Option].map(Some("adsf"))(len)           must_== Some(4)
       Functor[Option].map(None)(len)                   must_== None
 
+      import std.list._
       Functor[List]  .map(List("qwer", "adsfg"))(len)  must_== List(4,5)
       Functor[List]  .map(List(1, 2, 3))(_ * 2)        must_== List(2, 4, 6)
     }

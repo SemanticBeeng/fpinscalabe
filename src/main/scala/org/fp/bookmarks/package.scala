@@ -40,5 +40,6 @@ package object bookmarks {
     * Bookmarks for [[Scalaz]]
     */
   val ann_FProductEx1 = Annotation(Scalaz, "https://github.com/scalaz/scalaz/blob/9eeccf5f2634c6dd91127ccca3409d7aec4998e3/example/src/main/scala/scalaz/example/FunctorUsage.scala#L66-L75")
+  val ann_functorsOptionAndList = Annotation(Scalaz, "https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FunctorUsage.scala#L35-L41")
 
 }
