@@ -33,7 +33,17 @@ package object withdefaultmap {
       Functor[List]  .map(List("qwer", "adsfg"))(len)  must_== List(4,5)
       Functor[List]  .map(List(1, 2, 3))(_ * 2)        must_== List(2, 4, 6)
     }
+
+    s"$keyPoint Either is not really a $functor but a $biFunctor".p
+    eg {
+      import scalaz.{Functor, std}
+      import scalaz.syntax.functor._
+      import std.either._
+      val increment: Int => Int = i => i + 1 // a bit of help for Intellij type inference
+      (Right(1): Either[String, Int]) map increment must_== Right(2)
+    }
   }
+
 
   /**
     * @see [[Cats]]
@@ -54,10 +64,16 @@ package object withdefaultmap {
       import std.list._
       Functor[List]  .map(List("qwer", "adsfg"))(len)  must_== List(4,5)
       Functor[List]  .map(List(1, 2, 3))(_ * 2)        must_== List(2, 4, 6)
+    }
 
-//      import cats.syntax.functor._
-//      Functor[Either[String, Int]].map(Right(1)) { _ + 1 } must_== Right(2)
-//      (Right(1): Either[String, Int]) map { _ + 1 } must_== Right(2)
+    s"$keyPoint Either is not really a $functor but a $biFunctor".p
+    eg {
+      import cats.{Functor, std}
+      import cats.syntax.functor._
+      import std.either._
+      val increment: Int => Int = i => i + 1 // a bit of help for Intellij type inference
+      (Right(1): Either[String, Int]) map increment must_== Right(2)
     }
   }
 }
+

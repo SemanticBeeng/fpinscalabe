@@ -22,6 +22,8 @@ package object concepts {
 
   //
   val functor = "[functor]"
+  val biFunctor = "[bi functor]"
+
   val functorComposition = "[functor composition]"
   /**
     * @todo related to [[operatorLift]]
