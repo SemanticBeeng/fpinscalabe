@@ -6,7 +6,7 @@ import org.fp.bookmarks._
 import org.specs2.specification.dsl.mutable.{AutoExamples, TextDsl}
 
 //
-import org.fp.studies.functor.mapping.withcustommap.{AmountExample_FunctorScalaz, AmountExample_FunctorCats}
+import org.fp.studies.functor.operators.withcustommap.{AmountExample_FunctorScalaz, AmountExample_FunctorCats}
 
 /**
   *

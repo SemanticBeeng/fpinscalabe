@@ -1,7 +1,7 @@
 package org.specs2.examples.functor
 
 import org.fp._
-import org.fp.studies.functor.mapping.withcustommap.{ScalazSpec, CatsSpec}
+import org.fp.studies.functor.operators.withcustommap.{ScalazSpec, CatsSpec}
 import org.specs2.ugbase.UserGuidePage
 
 /**
