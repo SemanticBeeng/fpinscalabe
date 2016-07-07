@@ -11,10 +11,10 @@ object ApplicativeMapping extends UserGuidePage {
 
   def is = "Custom applicative".title ^ s2"""
 
-  ${concepts.applicative} mapping (of a function) preserves the type/shape of the ${concepts.applicative}
-  Examples for a 'custom' ${concepts.applicative}
+  ${concepts.applicativeFunctor} mapping (of a function) preserves the type/shape of the ${concepts.applicativeFunctor}
+  Examples for a 'custom' ${concepts.applicativeFunctor}
 
-    * in ${resources.Scalaz.id} and ${resources.Cats.id}: ${withcustommap.Spec.is}
+    * in ${resources.Scalaz.id} and ${resources.Cats.id}: ${custom.Spec.is}
 
 }
 

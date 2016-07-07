@@ -3,6 +3,7 @@ package org.fp.studies.applicative.operators
 import org.fp.concepts._
 import org.fp.resources._
 import org.fp.bookmarks._
+//
 import org.specs2.specification.dsl.mutable.AutoExamples
 
 //
@@ -10,12 +11,12 @@ import org.specs2.specification.dsl.mutable.AutoExamples
 /**
   *
   */
-package object withcustommap {
+package object custom {
 
   import org.fp.studies.functor.operators.withcustommap.AmountExample
 
   /**
-    * @see [[scalaz.Scalaz]]
+    * @see [[Scalaz]]
     */
   object AmountExample_ApplicativeScalaz extends AmountExample {
 
@@ -50,7 +51,7 @@ package object withcustommap {
   }
 
   /**
-    * @see [[scalaz.Scalaz]]
+    * @see [[Cats]]
     */
   object AmountExample_ApplicativeCats extends AmountExample {
 
@@ -87,30 +88,49 @@ package object withcustommap {
 
   object Spec extends org.specs2.mutable.Spec with AutoExamples {
 
-    s"$keyPoint Implicit conversion to $applicative applies here:"
-    eg {  /** in [[Scalaz]] */
+    s"$keyPoint Implicit conversion to $applicativeFunctor applies here:"
+    eg {
+      /** in [[Scalaz]] */
 
       import scalaz.syntax.applicative._
       import AmountExample_ApplicativeScalaz._
 
       (One(21): Amount[Int]) <*> One({ x: Int => x * 2 }) must_== One(42)
+    }
+
+    eg { /** in [[Cats]] */
+      import cats.Applicative
+      import cats.syntax.applicative._
+      import AmountExample_ApplicativeCats._
+
+      //@todo
+//      (One(21): Amount[Int]) map One({ x: Int => x * 2 }) must_== One(42)
+//      Applicative[Amount].ap2(One(21): Amount[Int])  (One({ x: Int => x * 2 })) must_== One(42)
+      success
+    }
+
+    s"$keyPoint Applying $applicativeFunctor $operatorLHS and $operatorRHS to extract a projection:"
+    eg {
+      /** in [[Scalaz]] */
+
+      import scalaz.syntax.applicative._
+      import AmountExample_ApplicativeScalaz._
 
       (One(6): Amount[Int]) <* One(7) must_== One(6)
 
       (One(6): Amount[Int]) *> One(7) must_== One(7)
     }
 
-//    eg { /** in [[Cats]] */
-//      import cats.syntax.applicative._
-//      import AmountExample_ApplicativeCats._
-//
-//      (One(21): Amount[Int]) <*> One({ x: Int => x * 2 }) must_== One(42)
-//
-//      (One(6): Amount[Int]) <* One(7) must_== One(6)
-//
-//      (One(6): Amount[Int]) *> One(7) must_== One(7)
-//    }
+    eg { /** in [[Cats]] */
+      import cats.syntax.applicative._
+      import AmountExample_ApplicativeCats._
 
+      //@todo
+      // (One(6): Amount[Int]) <* One(7) must_== One(6)
+      //
+      // (One(6): Amount[Int]) *> One(7) must_== One(7)
+      success
+    }
   }
 
 }

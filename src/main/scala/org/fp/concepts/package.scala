@@ -42,7 +42,9 @@ package object concepts {
   val lawComposition = "[composition law]"
 
   //
-  val applicative = "[applicative]"
+  val applicativeFunctor = "[applicative]"
+  val operatorLHS = "[LHS operator]"
+  val operatorRHS = "[RHS operator]"
 
   //
   val monoid = "[monoid]"
