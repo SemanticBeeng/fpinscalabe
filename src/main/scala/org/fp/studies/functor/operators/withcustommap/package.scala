@@ -68,7 +68,7 @@ package object withcustommap {
   /**
     * @see [[Scalaz]]
     */
-  object ScalazSpec extends org.specs2.mutable.Spec with AutoExamples /*with AmountExample_FunctorScalaz*/ {
+  object ScalazSpec extends org.specs2.mutable.Spec with AutoExamples {
 
     s"$keyPoint Explicit conversion to $functor applies here:"
     eg {
@@ -91,7 +91,7 @@ package object withcustommap {
   /**
     *  @see [[Cats]]
     */
-  object CatsSpec extends org.specs2.mutable.Spec with AutoExamples /*with AmountExample_FunctorCats*/ {
+  object CatsSpec extends org.specs2.mutable.Spec with AutoExamples {
 
     s"$keyPoint Explicit conversion to $functor applies here:"
     eg {
