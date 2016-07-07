@@ -27,7 +27,7 @@ package object withcustommap {
   /**
     * @see [[Scalaz]]
     */
-  trait AmountExample_FunctorScalaz extends AmountExample {
+  object AmountExample_FunctorScalaz extends AmountExample {
 
     import scalaz.Functor
 
@@ -50,7 +50,7 @@ package object withcustommap {
   /**
     * @see [[Cats]]
     */
-  trait AmountExample_FunctorCats extends AmountExample {
+  object AmountExample_FunctorCats extends AmountExample {
 
     import cats.Functor
 
@@ -68,11 +68,12 @@ package object withcustommap {
   /**
     * @see [[Scalaz]]
     */
-  object ScalazSpec extends org.specs2.mutable.Spec with AutoExamples with AmountExample_FunctorScalaz {
+  object ScalazSpec extends org.specs2.mutable.Spec with AutoExamples /*with AmountExample_FunctorScalaz*/ {
 
     s"$keyPoint Explicit conversion to $functor applies here:"
     eg {
       import scalaz.Functor
+      import AmountExample_FunctorScalaz._
 
       Functor[Amount].map(One(6)) { x: Int => x * 7 } must_== One(42)
     }
@@ -80,6 +81,7 @@ package object withcustommap {
     s"$keyPoint Implicit conversion to $functor applies here:"
     eq {
       import scalaz.syntax.functor._
+      import AmountExample_FunctorScalaz._
 
       (One(6): Amount[Int]) map { x: Int => x * 7 } must_== One(42)
     }
@@ -89,11 +91,12 @@ package object withcustommap {
   /**
     *  @see [[Cats]]
     */
-  object CatsSpec extends org.specs2.mutable.Spec with AutoExamples with AmountExample_FunctorCats {
+  object CatsSpec extends org.specs2.mutable.Spec with AutoExamples /*with AmountExample_FunctorCats*/ {
 
     s"$keyPoint Explicit conversion to $functor applies here:"
     eg {
       import cats.Functor
+      import AmountExample_FunctorCats._
 
       Functor[Amount].map(One(6)) { x: Int => x * 7 } must_== One(42)
     }
@@ -101,6 +104,7 @@ package object withcustommap {
     s"$keyPoint Implicit conversion to $functor applies here:"
     eq {
       import cats.syntax.functor._
+      import AmountExample_FunctorCats._
 
       (One(6): Amount[Int]) map { x: Int => x * 7 } must_== One(42)
     }
