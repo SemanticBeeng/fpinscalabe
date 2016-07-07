@@ -5,7 +5,7 @@ import org.fp.concepts._
 import org.fp.resources._
 import org.fp.bookmarks._
 //
-import org.fp.studies.monoid.append.{CatsSpec, ScalazSpec}
+import org.fp.studies.monoid.append.Spec
 import org.specs2.ugbase.UserGuidePage
 
 /**
@@ -17,9 +17,8 @@ object MonoidAppend extends UserGuidePage {
 
   ${concepts.monoid}s can be use with/over primitive types
 
-    * in ${resources.Scalaz.id} ${ScalazSpec.is}
+    * in ${resources.Scalaz.id} and ${resources.Cats.id}: ${Spec.is}
 
-    * in ${resources.Cats.id} ${CatsSpec.is}
 
 """
 }

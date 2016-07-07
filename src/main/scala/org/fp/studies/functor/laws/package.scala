@@ -12,14 +12,12 @@ import org.specs2.specification.dsl.mutable.{TextDsl, AutoExamples}
   */
 package object laws {
 
-  /**
-    * @see [[Scalaz]]
-    */
-  object ScalazSpec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
+  object Spec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
 
     s"$keyPoint Mapping Identity function leaves the $functor unchanged ".p
     s"see $lawIdentity"
-    eg {
+
+    eg { /** in [[Scalaz]] */
       import scalaz.Functor
       import scalaz.syntax.functor._
       import scalaz.std.list._
@@ -33,9 +31,19 @@ package object laws {
       anyList map identity must_== anyList
     }
 
+    eg { /** in [[Cats]] */
+      import cats.syntax.functor._
+      import cats.std.list._
+
+      import org.scalacheck.Arbitrary
+      val anyList:List[Int] = Arbitrary.arbitrary[List[Int]].sample.get
+      anyList map identity must_== anyList
+    }
+
     s"$keyPoint Mapping a composed function on a $functor is same as the mapping the functions one by one ".p
     s"see $lawComposition"
-    eg {
+
+    eg { /** in [[Scalaz]] */
       import scalaz.Functor
       import scalaz.{std, syntax}
       import syntax.functor._
@@ -51,27 +59,7 @@ package object laws {
       Functor[List].map(anyList)(f map g) must_== Functor[List].map(anyList)(f).map(g)
     }
 
-  }
-
-  /**
-    * @see [[Cats]]
-    */
-  object CatsSpec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
-
-    s"$keyPoint Mapping Identity function leaves the $functor unchanged ".p
-    s"see $lawIdentity"
-    eg {
-      import cats.syntax.functor._
-      import cats.std.list._
-
-      import org.scalacheck.Arbitrary
-      val anyList:List[Int] = Arbitrary.arbitrary[List[Int]].sample.get
-      anyList map identity must_== anyList
-    }
-
-    s"$keyPoint Mapping a composed function on a $functor is same as the mapping the functions one by one ".p
-    s"see $lawComposition"
-    eg {
+    eg { /** in [[Cats]] */
       import cats.Functor
       import cats.{std, syntax}
       import syntax.functor._

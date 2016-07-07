@@ -16,7 +16,7 @@ package object append {
     * @see [[Scalaz]]
     * @see [[operatorAppend]]
     */
-  object ScalazSpec extends org.specs2.mutable.Spec with TextDsl with AutoExamples {
+  object Spec extends org.specs2.mutable.Spec with TextDsl with AutoExamples {
 
     s"$keyPoint Use $monoid-s to abstract over $operatorAppend-ing things of a same kind (using the explicit syntax):".p
     eg {
@@ -25,8 +25,20 @@ package object append {
       Monoid[Int].append(10,20) must_== 30
     }
 
+    eg { /** in [[Cats]] */
+      /*@todo
+            import cats.Monoid
+            import cats.std.anyVal._
+            import cats.syntax.m
+
+            Monoid[Int].append(10,20) must_== 30
+      */
+      success
+    }
+
     s"$keyPoint Use $monoid-s to abstract over $operatorAppend-ing things of a same kind (using the sugar syntax):".p
-    eg {
+
+    eg { /** in [[Scalaz]] */
       import scalaz._, syntax.semigroup._, std.anyVal._
 
       10 |+| 20 must_== 30
@@ -43,32 +55,12 @@ package object append {
       Multiplication(2) |+| Multiplication(5) must_== Monoid[Int].multiply(2,5)
     }
 
-  }
+    eg { /** in [[Cats]] */
+      /*@todo
+            import cats._, syntax.semigroup._, std.anyVal._
 
-  /**
-    * @see [[Cats]]
-    */
-  object CatsSpec extends org.specs2.mutable.Spec with TextDsl with AutoExamples {
-
-    s"$keyPoint Use $monoid-s to abstract over combining things of a same kind (using the explicit syntax):".p
-    eg {
-/*@todo
-      import cats.Monoid
-      import cats.std.anyVal._
-      import cats.syntax.m
-
-      Monoid[Int].append(10,20) must_== 30
-*/
-      success
-    }
-
-    s"$keyPoint Use $monoid-s to abstract over combining things of a same kind (using the sugar syntax):".p
-    eg {
-/*@todo
-      import cats._, syntax.semigroup._, std.anyVal._
-
-      10 |+| 20 must_== 30
-*/
+            10 |+| 20 must_== 30
+      */
       success
     }
   }

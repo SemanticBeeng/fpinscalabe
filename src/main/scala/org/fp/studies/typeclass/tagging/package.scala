@@ -13,13 +13,12 @@ package object tagging {
 
 
     /**
-      * @see [[Scalaz]]
       * @see [[ann_newType]]
       */
-    object ScalazSpec extends org.specs2.mutable.Spec with TextDsl with AutoExamples {
+    object Spec extends org.specs2.mutable.Spec with TextDsl with AutoExamples {
 
       s"$keyPoint ...:".p
-      eg {
+      eg { /** in [[Scalaz]] */
 //        type Tagged[U] = { type Tag = U }
 //        type @@[T, U] = T with Tagged[U]
 //
@@ -38,15 +37,9 @@ package object tagging {
 
         success
       }
-    }
-
-    /**
-      * @see [[Cats]]
-      */
-    object CatsSpec extends org.specs2.mutable.Spec with TextDsl with AutoExamples {
 
       s"$keyPoint ... ".p
-      eg {
+      eg { /** in [[Simulacrum]] */
         success
       }
     }

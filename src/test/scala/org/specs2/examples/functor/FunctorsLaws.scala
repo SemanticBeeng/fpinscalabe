@@ -14,9 +14,8 @@ object FunctorsLaws extends UserGuidePage {
   ${concepts.functor}s are govered/defined by a few laws : ${concepts.lawIdentity}, ${concepts.lawComposition}, etc
   See examples
 
-    * in ${resources.Scalaz.id} ${ScalazSpec.is}
+    * in ${resources.Scalaz.id} ${Spec.is}
 
-    * in ${resources.Cats.id} ${CatsSpec.is}
 }
 
 """

@@ -14,13 +14,14 @@ import org.specs2.specification.dsl.mutable.{AutoExamples, TextDsl}
 package object withdefaultmap {
 
   /**
-    * @see [[Scalaz]]
+    * @see [[ann_FunctionSyntax]]
     */
-  object ScalazSpec extends org.specs2.mutable.Spec with TextDsl with AutoExamples {
+  object Spec extends org.specs2.mutable.Spec with TextDsl with AutoExamples {
 
     s"$keyPoint Examples for $functor-s like Option and List ".p
     s"$bookmarks: $ann_functorsOptionAndList"
-    eg {
+
+    eg { /** in [[Scalaz]] */
       import scalaz.{Functor, std}
 
       val len: String => Int = _.length
@@ -34,46 +35,37 @@ package object withdefaultmap {
       Functor[List]  .map(List(1, 2, 3))(_ * 2)        must_== List(2, 4, 6)
     }
 
+    eg { /** in [[Cats]] */
+      import cats.{Functor, std}
+      val len: String => Int = _.length
+
+      import std.option._
+      Functor[Option].map(Some("adsf"))(len)           must_== Some(4)
+      Functor[Option].map(None)(len)                   must_== None
+
+      import std.list._
+      Functor[List]  .map(List("qwer", "adsfg"))(len)  must_== List(4,5)
+      Functor[List]  .map(List(1, 2, 3))(_ * 2)        must_== List(2, 4, 6)
+    }
+
     s"$keyPoint Either is not really a $functor but a $biFunctor".p
-    eg {
+
+    eg { /** in [[Scalaz]] */
       import scalaz.{Functor, std}
       import scalaz.syntax.functor._
       import std.either._
       val increment: Int => Int = i => i + 1 // a bit of help for Intellij type inference
       (Right(1): Either[String, Int]) map increment must_== Right(2)
     }
-  }
 
-
-  /**
-    * @see [[Cats]]
-    * @see [[ann_FunctionSyntax]]
-    */
-  object CatsSpec extends org.specs2.mutable.Spec with TextDsl with AutoExamples {
-
-    s"$keyPoint Examples for $functor-s like Option and List ".p
-    s"$bookmarks: $ann_functorsOptionAndList"
-    eg {
-      import cats.{Functor, std}
-      val len: String => Int = _.length
-
-      import std.option._
-      Functor[Option].map(Some("adsf"))(len)           must_== Some(4)
-      Functor[Option].map(None)(len)                   must_== None
-
-      import std.list._
-      Functor[List]  .map(List("qwer", "adsfg"))(len)  must_== List(4,5)
-      Functor[List]  .map(List(1, 2, 3))(_ * 2)        must_== List(2, 4, 6)
-    }
-
-    s"$keyPoint Either is not really a $functor but a $biFunctor".p
-    eg {
+    eg { /** in [[Cats]] */
       import cats.{Functor, std}
       import cats.syntax.functor._
       import std.either._
       val increment: Int => Int = i => i + 1 // a bit of help for Intellij type inference
       (Right(1): Either[String, Int]) map increment must_== Right(2)
     }
+
   }
 }
 
