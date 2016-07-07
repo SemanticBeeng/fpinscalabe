@@ -3,6 +3,7 @@ package org.fp.studies.functor
 import org.fp.concepts._
 import org.fp.resources._
 import org.fp.bookmarks._
+//
 import org.specs2.specification.dsl.mutable.{AutoExamples, TextDsl}
 
 //
@@ -16,13 +17,12 @@ import org.fp.studies.functor.operators.withcustommap.{AmountExample_FunctorScal
   */
 package object functionlifting {
 
-  /**
-    * @see [[Scalaz]]
-    */
-  object ScalazSpec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
+  object Spec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
 
     s"$keyPoint Explicit $functionLifting".p
-    eg {
+
+    eg { /** in [[Scalaz]] */
+
       import scalaz.Functor
       import AmountExample_FunctorScalaz._
 
@@ -31,15 +31,9 @@ package object functionlifting {
 
       amountTimesTwo(Few(1,2,3)) must_== Few(2,4,6)
     }
-  }
 
-  /**
-    * @see [[Cats]]
-    */
-  object CatsSpec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
+    eg { /** in [[Cats]] */
 
-    s"$keyPoint Explicit $functionLifting".p
-      eg {
       import cats.Functor
       import AmountExample_FunctorCats._
 
