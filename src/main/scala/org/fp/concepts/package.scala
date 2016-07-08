@@ -38,11 +38,19 @@ package object concepts {
   val operatorVoid = "[void operator]"
   val operatorFproduct = "[fproduct operator]"
   val operatorAs = "[as operator]"
+
+  /**
+    *
+    */
   val lawIdentity = "[identity law]"
   val lawComposition = "[composition law]"
+  val lawHomomorphism = "[homomorphism law]"
+  val lawInterchange = "[interchange law]"
+  val lawMapping = "[mapping law]" //@todo ??
 
   //
   val applicativeFunctor = "[applicative]"
+  val operatorApply = "[apply operator]"
   val operatorLHS = "[LHS operator]"
   val operatorRHS = "[RHS operator]"
 
@@ -51,9 +59,3 @@ package object concepts {
   val operatorAppend = "[append operator]"
 }
 
-package object rules {
-  //import org.fp.concepts._
-  //import org.specs2.s2
-
-  //@todo val functionApplicationPreservesShape = s2""" $functor mapping (of a function) preserves the type/shape of the $functor"""
-}

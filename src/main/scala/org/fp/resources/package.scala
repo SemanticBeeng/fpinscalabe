@@ -1,6 +1,6 @@
 package org.fp
 
-import org.fp.resources.intf.ResourceType.{blog, framework, ResourceTypeVal}
+import org.fp.resources.intf.ResourceType.{book, blog, framework, ResourceTypeVal}
 
 /**
   *
@@ -51,5 +51,7 @@ package object resources {
   val herdingCats = Resource[blog]("Herding Cats", "http://eed3si9n.com/herding-cats/")
 
   val timperrett = Resource[blog]("timperrett blog", "http://timperrett.com/")
+
+  val scalaWithCats = Resource[book]("Advanced scala with Cats", "[Noel Welsh, Dave Gurnell] Advanced scala with Cats.pdf")
 }
 

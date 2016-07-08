@@ -88,7 +88,30 @@ package object custom {
 
   object Spec extends org.specs2.mutable.Spec with AutoExamples {
 
-    s"$keyPoint Implicit conversion to $applicativeFunctor applies here:"
+    s"$keyPoint The $applicativeFunctor $operatorApply can have a few equivalent forms:"
+    s"$bookmarks $ann_ApplyStyle"
+    eg {
+      /** in [[Scalaz]] */
+
+      import scalaz.syntax.applicative._
+      import AmountExample_ApplicativeScalaz._
+
+      ^(One(6): Amount[Int], One(7)) { _ * _ } must_== One(42)
+      ((One(6): Amount[Int]) |@| One(7)) { _ * _ } must_== One(42)
+    }
+
+    eg { /** in [[Cats]] */
+      import cats.syntax.applicative._
+      import AmountExample_ApplicativeCats._
+
+      //@todo
+      //^(One(6): Amount[Int], One(7)) { _ * _ } must_== One(42)
+      //((One(6): Amount[Int]) |@| One(7)) { _ * _ } must_== One(42)
+      success
+    }
+
+    s"$keyPoint The $applicativeFunctor $operatorApply applies the function from inside the second $functor:"
+    s"$bookmarks $ann_ApplicativeExtractsFunction"
     eg {
       /** in [[Scalaz]] */
 
@@ -96,6 +119,12 @@ package object custom {
       import AmountExample_ApplicativeScalaz._
 
       (One(21): Amount[Int]) <*> One({ x: Int => x * 2 }) must_== One(42)
+
+      /**
+        * @doesnotcompile
+        *
+        * One({ x: Int => x * 2 }) <*> (One(21): Amount[Int]) must_== One(42)
+        */
     }
 
     eg { /** in [[Cats]] */
@@ -104,8 +133,8 @@ package object custom {
       import AmountExample_ApplicativeCats._
 
       //@todo
-//      (One(21): Amount[Int]) map One({ x: Int => x * 2 }) must_== One(42)
-//      Applicative[Amount].ap2(One(21): Amount[Int])  (One({ x: Int => x * 2 })) must_== One(42)
+      //(One(21): Amount[Int]) map One({ x: Int => x * 2 }) must_== One(42)
+      //Applicative[Amount].app2(One(21), One({ x: Int => x * 2 })) must_== One(42)
       success
     }
 
@@ -131,6 +160,20 @@ package object custom {
       // (One(6): Amount[Int]) *> One(7) must_== One(7)
       success
     }
+
+    /**
+      * [[ann_applicativeLaws]]
+      * @todo
+      */
+    eg {
+      import scalaz.Applicative
+      import scalaz.std.option._
+      import scalaz.syntax.applicative._
+
+      ///some(1)
+      success
+    }
+
   }
 
 }

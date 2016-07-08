@@ -16,6 +16,9 @@ package object bookmarks {
     */
   val ann_FunctionComposition = Annotation(learningScalazFromLearningScalaz, "https://hyp.is/GnoRUCvdEea3T6skHMRxAw/archive.is/O43Km")
   val ann_FunctionLifting = Annotation(learningScalazFromLearningScalaz, "https://hyp.is/-9XDGibxEeaaDnsg0VK0XA/archive.is/O43Km")
+  val ann_ApplicativeExtractsFunction = Annotation(learningScalazFromLearningScalaz, "https://hyp.is/bW2eiCgbEeafQPtbTQkaDA/archive.is/O43Km")
+  val ann_ApplyStyle = Annotation(learningScalazFromLearningScalaz, "https://hyp.is/X6EyYigeEea-b_PzinHrew/archive.is/O43Km")
+
 
   /**
     * Bookmarks for [[herdingCats]]
@@ -42,4 +45,5 @@ package object bookmarks {
   val ann_FProductEx1 = Annotation(Scalaz, "https://github.com/scalaz/scalaz/blob/9eeccf5f2634c6dd91127ccca3409d7aec4998e3/example/src/main/scala/scalaz/example/FunctorUsage.scala#L66-L75")
   val ann_functorsOptionAndList = Annotation(Scalaz, "https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FunctorUsage.scala#L35-L41")
 
+  val ann_applicativeLaws = Annotation(scalaWithCats, "[bkm] 9439935") //todo: find a way to link
 }
