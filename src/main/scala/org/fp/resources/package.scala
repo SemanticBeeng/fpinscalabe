@@ -53,5 +53,8 @@ package object resources {
   val timperrett = Resource[blog]("timperrett blog", "http://timperrett.com/")
 
   val scalaWithCats = Resource[book]("Advanced scala with Cats", "[Noel Welsh, Dave Gurnell] Advanced scala with Cats.pdf")
+
+  val stackOverflow = Resource[blog]("Stack overflow", "http://stackoverflow.com/")
+
 }
 

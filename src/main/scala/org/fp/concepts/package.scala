@@ -53,6 +53,10 @@ package object concepts {
   val operatorApply = "[apply operator]"
   val operatorLHS = "[LHS operator]"
   val operatorRHS = "[RHS operator]"
+  val operatorSequence = "[sequence operator]"
+
+  //
+  val traverseFunctor = "[traverse]"
 
   //
   val monoid = "[monoid]"

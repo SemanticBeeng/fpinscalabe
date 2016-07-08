@@ -3,6 +3,9 @@ package org.fp.studies.applicative.operators
 import org.fp.concepts._
 import org.fp.resources._
 import org.fp.bookmarks._
+
+import scala.language.higherKinds
+
 //
 import org.specs2.specification.dsl.mutable.AutoExamples
 
@@ -171,6 +174,37 @@ package object custom {
       import scalaz.syntax.applicative._
 
       ///some(1)
+      success
+    }
+
+    s"$keyPoint $applicativeFunctor enable $operatorSequence to transform lists of $functor-s:"
+    eg {
+      /** in [[Scalaz]] */
+
+      import scalaz.Applicative
+      import scalaz.syntax.applicative._
+      import AmountExample_ApplicativeScalaz._
+
+      //Applicative[Amount].sequence(List(One(2), One(3), One(7))) must_== One(List(2,3,7))
+      //List(One(2), One(3), One(7)).sequence must_== One(List(2,3,7))
+      def sequenceA[F[_]: Applicative, A](list: List[F[A]]): F[List[A]] = list match {
+        case Nil     => (Nil: List[A]).point[F]
+        case x :: xs => (x |@| sequenceA(xs)) {_ :: _}
+      }
+      sequenceA[Amount, Int](List(One(2), One(3), One(7))) must_== One(List(2,3,7))
+    }
+
+    eg { /** in [[Cats]] */
+      import cats.Applicative
+      import cats.syntax.applicative._
+      import AmountExample_ApplicativeCats._
+
+      //@todo
+      // def sequenceA[F[_]: Applicative, A](list: List[F[A]]): F[List[A]] = list match {
+      //    case Nil     => (Nil: List[A]).point[F]
+      //    case x :: xs => (x |@| sequenceA(xs)) {_ :: _}
+      // }
+      // sequenceA[Amount, Int](List(One(2), One(3), One(7))) must_== One(List(2,3,7))
       success
     }
 
