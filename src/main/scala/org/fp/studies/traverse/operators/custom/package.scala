@@ -1,4 +1,4 @@
-package org.fp.studies.applicative.operators
+package org.fp.studies.traverse.operators
 
 import org.fp.concepts._
 import org.fp.resources._
@@ -12,7 +12,7 @@ import org.specs2.specification.dsl.mutable.AutoExamples
 /**
   *
   */
-package object dfault {
+package object custom {
 
   object Spec extends org.specs2.mutable.Spec with AutoExamples {
 
