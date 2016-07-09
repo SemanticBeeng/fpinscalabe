@@ -54,6 +54,7 @@ package object concepts {
   val operatorLHS = "[LHS operator]"
   val operatorRHS = "[RHS operator]"
   val operatorSequence = "[sequence operator]"
+  val operatorTraverse = "[traverse operator]"
 
   //
   val traverseFunctor = "[traverse]"

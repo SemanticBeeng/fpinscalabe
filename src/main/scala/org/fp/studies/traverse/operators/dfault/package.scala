@@ -5,16 +5,17 @@ import org.fp.resources._
 import org.fp.bookmarks._
 
 import scala.language.higherKinds
+import scalaz.std.option._
 
 //
-import org.specs2.specification.dsl.mutable.AutoExamples
+import org.specs2.specification.dsl.mutable.{TextDsl, AutoExamples}
 
 /**
   *
   */
 package object dfault {
 
-  object Spec extends org.specs2.mutable.Spec with AutoExamples {
+  object Spec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
 
     s"$keyPoint The $traverseFunctor's $operatorSequence turns F[G[A] into G[F[A]] given that there exists " +
       s"an implementation of $traverseFunctor[F], and of $applicativeFunctor[G] (Option and List happen to satisfy both). " +
@@ -73,5 +74,49 @@ package object dfault {
     }
 
     //@todo: finish using the example from Runar [[ann_Traverse]]
+
+    s"$keyPoint The $traverseFunctor's $operatorSequence maps a function over a structure through the effects of the " +
+      s"inner $applicativeFunctor. You can think of this as combining a $operatorMap with a $operatorSequence. " +
+      s"So when you find yourself calling fa.map(f).sequence, it can be replaced with just fa.traverse(f)::"
+
+    eg { /** in [[Scalaz]] */
+
+      import scalaz.std.list._
+      import scalaz.std.option._
+      import scalaz.syntax.traverse._
+
+      val smallNumbers = List(1,2,3,4,5)
+      val bigNumbers = List(10,20,30,40,50)
+      val doubleSmall: Int => Option[Int] = x => if (x < 30) Some(x * 2) else None
+
+      s"This multiples small numbers".p
+      smallNumbers.traverse(doubleSmall) must_== Some(List(2,4,6,8,10))
+      smallNumbers.traverse(doubleSmall) must_== smallNumbers.map(doubleSmall).sequence
+
+      s"When we hit the 30, we get a None, which 'fails' the whole computation".p
+      bigNumbers.traverse(doubleSmall) must_== scalaz.std.option.none[List[Int]]
+      bigNumbers.traverse(doubleSmall) must_== bigNumbers.map(doubleSmall).sequence
+    }
+
+    eg { /** in [[Cats]] */
+
+      import cats._
+      import cats.std.list._
+      import cats.std.option._
+      import cats.syntax.traverse._
+
+      val smallNumbers = List(1,2,3,4,5)
+      val bigNumbers = List(10,20,30,40,50)
+      val doubleSmall: Int => Option[Int] = x => if (x < 30) Some(x * 2) else None
+
+      s"This multiples small numbers".p
+      smallNumbers.traverse(doubleSmall) must_== Some(List(2,4,6,8,10))
+      //@todo smallNumbers.traverse(doubleSmall) must_== smallNumbers.map(doubleSmall).sequence
+
+      s"When we hit the 30, we get a None, which 'fails' the whole computation".p
+      bigNumbers.traverse(doubleSmall) must_== scalaz.std.option.none[List[Int]]
+      //@todo bigNumbers.traverse(doubleSmall) must_== bigNumbers.map(doubleSmall).sequence
+    }
   }
+
 }
