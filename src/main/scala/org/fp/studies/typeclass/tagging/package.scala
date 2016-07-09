@@ -35,11 +35,14 @@ package object tagging {
         type KindOfResource = String
         val a : KindOfResource @@ Resource.type = scalaz.Tag[KindOfResource, Resource.type]("abc")
 
+        //@todo
         success
       }
 
       s"$keyPoint ... ".p
       eg { /** in [[Simulacrum]] */
+
+        //@todo
         success
       }
     }

@@ -27,6 +27,7 @@ package object dfault {
       import scalaz.std.list._
       import scalaz.std.option._
 
+      //@todo
       success
     }
 
@@ -36,6 +37,7 @@ package object dfault {
       import cats.std.list._
       import cats.std.option._
 
+      //@todo
       success
     }
   }

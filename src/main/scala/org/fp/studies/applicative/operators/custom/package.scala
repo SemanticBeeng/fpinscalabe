@@ -108,8 +108,6 @@ package object custom {
       import AmountExample_ApplicativeCats._
 
       //@todo
-      //^(One(6): Amount[Int], One(7)) { _ * _ } must_== One(42)
-      //((One(6): Amount[Int]) |@| One(7)) { _ * _ } must_== One(42)
       success
     }
 
@@ -136,8 +134,6 @@ package object custom {
       import AmountExample_ApplicativeCats._
 
       //@todo
-      //(One(21): Amount[Int]) map One({ x: Int => x * 2 }) must_== One(42)
-      //Applicative[Amount].app2(One(21), One({ x: Int => x * 2 })) must_== One(42)
       success
     }
 
@@ -158,9 +154,6 @@ package object custom {
       import AmountExample_ApplicativeCats._
 
       //@todo
-      // (One(6): Amount[Int]) <* One(7) must_== One(6)
-      //
-      // (One(6): Amount[Int]) *> One(7) must_== One(7)
       success
     }
 
@@ -173,7 +166,7 @@ package object custom {
       import scalaz.std.option._
       import scalaz.syntax.applicative._
 
-      ///some(1)
+      //@todo
       success
     }
 
@@ -200,11 +193,6 @@ package object custom {
       import AmountExample_ApplicativeCats._
 
       //@todo
-      // def sequenceA[F[_]: Applicative, A](list: List[F[A]]): F[List[A]] = list match {
-      //    case Nil     => (Nil: List[A]).point[F]
-      //    case x :: xs => (x |@| sequenceA(xs)) {_ :: _}
-      // }
-      // sequenceA[Amount, Int](List(One(2), One(3), One(7))) must_== One(List(2,3,7))
       success
     }
 
