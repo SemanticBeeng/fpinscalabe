@@ -102,8 +102,10 @@ package object custom {
       Tag.unwrap(res1.foldMap(Tags.Disjunction(_))) must_== false
       Tag.unwrap(res2.foldMap(Tags.Disjunction(_))) must_== true
 
-      s"Here's a variation of above which might be a bit of a head scratcher, but this works because a Monoid gives rise to an $applicativeFunctor." +
-        s"Because Boolean is not a * -> * type constructor, we need traverseU instead of traverse to find the $applicativeFunctor.".p
+      //@todo can this be done in a more economical in terms of intermediate data structure?
+
+      s"Here's a variation of above which might be a bit of a head scratcher, but this works because a $monoid gives rise to an $applicativeFunctor." +
+        s"Because Boolean is not a * -> * $typeConstructor, we need traverseU instead of $operatorTraverse to find the $applicativeFunctor.".p
 
       import scalaz.Applicative.monoidApplicative
 
