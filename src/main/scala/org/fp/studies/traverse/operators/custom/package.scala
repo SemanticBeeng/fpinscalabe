@@ -16,10 +16,6 @@ package object custom {
 
   object Spec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
 
-    s"$keyPoint ... "
-
-    s"$bookmarks .. "
-
     s"$keyPoint Both $operatorSequence and $operatorTraverse come in 'Unapply' varieties: sequenceU and traverseU." +
       s" These are useful in the case when the scala compiler fails to infer an implicit $applicativeFunctor instance  for the 'inner' type. " +
       s"This will commonly happen when there is a 'Kind mismatch'. For example this happens with Validation, which is " +
@@ -70,6 +66,10 @@ package object custom {
       //@todo
       success
     }
+
+    s"$keyPoint ... "
+
+    s"$bookmarks .. "
 
     eg { /** in [[Scalaz]] */
 
