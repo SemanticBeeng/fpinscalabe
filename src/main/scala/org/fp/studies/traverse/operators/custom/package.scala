@@ -67,7 +67,8 @@ package object custom {
       success
     }
 
-    s"$keyPoint ... "
+    s"$keyPoint The $operatorTraverse comes in a form, traverseS, that allows traversing a structure with with a function while " +
+      s"carrying a state through the computation."
 
     s"$bookmarks .. "
 
@@ -75,11 +76,39 @@ package object custom {
 
       import scalaz._
 
+      import scalaz.State._
       import scalaz.std.list._
       import scalaz.std.option._
+      import scalaz.std.anyVal._
+      import scalaz.syntax.equal._      // for === syntax
+      import scalaz.syntax.traverse._
 
-      //@todo
-      success
+      s"The state stores the last seen Int, returns whether of not the current was a repeat".p
+      val checkForRepeats: Int => State[Option[Int], Boolean] = { next =>
+        for {
+          last <- get
+          _ <- put(scalaz.std.option.some(next))
+        } yield last === scalaz.std.option.some(next)
+      }
+
+      val nonRepeating = List(1,2,3,4)
+      val repeating = List(1,2,3,3,4)
+
+      s"Traverse the lists with None as the starting state, we get back a list of Booleans meaning this element was a repeat of the previous".p
+
+      val res1: List[Boolean] = nonRepeating.traverseS(checkForRepeats).eval(None)
+      val res2: List[Boolean] = repeating.traverseS(checkForRepeats).eval(None)
+
+      Tag.unwrap(res1.foldMap(Tags.Disjunction(_))) must_== false
+      Tag.unwrap(res2.foldMap(Tags.Disjunction(_))) must_== true
+
+      s"Here's a variation of above which might be a bit of a head scratcher, but this works because a Monoid gives rise to an $applicativeFunctor." +
+        s"Because Boolean is not a * -> * type constructor, we need traverseU instead of traverse to find the $applicativeFunctor.".p
+
+      import scalaz.Applicative.monoidApplicative
+
+      Tag.unwrap(res1.traverseU(Tags.Disjunction(_))) must_== false
+      Tag.unwrap(res2.traverseU(Tags.Disjunction(_))) must_== true
     }
 
     eg { /** in [[Cats]] */
