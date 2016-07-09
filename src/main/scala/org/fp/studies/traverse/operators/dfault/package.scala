@@ -5,7 +5,6 @@ import org.fp.resources._
 import org.fp.bookmarks._
 
 import scala.language.higherKinds
-import scalaz.std.option._
 
 //
 import org.specs2.specification.dsl.mutable.{TextDsl, AutoExamples}
@@ -25,8 +24,7 @@ package object dfault {
 
     eg { /** in [[Scalaz]] */
 
-      import scalaz._
-
+      import scalaz.Traverse
       import scalaz.std.list._
       import scalaz.std.option._
 
@@ -62,7 +60,6 @@ package object dfault {
 
     eg { /** in [[Cats]] */
 
-      import cats._
       import cats.std.list._
       import cats.std.option._
       import cats.syntax.traverse._
@@ -100,7 +97,6 @@ package object dfault {
 
     eg { /** in [[Cats]] */
 
-      import cats._
       import cats.std.list._
       import cats.std.option._
       import cats.syntax.traverse._
