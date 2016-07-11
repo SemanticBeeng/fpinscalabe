@@ -23,9 +23,11 @@ package object dfault {
 
       s"Option as $applyFunctor".p
 
-      import scalaz.syntax.applicative._
+      import scalaz.syntax.apply._
       import scalaz.std.option._
       import scalaz.syntax.std.option._
+
+      s"We can use <*>:".p
 
       9.some <*> {(_: Int) + 3}.some must_== Some(12)
 
@@ -68,11 +70,11 @@ package object dfault {
     eg { /** in [[Scalaz]] */
 
       s"List as $applyFunctor".p
-      s"Lists (actually the list $typeConstructor, []) are $applyFunctor-s. What a surprise!".p
+      s"LYAHFGG:" +
+        s"Lists (actually the list $typeConstructor, []) are $applyFunctor-s. What a surprise!".p
 
-      import scalaz.syntax.applicative._
+      import scalaz.syntax.apply._
       import scalaz.std.list._
-      //import scalaz.syntax.std.list._
 
       List(1, 2, 3) <*> List((_: Int) * 0, (_: Int) + 100, (x: Int) => x * x) must_== List(0, 0, 0, 101, 102, 103, 1, 4, 9)
 
@@ -91,11 +93,124 @@ package object dfault {
       success
     }
 
+    eg { /** in [[Scalaz]] */
+
+      s"Zip Lists".p
+      s"LYAHFGG:" +
+        s"However, [(+3),(*2)] <*> [1,2] could also work in such a way that the first function in the left list gets applied to the first value " +
+        s"in the right one, the second function gets applied to the second value, and so on. That would result in a list with two values, " +
+        s"namely [4,4]. You could look at it as [1 + 3, 2 * 2]." +
+        s"This can be done in $Scalaz, but not easily.".p
+
+      import scalaz.Tags
+      import scalaz.syntax.apply._
+      import scalaz.std.list._
+      //import scalaz.syntax.std.list._
+
+      //@todo https://stackoverflow.com/questions/30985397/ziplist-with-scalaz
+      //streamZipApplicative.ap(Tags.Zip(Stream(1, 2))) (Tags.Zip(Stream({(_: Int) + 3}, {(_: Int) * 2})))
+      //res32: scala.collection.immutable.Stream[Int] with Object{type Tag = scalaz.Tags.Zip} = Stream(4, ?)
+      success
+    }
+
+    eg {
+      /** in [[Cats]] */
+      //@todo
+      success
+    }
+
+    eg { /** in [[Scalaz]] */
+
+      s"Useful functions for Applicatives".p
+      s"LYAHFGG:" +
+        s"Control.Applicative defines a function that’s called liftA2, which has a type of." +
+        s"" +
+        s"liftA2 :: (Applicative f) => (a -> b -> c) -> f a -> f b -> f c .".p
+
+      s"There’s Apply[F].lift2:".p
+
+      import scalaz.Apply
+      import scalaz.std.option._
+      import scalaz.syntax.std.option._
+
+      val lift2 : (Option[Int], Option[List[Int]]) => Option[List[Int]] = Apply[Option].lift2((_: Int) :: (_: List[Int]))
+
+      lift2(3.some, List(4).some) must_== Some(List(3, 4))
+
+      //@todo elaborate
+    }
+
+    eg {
+      /** in [[Cats]] */
+      //@todo
+      success
+    }
+
+    eg { /** in [[Scalaz]] */
+
+      s"Useful functions for Applicatives".p
+      s"LYAHFGG:" +
+         s"Let’s try implementing a function that takes a list of $applicativeFunctor-s and returns an $applicativeFunctor that has a list as its " +
+        s"result value. We’ll call it sequenceA." +
+        s"" +
+        s"sequenceA :: (Applicative f) => [f a] -> f [a] " +
+        s" sequenceA [] = pure [] " +
+        s" sequenceA (x:xs) = (:) <$$> x <*> sequenceA xs  ".p
+
+      s"Let’s try implementing this in Scalaz!".p
+
+      import scalaz.Applicative
+      import scalaz.syntax.applicative._
+
+      def sequenceA[F[_]: Applicative, A](list: List[F[A]]): F[List[A]] = list match {
+        case Nil     => (Nil: List[A]).point[F]
+        case x :: xs => (x |@| sequenceA(xs)) {_ :: _}
+      }
+
+      s"Let’s test it:".p
+
+      import scalaz.std.option._
+      import scalaz.std.list._
+      import scalaz.syntax.std.option._
+
+      sequenceA(List(1.some, 2.some)) must_== Some(List(1, 2))
+
+      sequenceA(List(3.some, scalaz.std.option.none, 1.some)) must_== None
+
+      sequenceA(List(List(1, 2, 3), List(4, 5, 6))) must_==
+        List(List(1, 4), List(1, 5), List(1, 6), List(2, 4), List(2, 5), List(2, 6), List(3, 4), List(3, 5), List(3, 6))
+
+      /**
+        * @todo: move to the other examples about [[traverseFunctor]]
+        */
+
+      s"We got the right answers. " +
+        s"What’s interesting here is that we did end up needing Pointed after all, and sequenceA is generic in  $typeClass-y way." +
+        s"For Function1 with Int fixed example, we have to unfortunately invoke a dark magic.".p
+
+      import scalaz.std.function._
+
+      type Function1Int[A] = ({type l[A] = (Int) => A})#l[A]
+
+      val functions: List[Function1Int[Int]] = List((_: Int) + 3, (_: Int) + 2, (_: Int) + 1)
+      val f: Int => List[Int] = sequenceA[Function1Int, Int] (functions)
+      val s = f(3) must_== List(6, 5, 4)
+
+      s"It took us a while, but I am glad we got this far. We’ll pick it up from here later.".p
+      s
+    }
+
+    eg {
+      /** in [[Cats]] */
+      //@todo
+      success
+    }
+
     s"$keyPoint Applying $applicativeFunctor $operatorLHS and $operatorRHS to extract a projection:"
     eg {
       /** in [[Scalaz]] */
 
-      import scalaz.syntax.applicative._
+      import scalaz.syntax.apply._
       import scalaz.std.option._
       import scalaz.syntax.std.option._
 
