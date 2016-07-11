@@ -61,6 +61,7 @@ package object concepts {
   val traverseFunctor = "[traverse]"
 
   //
+  val monad = "[monad]"
   val monoid = "[monoid]"
   val operatorAppend = "[append operator]"
 }

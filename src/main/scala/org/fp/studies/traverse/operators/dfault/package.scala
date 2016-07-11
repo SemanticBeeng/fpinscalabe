@@ -115,9 +115,43 @@ package object dfault {
       //@todo bigNumbers.traverse(doubleSmall) must_== bigNumbers.map(doubleSmall).sequence
     }
 
-    /**
-      * @todo: finish using the example from Runar [[ann_Traverse]]
-      */
+    s"$keyPoint The semantics of $applicativeFunctor[Option] are such that if any of the elements of a List of Options are None, then " +
+      s"the sequence will be None as well."
 
+    s"$bookmarks $ann_Traverse"
+
+    eq { /** [[Scalaz]] */
+
+      s"If you want to get a list of all the Some values regardless of whether any other values are None, you can do this:".p
+
+      //      val list: List[Option[Int]] = List(Some(1), Some(2), None, Some(3))
+      //      list.flatMap (_.toList) must_== Some(List(1, 2, 3))
+
+      s"You can generalize that for any $monad that also forms a $monoid (List happens to be one of these)".p
+
+      //      import scalaz.{Monad, Monoid}
+      //      import scalaz.syntax.monad._
+      //      import scalaz.std.option._
+      //
+      //      def somes[F[_], A](x: F[Option[A]])
+      //                       (implicit m: Monad[F], z: Monoid[F[A]]) =
+      //        x flatMap (o => o.fold(_.pure[F]) (z.zero))
+      //
+      //      implicit val m = Monad[List]
+      //      implicit val z = Monoid[List[Int]]
+      //
+      //      somes(list)(m, z) must_== Some(List(1, 2, 3))
+      success
+    }
+
+    eg { /** in [[Cats]] */
+
+      import cats._
+      import cats.std.list._
+      import cats.std.option._
+
+      //@todo
+      success
+    }
   }
 }
