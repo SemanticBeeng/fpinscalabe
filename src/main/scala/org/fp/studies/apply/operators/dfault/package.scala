@@ -21,20 +21,7 @@ package object dfault {
 
     eg { /** in [[Scalaz]] */
 
-      import scalaz.syntax.applicative._
-      import scalaz.std.list._
-
-      ^(List(1, 2), List(3)) { _ * _ } must_== List(3, 6)
-      (List(1, 2) |@| List(3)) { _ * _ } must_== List(3, 6)
-    }
-
-    eg {
-      /** in [[Cats]] */
-      //@todo
-      success
-    }
-
-    eg { /** in [[Scalaz]] */
+      s"Option as $applyFunctor".p
 
       import scalaz.syntax.applicative._
       import scalaz.std.option._
@@ -46,10 +33,30 @@ package object dfault {
 
       3.some <*> { 9.some <*> {(_: Int) + (_: Int)}.curried.some } must_== Some(12)
 
-      s"Another thing I found in 7.0.0-M3 is a new notation that extracts values from containers and apply them to a single function:".p
+      s"Another thing I found in 7.0.0-M3 is a new notation that extracts values from containers and apply them to a single function.".p
+
+      s"This is actually useful because for one-function case, we no longer need to put it into the container. " +
+        s"I am guessing that this is why Scalaz 7 does not introduce any operator from $applicativeFunctor itself. " +
+        s"Whatever the case, it seems like we no longer need Pointed or <$$>.".p
+
       ^(3.some, 5.some) {_ + _} must_== 8.some
 
       ^(3.some, scalaz.std.option.none[Int]) {_ + _} must_== scalaz.std.option.none[Int]
+
+      s"The new ^(f1, f2) {...} style is not without the problem though. It doesn’t seem to handle $applicativeFunctor-s that takes two type " +
+        s"parameters like Function1, Writer, and Validation. There’s another way called $applicativeBuilder, which apparently was the way " +
+        s"it worked in Scalaz 6, got deprecated in M3, but will be vindicated again because of ^(f1, f2) {...}’s issues. " +
+        s"Here’s how it looks:".p
+
+      (3.some |@| 5.some) {_ + _} must_== 8.some
+
+      //@todo: elaborate on this point
+
+      val times = {(_: Int) * (_:Double)}
+
+      ^(2.some, Some(3.2))(times) must_== Some(6.4)
+      //@todo (Some(1) |@| Some(2)) (times) must_== Some(3)
+
     }
 
     eg {
@@ -60,14 +67,22 @@ package object dfault {
 
     eg { /** in [[Scalaz]] */
 
+      s"List as $applyFunctor".p
+      s"Lists (actually the list $typeConstructor, []) are $applyFunctor-s. What a surprise!".p
+
       import scalaz.syntax.applicative._
-      import scalaz.std.option._
-      import scalaz.syntax.std.option._
+      import scalaz.std.list._
+      //import scalaz.syntax.std.list._
 
-      val times = {(_: Int) * (_:Int)}
+      List(1, 2, 3) <*> List((_: Int) * 0, (_: Int) + 100, (x: Int) => x * x) must_== List(0, 0, 0, 101, 102, 103, 1, 4, 9)
 
-      ^(2.some, Some(3))(times) must_== Some(6)
-      //@todo (Some(1) |@| Some(2)) (times) must_== Some(3)
+      List(3, 4) <*> { List(1, 2) <*> List({(_: Int) + (_: Int)}.curried, {(_: Int) * (_: Int)}.curried) } must_== List(4, 5, 5, 6, 3, 4, 6, 8)
+
+      (List("ha", "heh", "hmm") |@| List("?", "!", ".")) {_ + _} must_== List("ha?", "ha!", "ha.", "heh?", "heh!", "heh.", "hmm?", "hmm!", "hmm.")
+
+      ^(List(1, 2), List(3)) { _ * _ } must_== List(3, 6)
+
+      (List(1, 2) |@| List(3)) { _ * _ } must_== List(3, 6)
     }
 
     eg {

@@ -3,13 +3,11 @@ package org.fp.studies.traverse.operators
 import org.fp.concepts._
 import org.fp.resources._
 import org.fp.bookmarks._
-import org.fp.studies.functor.operators.withcustommap.AmountExample_FunctorScalaz
 
 import scala.language.higherKinds
 
 //
 import org.specs2.specification.dsl.mutable.{TextDsl, AutoExamples}
-import org.fp.studies.applicative.operators.custom.AmountExample_ApplicativeScalaz
 
 /**
   *

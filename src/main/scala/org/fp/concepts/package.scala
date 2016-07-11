@@ -53,6 +53,7 @@ package object concepts {
   //
   val applyFunctor = "[apply functor]"
   val applicativeFunctor = "[applicative functor]"
+  val applicativeBuilder = "[applicative builder]"
   val applicativeValue = "[applicative value]"
   val operatorPoint = "[pure/point operator]"
   val operatorApply = "[apply operator]"
