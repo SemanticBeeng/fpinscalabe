@@ -10,6 +10,9 @@ package object bookmarks {
     * Bookmarks for [[learningScalaz]]
     */
   val ann_newType = Annotation(learningScalaz, "https://hyp.is/qEArpi17EeaSGQvCBfOHEw/archive.is/eGwcT")
+  val ann_ApplicativeMoreThanFunctor = Annotation(learningScalaz, "https://hyp.is/Z4AHECohEea_Rd-tB4xR5A/archive.is/KjNlH")
+  val ann_ApplicativeAsTypeConstructor = Annotation(learningScalaz, "https://hyp.is/KLsYjCokEeaG1D9bbI4Omg/archive.is/KjNlH")
+
 
   /**
     * Bookmarks for [[learningScalazFromLearningScalaz]]
