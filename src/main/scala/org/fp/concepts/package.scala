@@ -51,6 +51,7 @@ package object concepts {
   val lawMapping = "[mapping law]" //@todo ??
 
   //
+  val applyFunctor = "[apply functor]"
   val applicativeFunctor = "[applicative functor]"
   val applicativeValue = "[applicative value]"
   val operatorPoint = "[pure/point operator]"

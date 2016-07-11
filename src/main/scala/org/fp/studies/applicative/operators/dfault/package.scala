@@ -71,9 +71,11 @@ package object dfault {
 
       1.pure[List] must_== List(1)
       1.pure[List] map {_ + 2} must_== List(3)
+      //@todo 1.η[List] map {_ + 2} must_== List(3)
 
       1.pure[Option] must_== Some(1)
       1.pure[Option] map {_ + 2} must_== Some(3)
+      //@todo 1.η[Option] map {_ + 2} must_== Some(3)
     }
 
     s"I can’t really express it in words yet, but there’s something cool about the fact that $constructor is abstracted out.".p

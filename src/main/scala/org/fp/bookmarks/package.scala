@@ -12,7 +12,7 @@ package object bookmarks {
   val ann_newType = Annotation(learningScalaz, "https://hyp.is/qEArpi17EeaSGQvCBfOHEw/archive.is/eGwcT")
   val ann_ApplicativeMoreThanFunctor = Annotation(learningScalaz, "https://hyp.is/Z4AHECohEea_Rd-tB4xR5A/archive.is/KjNlH")
   val ann_ApplicativeAsTypeConstructor = Annotation(learningScalaz, "https://hyp.is/KLsYjCokEeaG1D9bbI4Omg/archive.is/KjNlH")
-
+  val ann_AppStyle2 = Annotation(learningScalaz, "https://hyp.is/kTZy7iokEea21xt1q64Shw/archive.is/KjNlH")
 
   /**
     * Bookmarks for [[learningScalazFromLearningScalaz]]
@@ -20,7 +20,7 @@ package object bookmarks {
   val ann_FunctionComposition = Annotation(learningScalazFromLearningScalaz, "https://hyp.is/GnoRUCvdEea3T6skHMRxAw/archive.is/O43Km")
   val ann_FunctionLifting = Annotation(learningScalazFromLearningScalaz, "https://hyp.is/-9XDGibxEeaaDnsg0VK0XA/archive.is/O43Km")
   val ann_ApplicativeExtractsFunction = Annotation(learningScalazFromLearningScalaz, "https://hyp.is/bW2eiCgbEeafQPtbTQkaDA/archive.is/O43Km")
-  val ann_ApplyStyle = Annotation(learningScalazFromLearningScalaz, "https://hyp.is/X6EyYigeEea-b_PzinHrew/archive.is/O43Km")
+  val ann_ApplicativeExtractsFunction2 = Annotation(learningScalazFromLearningScalaz, "https://hyp.is/X6EyYigeEea-b_PzinHrew/archive.is/O43Km")
 
   val ann_Traverse = Annotation(stackOverflow, "http://stackoverflow.com/a/2569881/4032515")
 

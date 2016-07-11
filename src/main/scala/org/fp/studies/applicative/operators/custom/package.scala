@@ -92,7 +92,7 @@ package object custom {
   object Spec extends org.specs2.mutable.Spec with AutoExamples {
 
     s"$keyPoint The $applicativeFunctor $operatorApply can have a few equivalent forms:"
-    s"$bookmarks $ann_ApplyStyle"
+    s"$bookmarks $ann_ApplicativeExtractsFunction2"
     eg {
       /** in [[Scalaz]] */
 
@@ -110,7 +110,7 @@ package object custom {
       val times = {(_: Int) * (_:Int)}
 
       ^(2.some, Some(3))(times) must_== Some(6)
-      //(Some(1) |@| Some(2)) (times) must_== Some(3)
+      //@todo (Some(1) |@| Some(2)) (times) must_== Some(3)
 
       import AmountExample_ApplicativeScalaz._
 
@@ -127,7 +127,7 @@ package object custom {
     }
 
     s"$keyPoint The $applicativeFunctor $operatorApply applies the function from inside the second $functor:"
-    s"$bookmarks $ann_ApplicativeExtractsFunction"
+    s"$bookmarks $ann_ApplicativeExtractsFunction, $ann_AppStyle2 "
     eg {
       /** in [[Scalaz]] */
 
