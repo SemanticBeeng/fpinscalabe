@@ -16,6 +16,90 @@ package object dfault {
 
   object Spec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
 
+    s"$keyPoint The $applyFunctor $operatorApply can have a few equivalent forms:"
+    s"$bookmarks $ann_ApplicativeExtractsFunction2"
+
+    eg { /** in [[Scalaz]] */
+
+      import scalaz.syntax.applicative._
+      import scalaz.std.list._
+
+      ^(List(1, 2), List(3)) { _ * _ } must_== List(3, 6)
+      (List(1, 2) |@| List(3)) { _ * _ } must_== List(3, 6)
+    }
+
+    eg {
+      /** in [[Cats]] */
+      //@todo
+      success
+    }
+
+    eg { /** in [[Scalaz]] */
+
+      import scalaz.syntax.applicative._
+      import scalaz.std.option._
+      import scalaz.syntax.std.option._
+
+      9.some <*> {(_: Int) + 3}.some must_== Some(12)
+
+      3.some <*> { 9.some <*> {(_: Int) + (_: Int)}.curried.some } must_== Some(12)
+
+      3.some <*> { 9.some <*> {(_: Int) + (_: Int)}.curried.some } must_== Some(12)
+
+      s"Another thing I found in 7.0.0-M3 is a new notation that extracts values from containers and apply them to a single function:".p
+      ^(3.some, 5.some) {_ + _} must_== 8.some
+
+      ^(3.some, scalaz.std.option.none[Int]) {_ + _} must_== scalaz.std.option.none[Int]
+    }
+
+    eg {
+      /** in [[Cats]] */
+      //@todo
+      success
+    }
+
+    eg { /** in [[Scalaz]] */
+
+      import scalaz.syntax.applicative._
+      import scalaz.std.option._
+      import scalaz.syntax.std.option._
+
+      val times = {(_: Int) * (_:Int)}
+
+      ^(2.some, Some(3))(times) must_== Some(6)
+      //@todo (Some(1) |@| Some(2)) (times) must_== Some(3)
+    }
+
+    eg {
+      /** in [[Cats]] */
+      //@todo
+      success
+    }
+
+    s"$keyPoint Applying $applicativeFunctor $operatorLHS and $operatorRHS to extract a projection:"
+    eg {
+      /** in [[Scalaz]] */
+
+      import scalaz.syntax.applicative._
+      import scalaz.std.option._
+      import scalaz.syntax.std.option._
+
+      1.some <* 2.some must_== Some(1)
+
+      scalaz.std.option.none <* 2.some must_== None
+
+      1.some *> 2.some must_== Some(2)
+
+      scalaz.std.option.none *> 2.some must_== None
+
+    }
+
+    eg { /** in [[Cats]] */
+
+      //@todo
+      success
+    }
+
     s"$keyPoint So far, when we were mapping functions over $functor-, we usually mapped functions that take only one parameter. " +
       s"But what happens when we $operatorMap a function like *, which takes two parameters, over a $functor?"
 

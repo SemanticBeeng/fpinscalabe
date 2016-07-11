@@ -93,35 +93,18 @@ package object custom {
 
     s"$keyPoint The $applyFunctor $operatorApply can have a few equivalent forms:"
     s"$bookmarks $ann_ApplicativeExtractsFunction2"
-    eg {
-      /** in [[Scalaz]] */
 
-      import scalaz.syntax.applicative._
-      import scalaz.std.list._
+    eg { /** in [[Scalaz]] */
 
-      ^(List(1, 2), List(3)) { _ * _ } must_== List(3, 6)
-      (List(1, 2) |@| List(3)) { _ * _ } must_== List(3, 6)
-
-      import scalaz.Apply
-      import scalaz.std.option._
-      import scalaz.syntax.std.option._
-      import scalaz.syntax.applicative._
-
-      val times = {(_: Int) * (_:Int)}
-
-      ^(2.some, Some(3))(times) must_== Some(6)
-      //@todo (Some(1) |@| Some(2)) (times) must_== Some(3)
-
-      import AmountExample_ApplyScalaz._
+     import scalaz.syntax.applicative._
+     import AmountExample_ApplyScalaz._
 
       ^(One(6): Amount[Int], One(7)) { _ * _ } must_== One(42)
       ((One(6): Amount[Int]) |@| One(7)) { _ * _ } must_== One(42)
     }
 
-    eg { /** in [[Cats]] */
-      import cats.syntax.applicative._
-      import AmountExample_ApplyCats._
-
+    eg {
+      /** in [[Cats]] */
       //@todo
       success
     }
@@ -156,18 +139,7 @@ package object custom {
     eg {
       /** in [[Scalaz]] */
 
-      import scalaz.std.option._
-      import scalaz.syntax.std.option._
       import scalaz.syntax.applicative._
-
-      1.some <* 2.some must_== Some(1)
-
-      scalaz.std.option.none <* 2.some must_== None
-
-      1.some *> 2.some must_== Some(2)
-
-      scalaz.std.option.none *> 2.some must_== None
-
       import AmountExample_ApplyScalaz._
 
       (One(6): Amount[Int]) <* One(7) must_== One(6)
@@ -182,7 +154,5 @@ package object custom {
       //@todo
       success
     }
-
   }
-
 }
