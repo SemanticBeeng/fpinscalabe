@@ -16,6 +16,7 @@ package object concepts {
   val structuralType = "structural type"
 
   //
+  val constructor = "[constructor]"
   val typeConstructor = "[type constructor]"
   val typeClass = "[type class]"
   val taggedType = "[tagged type]"

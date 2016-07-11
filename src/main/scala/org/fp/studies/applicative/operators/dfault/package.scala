@@ -44,7 +44,7 @@ package object dfault {
       s"of default (or pure) context—a minimal context that still yields that value."
 
     s"$keyPoint $Scalaz likes the name point instead of pure, and it seems like it’s basically a constructor that takes value A and returns F[A]. " +
-      s"It doesn’t introduce an operator, but it introduces point method and its symbolic alias η to all data types."
+      s"It doesn't introduce an operator, but it introduces point method ($operatorPoint) and its symbolic alias η to all data types."
 
     s"$bookmarks: $ann_ApplicativeAsTypeConstructor"
 
@@ -56,9 +56,11 @@ package object dfault {
 
       1.point[List] must_== List(1)
       1.point[List] map {_ + 2} must_== List(3)
+      1.η[List] map {_ + 2} must_== List(3)
 
       1.point[Option] must_== Some(1)
       1.point[Option] map {_ + 2} must_== Some(3)
+      1.η[Option] map {_ + 2} must_== Some(3)
     }
 
     eg { /** in [[Cats]] */
@@ -74,7 +76,7 @@ package object dfault {
       1.pure[Option] map {_ + 2} must_== Some(3)
     }
 
-    s"I can’t really express it in words yet, but there’s something cool about the fact that constructor is abstracted out.".p
+    s"I can’t really express it in words yet, but there’s something cool about the fact that $constructor is abstracted out.".p
 
   }
 }
