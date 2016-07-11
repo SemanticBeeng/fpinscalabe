@@ -97,6 +97,21 @@ package object custom {
       /** in [[Scalaz]] */
 
       import scalaz.syntax.applicative._
+      import scalaz.std.list._
+
+      ^(List(1, 2), List(3)) { _ * _ } must_== List(3, 6)
+      (List(1, 2) |@| List(3)) { _ * _ } must_== List(3, 6)
+
+      import scalaz.Apply
+      import scalaz.std.option._
+      import scalaz.syntax.std.option._
+      import scalaz.syntax.applicative._
+
+      val times = {(_: Int) * (_:Int)}
+
+      ^(2.some, Some(3))(times) must_== Some(6)
+      //(Some(1) |@| Some(2)) (times) must_== Some(3)
+
       import AmountExample_ApplicativeScalaz._
 
       ^(One(6): Amount[Int], One(7)) { _ * _ } must_== One(42)
