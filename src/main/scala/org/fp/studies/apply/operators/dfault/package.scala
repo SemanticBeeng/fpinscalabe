@@ -45,9 +45,10 @@ package object dfault {
 
       ^(3.some, scalaz.std.option.none[Int]) {_ + _} must_== scalaz.std.option.none[Int]
 
-      s"The new ^(f1, f2) {...} style is not without the problem though. It doesn’t seem to handle $applicativeFunctor-s that takes two type " +
-        s"parameters like Function1, Writer, and Validation. There’s another way called $applicativeBuilder, which apparently was the way " +
-        s"it worked in Scalaz 6, got deprecated in M3, but will be vindicated again because of ^(f1, f2) {...}’s issues. " +
+      s"The new ^(f1, f2) {...} style is not without the problem though. " +
+        s"It doesn’t seem to handle $applicativeFunctor-s that takes two type parameters like Function1, Writer, and Validation. " +
+        s"There’s another way called $applicativeBuilder, which apparently was the way it worked in Scalaz 6, got deprecated in M3, " +
+        s"but will be vindicated again because of ^(f1, f2) {...}’s issues. " +
         s"Here’s how it looks:".p
 
       (3.some |@| 5.some) {_ + _} must_== 8.some
@@ -59,6 +60,9 @@ package object dfault {
       ^(2.some, Some(3.2))(times) must_== Some(6.4)
       //@todo (Some(1) |@| Some(2)) (times) must_== Some(3)
 
+      /**
+        * [[bookmarks]] [[ann_ApplicativeBuilder]]
+        */
       import scalaz.std.function._
 
       val f = ({(_: Int) * 2} |@| {(_: Int) + 10}) {_ + _}

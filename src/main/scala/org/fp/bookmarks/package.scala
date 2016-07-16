@@ -13,6 +13,8 @@ package object bookmarks {
   val ann_ApplicativeMoreThanFunctor = Annotation(learningScalaz, "https://hyp.is/Z4AHECohEea_Rd-tB4xR5A/archive.is/KjNlH")
   val ann_ApplicativeAsTypeConstructor = Annotation(learningScalaz, "https://hyp.is/KLsYjCokEeaG1D9bbI4Omg/archive.is/KjNlH")
   val ann_AppStyle2 = Annotation(learningScalaz, "https://hyp.is/kTZy7iokEea21xt1q64Shw/archive.is/KjNlH")
+  val ann_ApplicativeBuilder = Annotation(learningScalaz, "https://hyp.is/ajiiakt3EeaAp9sBzMYzmQ/archive.is/cNcVk")
+
 
   /**
     * Bookmarks for [[learningScalazFromLearningScalaz]]
