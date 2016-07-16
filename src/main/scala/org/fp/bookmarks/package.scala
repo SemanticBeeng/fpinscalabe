@@ -41,6 +41,7 @@ package object bookmarks {
     */
   val ann_MapOperatorCompositionOrder = Annotation(herdingCats, "https://hyp.is/CoRoHC3_Eea6um8KQ6ynmA/archive.is/xhOwY")
   val ann_FProductEx2 = Annotation(herdingCats, "https://hyp.is/qlp3EC4XEeaYRVPnJsP_4Q/archive.is/xhOwY")
+  val ann_Kleisli = Annotation(herdingCats, "https://hyp.is/cYWmHkt6EeaotYslIz7HKA/archive.is/0ukQo")
 
   //
   val ann_unboxNewTypesInScalaz = Annotation(timperrett, "https://hyp.is/_XD7IC1-Eea_sPMAraQN2w/archive.is/KAdCc")
