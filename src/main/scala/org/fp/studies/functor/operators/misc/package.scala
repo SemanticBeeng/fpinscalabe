@@ -78,5 +78,33 @@ package object misc {
 
       List("a", "b", "c").as("-") must_== List("-", "-", "-")
     }
+
+    s"$keyPoint $functor also enables some operators that override the values in the data structure " +
+      s"like $operatorShift, $operatorAs, $operatorFpair, $operatorStrengthL, $operatorStrengthR, and $operatorVoid:".p
+
+    eg { /** in [[Scalaz]] */
+      import scalaz.syntax.functor._
+      import scalaz.std.list._
+
+      List(1, 2, 3) >| "x" must_== List("x", "x", "x")
+      List(1, 2, 3) as "x" must_== List("x", "x", "x")
+      List(1, 2, 3) strengthL "x" must_== List(("x",1), ("x",2), ("x",3))
+      List(1, 2, 3) strengthR "x" must_== List((1, "x"), (2, "x"), (3, "x"))
+      List(1, 2, 3).fpair must_== List((1,1), (2,2), (3,3))
+      List(1, 2, 3).void must_== List((), (), ())
+
+    }
+
+    eg { /** in [[Cats]] */
+      import cats.syntax.functor._
+      import cats.std.list._
+
+      //@todo List(1, 2, 3) >| "x" must_== List("x", "x", "x")
+      List(1, 2, 3) as "x" must_== List("x", "x", "x")
+      //@todo List(1, 2, 3) strengthL "x" must_== List(("x",1), ("x",2), ("x",3))
+      //@todo List(1, 2, 3) strengthR "x" must_== List((1, "x"), (2, "x"), (3, "x"))
+      //@todo List(1, 2, 3).fpair must_== List((1,1), (2,2), (3,3))
+      List(1, 2, 3).void must_== List((), (), ())
+    }
   }
 }

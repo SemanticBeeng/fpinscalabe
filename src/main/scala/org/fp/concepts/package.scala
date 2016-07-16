@@ -39,7 +39,11 @@ package object concepts {
   val operatorLift = "[lift operator]"
   val operatorVoid = "[void operator]"
   val operatorFproduct = "[fproduct operator]"
+  val operatorFpair = "[fpair operator]"
   val operatorAs = "[as operator]"
+  val operatorShift = "[>| operator]" //@todo what is the correct name?
+  val operatorStrengthL = "[strengthL operator]"
+  val operatorStrengthR = "[RightL operator]"
 
   /**
     *

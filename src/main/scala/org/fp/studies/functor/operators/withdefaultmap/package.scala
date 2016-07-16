@@ -65,7 +65,6 @@ package object withdefaultmap {
       val increment: Int => Int = i => i + 1 // a bit of help for Intellij type inference
       (Right(1): Either[String, Int]) map increment must_== Right(2)
     }
-
   }
 }
 
