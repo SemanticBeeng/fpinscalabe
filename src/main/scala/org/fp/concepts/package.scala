@@ -21,16 +21,23 @@ package object concepts {
   val typeClass = "[type class]"
   val taggedType = "[tagged type]"
   val higherKindedType = "[higher-Kinded type]"
+  val monadicFunction = "[monadic function]"
 
   //
   val functor = "[functor]"
   val biFunctor = "[bi functor]"
+  val applyFunctor = "[apply functor]"
+  val applicativeFunctor = "[applicative functor]"
+  val applicativeBuilder = "[applicative builder]"
+  val applicativeValue = "[applicative value]"
+  val traverseFunctor = "[traverse]"
+  val kleisli = "[kleisli]"
 
-  val functorComposition = "[functor composition]"
   /**
     * @todo related to [[operatorLift]]
     */
   val functionLifting = "[function lifting]"
+  val functorComposition = "[functor composition]"
 
   /**
     * @todo "fmap" in Haskell
@@ -44,6 +51,13 @@ package object concepts {
   val operatorShift = "[>| operator]" //@todo what is the correct name?
   val operatorStrengthL = "[strengthL operator]"
   val operatorStrengthR = "[RightL operator]"
+  val operatorPoint = "[pure/point operator]"
+  val operatorApply = "[apply operator]"
+  val operatorLHS = "[LHS operator]"
+  val operatorRHS = "[RHS operator]"
+  val operatorSequence = "[sequence operator]"
+  val operatorTraverse = "[traverse operator]"
+
 
   /**
     *
@@ -53,21 +67,6 @@ package object concepts {
   val lawHomomorphism = "[homomorphism law]"
   val lawInterchange = "[interchange law]"
   val lawMapping = "[mapping law]" //@todo ??
-
-  //
-  val applyFunctor = "[apply functor]"
-  val applicativeFunctor = "[applicative functor]"
-  val applicativeBuilder = "[applicative builder]"
-  val applicativeValue = "[applicative value]"
-  val operatorPoint = "[pure/point operator]"
-  val operatorApply = "[apply operator]"
-  val operatorLHS = "[LHS operator]"
-  val operatorRHS = "[RHS operator]"
-  val operatorSequence = "[sequence operator]"
-  val operatorTraverse = "[traverse operator]"
-
-  //
-  val traverseFunctor = "[traverse]"
 
   //
   val monad = "[monad]"
