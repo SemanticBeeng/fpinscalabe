@@ -59,6 +59,12 @@ package object dfault {
       ^(2.some, Some(3.2))(times) must_== Some(6.4)
       //@todo (Some(1) |@| Some(2)) (times) must_== Some(3)
 
+      import scalaz.std.function._
+
+      val f = ({(_: Int) * 2} |@| {(_: Int) + 10}) {_ + _}
+
+      // (5 * 2) + (5 + 10)
+      f(5) must_== 25
     }
 
     eg {
