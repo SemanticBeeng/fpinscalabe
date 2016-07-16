@@ -9,7 +9,7 @@ import org.specs2.specification.dsl.mutable.{AutoExamples, TextDsl}
 /**
   * @see [[monoid]]
   */
-package object append {
+package object dfault {
 
 
   /**
