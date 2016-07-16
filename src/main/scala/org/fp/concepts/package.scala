@@ -31,12 +31,13 @@ package object concepts {
   val applicativeBuilder = "[applicative builder]"
   val applicativeValue = "[applicative value]"
   val traverseFunctor = "[traverse]"
-  val kleisli = "[kleisli]"
+  val Kleisli = "[Kleisli]"
 
   /**
     * @todo related to [[operatorLift]]
     */
   val functionLifting = "[function lifting]"
+  val functionComposition = "[function composition]"
   val functorComposition = "[functor composition]"
 
   /**
@@ -57,7 +58,7 @@ package object concepts {
   val operatorRHS = "[RHS operator]"
   val operatorSequence = "[sequence operator]"
   val operatorTraverse = "[traverse operator]"
-
+  val operatorAppend = "[append operator]"
 
   /**
     *
@@ -71,6 +72,5 @@ package object concepts {
   //
   val monad = "[monad]"
   val monoid = "[monoid]"
-  val operatorAppend = "[append operator]"
 }
 
