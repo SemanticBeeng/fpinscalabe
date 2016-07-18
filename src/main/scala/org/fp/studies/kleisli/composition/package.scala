@@ -48,6 +48,7 @@ package object composition {
       s"There’s also 'andThen', which runs the left-hand side first:".p
       (4.some flatMap (f andThen g).run) must_== Some(500)
       (4.some flatMap (f >=>     g).run) must_== Some(500)
+      //@todo ((f >=>     g).run) =<< 4.some)  must_== Some(500)
 
       s"Both 'compose' and 'andThen' work like $functionComposition but note that they retain the monadic context.".p
 
