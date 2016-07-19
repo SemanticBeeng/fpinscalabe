@@ -3,6 +3,7 @@ package org.fp.studies.kleisli
 import org.fp.concepts._
 import org.fp.resources._
 import org.fp.bookmarks._
+
 //
 import org.specs2.specification.dsl.mutable.{TextDsl, AutoExamples}
 
@@ -13,9 +14,9 @@ import org.specs2.specification.dsl.mutable.{TextDsl, AutoExamples}
 package object composition {
 
   /**
-    * Note the [[org.fp.resources.Scalaz]] dual syntax for function composition: 'map and '∘'
+    *
     */
-  object Spec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
+  object Spec1 extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
 
     object Catnip {
       implicit class IdOp[A](val a: A) extends AnyVal {
@@ -39,7 +40,7 @@ package object composition {
       val f = kleisli { (x: Int) => (x + 1).some }
       val g = kleisli { (x: Int) => (x * 100).some }
 
-      s"There’s a special wrapper for a function of type A => F[B] called $Kleisli:".p
+      s"There’s a special wrapper for a function of type A => F[B] called $KleisliArrow:".p
 
       s"We can then compose the functions using 'compose', which runs the right-hand side first:".p
       (4.some flatMap (f compose g).run) must_== Some(401)
@@ -52,7 +53,7 @@ package object composition {
 
       s"Both 'compose' and 'andThen' work like $functionComposition but note that they retain the monadic context.".p
 
-      s"$Kleisli also has some interesting methods like $operatorLift, which allows you to lift a $monadicFunction " +
+      s"$KleisliArrow also has some interesting methods like $operatorLift, which allows you to lift a $monadicFunction " +
         s"into another $applicativeFunctor.".p
       import scalaz.std.list._
 
@@ -89,6 +90,82 @@ package object composition {
 
       val l = f.lift[List]
       (List(1, 2, 3) >>= l.run) must_== List(Some(2), Some(3), Some(4))
+    }
+  }
+
+  /**
+    *
+    */
+  object Spec2 extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
+
+    import scala.util.Try
+
+    class Data {
+
+      case class Continent(name: String, countries: List[Country] = List.empty)
+      case class Country(name: String, cities: List[City] = List.empty)
+      case class City(name: String, isCapital: Boolean = false, inhabitants: Int = 20)
+
+      private val Washington = City("Washington")
+      private val NewYork = City("New York")
+
+      private val NewDehli = City("New Dehli")
+      private val Calcutta = City("Calcutta")
+
+      val data: List[Continent] = List(
+        Continent("Europe"),
+        Continent("America",
+          List(
+            Country("USA", List(Washington, NewYork))
+          )
+        ),
+        Continent("Asia",
+          List(Country("India", List(NewDehli, Calcutta))
+          )
+        )
+      )
+
+      def continents(name: String): List[Continent] =
+        data.filter(k => k.name.contains(name))
+
+      def countries(continent: Continent): List[Country] = continent.countries
+
+      def cities(country: Country): List[City] = country.cities
+
+      var saved = List[City]()
+      def save(cities: List[City]): Try[Unit] =
+        Try {
+          cities.foreach(c => saved = saved.::(c))
+        }
+
+      def inhabitants(c: City): Int = c.inhabitants
+    }
+
+    val d = new Data
+
+    s"$keyPoint Examples of using the variations of the $operatorAndThen,  " +
+      s"either starting with a $KleisliArrow and following with functions of the form A => M[B] " +
+      s"or following with adequate $KleisliArrow. " +
+      s" The aliases are: " +
+      s"  >==> and andThenK " +
+      s"  >=>  and andThen " +
+      s" " +
+      s" the same applies to $functionComposition with " +
+      s" <==<, <=<, composeK and compose".p
+
+    eg { /** [[Scalaz]] */
+
+      import scalaz.Kleisli._
+
+      val allCities = kleisli(d.continents) >==> d.countries >==> d.cities
+      val allCities2 = kleisli(d.continents) >=> kleisli(d.countries) >=> kleisli(d.cities)
+
+      allCities("America") must_== allCities2("America")
+    }
+
+    eg { /** [[Cats]] */
+
+      success
     }
   }
 }

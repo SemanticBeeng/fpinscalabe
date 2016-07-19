@@ -24,6 +24,9 @@ package object concepts {
   val monadicFunction = "[monadic function]"
 
   //
+  /**
+    * See Functor.md
+    */
   val functor = "[functor]"
   val biFunctor = "[bi functor]"
   val applyFunctor = "[apply functor]"
@@ -31,7 +34,7 @@ package object concepts {
   val applicativeBuilder = "[applicative builder]"
   val applicativeValue = "[applicative value]"
   val traverseFunctor = "[traverse]"
-  val Kleisli = "[Kleisli]"
+  val KleisliArrow = "[Kleisli arrow]"
 
   /**
     * @todo related to [[operatorLift]]
@@ -59,6 +62,8 @@ package object concepts {
   val operatorSequence = "[sequence operator]"
   val operatorTraverse = "[traverse operator]"
   val operatorAppend = "[append operator]"
+  val operatorCompose = "[coompose operator]"
+  val operatorAndThen = "[andThen operator]"
 
   /**
     *
