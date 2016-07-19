@@ -3,3 +3,4 @@ target/
 project/
 .ivy
 .project
+src/main/scala/org/fp/concepts/ek.wiki
