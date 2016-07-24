@@ -100,7 +100,7 @@ package object composition {
 
     import scala.util.Try
 
-    object Data {
+    class Data {
 
       case class Continent(name: String, countries: List[Country] = List.empty)
       case class Country(name: String, cities: List[City] = List.empty)
@@ -155,10 +155,10 @@ package object composition {
 
       import scalaz.Kleisli._
       import scalaz.std.list._
-      import Data._
+      val d = new Data
 
-      val allCities = kleisli(continents) >==> countries >==> cities
-      val allCities2 = kleisli(continents) >=> kleisli(countries) >=> kleisli(cities)
+      val allCities = kleisli(d.continents) >==> d.countries >==> d.cities
+      val allCities2 = kleisli(d.continents) >=> kleisli(d.countries) >=> kleisli(d.cities)
 
       allCities("America") must_== allCities2("America")
     }
