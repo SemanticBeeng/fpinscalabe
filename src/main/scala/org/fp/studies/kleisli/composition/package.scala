@@ -153,9 +153,8 @@ package object composition {
 
     eg { /** [[Scalaz]] */
 
-      import scalaz._
-      import Scalaz._
       import scalaz.Kleisli._
+      import scalaz.std.list._
       import Data._
 
       val allCities = kleisli(continents) >==> countries >==> cities
