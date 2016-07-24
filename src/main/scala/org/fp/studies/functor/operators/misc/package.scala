@@ -8,7 +8,7 @@ import org.specs2.specification.dsl.mutable.{TextDsl, AutoExamples}
 
   /**
     *
-    * @see [[operatorVoid]], [[operatorFproduct]]
+    * @see [[operator_void]], [[operator_Fproduct]]
     */
 package object misc {
 
@@ -17,7 +17,7 @@ package object misc {
     */
   object Spec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
 
-    s"$keyPoint The $operatorFproduct pairs a value with the result of applying a function to that value.".p
+    s"$keyPoint The $operator_Fproduct pairs a value with the result of applying a function to that value.".p
     s"$bookmarks: $ann_FProductEx1, $ann_FProductEx2"
 
     eg { /** in [[Scalaz]] */
@@ -42,7 +42,7 @@ package object misc {
         Map("a" -> 1, "aa" -> 2, "b" ->  1, "ccccc" -> 5)
     }
 
-    s"$keyPoint The $operatorVoid transforms F[A] into a F[Unit].".p
+    s"$keyPoint The $operator_void transforms F[A] into a F[Unit].".p
     eg { /** in [[Scalaz]] */
       // 8<--
       import scalaz.Functor
@@ -61,7 +61,7 @@ package object misc {
       Functor[Option].void(Some(1)) must_== Some(())
     }
 
-    s"$keyPoint The $operatorAs transforms F[A] into a F[B].".p
+    s"$keyPoint The $operator_as transforms F[A] into a F[B].".p
     eg { /** in [[Scalaz]] */
       import scalaz.std.list._
       import scalaz.syntax.functor._
@@ -70,7 +70,7 @@ package object misc {
       List("a", "b", "c").as("-") must_== List("-", "-", "-")
     }
 
-    s"$keyPoint The $operatorAs transforms F[A] into a F[B].".p
+    s"$keyPoint The $operator_as transforms F[A] into a F[B].".p
     eg { /** in [[Cats]] */
       import cats.std.list._
       import cats.syntax.functor._
@@ -80,7 +80,7 @@ package object misc {
     }
 
     s"$keyPoint $functor also enables some operators that override the values in the data structure " +
-      s"like $operatorShift, $operatorAs, $operatorFpair, $operatorStrengthL, $operatorStrengthR, and $operatorVoid:".p
+      s"like $operator_shift, $operator_as, $operator_Fpair, $operator_strengthL, $operator_strengthR, and $operator_void:".p
 
     eg { /** in [[Scalaz]] */
       import scalaz.syntax.functor._

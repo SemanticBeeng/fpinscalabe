@@ -37,7 +37,7 @@ package object concepts {
   val KleisliArrow = "[Kleisli arrow]"
 
   /**
-    * @todo related to [[operatorLift]]
+    * @todo related to [[operator_lift]]
     */
   val functionLifting = "[function lifting]"
   val functionComposition = "[function composition]"
@@ -46,24 +46,25 @@ package object concepts {
   /**
     * @todo "fmap" in Haskell
     */
-  val operatorMap = "[map operator]"
-  val operatorLift = "[lift operator]"
-  val operatorVoid = "[void operator]"
-  val operatorFproduct = "[fproduct operator]"
-  val operatorFpair = "[fpair operator]"
-  val operatorAs = "[as operator]"
-  val operatorShift = "[>| operator]" //@todo what is the correct name?
-  val operatorStrengthL = "[strengthL operator]"
-  val operatorStrengthR = "[RightL operator]"
-  val operatorPoint = "[pure/point operator]"
-  val operatorApply = "[apply operator]"
-  val operatorLHS = "[LHS operator]"
-  val operatorRHS = "[RHS operator]"
-  val operatorSequence = "[sequence operator]"
-  val operatorTraverse = "[traverse operator]"
-  val operatorAppend = "[append operator]"
-  val operatorCompose = "[coompose operator]"
-  val operatorAndThen = "[andThen operator]"
+  val operator_map = "[map operator]"
+  val operator_lift = "[lift operator]"
+  val operator_void = "[void operator]"
+  val operator_Fproduct = "[fproduct operator]"
+  val operator_Fpair = "[fpair operator]"
+  val operator_as = "[as operator]"
+  val operator_shift = "[>| operator]" //@todo what is the correct name?
+  val operator_strengthL = "[strengthL operator]"
+  val operator_strengthR = "[RightL operator]"
+  val operator_point = "[pure/point operator]"
+  val operator_apply = "[apply operator]"
+  val operator_LHS = "[LHS operator]"
+  val operator_RHS = "[RHS operator]"
+  val operator_sequence = "[sequence operator]"
+  val operator_traverse = "[traverse operator]"
+  val operator_append = "[append operator]"
+  val operator_compose = "[coompose operator]"
+  val operator_andThen = "[andThen operator]"
+  val operator_>==> = "[>==> operator]"
 
   /**
     *

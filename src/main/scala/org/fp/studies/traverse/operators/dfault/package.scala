@@ -16,7 +16,7 @@ package object dfault {
 
   object Spec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
 
-    s"$keyPoint The $traverseFunctor's $operatorSequence turns F[G[A] into G[F[A]] given that there exists " +
+    s"$keyPoint The $traverseFunctor's $operator_sequence turns F[G[A] into G[F[A]] given that there exists " +
       s"an implementation of $traverseFunctor[F], and of $applicativeFunctor[G] (Option and List happen to satisfy both). " +
       s"This is like turning the structure 'inside-out'"
 
@@ -70,11 +70,11 @@ package object dfault {
       success
     }
 
-    s"$keyPoint The $traverseFunctor's $operatorSequence maps a function over a structure through the effects of the " +
-      s"inner $applicativeFunctor. You can think of this as combining a $operatorMap with a $operatorSequence. " +
+    s"$keyPoint The $traverseFunctor's $operator_sequence maps a function over a structure through the effects of the " +
+      s"inner $applicativeFunctor. You can think of this as combining a $operator_map with a $operator_sequence. " +
       s"So when you find yourself calling fa.map(f).sequence, it can be replaced with just fa.traverse(f)::"
     /**
-      * @todo determine if the [[operatorTraverse]] implementation is more economical in terms of intermediate data structures
+      * @todo determine if the [[operator_traverse]] implementation is more economical in terms of intermediate data structures
       */
 
     eg { /** in [[Scalaz]] */

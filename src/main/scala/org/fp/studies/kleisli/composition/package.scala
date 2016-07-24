@@ -53,7 +53,7 @@ package object composition {
 
       s"Both 'compose' and 'andThen' work like $functionComposition but note that they retain the monadic context.".p
 
-      s"$KleisliArrow also has some interesting methods like $operatorLift, which allows you to lift a $monadicFunction " +
+      s"$KleisliArrow also has some interesting methods like $operator_lift, which allows you to lift a $monadicFunction " +
         s"into another $applicativeFunctor.".p
       import scalaz.std.list._
 
@@ -83,7 +83,7 @@ package object composition {
 
       s"Both 'compose' and 'andThen' work like $functionComposition but note that they retain the monadic context.".p
 
-      s"$Kleisli also has some interesting methods like $operatorLift, which allows you to lift a $monadicFunction " +
+      s"$Kleisli also has some interesting methods like $operator_lift, which allows you to lift a $monadicFunction " +
         s"into another $applicativeFunctor.".p
 
       import cats.std.list._
@@ -141,7 +141,7 @@ package object composition {
       def inhabitants(c: City): Int = c.inhabitants
     }
 
-    s"$keyPoint Examples of using the variations of the $operatorAndThen,  " +
+    s"$keyPoint Examples of using the variations of the $operator_andThen,  " +
       s"either starting with a $KleisliArrow and following with functions of the form A => M[B] " +
       s"or following with adequate $KleisliArrow. " +
       s" The aliases are: " +

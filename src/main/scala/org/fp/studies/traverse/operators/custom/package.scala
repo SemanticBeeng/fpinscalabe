@@ -16,7 +16,7 @@ package object custom {
 
   object Spec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
 
-    s"$keyPoint Both $operatorSequence and $operatorTraverse come in 'Unapply' varieties: sequenceU and traverseU." +
+    s"$keyPoint Both $operator_sequence and $operator_traverse come in 'Unapply' varieties: sequenceU and traverseU." +
       s" These are useful in the case when the scala compiler fails to infer an implicit $applicativeFunctor instance  for the 'inner' type. " +
       s"This will commonly happen when there is a 'Kind mismatch'. For example this happens with Validation, which is " +
       s"kind *,* -> * instead of the expected * -> * kind of an $applicativeFunctor, since the Validation type constructor takes two arguments instead of one."
@@ -67,7 +67,7 @@ package object custom {
       success
     }
 
-    s"$keyPoint The $operatorTraverse comes in a form, traverseS, that allows traversing a structure with with a function while " +
+    s"$keyPoint The $operator_traverse comes in a form, traverseS, that allows traversing a structure with with a function while " +
       s"carrying a state through the computation."
 
     s"$bookmarks .. "
@@ -105,7 +105,7 @@ package object custom {
       //@todo can this be done in a more economical in terms of intermediate data structure?
 
       s"Here's a variation of above which might be a bit of a head scratcher, but this works because a $monoid gives rise to an $applicativeFunctor." +
-        s"Because Boolean is not a * -> * $typeConstructor, we need traverseU instead of $operatorTraverse to find the $applicativeFunctor.".p
+        s"Because Boolean is not a * -> * $typeConstructor, we need traverseU instead of $operator_traverse to find the $applicativeFunctor.".p
 
       //@todo: understand the role of this function; does not seem used
       import scalaz.Applicative.monoidApplicative

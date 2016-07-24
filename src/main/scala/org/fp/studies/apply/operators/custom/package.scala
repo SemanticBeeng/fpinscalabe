@@ -91,7 +91,7 @@ package object custom {
 
   object Spec extends org.specs2.mutable.Spec with AutoExamples {
 
-    s"$keyPoint The $applyFunctor $operatorApply can have a few equivalent forms:"
+    s"$keyPoint The $applyFunctor $operator_apply can have a few equivalent forms:"
     s"$bookmarks $ann_ApplicativeExtractsFunction2"
 
     eg { /** in [[Scalaz]] */
@@ -109,7 +109,7 @@ package object custom {
       success
     }
 
-    s"$keyPoint The $applicativeFunctor $operatorApply applies the function from inside the second $functor:"
+    s"$keyPoint The $applicativeFunctor $operator_apply applies the function from inside the second $functor:"
     s"$bookmarks $ann_ApplicativeExtractsFunction, $ann_AppStyle2 "
     eg {
       /** in [[Scalaz]] */
@@ -135,7 +135,7 @@ package object custom {
       success
     }
 
-    s"$keyPoint Applying $applicativeFunctor $operatorLHS and $operatorRHS to extract a projection:"
+    s"$keyPoint Applying $applicativeFunctor $operator_LHS and $operator_RHS to extract a projection:"
     eg {
       /** in [[Scalaz]] */
 

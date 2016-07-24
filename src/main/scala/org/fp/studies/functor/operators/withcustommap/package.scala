@@ -8,7 +8,7 @@ import org.specs2.specification.dsl.mutable.AutoExamples
 
 /**
   *
-  * @see [[operatorMap]]
+  * @see [[operator_map]]
   *
   */
 package object withcustommap {

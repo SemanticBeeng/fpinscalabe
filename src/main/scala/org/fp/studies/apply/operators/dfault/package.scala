@@ -16,7 +16,7 @@ package object dfault {
 
   object Spec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
 
-    s"$keyPoint The $applyFunctor $operatorApply can have a few equivalent forms:"
+    s"$keyPoint The $applyFunctor $operator_apply can have a few equivalent forms:"
     s"$bookmarks $ann_ApplicativeExtractsFunction2"
 
     eg { /** in [[Scalaz]] */
@@ -216,7 +216,7 @@ package object dfault {
       success
     }
 
-    s"$keyPoint Applying $applicativeFunctor $operatorLHS and $operatorRHS to extract a projection:"
+    s"$keyPoint Applying $applicativeFunctor $operator_LHS and $operator_RHS to extract a projection:"
     eg {
       /** in [[Scalaz]] */
 
@@ -241,7 +241,7 @@ package object dfault {
     }
 
     s"$keyPoint So far, when we were mapping functions over $functor-, we usually mapped functions that take only one parameter. " +
-      s"But what happens when we $operatorMap a function like *, which takes two parameters, over a $functor?"
+      s"But what happens when we $operator_map a function like *, which takes two parameters, over a $functor?"
 
     s"$bookmarks $ann_ApplicativeMoreThanFunctor "
 
@@ -254,21 +254,21 @@ package object dfault {
         *  List(1, 2, 3, 4) map times
         */
 
-      s"We have to curry the function to $operatorMap and we get a list of partial functions:".p
+      s"We have to curry the function to $operator_map and we get a list of partial functions:".p
       val partialFuncList = List(1, 2, 3, 4) map times.curried
 
       s"Now, we can map with the second parameter of 'times' to get the results.".p
       partialFuncList.map(f => f(9)) must_== List(9, 18, 27, 36)
     }
 
-    s"$keyPoint So $applicativeFunctor extends another $typeClass Apply, and introduces $operatorPoint and its alias 'pure'." +
+    s"$keyPoint So $applicativeFunctor extends another $typeClass Apply, and introduces $operator_point and its alias 'pure'." +
       s"LYAHFGG: " +
-      s"  $operatorPoint should take a value of any type and return an $applicativeValue with that value inside it. … " +
-      s"A better way of thinking about $operatorPoint would be to say that it takes a value and puts it in some sort " +
+      s"  $operator_point should take a value of any type and return an $applicativeValue with that value inside it. … " +
+      s"A better way of thinking about $operator_point would be to say that it takes a value and puts it in some sort " +
       s"of default (or pure) context—a minimal context that still yields that value."
 
     s"$keyPoint $Scalaz likes the name point instead of pure, and it seems like it’s basically a constructor that takes value A and returns F[A]. " +
-      s"It doesn't introduce an operator, but it introduces point method ($operatorPoint) and its symbolic alias η to all data types."
+      s"It doesn't introduce an operator, but it introduces point method ($operator_point) and its symbolic alias η to all data types."
 
     s"$bookmarks: $ann_ApplicativeAsTypeConstructor"
 

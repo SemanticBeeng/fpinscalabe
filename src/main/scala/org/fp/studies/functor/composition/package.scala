@@ -30,11 +30,11 @@ package object composition {
       import std.function._
       import syntax.functor._
 
-      s"Function1 can be thought as infinite $operatorMap from the domain to the range. ".p
+      s"Function1 can be thought as infinite $operator_map from the domain to the range. ".p
       s"$bookmarks: $ann_Function1asMap".p
       ((inc map timesTwo) (3): Int) must_== 8
 
-      s"Order of composition for the $operatorMap is opposite to regular 'compose'".p
+      s"Order of composition for the $operator_map is opposite to regular 'compose'".p
       s"$bookmarks: $ann_MapOperatorCompositionOrder".p
       ((inc compose timesTwo) (3): Int) must_== 7
 
@@ -53,11 +53,11 @@ package object composition {
       import cats.syntax.functor._
       import cats.std.function._
 
-      s"Function1 can be thought as infinite $operatorMap from the domain to the range. ".p
+      s"Function1 can be thought as infinite $operator_map from the domain to the range. ".p
       s"$bookmarks: $ann_Function1asMap".p
       ((inc map timesTwo) (3): Int) must_== 8
 
-      s"Order of composition for the $operatorMap is opposite to regular 'compose'".p
+      s"Order of composition for the $operator_map is opposite to regular 'compose'".p
       s"$bookmarks: $ann_MapOperatorCompositionOrder".p
       ((inc compose timesTwo) (3): Int) must_== 7
 
@@ -65,7 +65,7 @@ package object composition {
       (func3(1) : Double) must_== 2.0
     }
 
-    s"$keyPoint Compose a $functor-s $operatorMap with the ${Scala.id} collection map function:".p
+    s"$keyPoint Compose a $functor-s $operator_map with the ${Scala.id} collection map function:".p
 
     eg { /** in [[Scalaz]] */
       val func1 = (x: String) => x.length

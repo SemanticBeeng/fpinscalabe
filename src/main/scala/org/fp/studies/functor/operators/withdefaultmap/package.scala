@@ -8,7 +8,7 @@ import org.specs2.specification.dsl.mutable.{AutoExamples, TextDsl}
 
 /**
   *
-  * [[operatorMap]]
+  * [[operator_map]]
   *
   */
 package object withdefaultmap {

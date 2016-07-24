@@ -32,7 +32,7 @@ package object custom {
       success
     }
 
-    s"$keyPoint $applicativeFunctor enable $operatorSequence to transform lists of $functor-s:"
+    s"$keyPoint $applicativeFunctor enable $operator_sequence to transform lists of $functor-s:"
     eg {
       /** in [[Scalaz]] */
 

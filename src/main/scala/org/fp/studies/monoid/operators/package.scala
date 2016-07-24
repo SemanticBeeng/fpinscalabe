@@ -14,11 +14,11 @@ package object dfault {
 
   /**
     * @see [[Scalaz]]
-    * @see [[operatorAppend]]
+    * @see [[operator_append]]
     */
   object Spec extends org.specs2.mutable.Spec with TextDsl with AutoExamples {
 
-    s"$keyPoint Use $monoid-s to abstract over $operatorAppend-ing things of a same kind (using the explicit syntax):".p
+    s"$keyPoint Use $monoid-s to abstract over $operator_append-ing things of a same kind (using the explicit syntax):".p
     eg {
       import scalaz._, std.anyVal._
 
@@ -36,7 +36,7 @@ package object dfault {
       success
     }
 
-    s"$keyPoint Use $monoid-s to abstract over $operatorAppend-ing things of a same kind (using the sugar syntax):".p
+    s"$keyPoint Use $monoid-s to abstract over $operator_append-ing things of a same kind (using the sugar syntax):".p
 
     eg { /** in [[Scalaz]] */
       import scalaz._, syntax.semigroup._, std.anyVal._
@@ -47,7 +47,7 @@ package object dfault {
     /**
       * @see [[ann_unboxNewTypesInScalaz]]
       */
-    s"$keyPoint Use multiple $operatorAppend-s for the same $monoid-s:".p
+    s"$keyPoint Use multiple $operator_append-s for the same $monoid-s:".p
     eg {
       import scalaz._, syntax.semigroup._, std.anyVal._
       import Tags._
