@@ -152,12 +152,12 @@ package object composition {
       val d = new Data
 
       s" Some operator have aliases: " +
-        s" operator_>==> is alias for $operator_andThenK " +
-        s" operator_>=>  is alias for $operator_andThen " +
+        s" $$operator_>==> is alias for $operator_andThenK " +
+        s" $$operator_>=>  is alias for $operator_andThen " +
         s" " +
         s" The same applies to $functionComposition with " +
-        s" operator_<==< and $operator_composeK " +
-        s" operator_<=<  and $operator_compose".p
+        s" $$operator_<==< and $operator_composeK " +
+        s" $$operator_<=<  and $operator_compose".p
 
       val allCities = kleisli(d.continents) >==> d.countries >==> d.cities
       val allCities2 = kleisli(d.continents) >=> kleisli(d.countries) >=> kleisli(d.cities)
