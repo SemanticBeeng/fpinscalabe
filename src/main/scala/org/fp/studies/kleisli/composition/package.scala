@@ -100,17 +100,17 @@ package object composition {
 
     import scala.util.Try
 
+    case class Continent(name: String, countries: List[Country] = List.empty)
+    case class Country(name: String, cities: List[City] = List.empty)
+    case class City(name: String, isCapital: Boolean = false, inhabitants: Int = 20)
+
+    val Washington = City("Washington", isCapital = true,  inhabitants =  9000000)
+    val NewYork = City("New York",      isCapital = false, inhabitants = 11000000)
+
+    val NewDehli = City("New Dehli",    isCapital = false, inhabitants = 20000000)
+    val Calcutta = City("Calcutta",     isCapital = false, inhabitants = 30000000)
+
     class Data {
-
-      case class Continent(name: String, countries: List[Country] = List.empty)
-      case class Country(name: String, cities: List[City] = List.empty)
-      case class City(name: String, isCapital: Boolean = false, inhabitants: Int = 20)
-
-      private val Washington = City("Washington")
-      private val NewYork = City("New York")
-
-      private val NewDehli = City("New Dehli")
-      private val Calcutta = City("Calcutta")
 
       val data: List[Continent] = List(
         Continent("Europe"),
@@ -132,10 +132,11 @@ package object composition {
 
       def cities(country: Country): List[City] = country.cities
 
-      var saved = List[City]()
-      def save(cities: List[City]): Try[Unit] =
+      def save(cities: List[City]): Try[List[City]] =
         Try {
+          var saved = List[City]()
           cities.foreach(c => saved = saved.::(c))
+          saved
         }
 
       def inhabitants(c: City): Int = c.inhabitants
@@ -145,6 +146,7 @@ package object composition {
       s"either starting with a $KleisliArrow and following with functions of the form A => M[B] " +
       s"or following with adequate $KleisliArrow."
 
+    s"$bookmarks $ann_KleisliArrow1".p
     eg { /** [[Scalaz]] */
 
       import scalaz.Kleisli._
@@ -159,10 +161,34 @@ package object composition {
         s" $$operator_<==< and $operator_composeK " +
         s" $$operator_<=<  and $operator_compose".p
 
-      val allCities = kleisli(d.continents) >==> d.countries >==> d.cities
-      val allCities2 = kleisli(d.continents) >=> kleisli(d.countries) >=> kleisli(d.cities)
+      val allCities1 = kleisli(d.continents) >==>         d.countries   >==>         d.cities
+      val allCities2 = kleisli(d.continents) >=>  kleisli(d.countries)  >=>  kleisli(d.cities)
 
-      allCities("America") must_== allCities2("America")
+      allCities1("America") must_== allCities2("America")
+      //allCities1          must_== List(Washington, NewYork, NewDehli, Calcutta)
+      allCities1("Ameri") must_== List(Washington, NewYork)
+      allCities1("Asi")   must_== List(NewDehli, Calcutta)
+
+      s" $$operator=<< takes a $monadicStructure compatible with the $KleisliFunction" +
+       s"as its parameter and $operator_flatMap-s the function over this parameter.".p
+      //@rodo (allCities1 =<< List("Amer", "Asi")) must_== List(Washington, NewYork, NewDehli, Calcutta)
+
+      s"With $operator_map we can map a function B => C over a $KleisliFunction of the structure A => M[B]".p
+      val cityInhabitants = allCities1 map d.inhabitants
+      cityInhabitants =<< List("Amer", "Asi") must_== List(9000000, 11000000, 20000000, 30000000)
+
+      s"with $operator_mapK you can map a $KleisliFunction into another $monadicStructure, e.g. provide a function M[A] => N[B]".p
+      val getAndSave = allCities1 mapK d.save
+      //import scalaz.Success
+      //@todo clarify getAndSave("America") must_== Success(allCities1("America").reverse)
+
+      s"$operator_local can be used to prepend a $KleisliFunction of the form A => M[B] with a function of the form AA => A, " +
+        s"resulting in a $KleisliFunction of the form AA => M[B]".p
+      def index(i: Int) = d.data(i).name
+      val allCitiesByIndex = allCities1 local index
+
+      //allCitiesByIndex(1) must_== "Washington"
+      allCitiesByIndex(1) must_== List(NewYork, Calcutta)
     }
 
     eg { /** [[Cats]] */

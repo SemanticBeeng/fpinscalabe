@@ -35,6 +35,7 @@ package object concepts {
   val applicativeValue = "[applicative value]"
   val traverseFunctor = "[traverse]"
   val KleisliArrow = "[Kleisli arrow]"
+  val KleisliFunction = "[Kleisli function]"
 
   /**
     * @todo related to [[operator_lift]]
@@ -47,6 +48,8 @@ package object concepts {
     * @todo "fmap" in Haskell
     */
   val operator_map = "[map operator]"
+  val operator_mapK = "[mapK operator]"
+  val operator_flatMap = "[flatMap operator]"
   val operator_lift = "[lift operator]"
   val operator_void = "[void operator]"
   val operator_Fproduct = "[fproduct operator]"
@@ -74,7 +77,9 @@ package object concepts {
   //
   val operator_andThenK = "[andThenK operator]"
   val operator_>==> = "[>==> operator]" /** alias for [[operator_andThenK]]*/
-
+  //
+  val operator_=<< = "[operator operator=<<]"
+  val operator_local = "[operator local]" //@todo clarify
 
   /**
     *
@@ -87,6 +92,7 @@ package object concepts {
 
   //
   val monad = "[monad]"
+  val monadicStructure = "[monadic structure]"
   val monoid = "[monoid]"
 }
 

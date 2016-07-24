@@ -52,6 +52,14 @@ package object bookmarks {
   val ann_FProductEx1 = Annotation(Scalaz, "https://github.com/scalaz/scalaz/blob/9eeccf5f2634c6dd91127ccca3409d7aec4998e3/example/src/main/scala/scalaz/example/FunctorUsage.scala#L66-L75")
   val ann_functorsOptionAndList = Annotation(Scalaz, "https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FunctorUsage.scala#L35-L41")
   val ann_TraverseUsage = Annotation(Scalaz, "https://github.com/scalaz/scalaz/blob/ea856759e60d0d3fbf2becc7b4e1918ecdf70085/example/src/main/scala/scalaz/example/TraverseUsage.scala#L6-L19")
+  val ann_KleisliArrow1 = Annotation(Scalaz, "https://github.com/scalaz/scalaz/blob/9eeccf5f2634c6dd91127ccca3409d7aec4998e3/example/src/main/scala/scalaz/example/KleisliUsage.scala#L42-L76")
 
+  /**
+    * Bookmarks for [[scalaWithCats]]
+    */
   val ann_applicativeLaws = Annotation(scalaWithCats, "[bkm] 9439935") //todo: find a way to link
+
+
+
+
 }
