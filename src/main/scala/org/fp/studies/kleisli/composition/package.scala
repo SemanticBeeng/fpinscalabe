@@ -100,7 +100,7 @@ package object composition {
 
     import scala.util.Try
 
-    class Data {
+    object Data {
 
       case class Continent(name: String, countries: List[Country] = List.empty)
       case class Country(name: String, cities: List[City] = List.empty)
@@ -141,8 +141,6 @@ package object composition {
       def inhabitants(c: City): Int = c.inhabitants
     }
 
-    val d = new Data
-
     s"$keyPoint Examples of using the variations of the $operatorAndThen,  " +
       s"either starting with a $KleisliArrow and following with functions of the form A => M[B] " +
       s"or following with adequate $KleisliArrow. " +
@@ -155,10 +153,13 @@ package object composition {
 
     eg { /** [[Scalaz]] */
 
+      import scalaz._
+      import Scalaz._
       import scalaz.Kleisli._
+      import Data._
 
-      val allCities = kleisli(d.continents) >==> d.countries >==> d.cities
-      val allCities2 = kleisli(d.continents) >=> kleisli(d.countries) >=> kleisli(d.cities)
+      val allCities = kleisli(continents) >==> countries >==> cities
+      val allCities2 = kleisli(continents) >=> kleisli(countries) >=> kleisli(cities)
 
       allCities("America") must_== allCities2("America")
     }
