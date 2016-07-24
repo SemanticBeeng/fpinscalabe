@@ -62,9 +62,19 @@ package object concepts {
   val operator_sequence = "[sequence operator]"
   val operator_traverse = "[traverse operator]"
   val operator_append = "[append operator]"
-  val operator_compose = "[coompose operator]"
+  //
+  val operator_compose = "[compose operator]"
+  val operator_<=< = "[<=< operator]" /** alias for [[operator_compose]]*/
+  //
+  val operator_composeK = "[composeK operator]"
+  val operator_<==< = "[<==< operator]" /** alias for [[operator_composeK]]*/
+  //
   val operator_andThen = "[andThen operator]"
-  val operator_>==> = "[>==> operator]"
+  val operator_>=> = "[>=> operator]" /** alias for [[operator_andThen]]*/
+  //
+  val operator_andThenK = "[andThenK operator]"
+  val operator_>==> = "[>==> operator]" /** alias for [[operator_andThenK]]*/
+
 
   /**
     *

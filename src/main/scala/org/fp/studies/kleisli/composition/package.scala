@@ -143,19 +143,21 @@ package object composition {
 
     s"$keyPoint Examples of using the variations of the $operator_andThen,  " +
       s"either starting with a $KleisliArrow and following with functions of the form A => M[B] " +
-      s"or following with adequate $KleisliArrow. " +
-      s" The aliases are: " +
-      s"  >==> and andThenK " +
-      s"  >=>  and andThen " +
-      s" " +
-      s" the same applies to $functionComposition with " +
-      s" <==<, <=<, composeK and compose".p
+      s"or following with adequate $KleisliArrow."
 
     eg { /** [[Scalaz]] */
 
       import scalaz.Kleisli._
       import scalaz.std.list._
       val d = new Data
+
+      s" Some operator have aliases: " +
+        s" operator_>==> is alias for $operator_andThenK " +
+        s" operator_>=>  is alias for $operator_andThen " +
+        s" " +
+        s" The same applies to $functionComposition with " +
+        s" operator_<==< and $operator_composeK " +
+        s" operator_<=<  and $operator_compose".p
 
       val allCities = kleisli(d.continents) >==> d.countries >==> d.cities
       val allCities2 = kleisli(d.continents) >=> kleisli(d.countries) >=> kleisli(d.cities)
