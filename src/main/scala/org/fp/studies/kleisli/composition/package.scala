@@ -102,11 +102,17 @@ package object composition {
     s"$keyPoint $KleisliArrow is $functionComposition for $monad-s"
 
     object SomeFunctions {
-      // Some methods that take simple types and return higher-kinded types
+
+      s"Some functions that take simple types and return higher-kinded types".p
+
       def str(x: Int): Option[String] = Some(x.toString)
       def toInt(x: String): Option[Int] = Some(x.toInt)
       def double(x: Int): Option[Double] = Some(x * 2)
 
+      s"".p
+      def opt(x: Int): Option[String] = Some(x.toString)
+      def list(x: String) = List(x)
+      def optToList[T](o: Option[T]) = o.toList
     }
     s"$bookmarks $ann_KleisliArrow2".p
     eg {
@@ -129,6 +135,24 @@ package object composition {
 
       oldSchool(1) must_== Some(2.0)
       funky(1)     must_== Some(2.0)
+    }
+
+    eg { /** [[Cats]] */
+
+      //@todo
+      success
+    }
+
+    eg {
+      /** [[Scalaz]] */
+
+      import scalaz.Kleisli._
+
+      import SomeFunctions._
+
+      s"now we can $operator_compose opt and list using optToList".p
+      //@todo val multi = (kleisli(opt _) compose optToList) >=> list
+      success
     }
 
     eg { /** [[Cats]] */
