@@ -3,6 +3,7 @@ package org.fp.studies.kleisli
 import org.fp.concepts._
 import org.fp.resources._
 import org.fp.bookmarks._
+import org.fp.studies.kleisli.composition.Spec1.Catnip
 
 //
 import org.specs2.specification.dsl.mutable.{TextDsl, AutoExamples}
@@ -19,6 +20,7 @@ package object composition {
   object Spec1 extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
 
     object Catnip {
+
       implicit class IdOp[A](val a: A) extends AnyVal {
         def some: Option[A] = Some(a)
       }
@@ -98,19 +100,19 @@ package object composition {
     */
   object Spec2 extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
 
-    import scala.util.Try
-
     object World {
 
       case class Continent(name: String, countries: List[Country] = List.empty)
+
       case class Country(name: String, cities: List[City] = List.empty)
+
       case class City(name: String, isCapital: Boolean = false, inhabitants: Int = 20)
 
-      val Washington = City("Washington", isCapital = true,  inhabitants =  9000000)
-      val NewYork = City("New York",      isCapital = false, inhabitants = 11000000)
+      val Washington = City("Washington", isCapital = true, inhabitants = 9000000)
+      val NewYork = City("New York", isCapital = false, inhabitants = 11000000)
 
-      val NewDehli = City("New Dehli",    isCapital = false, inhabitants = 20000000)
-      val Calcutta = City("Calcutta",     isCapital = false, inhabitants = 30000000)
+      val NewDehli = City("New Dehli", isCapital = false, inhabitants = 20000000)
+      val Calcutta = City("Calcutta", isCapital = false, inhabitants = 30000000)
 
       val data: List[Continent] = List(
         Continent("Europe"),
@@ -132,6 +134,8 @@ package object composition {
 
       def cities(country: Country): List[City] = country.cities
 
+      import scala.util.Try
+
       def save(cities: List[City]): Try[List[City]] =
         Try {
           var saved = List[City]()
@@ -147,7 +151,8 @@ package object composition {
       s"or following with adequate $KleisliArrow."
 
     s"$bookmarks $ann_KleisliArrow1".p
-    eg { /** [[Scalaz]] */
+    eg {
+      /** [[Scalaz]] */
 
       import scalaz.Kleisli._
       import scalaz.std.list._
@@ -162,15 +167,15 @@ package object composition {
         s" $$operator_<==< and $operator_composeK " +
         s" $$operator_<=<  and $operator_compose".p
 
-      val allCities1 = kleisli(continents) >==>         countries   >==>         cities
-      val allCities2 = kleisli(continents) >=>  kleisli(countries)  >=>  kleisli(cities)
+      val allCities1 = kleisli(continents) >==> countries >==> cities
+      val allCities2 = kleisli(continents) >=> kleisli(countries) >=> kleisli(cities)
 
       allCities1("America") must_== allCities2("America")
       allCities1("Ameri") must_== List(Washington, NewYork)
-      allCities1("Asi")   must_== List(NewDehli, Calcutta)
+      allCities1("Asi") must_== List(NewDehli, Calcutta)
 
       s" $$operator=<< takes a $monadicStructure compatible with the $KleisliFunction" +
-       s"as its parameter and $operator_flatMap-s the function over this parameter.".p
+        s"as its parameter and $operator_flatMap-s the function over this parameter.".p
       (allCities1 =<< List("Amer", "Asi")) must_== List(Washington, NewYork, NewDehli, Calcutta)
 
       s"With $operator_map we can map a function B => C over a $KleisliFunction of the structure A => M[B]".p
@@ -190,11 +195,52 @@ package object composition {
       allCitiesByIndex(1) must_== List(Washington, NewYork)
     }
 
+    eg {
+      /** [[Cats]] */
+
+      //@todo
+      success
+    }
+
+    object SomeFunctions {
+      // Some methods that take simple types and return higher-kinded types
+      def str(x: Int): Option[String] = Some(x.toString)
+      def toInt(x: String): Option[Int] = Some(x.toInt)
+      def double(x: Int): Option[Double] = Some(x * 2)
+
+    }
+
+    s"$keyPoint $KleisliArrow is $functionComposition for $monad-s"
+
+    s"$bookmarks $ann_KleisliArrow2".p
+    eg {
+      /** [[Scalaz]] */
+
+      import scalaz.Kleisli._
+      import scalaz.std.option._
+
+      import SomeFunctions._
+
+      s"Lets compose those functions Ye Olde Way".p
+      def oldSchool(i: Int) =
+        for (x <- str(i);
+             y <- toInt(x);
+             z <- double(y))
+          yield z
+
+      s"And compose those functions $KleisliArrow way".p
+      val funky = kleisli(str _) >==> toInt >==> double
+
+      oldSchool(1) must_== Some(2.0)
+      funky(1)     must_== Some(2.0)
+    }
+
     eg { /** [[Cats]] */
 
       //@todo
       success
     }
+
   }
 }
 
