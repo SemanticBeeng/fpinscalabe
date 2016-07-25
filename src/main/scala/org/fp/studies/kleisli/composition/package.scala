@@ -165,13 +165,12 @@ package object composition {
       val allCities2 = kleisli(d.continents) >=>  kleisli(d.countries)  >=>  kleisli(d.cities)
 
       allCities1("America") must_== allCities2("America")
-      //allCities1          must_== List(Washington, NewYork, NewDehli, Calcutta)
       allCities1("Ameri") must_== List(Washington, NewYork)
       allCities1("Asi")   must_== List(NewDehli, Calcutta)
 
       s" $$operator=<< takes a $monadicStructure compatible with the $KleisliFunction" +
        s"as its parameter and $operator_flatMap-s the function over this parameter.".p
-      //@rodo (allCities1 =<< List("Amer", "Asi")) must_== List(Washington, NewYork, NewDehli, Calcutta)
+      (allCities1 =<< List("Amer", "Asi")) must_== List(Washington, NewYork, NewDehli, Calcutta)
 
       s"With $operator_map we can map a function B => C over a $KleisliFunction of the structure A => M[B]".p
       val cityInhabitants = allCities1 map d.inhabitants
@@ -187,8 +186,7 @@ package object composition {
       def index(i: Int) = d.data(i).name
       val allCitiesByIndex = allCities1 local index
 
-      //allCitiesByIndex(1) must_== "Washington"
-      allCitiesByIndex(1) must_== List(NewYork, Calcutta)
+      allCitiesByIndex(1) must_== List(Washington, NewYork)
     }
 
     eg { /** [[Cats]] */
@@ -197,3 +195,5 @@ package object composition {
     }
   }
 }
+
+
