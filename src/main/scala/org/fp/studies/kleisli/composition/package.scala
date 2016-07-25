@@ -3,7 +3,6 @@ package org.fp.studies.kleisli
 import org.fp.concepts._
 import org.fp.resources._
 import org.fp.bookmarks._
-import org.fp.studies.kleisli.composition.Spec1.Catnip
 
 //
 import org.specs2.specification.dsl.mutable.{TextDsl, AutoExamples}
@@ -99,6 +98,44 @@ package object composition {
     *
     */
   object Spec2 extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
+
+    s"$keyPoint $KleisliArrow is $functionComposition for $monad-s"
+
+    object SomeFunctions {
+      // Some methods that take simple types and return higher-kinded types
+      def str(x: Int): Option[String] = Some(x.toString)
+      def toInt(x: String): Option[Int] = Some(x.toInt)
+      def double(x: Int): Option[Double] = Some(x * 2)
+
+    }
+    s"$bookmarks $ann_KleisliArrow2".p
+    eg {
+      /** [[Scalaz]] */
+
+      import scalaz.Kleisli._
+      import scalaz.std.option._
+
+      import SomeFunctions._
+
+      s"Lets compose those functions Ye Olde Way".p
+      def oldSchool(i: Int) =
+        for (x <- str(i);
+             y <- toInt(x);
+             z <- double(y))
+          yield z
+
+      s"And compose those functions $KleisliArrow way".p
+      val funky = kleisli(str) >==> toInt >==> double
+
+      oldSchool(1) must_== Some(2.0)
+      funky(1)     must_== Some(2.0)
+    }
+
+    eg { /** [[Cats]] */
+
+      //@todo
+      success
+    }
 
     object World {
 
@@ -201,46 +238,6 @@ package object composition {
       //@todo
       success
     }
-
-    object SomeFunctions {
-      // Some methods that take simple types and return higher-kinded types
-      def str(x: Int): Option[String] = Some(x.toString)
-      def toInt(x: String): Option[Int] = Some(x.toInt)
-      def double(x: Int): Option[Double] = Some(x * 2)
-
-    }
-
-    s"$keyPoint $KleisliArrow is $functionComposition for $monad-s"
-
-    s"$bookmarks $ann_KleisliArrow2".p
-    eg {
-      /** [[Scalaz]] */
-
-      import scalaz.Kleisli._
-      import scalaz.std.option._
-
-      import SomeFunctions._
-
-      s"Lets compose those functions Ye Olde Way".p
-      def oldSchool(i: Int) =
-        for (x <- str(i);
-             y <- toInt(x);
-             z <- double(y))
-          yield z
-
-      s"And compose those functions $KleisliArrow way".p
-      val funky = kleisli(str _) >==> toInt >==> double
-
-      oldSchool(1) must_== Some(2.0)
-      funky(1)     must_== Some(2.0)
-    }
-
-    eg { /** [[Cats]] */
-
-      //@todo
-      success
-    }
-
   }
 }
 
