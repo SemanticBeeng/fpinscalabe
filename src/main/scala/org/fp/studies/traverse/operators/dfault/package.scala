@@ -141,6 +141,7 @@ package object dfault {
       //      implicit val z = Monoid[List[Int]]
       //
       //      somes(list)(m, z) must_== Some(List(1, 2, 3))
+      //@todo
       success
     }
 

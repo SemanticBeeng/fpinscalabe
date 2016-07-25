@@ -191,6 +191,7 @@ package object composition {
 
     eg { /** [[Cats]] */
 
+      //@todo
       success
     }
   }
