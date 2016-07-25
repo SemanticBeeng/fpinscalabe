@@ -56,5 +56,6 @@ package object resources {
 
   val stackOverflow = Resource[blog]("Stack overflow", "http://stackoverflow.com/")
 
+  val casualMiracles = Resource[blog]("Casual Miracles", "http://www.casualmiracles.com")
 }
 

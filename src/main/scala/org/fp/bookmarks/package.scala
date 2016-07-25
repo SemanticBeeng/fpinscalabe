@@ -59,6 +59,10 @@ package object bookmarks {
     */
   val ann_applicativeLaws = Annotation(scalaWithCats, "[bkm] 9439935") //todo: find a way to link
 
+  /**
+    * Bookmarks for [[casualMiracles]]
+    */
+  val ann_KleisliArrow2 = Annotation(casualMiracles, "https://hyp.is/klP4klJtEeao35P5f-9vBg/archive.is/WwkrC")
 
 
 
