@@ -28,7 +28,7 @@ package object composition {
 
     s"$keyPoint Composing monadic functions" +
       s"LYAHFGG:" +
-      s"When we were learning about the $monad laws, we said that the $$operator_<=< function is just like $functionComposition, " +
+      s"When we were learning about the $monadLaws, we said that the $$operator_<=< function is just like $functionComposition, " +
       s"only instead of working for normal functions like a -> b, it works for $monadicFunction-s like a -> m b.".p
 
     eg { /** in [[Scalaz]] */
@@ -228,12 +228,17 @@ package object composition {
         s" $$operator_<==< and $operator_composeK " +
         s" $$operator_<=<  and $operator_compose".p
 
-      val allCities1 = kleisli(continents) >==> countries >==> cities
-      val allCities2 = kleisli(continents) >=> kleisli(countries) >=> kleisli(cities)
+      val allCities1 = kleisli(continents) >==>         countries  >==>         cities
+      val allCities2 = kleisli(continents) >=>  kleisli(countries) >=>  kleisli(cities)
+      val allCities3 = kleisli(cities)     <==<         countries <==<          continents
+      val allCities4 = kleisli(cities)     <=<  kleisli(countries) <=<  kleisli(continents)
 
       allCities1("America") must_== allCities2("America")
-      allCities1("Ameri") must_== List(Washington, NewYork)
-      allCities1("Asi") must_== List(NewDehli, Calcutta)
+      allCities1("Ameri")   must_== List(Washington, NewYork)
+      allCities1("Asi")     must_== List(NewDehli, Calcutta)
+
+      allCities2("America") must_== allCities3("America")
+      allCities2("America") must_== allCities4("America")
 
       s" $$operator=<< takes a $monadicStructure compatible with the $KleisliFunction" +
         s"as its parameter and $operator_flatMap-s the function over this parameter.".p
@@ -280,12 +285,32 @@ package object composition {
             Source.fromFile(f).getLines().toList.map(l => l.length())
         }
 
-        val lineLengths = kleisli(files) >==> lengths
-        //val homeLineLengths = (kleisli(files) >==> lengths) <=< ((home: String) => List("/Users/" + home))
+        val lineLengths     = kleisli(files) >==> lengths
+      //private val stringToStrings: (String) => List[String] = (userName: String) => List("/home/" + userName)
+      //val homeLineLengths = (kleisli(files) >==> lengths) <=< stringToStrings
 
-        val myLineLengths = (kleisli(files) >==> lengths) =<< List("/Users/janmachacek/Tmp/foo")
+        val myLineLengths   = (kleisli(files) >==> lengths) =<< List("/home")
       }
-  }
+
+      s"$keyPoint ..."
+      s"$bookmarks $ann_KleisliArrow3".p
+      eg {
+        /** [[Scalaz]] */
+
+        import scalaz.Kleisli._
+        import scalaz.std.list._
+
+        //@todo
+        success
+      }
+
+      eg {
+        /** [[Cats]] */
+
+        //@todo
+        success
+      }
+    }
 }
 
 

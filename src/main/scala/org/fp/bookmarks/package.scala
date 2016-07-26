@@ -64,6 +64,11 @@ package object bookmarks {
     */
   val ann_KleisliArrow2 = Annotation(casualMiracles, "https://hyp.is/klP4klJtEeao35P5f-9vBg/archive.is/WwkrC")
 
+  /**
+    * Bookmarks for [[cakeSolutions]]
+    */
+  val ann_KleisliArrow3 = Annotation(casualMiracles, "https://hyp.is/TTdeWFJ2EearsYMHkxbVyw/archive.is/qPpZB")
+
 
 
 }

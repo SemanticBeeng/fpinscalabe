@@ -83,6 +83,7 @@ package object concepts {
   /**
     *
     */
+  val monadLaws = "[monad laws]"
   val lawIdentity = "[identity law]"
   val lawComposition = "[composition law]"
   val lawHomomorphism = "[homomorphism law]"
