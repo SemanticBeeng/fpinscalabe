@@ -28,7 +28,7 @@ package object composition {
 
     s"$keyPoint Composing monadic functions" +
       s"LYAHFGG:" +
-      s"When we were learning about the $monad laws, we said that the <=< function is just like $functionComposition, " +
+      s"When we were learning about the $monad laws, we said that the $$operator_<=< function is just like $functionComposition, " +
       s"only instead of working for normal functions like a -> b, it works for $monadicFunction-s like a -> m b.".p
 
     eg { /** in [[Scalaz]] */
@@ -38,21 +38,21 @@ package object composition {
       import scalaz.std.option._
       import Catnip._
 
-      val f = kleisli { (x: Int) => (x + 1).some }
+      val f = kleisli { (x: Int) => (x +   1).some }
       val g = kleisli { (x: Int) => (x * 100).some }
 
       s"There’s a special wrapper for a function of type A => F[B] called $KleisliArrow:".p
 
-      s"We can then compose the functions using 'compose', which runs the right-hand side first:".p
+      s"We can then compose the functions using $operator_compose, which runs the right-hand side first:".p
       (4.some flatMap (f compose g).run) must_== Some(401)
       (4.some flatMap (f <==<    g).run) must_== Some(401)
 
-      s"There’s also 'andThen', which runs the left-hand side first:".p
-      (4.some flatMap (f andThen g).run) must_== Some(500)
-      (4.some flatMap (f >=>     g).run) must_== Some(500)
-      //@todo ((f >=>     g).run) =<< 4.some)  must_== Some(500)
+      s"There’s also $operator_andThen, which runs the left-hand side first:".p
+      (4.some flatMap (f andThen g).run)       must_== Some(500)
+      (4.some flatMap (f >=>     g).run)       must_== Some(500)
+                      (f >=>     g) =<< 4.some must_== Some(500)
 
-      s"Both 'compose' and 'andThen' work like $functionComposition but note that they retain the monadic context.".p
+      s"Both $operator_compose and $operator_andThen work like $functionComposition but note that they retain the $monadicContext.".p
 
       s"$KleisliArrow also has some interesting methods like $operator_lift, which allows you to lift a $monadicFunction " +
         s"into another $applicativeFunctor.".p
@@ -262,6 +262,29 @@ package object composition {
       //@todo
       success
     }
+
+    object FilesOp {
+
+      import java.io.File
+      import scala.io.Source
+      import scalaz.Kleisli._
+      import scalaz.std.list._
+
+      val files: String => List[File] =
+          (dir) => new File(dir).listFiles().toList
+
+      val lengths: File => List[Int] = { (f) =>
+          if (f.isDirectory)
+            List(0)
+          else
+            Source.fromFile(f).getLines().toList.map(l => l.length())
+        }
+
+        val lineLengths = kleisli(files) >==> lengths
+        //val homeLineLengths = (kleisli(files) >==> lengths) <=< ((home: String) => List("/Users/" + home))
+
+        val myLineLengths = (kleisli(files) >==> lengths) =<< List("/Users/janmachacek/Tmp/foo")
+      }
   }
 }
 

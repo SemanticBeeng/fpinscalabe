@@ -21,7 +21,6 @@ package object concepts {
   val typeClass = "[type class]"
   val taggedType = "[tagged type]"
   val higherKindedType = "[higher-Kinded type]"
-  val monadicFunction = "[monadic function]"
 
   //
   /**
@@ -93,6 +92,9 @@ package object concepts {
   //
   val monad = "[monad]"
   val monadicStructure = "[monadic structure]"
+  val monadicContext = "[monadic context]"
+  val monadicFunction = "[monadic function]"
+  //
   val monoid = "[monoid]"
 }
 
