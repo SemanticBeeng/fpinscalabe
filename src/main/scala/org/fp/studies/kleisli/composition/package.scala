@@ -285,11 +285,9 @@ package object composition {
             Source.fromFile(f).getLines().toList.map(l => l.length())
         }
 
-        val lineLengths     = kleisli(files) >==> lengths
-      //private val stringToStrings: (String) => List[String] = (userName: String) => List("/home/" + userName)
-      //val homeLineLengths = (kleisli(files) >==> lengths) <=< stringToStrings
-
-        val myLineLengths   = (kleisli(files) >==> lengths) =<< List("/home")
+        val lineLengths            =  kleisli(files) >==> lengths
+        val etcLineLengths         = (kleisli(files) >==> lengths) <==< ((dir: String) => List("/etc/" + dir))
+        val interfacesLineLengths  = (kleisli(files) >==> lengths) =<< List("network/interfaces")
       }
 
       s"$keyPoint ..."
@@ -297,10 +295,11 @@ package object composition {
       eg {
         /** [[Scalaz]] */
 
-        import scalaz.Kleisli._
-        import scalaz.std.list._
+        import FilesOp._
 
-        //@todo
+        println("?????????????????")
+        //println(interfacesLineLengths)
+        //interfacesLineLengths(0) must beGreaterThan 10
         success
       }
 
