@@ -30,12 +30,6 @@ package object dfault {
     eg {
       /** [[Scalaz]] */
 
-      //import scalaz._
-//      import scalaz.Arrow
-//      import scalaz.Arrow._
-//      import scalaz.Strong
-//      import scalaz.Strong._
-//      import scalaz.syntax.strong._
       import scalaz.syntax.arrow._
       import scalaz.std.AllInstances._
 
