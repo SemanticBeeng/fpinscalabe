@@ -55,6 +55,8 @@ package object bookmarks {
   val ann_functorsOptionAndList = Annotation(Scalaz, "https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FunctorUsage.scala#L35-L41")
   val ann_TraverseUsage = Annotation(Scalaz, "https://github.com/scalaz/scalaz/blob/ea856759e60d0d3fbf2becc7b4e1918ecdf70085/example/src/main/scala/scalaz/example/TraverseUsage.scala#L6-L19")
   val ann_KleisliArrow1 = Annotation(Scalaz, "https://github.com/scalaz/scalaz/blob/9eeccf5f2634c6dd91127ccca3409d7aec4998e3/example/src/main/scala/scalaz/example/KleisliUsage.scala#L42-L76")
+  val ann_Arrow1 = Annotation(Scalaz, "https://github.com/olafurpg/scala-repos/blob/master/repos/scalaz/example/src/main/scala/scalaz/example/ArrowUsage.scala#L13-L28")
+
 
   /**
     * Bookmarks for [[scalaWithCats]]

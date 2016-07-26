@@ -340,33 +340,6 @@ package object composition {
         success
       }
     }
-
-    /**
-      *
-      */
-    object Spec3 extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
-
-      s"$keyPoint ..."
-
-      s"$bookmarks $ann_Function1Lift".p
-      eg {
-        /** [[Scalaz]] */
-
-        import scalaz.Kleisli._
-        import scalaz.std.list._
-
-        //@todo
-        success
-      }
-
-      eg {
-        /** [[Cats]] */
-
-        //@todo
-        success
-      }
-
-    }
   }
 
 

@@ -33,6 +33,8 @@ package object concepts {
   val applicativeBuilder = "[applicative builder]"
   val applicativeValue = "[applicative value]"
   val traverseFunctor = "[traverse]"
+  val Arrow = "[arrow]"
+  val FunctionArrow = "[function arrow]"
   val KleisliArrow = "[Kleisli arrow]"
   val KleisliFunction = "[Kleisli function]"
 

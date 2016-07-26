@@ -1,4 +1,4 @@
-package org.specs2.kleisli
+package org.specs2.examples.kleisli
 
 import org.fp._
 import org.fp.studies.kleisli.composition._
