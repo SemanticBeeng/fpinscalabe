@@ -57,9 +57,12 @@ package object composition {
       s"$KleisliArrow also has some interesting methods like $operator_lift, which allows you to lift a $monadicFunction " +
         s"into another $applicativeFunctor.".p
       import scalaz.std.list._
+      //import scalaz.std.function._
 
       val l = f.lift[List]
+
       (List(1, 2, 3) flatMap l.run) must_== List(Some(2), Some(3), Some(4))
+      //@todo (l =<< List(1, 2, 3))         must_== List(Some(2), Some(3), Some(4))
     }
 
     s"$bookmarks $ann_Kleisli"
@@ -90,7 +93,9 @@ package object composition {
       import cats.std.list._
 
       val l = f.lift[List]
-      (List(1, 2, 3) >>= l.run) must_== List(Some(2), Some(3), Some(4))
+
+      (List(1, 2, 3) flatMap l.run) must_== List(Some(2), Some(3), Some(4))
+      (List(1, 2, 3) >>=     l.run) must_== List(Some(2), Some(3), Some(4))
     }
   }
 
@@ -335,6 +340,33 @@ package object composition {
         success
       }
     }
-}
+
+    /**
+      *
+      */
+    object Spec3 extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
+
+      s"$keyPoint ..."
+
+      s"$bookmarks $ann_Function1Lift".p
+      eg {
+        /** [[Scalaz]] */
+
+        import scalaz.Kleisli._
+        import scalaz.std.list._
+
+        //@todo
+        success
+      }
+
+      eg {
+        /** [[Cats]] */
+
+        //@todo
+        success
+      }
+
+    }
+  }
 
 
