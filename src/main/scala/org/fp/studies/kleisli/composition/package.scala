@@ -272,6 +272,7 @@ package object composition {
 
       import java.io.File
       import scala.io.Source
+      import scalaz.Kleisli
       import scalaz.Kleisli._
       import scalaz.std.list._
 
@@ -279,12 +280,21 @@ package object composition {
         new File(dir).listFiles().toList
       }
 
-      val lengths: File => List[Int] = { (f) =>
+      def lengths: File => List[Int] = { (f) =>
           if (f.isDirectory)
             List(0)
           else
             Source.fromFile(f).getLines().toList.map(l => l.length())
         }
+
+      s"$bookmarks $ann_KleisliArrow4, $ann_KleisliArrow5".p
+
+      def lengthsK: Kleisli[List, File, Int] = kleisli((f: File) => {
+        if (f.isDirectory)
+          lengthsK =<< f.listFiles().toList
+        else
+          Source.fromFile(f).getLines().toList.map(l => l.length())
+      })
 
         val lineLengths        =  kleisli(files) >==> lengths
         val etcLineLengths     = (kleisli(files) >==> lengths) <==< ((dir: String) => List("/etc/" + dir))
@@ -303,13 +313,13 @@ package object composition {
         println("?????????????????")
         import scala.util.Try
 
-        val dirs = kleisli(files) =<< List("/etc/network")
-        println(dirs)
+        //val dirs = kleisli(files) =<< List("/etc/network")
+        //println(dirs)
 
-        val lengthsC = Try {
-          networkLineLengths
-        }
-        println(lengthsC)
+        //val lengthsC = Try {
+        //  networkLineLengths
+        //}
+        //println(lengthsC)
         //interfacesLineLengths(0) must beGreaterThan 10
         success
       }
