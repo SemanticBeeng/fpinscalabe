@@ -268,7 +268,7 @@ package object composition {
       success
     }
 
-    object FilesOp {
+    object Scalaz_FilesOp {
 
       import java.io.File
       import scala.io.Source
@@ -287,6 +287,9 @@ package object composition {
             Source.fromFile(f).getLines().toList.map(l => l.length())
         }
 
+      /**
+        * @todo better understand the point of [[ann_KleisliArrow4]]
+        */
       s"$bookmarks $ann_KleisliArrow4, $ann_KleisliArrow5".p
 
       def lengthsK: Kleisli[List, File, Int] = kleisli((f: File) => {
@@ -308,19 +311,20 @@ package object composition {
 
         import scalaz.Kleisli._
         import scalaz.std.list._
-        import FilesOp._
+        import Scalaz_FilesOp._
 
-        println("?????????????????")
         import scala.util.Try
 
-        //val dirs = kleisli(files) =<< List("/etc/network")
-        //println(dirs)
+        /* @todo solve NullPointerException
+        val dirs = kleisli(files) =<< List("/etc/network")
+        println(dirs)
 
-        //val lengthsC = Try {
-        //  networkLineLengths
-        //}
-        //println(lengthsC)
-        //interfacesLineLengths(0) must beGreaterThan 10
+        val lengthsC = Try {
+          networkLineLengths
+        }
+        println(lengthsC)
+        interfacesLineLengths(0) must beGreaterThan 10
+        */
         success
       }
 
