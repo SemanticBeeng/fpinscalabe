@@ -9,7 +9,7 @@ import org.specs2.specification.dsl.mutable.{TextDsl, AutoExamples}
 
 /**
   *
-  * @see [[functorComposition]]
+  * @see [[functionComposition]]
   */
 package object composition {
 
@@ -366,7 +366,7 @@ package object composition {
 
         import SomeFunctions._
 
-        s"Applying first on the $FunctionArrow.".p
+        s"Using $operator_map to achieve $functionComposition for regular functions.".p
         1.some.map(a).map(b)  must_== 3.some
         1.some.map(ab)        must_== 3.some
 
@@ -377,7 +377,7 @@ package object composition {
         val bk = Kleisli( (value: Int) => (value + 1).some )
         val abk = ak.andThen(bk)
 
-        s"Applying first on the $FunctionArrow.".p
+        s"Using $operator_map and $operator_flatMap to achieve $functionComposition for $KleisliArrow-s.".p
         1.some.flatMap(ak.run).flatMap(bk.run)  must_== 3.some
         1.some.map(abk).get                     must_== 3.some
       }
