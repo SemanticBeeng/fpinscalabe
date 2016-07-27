@@ -99,5 +99,7 @@ package object concepts {
   val monadicFunction = "[monadic function]"
   //
   val monoid = "[monoid]"
+  //
+  val forComprehension = "[for comprehension]"
 }
 

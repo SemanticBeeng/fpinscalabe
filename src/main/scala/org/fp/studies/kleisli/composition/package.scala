@@ -413,6 +413,9 @@ package object composition {
     case class Make(id: Int, name: String)
     case class Part(id: Int, name: String)
 
+    /**
+      *
+      */
     object SomeFunctions1 {
 
       val make: (Int) => Make = (_) => Make(1, "Suzuki")
@@ -420,6 +423,20 @@ package object composition {
       val parts: Make => List[Part] = {
         case Make(1, _) => List(Part(1, "Gear Box"), Part(2, "Clutch cable"))
       }
+    }
+
+    /**
+      *
+      */
+    object SomeFunctions2 {
+
+      import scalaz.NonEmptyList
+      import scalaz.syntax.std.boolean._
+
+      val make  = (x: Int) => (x == 1).option(Make(1, "Suzuki"))
+
+      val parts = (x: Make) =>
+        (x.id == 1).option(NonEmptyList(Part(1, "Gear Box"), Part(2, "Clutch cable")))
     }
 
     s"$keyPoint Today I’ll be exploring a few different ways in which you can compose programs. " +
@@ -443,14 +460,51 @@ package object composition {
       g(1) must_== List(Part(1, "Gear Box"), Part(2, "Clutch cable"))
     }
 
+    s"Now we have a function make: Int => Option[Make] and a function parts: Make => Option[NonEmptyList[Part]]. " +
+      s"Based on our first example we should have a way to create a function from Int to Option[NonEmptyList[Part]]. " +
+      s"This isn’t immediately obvious however."
+
+    s"$bookmarks $ann_FunctionComposition3"
     eg {
       /** [[Scalaz]] */
 
+      import SomeFunctions2._
+
+      s"While make does return a Make, it is wrapped inside an Option so we need to account for a possible failure. " +
+        s"This leads to our first attempt:".p
+
+      import scalaz.NonEmptyList
+
+      val f: Option[Make] => Option[NonEmptyList[Part]] = {
+        case Some(m) => parts(m)
+        case _ => None
+      }
+      val g = f compose make
+      g(1) must_== Some(NonEmptyList(Part(1,"Gear Box"), Part(2, "Clutch cable")))
+    }
+
+    s"While this works, we had to manually create the plumbing between the two functions. You can imagine that with " +
+      s"different return and input types, this plubming would have to be rewritten over and over. " +
+      s"All the function f above is doing is serving as an adapter for parts. " +
+      s"It turns out there is a couple of ways in which this pattern can be generalised."
+
+    s"Monadic bind: " +
+      s"Option is a $monad so we can define f using a $forComprehension:"
+    eg {
+      /** [[Scalaz]] */
+
+      import scalaz.NonEmptyList
       import scalaz.std.option._
+      import scalaz.syntax.std.option._
 
+      import SomeFunctions2._
 
-      //@todo
-      success
+      val f = (x: Int) => for {
+        m <- make(x)
+        p <- parts(m)
+      } yield p
+
+      f(1) must_== Some(NonEmptyList(Part(1,"Gear Box"), Part(2, "Clutch cable")))
     }
 
     eg {
