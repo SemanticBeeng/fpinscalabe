@@ -76,5 +76,9 @@ package object bookmarks {
   val ann_KleisliArrow5 = Annotation(casualMiracles, "https://hyp.is/GpSn3lMSEea2IJPt4U3nuA/archive.is/9Olg3")
 
 
+  /**
+    * Bookmarks for [[misc]]
+    */
+  val ann_KleisliArrow6 = Annotation(misc, "https://gist.github.com/seanparsons/3736483#file-gistfile1-scala-L7-L35")
 
 }

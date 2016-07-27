@@ -23,8 +23,8 @@ package object dfault {
 
       s"Option as $applyFunctor".p
 
-      import scalaz.syntax.apply._
       import scalaz.std.option._
+      import scalaz.syntax.apply._
       import scalaz.syntax.std.option._
 
       s"We can use <*>:".p

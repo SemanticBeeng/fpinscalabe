@@ -340,6 +340,56 @@ package object composition {
         success
       }
     }
+
+  /**
+    *
+    */
+  object Spec3 extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
+
+      object SomeFunctions {
+        val a = (value: Int) => value * 2
+
+        val b = (value: Int) => value + 1
+
+        val ab = a.andThen(b)
+
+      }
+
+      s"$keyPoint $KleisliArrow composition is to $operator_flatMap as function composition is to $operator_map."
+
+      s"$bookmarks $ann_KleisliArrow6".p
+      eg {
+        /** [[Scalaz]] */
+
+        import scalaz.std.option._
+        import scalaz.syntax.std.option._
+
+        import SomeFunctions._
+
+        s"Applying first on the $FunctionArrow.".p
+        1.some.map(a).map(b)  must_== 3.some
+        1.some.map(ab)        must_== 3.some
+
+        import scalaz.Kleisli
+        import scalaz.Kleisli._
+
+        val ak = kleisli{ (value: Int) => (value * 2).some }
+        val bk = kleisli{ (value: Int) => (value + 1).some }
+        val abk = ak.andThen(bk)
+
+        s"Applying first on the $FunctionArrow.".p
+        //1.some.flatMap(ak).flatMap(bk)  must_== 3.some
+        1.some.map(abk).get         must_== 3.some
+        success
+      }
+
+      eg {
+        /** [[Cats]] */
+
+        //@todo
+        success
+      }
   }
+}
 
 

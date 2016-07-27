@@ -14,7 +14,7 @@ object Kleisli_UserGuidePage extends UserGuidePage {
   ${concepts.KleisliArrow} ....
   Examples for a ${concepts.KleisliArrow} ${concepts.functionComposition}
 
-    * with ${resources.Scalaz.id} and ${resources.Cats.id} in ${Spec1.is} and ${Spec2.is}
+    * with ${resources.Scalaz.id} and ${resources.Cats.id} in ${Spec1.is}, ${Spec2.is} and ${Spec3.is}
 
 }
 
