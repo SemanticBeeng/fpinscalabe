@@ -462,7 +462,7 @@ package object composition {
       g(1) must_== List(part1, part2)
     }
 
-    s"Now we have a function make: Int => Option[Make] and a function parts: Make => Option[NonEmptyList[Part]]. " +
+    s"$keyPoint Now we have a function make: Int => Option[Make] and a function parts: Make => Option[NonEmptyList[Part]]. " +
       s"Based on our first example we should have a way to create a function from Int to Option[NonEmptyList[Part]]. " +
       s"This isn’t immediately obvious however."
 
@@ -519,6 +519,70 @@ package object composition {
       val h = make(_:Int) >>= parts
       h(1) must_== f(1)
     }
+
+    s"$keyPoint The reason this is better is that make and parts could operate under a different $monad but the client code would not need to change. " +
+      s"In the example below, we’re operating under the List $monad:"
+
+    eg {
+      /** [[Scalaz]] */
+
+      val words: (String) => List[String] = _.split( """\s""").toList
+      val chars: String => List[Char] = _.toList
+
+      val f = (phrase: String) => for {
+        m <- words(phrase)
+        p <- chars(m)
+      } yield p
+
+      val charList = List('M', 'o', 't', 'o', 'r', 'c', 'y', 'c', 'l', 'e', 's', 'a', 'r', 'e', 'f', 'u', 'n', 't', 'o', 'r', 'i', 'd', 'e', '!')
+      f("Motorcycles are fun to ride!") must_== charList
+
+      s"or even:".p
+      val g = words(_: String) flatMap (w => chars(w).map(c => c))
+
+      g("Motorcycles are fun to ride!") must_== charList
+    }
+
+    s"$keyPoint We used the exact same for comprehension syntax to compose these operations. This works because both Option and List are $monad-s."+
+      s"Notwithstanding, this still feels like unnecessary plumbing. All we are doing with the $forComprehension / $operator_flatMap is " +
+      s"extracting the values from their respective $monad-s to simply put them back in. It would be nice if we could simply do something " +
+      s"like 'make compose parts' as we did in our first example."
+
+    s"$KleisliArrow-s:" +
+      s"A $KleisliArrow is simply a wrapper for a function of type A => F[B]. This is the same type of the second argument to the $monadicBind " +
+      s"as defined in [[Scalaz]]:"
+
+    s"$keyPoint By creating a $KleisliArrow from a function, we are given a function that knows how to extract the value " +
+      s"from a $monad F and feed it into the underlying function, much like $operator_bind does, but without actually having " +
+      s"to do any binding yourself."
+
+    eg {
+       /** [[Scalaz]] */
+
+      import scalaz.NonEmptyList
+      import scalaz.std.option._
+      import scalaz.Kleisli
+      import scalaz.Kleisli._
+
+      import SomeFunctions2._
+
+      s"To use a concrete example, let’s create a $KleisliArrow from our parts function:".p
+
+      kleisli(parts)
+
+      s"You can read this type as being a function which knows how to get a value of type Make from the Option $monad and will ultimately " +
+        s"return an Option[NonEmptyList[Part]]. " +
+        s"Now you might be asking, why would we want to wrap our functions in a $KleisliArrow?" +
+        s"By doing so, you have access to a number of useful functions defined in the $Kleisli trait, one of which is <==< (aliased as $operator_composeK):".p
+
+      val f1 = kleisli(parts) <==< make
+      val f2 = kleisli(parts) composeK make
+
+      s"This gives us the same result as the version using the $forComprehension but with less work and with code that looks similar to simple $functionComposition.".p
+
+      f1(1) must_== Some(NonEmptyList(part1, part2))
+      f2(1) must_== Some(NonEmptyList(part1, part2))
+     }
 
     eg {
       /** [[Cats]] */
