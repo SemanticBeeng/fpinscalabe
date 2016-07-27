@@ -512,12 +512,12 @@ package object composition {
       s"Which is simply syntactic sugar for:".p
 
       val g = make(_:Int) flatMap (m => parts(m).map(p => p))
-      g(1) must_== Some(NonEmptyList(part1, part2))
+      g(1) must_== f(1)
 
       s"You can also use the symbolic alias for $operator_bind, which makes it a lot nicer".p
 
       val h = make(_:Int) >>= parts
-      h(1) must_== Some(NonEmptyList(part1, part2))
+      h(1) must_== f(1)
     }
 
     eg {
