@@ -347,12 +347,11 @@ package object composition {
   object Spec3 extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
 
       object SomeFunctions {
-        val a = (value: Int) => value * 2
+        def a = (value: Int) => value * 2
 
-        val b = (value: Int) => value + 1
+        def b = (value: Int) => value + 1
 
-        val ab = a.andThen(b)
-
+        def ab = a.andThen(b)
       }
 
       s"$keyPoint $KleisliArrow composition is to $operator_flatMap as function composition is to $operator_map."
@@ -373,8 +372,8 @@ package object composition {
         import scalaz.Kleisli
         import scalaz.Kleisli._
 
-        val ak = Kleisli( (value: Int) => (value * 2).some )
-        val bk = Kleisli( (value: Int) => (value + 1).some )
+        val ak = Kleisli( (value: Int) => a(value).some )
+        val bk = Kleisli( (value: Int) => b(value).some )
         val abk = ak.andThen(bk)
 
         s"Using $operator_map and $operator_flatMap to achieve $functionComposition for $KleisliArrow-s.".p
@@ -396,8 +395,8 @@ package object composition {
 
         import cats.data.Kleisli
 
-        val ak = Kleisli( (value: Int) => (value * 2).some )
-        val bk = Kleisli( (value: Int) => (value + 1).some )
+        val ak = Kleisli( (value: Int) => a(value).some )
+        val bk = Kleisli( (value: Int) => b(value).some )
         val abk = ak.andThen(bk)
 
         s"Using $operator_map and $operator_flatMap to achieve $functionComposition for $KleisliArrow-s.".p
