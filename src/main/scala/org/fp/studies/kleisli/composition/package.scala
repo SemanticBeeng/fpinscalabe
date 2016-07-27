@@ -373,14 +373,13 @@ package object composition {
         import scalaz.Kleisli
         import scalaz.Kleisli._
 
-        val ak = kleisli{ (value: Int) => (value * 2).some }
-        val bk = kleisli{ (value: Int) => (value + 1).some }
+        val ak = Kleisli( (value: Int) => (value * 2).some )
+        val bk = Kleisli( (value: Int) => (value + 1).some )
         val abk = ak.andThen(bk)
 
         s"Applying first on the $FunctionArrow.".p
-        //1.some.flatMap(ak).flatMap(bk)  must_== 3.some
-        1.some.map(abk).get         must_== 3.some
-        success
+        1.some.flatMap(ak.run).flatMap(bk.run)  must_== 3.some
+        1.some.map(abk).get                     must_== 3.some
       }
 
       eg {
