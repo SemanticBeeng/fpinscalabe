@@ -7,7 +7,7 @@ import org.specs2.ugbase.UserGuidePage
 /**
   *
   */
-object Traverse extends UserGuidePage {
+object Traverse_UserGuidePage extends UserGuidePage {
 
   def is = "Traverse functors".title ^ s2"""
 

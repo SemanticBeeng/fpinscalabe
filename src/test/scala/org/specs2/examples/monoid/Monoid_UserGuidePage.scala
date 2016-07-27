@@ -12,7 +12,7 @@ import org.specs2.ugbase.UserGuidePage
 /**
   *
   */
-object MonoidAppend extends UserGuidePage {
+object Monoid_UserGuidePage extends UserGuidePage {
 
   def is = s"Basic use of $monoid-s".title ^ s2"""
 

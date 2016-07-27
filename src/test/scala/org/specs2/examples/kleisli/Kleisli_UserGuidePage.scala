@@ -7,7 +7,7 @@ import org.specs2.ugbase.UserGuidePage
 /**
   *
   */
-object KleisliMapping extends UserGuidePage {
+object Kleisli_UserGuidePage extends UserGuidePage {
 
   def is = "Kleisli example".title ^ s2"""
 

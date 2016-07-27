@@ -7,7 +7,7 @@ import org.specs2.ugbase.UserGuidePage
 /**
   *
   */
-object ArrowMapping extends UserGuidePage {
+object Arrow_UserGuidePage extends UserGuidePage {
 
   def is = "Arrow example".title ^ s2"""
 

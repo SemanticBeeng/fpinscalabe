@@ -7,7 +7,7 @@ import org.specs2.ugbase.UserGuidePage
 /**
   *
   */
-object TypeclassDefinition extends UserGuidePage {
+object TypeclassDefinition_UserGuidePage extends UserGuidePage {
 
   def is = s"Defining type classes".title ^ s2"""
 

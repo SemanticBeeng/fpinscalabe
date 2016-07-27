@@ -1,8 +1,8 @@
 package org.specs2.ugbase
 
-import org.specs2.examples.functor.{FunctorMiscOperators, FunctorFunctionComposition, FunctorFunctionLifting, FunctorsMapping}
-import org.specs2.examples.monoid.MonoidAppend
-import org.specs2.examples.typeclass.{TypeTagging, TypeclassDefinition}
+import org.specs2.examples.functor.{FunctorMiscOperators_UserGuidePage, FunctorFunctionComposition_UserGuidePage, FunctorFunctionLifting_UserGuidePage, FunctorsMapping_UserGuidePage}
+import org.specs2.examples.monoid.Monoid_UserGuidePage
+import org.specs2.examples.typeclass.{TypeTagging_UserGuidePage, TypeclassDefinition_UserGuidePage}
 
 //import org.specs2.execute.SnippetParams
 
@@ -16,19 +16,19 @@ object UserGuide extends UserGuidePage {
 
   ## Typeclass examples
 
-  ${link(TypeclassDefinition).hide}
-  ${link(TypeTagging).hide}
+  ${link(TypeclassDefinition_UserGuidePage).hide}
+  ${link(TypeTagging_UserGuidePage).hide}
 
   ## Functor examples
-  ${link(FunctorsMapping).hide}
-  ${link(FunctorFunctionLifting).hide}
-  ${link(FunctorFunctionComposition).hide}
-  ${link(FunctorMiscOperators).hide}
+  ${link(FunctorsMapping_UserGuidePage).hide}
+  ${link(FunctorFunctionLifting_UserGuidePage).hide}
+  ${link(FunctorFunctionComposition_UserGuidePage).hide}
+  ${link(FunctorMiscOperators_UserGuidePage).hide}
 
   ## Applicative examples
 
   ## Monoid examples
-  ${link(MonoidAppend).hide}
+  ${link(Monoid_UserGuidePage).hide}
 """
 
 }

@@ -7,7 +7,7 @@ import org.specs2.ugbase.UserGuidePage
 /**
   *
   */
-object FunctorMiscOperators extends UserGuidePage {
+object FunctorMiscOperators_UserGuidePage extends UserGuidePage {
 
   def is = "Functor misc operators".title ^ s2"""
 

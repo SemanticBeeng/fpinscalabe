@@ -7,7 +7,7 @@ import org.specs2.ugbase.UserGuidePage
 /**
   *
   */
-object TypeTagging extends UserGuidePage {
+object TypeTagging_UserGuidePage extends UserGuidePage {
 
   def is = "Tagging types".title ^ s2"""
 

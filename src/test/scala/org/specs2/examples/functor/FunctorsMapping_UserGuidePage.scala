@@ -7,7 +7,7 @@ import org.specs2.ugbase.UserGuidePage
 /**
   *
   */
-object FunctorsMapping extends UserGuidePage {
+object FunctorsMapping_UserGuidePage extends UserGuidePage {
 
   def is = "Custom functors".title ^ s2"""
 

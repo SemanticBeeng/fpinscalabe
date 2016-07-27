@@ -7,7 +7,7 @@ import org.specs2.ugbase.UserGuidePage
 /**
   *
   */
-object ApplicativeMapping extends UserGuidePage {
+object Applicative_UserGuidePage extends UserGuidePage {
 
   def is = "Custom applicative".title ^ s2"""
 

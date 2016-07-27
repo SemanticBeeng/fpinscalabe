@@ -7,7 +7,7 @@ import org.specs2.ugbase.UserGuidePage
 /**
   *
   */
-object FunctorsLaws extends UserGuidePage {
+object FunctorsLaws_UserGuidePage extends UserGuidePage {
 
   def is = "Functors laws".title ^ s2"""
 

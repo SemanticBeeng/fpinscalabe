@@ -7,7 +7,7 @@ import org.specs2.ugbase.UserGuidePage
 /**
   *
   */
-object FunctorFunctionComposition extends UserGuidePage {
+object FunctorFunctionComposition_UserGuidePage extends UserGuidePage {
 
   def is = s"Functor function composition".title ^ s2"""
 

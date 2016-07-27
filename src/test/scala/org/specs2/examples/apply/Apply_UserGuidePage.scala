@@ -7,7 +7,7 @@ import org.specs2.ugbase.UserGuidePage
 /**
   *
   */
-object ApplyMapping extends UserGuidePage {
+object Apply_UserGuidePage extends UserGuidePage {
 
   def is = "Apply functor example".title ^ s2"""
 

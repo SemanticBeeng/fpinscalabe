@@ -7,7 +7,7 @@ import org.specs2.ugbase.UserGuidePage
 /**
   *
   */
-object FunctorFunctionLifting extends UserGuidePage {
+object FunctorFunctionLifting_UserGuidePage extends UserGuidePage {
 
   def is = "Functor function lifting".title ^ s2"""
 

@@ -31,7 +31,7 @@ package object dfault {
       /** [[Scalaz]] */
 
       import scalaz.syntax.arrow._
-      import scalaz.std.AllInstances._
+      import scalaz.std.AllInstances._ //@todo more granular imports
 
       import SomeFunctions._
 
