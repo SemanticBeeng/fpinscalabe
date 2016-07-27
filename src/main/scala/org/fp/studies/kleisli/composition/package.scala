@@ -404,6 +404,65 @@ package object composition {
         1.some.map(abk.run).get                 must_== 3.some
       }
   }
+
+  /**
+    *
+    */
+  object Spec4 extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
+
+    case class Make(id: Int, name: String)
+    case class Part(id: Int, name: String)
+
+    object SomeFunctions1 {
+
+      val make: (Int) => Make = (_) => Make(1, "Suzuki")
+
+      val parts: Make => List[Part] = {
+        case Make(1, _) => List(Part(1, "Gear Box"), Part(2, "Clutch cable"))
+      }
+    }
+
+    s"$keyPoint Today I’ll be exploring a few different ways in which you can compose programs. " +
+      s"The examples that follow all deal with Vehicles - more specifically makes and parts:."
+
+    s"$bookmarks $ann_FunctionComposition2".p
+    eg {
+      /** [[Scala]] */
+
+      import SomeFunctions1._
+
+      s"So we have a function Int =>  Make and then a function : Make => List[Part]. " +
+        s"From set theory we know this implies we must have a function from Int => List[Part]. " +
+        s"This is nothing more than simple function composition:".p
+
+      val f = parts compose make
+      f(1) must_== List(Part(1, "Gear Box"), Part(2, "Clutch cable"))
+
+      s"Alternatively you can use $operator_andThen which works like $operator_compose, but with the arguments flipped:".p
+      val g = make andThen parts
+      g(1) must_== List(Part(1, "Gear Box"), Part(2, "Clutch cable"))
+    }
+
+    eg {
+      /** [[Scalaz]] */
+
+      import scalaz.std.option._
+
+
+      //@todo
+      success
+    }
+
+    eg {
+      /** [[Cats]] */
+
+      import cats.std.option._
+      import cats.syntax.option._
+
+      //@todo
+      success
+    }
+  }
 }
 
 

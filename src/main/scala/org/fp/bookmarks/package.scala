@@ -80,5 +80,6 @@ package object bookmarks {
     * Bookmarks for [[misc]]
     */
   val ann_KleisliArrow6 = Annotation(misc, "https://gist.github.com/seanparsons/3736483#file-gistfile1-scala-L7-L35")
+  val ann_FunctionComposition2 = Annotation(misc, "https://hyp.is/PNXgflPfEeaHsM_E9LlnXA/archive.is/KxWQi")
 
 }
