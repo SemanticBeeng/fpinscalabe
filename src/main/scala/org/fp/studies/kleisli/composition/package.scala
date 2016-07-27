@@ -648,6 +648,7 @@ package object composition {
       s"f now has the type Int => Option[List[Part]] and we have once again successfully composed both functions without writing any plumbing code ourselves."+
         s"Mark pointed out to me that $operator_lift is pretty much the same as $operator_map but with the arguments reversed. " +
         s"So the example above can be more succintly expressed as:".p
+      s"$bookmarks $ann_FunctionComposition4".p
 
       val g = make(_:Int).map(parts)
       g(1) must_== Some(List(part1, part2))
