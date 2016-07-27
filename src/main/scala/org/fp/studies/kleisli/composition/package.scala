@@ -412,6 +412,9 @@ package object composition {
 
     case class Make(id: Int, name: String)
     case class Part(id: Int, name: String)
+    import scalaz.NonEmptyList
+    val part1 = Part(1, "Gear Box")
+    val part2 = Part(2, "Clutch cable")
 
     /**
       *
@@ -421,7 +424,7 @@ package object composition {
       val make: (Int) => Make = (_) => Make(1, "Suzuki")
 
       val parts: Make => List[Part] = {
-        case Make(1, _) => List(Part(1, "Gear Box"), Part(2, "Clutch cable"))
+        case Make(1, _) => List(part1, part2)
       }
     }
 
@@ -430,13 +433,12 @@ package object composition {
       */
     object SomeFunctions2 {
 
-      import scalaz.NonEmptyList
       import scalaz.syntax.std.boolean._
 
       val make  = (x: Int) => (x == 1).option(Make(1, "Suzuki"))
 
       val parts = (x: Make) =>
-        (x.id == 1).option(NonEmptyList(Part(1, "Gear Box"), Part(2, "Clutch cable")))
+        (x.id == 1).option(NonEmptyList(part1, part2))
     }
 
     s"$keyPoint Today I’ll be exploring a few different ways in which you can compose programs. " +
@@ -453,11 +455,11 @@ package object composition {
         s"This is nothing more than simple function composition:".p
 
       val f = parts compose make
-      f(1) must_== List(Part(1, "Gear Box"), Part(2, "Clutch cable"))
+      f(1) must_== List(part1, part2)
 
       s"Alternatively you can use $operator_andThen which works like $operator_compose, but with the arguments flipped:".p
       val g = make andThen parts
-      g(1) must_== List(Part(1, "Gear Box"), Part(2, "Clutch cable"))
+      g(1) must_== List(part1, part2)
     }
 
     s"Now we have a function make: Int => Option[Make] and a function parts: Make => Option[NonEmptyList[Part]]. " +
@@ -480,7 +482,7 @@ package object composition {
         case _ => None
       }
       val g = f compose make
-      g(1) must_== Some(NonEmptyList(Part(1,"Gear Box"), Part(2, "Clutch cable")))
+      g(1) must_== Some(NonEmptyList(part1, part2))
     }
 
     s"While this works, we had to manually create the plumbing between the two functions. You can imagine that with " +
@@ -488,8 +490,9 @@ package object composition {
       s"All the function f above is doing is serving as an adapter for parts. " +
       s"It turns out there is a couple of ways in which this pattern can be generalised."
 
-    s"Monadic bind: " +
+    s"$monadicBind: " +
       s"Option is a $monad so we can define f using a $forComprehension:"
+
     eg {
       /** [[Scalaz]] */
 
@@ -504,18 +507,17 @@ package object composition {
         p <- parts(m)
       } yield p
 
-      f(1) must_== Some(NonEmptyList(Part(1,"Gear Box"), Part(2, "Clutch cable")))
+      f(1) must_== Some(NonEmptyList(part1, part2))
 
       s"Which is simply syntactic sugar for:".p
 
       val g = make(_:Int) flatMap (m => parts(m).map(p => p))
+      g(1) must_== Some(NonEmptyList(part1, part2))
 
-      g(1) must_== Some(NonEmptyList(Part(1,"Gear Box"), Part(2, "Clutch cable")))
-
-      s"You can also use the symbolic alias for 'bind', which makes it a lot nicer".p
+      s"You can also use the symbolic alias for $operator_bind, which makes it a lot nicer".p
 
       val h = make(_:Int) >>= parts
-      h(1) must_== Some(NonEmptyList(Part(1,"Gear Box"), Part(2, "Clutch cable")))
+      h(1) must_== Some(NonEmptyList(part1, part2))
     }
 
     eg {

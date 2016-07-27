@@ -81,6 +81,8 @@ package object concepts {
   //
   val operator_=<< = "[operator operator=<<]"
   val operator_local = "[operator local]" //@todo clarify
+  //
+  val operator_bind = "[operator bind]"
 
   /**
     *
@@ -97,6 +99,7 @@ package object concepts {
   val monadicStructure = "[monadic structure]"
   val monadicContext = "[monadic context]"
   val monadicFunction = "[monadic function]"
+  val monadicBind = "[monadic bind]"
   //
   val monoid = "[monoid]"
   //
