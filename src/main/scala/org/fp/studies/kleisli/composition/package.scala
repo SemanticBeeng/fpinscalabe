@@ -385,8 +385,24 @@ package object composition {
       eg {
         /** [[Cats]] */
 
-        //@todo
-        success
+        import cats.std.option._
+        import cats.syntax.option._
+
+        import SomeFunctions._
+
+        s"Using $operator_map to achieve $functionComposition for regular functions.".p
+        1.some.map(a).map(b)  must_== 3.some
+        1.some.map(ab)        must_== 3.some
+
+        import cats.data.Kleisli
+
+        val ak = Kleisli( (value: Int) => (value * 2).some )
+        val bk = Kleisli( (value: Int) => (value + 1).some )
+        val abk = ak.andThen(bk)
+
+        s"Using $operator_map and $operator_flatMap to achieve $functionComposition for $KleisliArrow-s.".p
+        1.some.flatMap(ak.run).flatMap(bk.run)  must_== 3.some
+        1.some.map(abk.run).get                 must_== 3.some
       }
   }
 }
