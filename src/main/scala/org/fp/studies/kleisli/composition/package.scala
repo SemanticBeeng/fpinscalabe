@@ -494,8 +494,8 @@ package object composition {
       /** [[Scalaz]] */
 
       import scalaz.NonEmptyList
+      import scalaz.syntax.bind._
       import scalaz.std.option._
-      import scalaz.syntax.std.option._
 
       import SomeFunctions2._
 
@@ -505,6 +505,17 @@ package object composition {
       } yield p
 
       f(1) must_== Some(NonEmptyList(Part(1,"Gear Box"), Part(2, "Clutch cable")))
+
+      s"Which is simply syntactic sugar for:".p
+
+      val g = make(_:Int) flatMap (m => parts(m).map(p => p))
+
+      g(1) must_== Some(NonEmptyList(Part(1,"Gear Box"), Part(2, "Clutch cable")))
+
+      s"You can also use the symbolic alias for 'bind', which makes it a lot nicer".p
+
+      val h = make(_:Int) >>= parts
+      h(1) must_== Some(NonEmptyList(Part(1,"Gear Box"), Part(2, "Clutch cable")))
     }
 
     eg {
