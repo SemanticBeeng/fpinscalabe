@@ -606,16 +606,14 @@ package object composition {
     eg {
       /** [[Scalaz]] */
 
-      //import scalaz.NonEmptyList
       import scalaz.std.option._
-      import scalaz.syntax.std.boolean._
       import scalaz.Functor
-      import scalaz.Functor._
 
       s"Sure this works but since lists already represent non-deterministic results, one can make the point that the Option type " +
         s"there is reduntant since, for this example, we can treat both None and the empty List as the absence of result. " +
         s"Let’s update the code:".p
 
+      //@todo how to include code but not run it
 //      val make  = (x: Int) => (x == 1).option(Make(1, "Suzuki"))
 //
 //      val parts: Make => List[Part] = {
@@ -636,6 +634,7 @@ package object composition {
         s"into a function of type F[A] => F[B]." +
         s"This sounds useful. Here are our function types again:".p
 
+      //@todo how to include code but not run it
 //      make: Int => Option[Make]
 //      parts: Make => List[Part]
 
