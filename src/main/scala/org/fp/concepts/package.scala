@@ -44,6 +44,7 @@ package object concepts {
   val functionLifting = "[function lifting]"
   val functionComposition = "[function composition]"
   val functorComposition = "[functor composition]"
+  val functorLifting = "[functor lifting]"
 
   /**
     * @todo "fmap" in Haskell

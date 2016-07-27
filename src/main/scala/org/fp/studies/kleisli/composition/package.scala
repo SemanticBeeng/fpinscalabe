@@ -441,6 +441,21 @@ package object composition {
         (x.id == 1).option(NonEmptyList(part1, part2))
     }
 
+    /**
+      *
+      */
+    object SomeFunctions3 {
+
+      import scalaz.syntax.std.boolean._
+
+      val make  = (x: Int) => (x == 1).option(Make(1, "Suzuki"))
+
+      val parts: Make => List[Part] = {
+        case Make(1, _) => List(part1, part2)
+        case _ => Nil
+      }
+    }
+
     s"$keyPoint Today I’ll be exploring a few different ways in which you can compose programs. " +
       s"The examples that follow all deal with Vehicles - more specifically makes and parts:."
 
@@ -583,6 +598,61 @@ package object composition {
       f1(1) must_== Some(NonEmptyList(part1, part2))
       f2(1) must_== Some(NonEmptyList(part1, part2))
      }
+
+    s"$keyPoint Not there yet" +
+      s"One thing that was bugging me is the return type for parts above:" +
+      s"Make => Option[NonEmptyList[Part]]"
+
+    eg {
+      /** [[Scalaz]] */
+
+      //import scalaz.NonEmptyList
+      import scalaz.std.option._
+      import scalaz.syntax.std.boolean._
+      import scalaz.Functor
+      import scalaz.Functor._
+
+      s"Sure this works but since lists already represent non-deterministic results, one can make the point that the Option type " +
+        s"there is reduntant since, for this example, we can treat both None and the empty List as the absence of result. " +
+        s"Let’s update the code:".p
+
+//      val make  = (x: Int) => (x == 1).option(Make(1, "Suzuki"))
+//
+//      val parts: Make => List[Part] = {
+//        case Make(1, _) => List(part1, part2)
+//        case _ => Nil
+//      }
+      import SomeFunctions3._
+
+      s"It seems we’re in worse shape now! As before, parts’s input type doesn’t line up with make’s return type. Not only that, " +
+        s"they aren’t even in the same $monad anymore!" +
+        s"This clearly breaks our previous approach using a $KleisliArrow to perform the composition. " +
+        s"On the other hand it makes room for another approach: $functorLifting.".p
+
+      s"Lifting" +
+        s"In Scala - and category theory - $monad-s are $functor-s. As such both Option and List have access to a set of useful functor combinators. " +
+        s"The one we’re interested in is called $operator_lift." +
+        s"Say you have a function A => B and you have a functor F[A]. Lifting is the name of the operation that transforms the function A => B " +
+        s"into a function of type F[A] => F[B]." +
+        s"This sounds useful. Here are our function types again:".p
+
+//      make: Int => Option[Make]
+//      parts: Make => List[Part]
+
+     s"We can’t get a function Int => List[Part] because make returns an Option[Make] meaning it can fail. " +
+       s"We need to propagate this possibility in the composition. We can however lift parts into the Option monad, effectively changing " +
+       s"its type from Make => List[Part] to Option[Make] => Option[List[Part]]:".p
+
+      val f = Functor[Option].lift(parts) compose make
+      f(1) must_== Some(List(part1, part2))
+
+      s"f now has the type Int => Option[List[Part]] and we have once again successfully composed both functions without writing any plumbing code ourselves."+
+        s"Mark pointed out to me that $operator_lift is pretty much the same as $operator_map but with the arguments reversed. " +
+        s"So the example above can be more succintly expressed as:".p
+
+      val g = make(_:Int).map(parts)
+      g(1) must_== Some(List(part1, part2))
+    }
 
     eg {
       /** [[Cats]] */
