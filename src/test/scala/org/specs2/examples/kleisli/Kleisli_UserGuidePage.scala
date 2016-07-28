@@ -19,7 +19,7 @@ object Kleisli_UserGuidePage extends UserGuidePage {
     * ${Spec2.is}
     * ${Spec3.is} and
     * ${Spec4.is}
-
+    * ${Spec5.is}
 }
 
 """
