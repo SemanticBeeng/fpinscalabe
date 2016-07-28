@@ -36,7 +36,12 @@ package object resources {
   }
 
   case class Resource[R <: ResourceTypeVal](id: String, /*kind: R, */url: String) extends intf.Resource[R]
-  case class Annotation[R <: ResourceTypeVal](resource: Resource[R], reference: String) extends intf.Annotation[R]
+  case class Annotation[R <: ResourceTypeVal](resource: Resource[R], reference: String) extends intf.Annotation[R] {
+    override def toString : String = {
+      "annotation" + reference
+    }
+    def is = toString
+  }
 
   /**
     * Resources specific to this project about "functional programming in Scala"
