@@ -3,9 +3,8 @@ package org.fp.studies.kleisli
 import org.fp.concepts._
 import org.fp.resources._
 import org.fp.bookmarks._
-
 //
-import org.specs2.specification.dsl.mutable.{TextDsl, AutoExamples}
+import org.specs2.specification.dsl.mutable.{AutoExamples, TextDsl}
 
 /**
   *
@@ -668,7 +667,7 @@ package object composition {
   /**
     *
     */
-  object Spec5 extends org.specs2.mutable.Specification /*with AutoExamples with TextDsl*/ {
+  object Spec5 extends org.specs2.mutable.Specification {
 
     case class Make(id: Int, name: String)
 
