@@ -70,8 +70,8 @@ object build extends Build {
       depends.resolvers    ++
     //promulgate.library("org.specs2.info"+(if (name.nonEmpty) s".$name" else ""), "specs2") ++
     //compilationSettings  ++
-      commonSettings       //++
-    //testingSettings      //++
+      commonSettings       ++
+     testingSettings      //++
 //     publicationSettings
 
 
