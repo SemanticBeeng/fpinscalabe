@@ -709,7 +709,7 @@ package object composition {
         import SomeFunctions1._
 
         val g = make andThen parts
-        g(1) must_== List(part1, part2)
+        g(1) must_== List(part1, part1)
       }
 
       Now we have a function make: Int => Option[Make] and a function parts: Make => Option[NonEmptyList[Part]].
