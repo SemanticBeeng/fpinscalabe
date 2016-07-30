@@ -1,1 +1,1 @@
-scalacOptions ++= Seq("-Yrangepos", "-deprecation", "-unchecked", "-feature", "-language:_")
+scalacOptions ++= Seq("-Yrangepos", "-Ylog-classpath", "-deprecation", "-unchecked", "-feature", "-language:_")

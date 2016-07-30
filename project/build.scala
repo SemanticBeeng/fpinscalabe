@@ -31,10 +31,22 @@ object build extends Build {
     id = "fpinscalabe",
     base = file("."),
     settings =
-      moduleSettings("fpinscalabe")       ++
-      //compatibilitySettings    ++
-      //releaseSettings          ++
-      //siteSettings             ++
+      moduleSettings("")       ++
+        //compatibilitySettings    ++
+        //releaseSettings          ++
+        //siteSettings             ++
+        Seq(name := "fpinscalabe", packagedArtifacts := Map.empty)
+  ).aggregate(main, html)
+   .enablePlugins(GitBranchPrompt)
+
+  /**
+    *
+    */
+  lazy val main = Project(
+    id = "main",
+    base = file("main"),
+    settings =
+      moduleSettings("main")       ++
       Seq(
         name := "FPinScalaByExample",
         libraryDependencies ++=
@@ -50,10 +62,21 @@ object build extends Build {
         // packagedArtifacts := Map.empty
         //logLevel in compile := Level.Error
       )
+  )
 
-  ).enablePlugins(GitBranchPrompt)
+  /**
+    *
+    */
+  lazy val html = Project(id = "html", base = file("html"),
+    settings =
+      Seq(libraryDependencies += depends.tagsoup) ++
+        moduleSettings("html") ++
+        Seq(name := "specs2-html")
+  ).dependsOn(main % "test")
 
-  /** COMMON SETTINGS */
+  /**
+    * COMMON SETTINGS
+    */
   lazy val commonSettings: Seq[Settings] = Seq(
     organization := "SemanticBeeng",
     specs2Version := "3.7",
@@ -74,13 +97,6 @@ object build extends Build {
      testingSettings      //++
 //     publicationSettings
 
-
-  lazy val html = Project(id = "html", base = file("html"),
-    settings =
-      Seq(libraryDependencies += depends.tagsoup) ++
-      moduleSettings("html") ++
-      Seq(name := "specs2-html")
-  ).dependsOn(fpinscalabe % "test")
 
 /*
   lazy val compilationSettings: Seq[Settings] = Seq(
