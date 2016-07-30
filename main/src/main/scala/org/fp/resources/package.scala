@@ -35,10 +35,17 @@ package object resources {
     }
   }
 
-  case class Resource[R <: ResourceTypeVal](id: String, /*kind: R, */url: String) extends intf.Resource[R]
+  case class Resource[R <: ResourceTypeVal](id: String, /*kind: R, */url: String) extends intf.Resource[R] {
+
+    override def toString : String = {
+      "resource(" + url +")"
+    }
+    def is = toString
+
+  }
   case class Annotation[R <: ResourceTypeVal](resource: Resource[R], reference: String) extends intf.Annotation[R] {
     override def toString : String = {
-      "annotation" + reference
+      "annotation(" + reference +")"
     }
     def is = toString
   }
