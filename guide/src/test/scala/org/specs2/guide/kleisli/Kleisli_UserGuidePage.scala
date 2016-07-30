@@ -5,13 +5,11 @@ import org.fp.studies.kleisli.composition._
 
 //
 import org.specs2.ugbase.UserGuidePage
-import org.specs2.common.SnippetHelper._
-import org.specs2.specification.Snippets
 
 /**
   *
   */
-object Kleisli_UserGuidePage extends UserGuidePage with Snippets {
+object Kleisli_UserGuidePage extends UserGuidePage {
 
   def is = "Kleisli example".title ^ s2"""
 
@@ -23,8 +21,6 @@ object Kleisli_UserGuidePage extends UserGuidePage with Snippets {
  * ${link(Spec4)}
  * ${link(Spec5)}
 
-### Spec #5
-    ${incl[Spec5]}
 
 """
 }

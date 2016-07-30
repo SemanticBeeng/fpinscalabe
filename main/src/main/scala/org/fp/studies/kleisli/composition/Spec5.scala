@@ -4,13 +4,14 @@ package org.fp.studies.kleisli.composition
 import org.fp.bookmarks._
 import org.fp.concepts._
 import org.fp.resources._
+import org.specs2.specification.Snippets
 
 trait Spec5
 
 /**
   *
   */
-object Spec5 extends org.specs2.mutable.Specification with Spec5 {
+object Spec5 extends org.specs2.Specification with Spec5 with Snippets {
 
   // 8<---
   case class Make(id: Int, name: String)
@@ -34,31 +35,38 @@ object Spec5 extends org.specs2.mutable.Specification with Spec5 {
     }
   }
 
-  override def is = s2"""
-     $keyPoint Today I’ll be exploring a few different ways in which you can compose programs.
-     The examples that follow all deal with Vehicles - more specifically makes and parts:."
+  override def is = s"Composing projects in a few different ways".title ^ s2"""
 
-     $bookmarks ${ann_FunctionComposition2.is}
+$keyPoint Today I’ll be exploring a few different ways in which you can compose programs.
 
-     So we have a function Int =>  Make and then a function : Make => List[Part].
-     From set theory we know this implies we must have a function from Int => List[Part].
-     This is nothing more than simple $functionComposition: ${eg { /** [[Scala]] */
+The examples that follow all deal with Vehicles - more specifically makes and parts:."
+
+$bookmarks ${ann_FunctionComposition2.is}
+
+So we have a function `Int =>  Make` and then a function : `Make => List[Part]`.
+From set theory we know this implies we must have a function : `Int => List[Part]`.
+This is nothing more than simple $functionComposition:
+
+  ${snippet{ /** [[Scala]] */
     import SomeFunctions1._
 
     val f = parts compose make
     f(1) must_== List(part1, part2)
   }}
 
-    Alternatively you can use $operator_andThen which works like $operator_compose, but with the arguments flipped: ${
+Alternatively you can use $operator_andThen which works like $operator_compose, but with the arguments flipped:
+
+  ${snippet{
     import SomeFunctions1._
 
     val g = make andThen parts
     g(1) must_== List(part1, part2)
-  }
+  }}
 
-    Now we have a function make: Int => Option[Make] and a function parts: Make => Option[NonEmptyList[Part]].
-    Based on our first example we should have a way to create a function from Int to Option[NonEmptyList[Part]].
-    This isn’t immediately obvious however.
+Now we have a function make: `Int => Option[Make]` and a function parts: `Make => Option[NonEmptyList[Part]]`.
+Based on our first example we should have a way to create a function from `Int => Option[NonEmptyList[Part]]`.
+
+This isn’t immediately obvious however.
     """
   // 8<---
 }
