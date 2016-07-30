@@ -13,13 +13,11 @@ object Kleisli_UserGuidePage extends UserGuidePage {
 
 ## Examples for a ${concepts.KleisliArrow} ${concepts.functionComposition} with ${resources.Scalaz.id} and ${resources.Cats.id}
 
-${Spec1.is}
-
- * ${link(Spec2).hide}
- * ${link(Spec3).hide}
- * ${link(Spec4).hide}
- * ${link(Spec5).hide}
-}
+ * ${link(Spec1)}
+ * ${link(Spec2)}
+ * ${link(Spec3)}
+ * ${link(Spec4)}
+ * ${link(Spec5)}
 
 """
 }
