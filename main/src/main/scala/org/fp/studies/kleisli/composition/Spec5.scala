@@ -60,7 +60,7 @@ object Spec5 extends org.specs2.Specification with Snippets /*with TextDsl*/ {
   }
 
 
-  override def is = s"Composing projects in a few different ways".title ^ s2"""
+  override def is = s"Composing programs in a few different ways".title ^ s2"""
 
 Today I’ll be exploring a few different ways in which you can compose programs.
 
@@ -203,7 +203,7 @@ much like $operator_bind does, but without actually having to do any binding you
 
 To use a concrete example, let’s create a $KleisliArrow from our parts function:
 
-${snippet{
+  ${snippet{
     import SomeFunctions3._
     import scalaz.Kleisli._
 
@@ -233,7 +233,7 @@ By doing so, you have access to a number of useful functions defined in the $Kle
     f2(1) must_== Some(NonEmptyList(part1, part2))
   }
 
-#### $keyPoint Not there yet
+#### Not there yet
 
 One thing that was bugging me is the return type for parts above: `Make => Option[NonEmptyList[Part]]`
 
@@ -259,7 +259,7 @@ It seems we’re in worse shape now! As before, parts’s input type doesn’t l
 This clearly breaks our previous approach using a $KleisliArrow to perform the composition.
 On the other hand it makes room for another approach: $functorLifting.
 
-### "Lifting
+### Lifting
 
 In Scala - and category theory - $monad-s are $functor-s. As such both Option and List have access to a set of useful functor combinators.
 The one we’re interested in is called $operator_lift.

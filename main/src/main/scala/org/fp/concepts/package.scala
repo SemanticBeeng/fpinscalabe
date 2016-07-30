@@ -5,8 +5,8 @@ package org.fp
   */
 package object concepts {
 
-  val keyPoint = "$$key point$$>>"
-  val bookmarks = "$$bookmarks$$>>"
+  val keyPoint = "$$key point$$"
+  val bookmarks = "$$bookmarks$$"
 
   //
   val selfType = "self-type"
