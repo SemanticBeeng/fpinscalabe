@@ -19,6 +19,7 @@ package object concepts {
   val constructor = "[constructor]"
   val typeConstructor = "[type constructor]"
   val typeClass = "[type class]"
+  val companionObject = "[companion object]"
   val taggedType = "[tagged type]"
   val higherKindedType = "[higher-Kinded type]"
 

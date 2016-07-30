@@ -1,4 +1,7 @@
+// 8<---
 package org.fp.studies.typeclass.definition
+
+import org.specs2.specification.Snippets
 
 /**
   *
@@ -8,6 +11,7 @@ package object auto {
   /**
     *
     */
+// 8<---
   trait Definitions {
 
     import simulacrum._
@@ -23,18 +27,16 @@ package object auto {
       }
     }
   }
-
+// 8<---
   object Definitions extends Definitions
 
 
   /**
-    * ----------------
-    */
-  /**
     *
     */
-  object Usages extends org.specs2.mutable.Specification /*with Snippets */{
+  object Usages extends org.specs2.mutable.Specification with Snippets {
 
+// 8<---
     import auto.Definitions._
 
     "Some examples of usages".p
@@ -106,5 +108,6 @@ package object auto {
       truthyIf(2 :: 3 :: 4 :: Nil) { "YEAH!" } { "NO!" } must_== "YEAH!"
       truthyIf(true) { "YEAH!" } { "NO!" } must_== "YEAH!"
     }
+// 8<---
   }
 }

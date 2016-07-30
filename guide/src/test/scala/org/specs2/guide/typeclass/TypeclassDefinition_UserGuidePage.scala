@@ -11,11 +11,10 @@ object TypeclassDefinition_UserGuidePage extends UserGuidePage {
 
   def is = s"Defining type classes".title ^ s2"""
 
-  ${concepts.functor}s enable ${concepts.functorComposition}
+## ${concepts.functor}s enable ${concepts.functorComposition}
 
-    * in ${resources.Scala.id} ${ScalaSpec.is}
-
-    * in ${resources.Simulacrum.id} ${SimulacrumSpec.is}
+ * with ${resources.Scala.id} in ${link(ScalaSpec)}
+ * with ${resources.Simulacrum.id} in ${link(SimulacrumSpec)}
 
 """
 }

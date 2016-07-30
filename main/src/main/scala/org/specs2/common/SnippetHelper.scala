@@ -15,7 +15,7 @@ object SnippetHelper {
 
   def incl[T : ClassTag]: Snippet[Unit] = {
     val name = implicitly[ClassTag[T]].runtimeClass.getName
-    load(FilePath.unsafe("src/main/scala/"+name.replace(".", "/")+".scala"))
+    load(FilePath.unsafe("main/src/main/scala/"+name.replace(".", "/")+".scala")) //@todo avoid hardcoding the module name
   }
 
 }
