@@ -1,4 +1,3 @@
-// 8<---
 package org.fp.studies.kleisli.composition
 
 import org.fp.bookmarks._
@@ -6,14 +5,11 @@ import org.fp.concepts._
 import org.fp.resources._
 import org.specs2.specification.Snippets
 
-trait Spec5
-
 /**
   *
   */
-object Spec5 extends org.specs2.Specification with Spec5 with Snippets {
+object Spec5 extends org.specs2.mutable.Specification with Snippets {
 
-  // 8<---
   case class Make(id: Int, name: String)
 
   case class Part(id: Int, name: String)
@@ -47,16 +43,16 @@ So we have a function `Int =>  Make` and then a function : `Make => List[Part]`.
 From set theory we know this implies we must have a function : `Int => List[Part]`.
 This is nothing more than simple $functionComposition:
 
-  ${snippet{ /** [[Scala]] */
+  ${ /** [[Scala]] */
     import SomeFunctions1._
 
     val f = parts compose make
     f(1) must_== List(part1, part2)
-  }}
+  }
 
 Alternatively you can use $operator_andThen which works like $operator_compose, but with the arguments flipped:
 
-  ${snippet{
+  ${eg{
     import SomeFunctions1._
 
     val g = make andThen parts
@@ -68,5 +64,4 @@ Based on our first example we should have a way to create a function from `Int =
 
 This isn’t immediately obvious however.
     """
-  // 8<---
 }

@@ -3,6 +3,8 @@ package org.fp.studies.kleisli
 import org.fp.concepts._
 import org.fp.resources._
 import org.fp.bookmarks._
+import org.specs2.specification.Snippets
+
 //
 import org.specs2.specification.dsl.mutable.{AutoExamples, TextDsl}
 
