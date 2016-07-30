@@ -36,7 +36,7 @@ object build extends Build {
         //releaseSettings          ++
         //siteSettings             ++
         Seq(name := "fpinscalabe", packagedArtifacts := Map.empty)
-  ).aggregate(main, html)
+  ).aggregate(main, guide)
    .enablePlugins(GitBranchPrompt)
 
   /**
@@ -67,12 +67,13 @@ object build extends Build {
   /**
     *
     */
-  lazy val html = Project(id = "html", base = file("html"),
+  lazy val guide = Project(id = "guide", base = file("guide"),
     settings =
       Seq(libraryDependencies += depends.tagsoup) ++
-        moduleSettings("html") ++
-        Seq(name := "specs2-html")
-  ).dependsOn(main % "test")
+        moduleSettings("guide") ++
+        Seq(name := "fpinscalabe-guide") ++
+        documentationSettings
+  ).dependsOn(main % "compile->compile;test->test")
 
   /**
     * COMMON SETTINGS
@@ -92,32 +93,30 @@ object build extends Build {
       coreDefaultSettings  ++
       depends.resolvers    ++
     //promulgate.library("org.specs2.info"+(if (name.nonEmpty) s".$name" else ""), "specs2") ++
-    //compilationSettings  ++
+      compilationSettings  ++
       commonSettings       ++
-     testingSettings      //++
+      testingSettings      //++
 //     publicationSettings
 
-
-/*
   lazy val compilationSettings: Seq[Settings] = Seq(
     // https://gist.github.com/djspiewak/976cd8ac65e20e136f05
-    unmanagedSourceDirectories in Compile ++=
+    /*unmanagedSourceDirectories in Compile ++=
       Seq((sourceDirectory in Compile).value / s"scala-${scalaBinaryVersion.value}",
           if (scalazVersion.value.startsWith("7.0")) (sourceDirectory in Compile).value / s"scala-scalaz-7.0.x"
           else                                       (sourceDirectory in Compile).value / s"scala-scalaz-7.1.x",
           if (scalazVersion.value.startsWith("7.0")) (sourceDirectory in (Test, test)).value / s"scala-scalaz-7.0.x"
-          else                                       (sourceDirectory in (Test, test)).value / s"scala-scalaz-7.1.x"),
+          else                                       (sourceDirectory in (Test, test)).value / s"scala-scalaz-7.1.x"),*/
     javacOptions ++= Seq("-Xmx3G", "-Xms512m", "-Xss4m"),
     maxErrors := 20,
     incOptions := incOptions.value.withNameHashing(true),
     scalacOptions ++=
       (if (scalaVersion.value.startsWith("2.11") || scalaVersion.value.startsWith("2.12"))
-        Seq("-Xfatal-warnings",
+        Seq(/*"-Xfatal-warnings",*/
             "-Xlint",
-            "-Ywarn-unused-import",
+            /*"-Ywarn-unused-import",
             "-Yno-adapted-args",
             "-Ywarn-numeric-widen",
-            "-Ywarn-value-discard",
+            "-Ywarn-value-discard",*/
             "-deprecation:false", "-Xcheckinit", "-unchecked", "-feature", "-language:_")
        else
         Seq("-Xcheckinit", "-Xlint", "-deprecation", "-unchecked", "-feature", "-language:_")),
@@ -126,7 +125,6 @@ object build extends Build {
     scalacOptions in (Compile, console) := Seq("-Yrangepos", "-feature", "-language:_"),
     scalacOptions in (Test, console) := Seq("-Yrangepos", "-feature", "-language:_")
   )
-*/
 
   lazy val testingSettings: Seq[Settings] = Seq(
     initialCommands in console in test := "import org.specs2._",
@@ -282,29 +280,29 @@ object build extends Build {
 //    },
 //    gitRemoteRepo := "git@github.com:etorreborre/specs2.git"
 //  )
-//
-//  lazy val documentationSettings =
-//    testTaskDefinition(generateWebsiteTask, Seq(Tests.Filter(_.endsWith("Website"))))
-//
-//  lazy val generateWebsiteTask = TaskKey[Tests.Output]("generate-website", "generate the website")
+
+  lazy val documentationSettings =
+    testTaskDefinition(generateWebsiteTask, Seq(Tests.Filter(_.endsWith("Website"))))
+
+  lazy val generateWebsiteTask = TaskKey[Tests.Output]("generate-website", "generate the website")
 //  lazy val generateWebsite     = executeStepTask(generateWebsiteTask in guide, "Generating the website", Test)
 //
 //  lazy val publishSite = ReleaseStep { st: State =>
 //    val st2 = executeStepTask(makeSite, "Making the site")(st)
 //    executeStepTask(pushSite, "Publishing the site")(st2)
 //  }
-//
-//  def testTaskDefinition(task: TaskKey[Tests.Output], options: Seq[TestOption]) =
-//    Seq(testTask(task))                          ++
-//    inScope(GlobalScope)(defaultTestTasks(task)) ++
-//    inConfig(Test)(testTaskOptions(task))        ++
-//    (testOptions in (Test, task) ++= options)
-//
-//  def testTask(task: TaskKey[Tests.Output]) =
-//    task <<= (streams in Test, loadedTestFrameworks in Test, testLoader in Test,
-//      testGrouping in Test in test, testExecution in Test in task,
-//      fullClasspath in Test in test, javaHome in test) flatMap Defaults.allTestGroupsTask
-//
+
+  def testTaskDefinition(task: TaskKey[Tests.Output], options: Seq[TestOption]) =
+    Seq(testTask(task))                          ++
+    inScope(GlobalScope)(defaultTestTasks(task)) ++
+    inConfig(Test)(testTaskOptions(task))        ++
+    (testOptions in (Test, task) ++= options)
+
+  def testTask(task: TaskKey[Tests.Output]) =
+    task <<= (streams in Test, loadedTestFrameworks in Test, testLoader in Test,
+      testGrouping in Test in test, testExecution in Test in task,
+      fullClasspath in Test in test, javaHome in test) flatMap Defaults.allTestGroupsTask
+
 //  /**
 //   * PUBLICATION
 //   */
