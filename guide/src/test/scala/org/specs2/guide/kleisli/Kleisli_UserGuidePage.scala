@@ -11,15 +11,14 @@ object Kleisli_UserGuidePage extends UserGuidePage {
 
   def is = "Kleisli example".title ^ s2"""
 
-  ${concepts.KleisliArrow} ....
-  Examples for a ${concepts.KleisliArrow} ${concepts.functionComposition}
+## Examples for a ${concepts.KleisliArrow} ${concepts.functionComposition} with ${resources.Scalaz.id} and ${resources.Cats.id}
 
-    * with ${resources.Scalaz.id} and ${resources.Cats.id} in
-    * ${Spec1.is}
-    * ${Spec2.is}
-    * ${Spec3.is} and
-    * ${Spec4.is}
-    * ${Spec5.is}
+${Spec1.is}
+
+ * ${link(Spec2).hide}
+ * ${link(Spec3).hide}
+ * ${link(Spec4).hide}
+ * ${link(Spec5).hide}
 }
 
 """
