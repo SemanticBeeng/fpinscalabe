@@ -1,17 +1,20 @@
 // 8<---
-package org.fp.studies.typeclass.definition.manual
+package org.fp.studies.typeclass.definition.auto
+
+import org.specs2.specification.Snippets
 
 trait Usages
 
 /**
   *
   */
-object Usages extends org.specs2.mutable.Specification with Usages {
+object Usages extends org.specs2.mutable.Specification with Usages with Snippets {
 
   // 8<---
   import Definitions._
 
   "Some examples of usages".p
+
   eg {
     "Here’s how we can define typeclass instances for Int:".p
 
@@ -51,6 +54,7 @@ object Usages extends org.specs2.mutable.Specification with Usages {
     implicit val booleanCanTruthy: CanTruthy[Boolean] = CanTruthy.fromTruthy(identity)
 
     import CanTruthy.ops._
+
     false.truthy must_== false
   }
 
@@ -60,6 +64,7 @@ object Usages extends org.specs2.mutable.Specification with Usages {
     "To delay the evaluation of the passed arguments, we can use pass-by-name: ".p
 
     import CanTruthy.ops._
+
     def truthyIf[A: CanTruthy, B, C](cond: A)(ifyes: => B)(ifno: => C) =
       if (cond.truthy) ifyes
       else ifno
