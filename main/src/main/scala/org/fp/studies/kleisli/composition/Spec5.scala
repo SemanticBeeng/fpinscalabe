@@ -93,7 +93,7 @@ Based on our first example we should have a way to create a function from `Int =
 
 This isn’t immediately obvious however.
 
-While make does return a Make, it is wrapped inside an Option so we need to account for a possible failure.
+While `make` does return a `Make`, it is wrapped inside an `Option` so we need to account for a possible failure.
 This leads to our first attempt:
 
   $bookmarks ${ann_FunctionComposition3.is}
@@ -114,18 +114,16 @@ This leads to our first attempt:
 While this works, we had to manually create the plumbing between the two functions. You can imagine that with different return and input types,
 this plumbing would have to be rewritten over and over.
 
-All the function f above is doing is serving as an adapter for parts.
+All the function `f` above is doing is serving as an adapter for `parts`.
 It turns out there is a couple of ways in which this pattern can be generalised.
 
-#### $monadicBind:
+#### Composition through $monadicBind:
 
-Option is a $monad so we can define f using a $forComprehension:
+Option is a $monad so we can define `f` using a $forComprehension:
 
   ${
     /** [[Scalaz]] */
     import scalaz.NonEmptyList
-    //import scalaz.syntax.bind._
-    //import scalaz.std.option._
     import SomeFunctions2._
 
     val f = (x: Int) => for {
@@ -166,9 +164,9 @@ You can also use the symbolic alias for $operator_bind, which makes it a lot nic
     h (1) must_== f(1)
   }
 
-The reason this is better is that make and parts could operate under a different $monad but the client code would not need to change.
+The reason this is better is that `make` and `parts` could operate under a different $monad but the client code would not need to change.
 
-In the example below, we’re operating under the List $monad:
+In the example below, we’re operating under the `List` $monad:
 
   ${
     /** [[Scalaz]] */
@@ -189,19 +187,23 @@ In the example below, we’re operating under the List $monad:
     g ("Motorcycles are fun to ride!") must_== charList
   }
 
-We used the exact same for comprehension syntax to compose these operations. This works because both Option and List are $monad
+We used the exact same $forComprehension syntax to compose these operations. This works because both `Option` and `List` are $monad
 
 Notwithstanding, this still feels like unnecessary plumbing. All we are doing with the $forComprehension / $operator_flatMap is extracting the values from their
 respective $monad-s to simply put them back in. It would be nice if we could simply do something like `make compose parts` as we did in our first example.
 
-#### $KleisliArrow-s:
+#### Composition through $KleisliArrow-s
 
 A $KleisliArrow is simply a wrapper for a function of type `A => F[B]`. This is the same type of the second argument to the $monadicBind as defined in ${Scalaz.is}:
+
+```
+  bind[A, B](fa: F[A])(f: A => F[B]): F[B]
+```
 
 By creating a $KleisliArrow from a function, we are given a function that knows how to extract the value from a $monad F and feed it into the underlying function,
 much like $operator_bind does, but without actually having to do any binding yourself.
 
-To use a concrete example, let’s create a $KleisliArrow from our parts function:
+To use a concrete example, let’s create a $KleisliArrow from our `parts` function:
 
   ${snippet{
     import SomeFunctions3._
@@ -212,8 +214,10 @@ To use a concrete example, let’s create a $KleisliArrow from our parts functio
 
 You can read this type as being a function which knows how to get a value of type Make from the Option $monad and will ultimately return an `Option[NonEmptyList[Part]]`.
 Now you might be asking, why would we want to wrap our functions in a $KleisliArrow?
-By doing so, you have access to a number of useful functions defined in the $KleisliArrow trait, one of which is <==< (aliased as $operator_composeK):
-                                                                             |
+By doing so, you have access to a number of useful functions defined in the $KleisliArrow trait, one of which is `<==<` (aliased as $operator_composeK):
+
+This gives us the same result as the version using the $forComprehension but with less work and with code that looks similar to simple $functionComposition.
+
   ${
     /** [[Scalaz]] */
 
@@ -227,15 +231,17 @@ By doing so, you have access to a number of useful functions defined in the $Kle
     val f1 = kleisli(parts) <==< make
     val f2 = kleisli(parts) composeK make
 
-    s"This gives us the same result as the version using the $forComprehension but with less work and with code that looks similar to simple $functionComposition."//.p
-
     f1(1) must_== Some(NonEmptyList(part1, part2))
     f2(1) must_== Some(NonEmptyList(part1, part2))
   }
 
 #### Not there yet
 
-One thing that was bugging me is the return type for parts above: `Make => Option[NonEmptyList[Part]]`
+One thing that was bugging me is the return type for parts above:
+
+```
+  Make => Option[NonEmptyList[Part]]
+```
 
 Sure this works but since lists already represent non-deterministic results, one can make the point that the Option type there is reduntant since, for this example,
 we can treat both None and the empty List as the absence of result.
@@ -255,16 +261,16 @@ Let’s update the code:
     }
   }}
 
-It seems we’re in worse shape now! As before, parts’s input type doesn’t line up with make’s return type. Not only that, they aren’t even in the same $monad anymore!
+It seems we’re in worse shape now! As before, `parts`’s input type doesn’t line up with `make`’s return type. Not only that, they aren’t even in the same $monad anymore!
 This clearly breaks our previous approach using a $KleisliArrow to perform the composition.
 On the other hand it makes room for another approach: $functorLifting.
 
-### Lifting
+### Composition through $functorLifting
 
-In Scala - and category theory - $monad-s are $functor-s. As such both Option and List have access to a set of useful functor combinators.
+In Scala - and category theory - $monad-s are $functor-s. As such both Option and List have access to a set of useful $functor combinators.
 The one we’re interested in is called $operator_lift.
 
-Say you have a function A => B and you have a functor F[A]. Lifting is the name of the operation that transforms the function A => B into a function of type F[A] => F[B].
+Say you have a function `A => B` and you have a `functor F[A]`. Lifting is the name of the operation that transforms the function `A => B` into a function of type `F[A] => F[B]`.
 This sounds useful.
 
 Here are our function types again:
@@ -274,13 +280,12 @@ Here are our function types again:
     parts: Make => List[Part]
 ```
 
-We can’t get a function `Int => List[Part]` because make returns an Option[Make] meaning it can fail.
+We can’t get a function `Int => List[Part]` because make returns an `Option[Make]` meaning it can fail.
 
-We need to propagate this possibility in the composition. We can however lift parts into the Option monad, effectively changing its type from `Make => List[Part]` to `Option[Make] => Option[List[Part]]:`
+We need to propagate this possibility in the composition. We can however lift parts into the `Option` $monad, effectively changing its type from `Make => List[Part]` to `Option[Make] => Option[List[Part]]:`
 
-${
+  ${
     import scalaz.std.option._
-    import scalaz.syntax.std.boolean._
     import scalaz.Functor
     import SomeFunctions3._
 
@@ -288,18 +293,17 @@ ${
     f(1) must_== Some(List(part1, part2))
   }
 
-f now has the type `Int => Option[List[Part]]` and we have once again successfully composed both functions without writing any plumbing code ourselves.
+`f` now has the type `Int => Option[List[Part]]` and we have once again successfully composed both functions without writing any plumbing code ourselves.
 
 Mark pointed out to me that $operator_lift is pretty much the same as $operator_map but with the arguments reversed.
 So the example above can be more succintly expressed as:
 
-$bookmarks ${ann_FunctionComposition4.is}
-
-${
+  $bookmarks ${ann_FunctionComposition4.is}
+  ${
     import SomeFunctions3._
 
     val g = make(_: Int).map(parts)
     g(1) must_== Some(List(part1, part2))
-  }
+    }
     """
 }
