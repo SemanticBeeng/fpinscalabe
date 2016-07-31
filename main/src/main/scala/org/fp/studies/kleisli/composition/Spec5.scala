@@ -72,21 +72,23 @@ So we have a function `Int => Make` and then a function : `Make => List[Part]`.
 From set theory we know this implies we must have a function : `Int => List[Part]`.
 This is nothing more than simple $functionComposition:
 
-  ${ /** [[Scala]] */
+  ${snippet{
+    /** [[Scala]] */
     import SomeFunctions1._
 
     val f = parts compose make
     f(1) must_== List(part1, part2)
-  }
+  }.offsetIs(-4)}
 
 Alternatively you can use $operator_andThen which works like $operator_compose, but with the arguments flipped:
 
-  ${eg{ /**@todo */
+  ${snippet{
+    /**@todo */
     import SomeFunctions1._
 
     val g = make andThen parts
     g(1) must_== List(part1, part2)
-  }}
+  }.offsetIs(-4)}
 
 Now we have a function make: `Int => Option[Make]` and a function parts: `Make => Option[NonEmptyList[Part]]`.
 Based on our first example we should have a way to create a function from `Int => Option[NonEmptyList[Part]]`.
@@ -97,10 +99,9 @@ While `make` does return a `Make`, it is wrapped inside an `Option` so we need t
 This leads to our first attempt:
 
   $bookmarks
-  ${ /** [[Scalaz]] */
-
+  ${snippet{
+    /** [[Scalaz]] */
     import SomeFunctions2._
-
     import scalaz.NonEmptyList
 
     val f: Option[Make] => Option[NonEmptyList[Part]] = {
@@ -109,7 +110,7 @@ This leads to our first attempt:
     }
     val g = f compose make
     g(1) must_== Some(NonEmptyList(part1, part2))
-  }
+  }.offsetIs(-4)}
 
 While this works, we had to manually create the plumbing between the two functions. You can imagine that with different return and input types,
 this plumbing would have to be rewritten over and over.
@@ -121,7 +122,7 @@ It turns out there is a couple of ways in which this pattern can be generalised.
 
 Option is a $monad so we can define `f` using a $forComprehension:
 
-  ${
+  ${snippet{
     /** [[Scalaz]] */
     import scalaz.NonEmptyList
     import SomeFunctions2._
@@ -132,11 +133,11 @@ Option is a $monad so we can define `f` using a $forComprehension:
     } yield p
 
     f(1) must_== Some(NonEmptyList(part1, part2))
-  }
+  }.offsetIs(-4)}
 
 Which is simply syntactic sugar for:
 
-  ${
+  ${snippet{
     import SomeFunctions2._
 
     val f = (x: Int) => for {
@@ -146,11 +147,11 @@ Which is simply syntactic sugar for:
 
     val g = make(_: Int) flatMap (m => parts(m).map(p => p))
     g(1) must_== f(1)
-  }
+  }.offsetIs(-4)}
 
 You can also use the symbolic alias for $operator_bind, which makes it a lot nicer.
 
-  ${
+  ${snippet{
     import scalaz.syntax.bind._
     import scalaz.std.option._
     import SomeFunctions2._
@@ -162,13 +163,13 @@ You can also use the symbolic alias for $operator_bind, which makes it a lot nic
 
     val h = make(_: Int) >>= parts
     h (1) must_== f(1)
-  }
+  }.offsetIs(-4)}
 
 The reason this is better is that `make` and `parts` could operate under a different $monad but the client code would not need to change.
 
 In the example below, we’re operating under the `List` $monad:
 
-  ${
+  ${snippet{
     /** [[Scalaz]] */
     val words: (String) => List[String] = _.split( """\s""").toList
     val chars: String => List[Char] = _.toList
@@ -185,7 +186,7 @@ In the example below, we’re operating under the `List` $monad:
     val g = words(_: String) flatMap (w => chars(w).map(c => c))
 
     g ("Motorcycles are fun to ride!") must_== charList
-  }
+  }.offsetIs(-4)}
 
 We used the exact same $forComprehension syntax to compose these operations. This works because both `Option` and `List` are $monad
 
@@ -210,7 +211,7 @@ To use a concrete example, let’s create a $KleisliArrow from our `parts` funct
     import scalaz.Kleisli._
 
     kleisli(parts)
-  }}
+  }.offsetIs(-4)}
 
 You can read this type as being a function which knows how to get a value of type Make from the Option $monad and will ultimately return an `Option[NonEmptyList[Part]]`.
 Now you might be asking, why would we want to wrap our functions in a $KleisliArrow?
@@ -218,7 +219,7 @@ By doing so, you have access to a number of useful functions defined in the $Kle
 
 This gives us the same result as the version using the $forComprehension but with less work and with code that looks similar to simple $functionComposition.
 
-  ${
+  ${snippet{
     /** [[Scalaz]] */
 
     import scalaz.NonEmptyList
@@ -233,7 +234,7 @@ This gives us the same result as the version using the $forComprehension but wit
 
     f1(1) must_== Some(NonEmptyList(part1, part2))
     f2(1) must_== Some(NonEmptyList(part1, part2))
-  }
+  }.offsetIs(-4)}
 
 #### Not there yet
 
@@ -259,7 +260,7 @@ Let’s update the code:
       case Make(1, _) => List(part1, part2)
       case _ => Nil
     }
-  }}
+  }.offsetIs(-4)}
 
 It seems we’re in worse shape now! As before, `parts`’s input type doesn’t line up with `make`’s return type. Not only that, they aren’t even in the same $monad anymore!
 This clearly breaks our previous approach using a $KleisliArrow to perform the composition.
@@ -284,14 +285,14 @@ We can’t get a function `Int => List[Part]` because make returns an `Option[Ma
 
 We need to propagate this possibility in the composition. We can however lift parts into the `Option` $monad, effectively changing its type from `Make => List[Part]` to `Option[Make] => Option[List[Part]]:`
 
-  ${
+  ${snippet{
     import scalaz.std.option._
     import scalaz.Functor
     import SomeFunctions3._
 
     val f = Functor[Option].lift(parts) compose make
     f(1) must_== Some(List(part1, part2))
-  }
+  }.offsetIs(-4)}
 
 `f` now has the type `Int => Option[List[Part]]` and we have once again successfully composed both functions without writing any plumbing code ourselves.
 
@@ -299,11 +300,11 @@ Mark pointed out to me that $operator_lift is pretty much the same as $operator_
 So the example above can be more succintly expressed as:
 
   $bookmarks
-  ${
+  ${snippet{
     import SomeFunctions3._
 
     val g = make(_: Int).map(parts)
     g(1) must_== Some(List(part1, part2))
-    }
+    }.offsetIs(-4)}
     """
 }
