@@ -66,7 +66,7 @@ Today I’ll be exploring a few different ways in which you can compose programs
 
 The examples that follow all deal with Vehicles - more specifically makes and parts.
 
-$bookmarks ${ann_FunctionComposition2.is}
+$bookmarks
 
 So we have a function `Int => Make` and then a function : `Make => List[Part]`.
 From set theory we know this implies we must have a function : `Int => List[Part]`.
@@ -96,7 +96,7 @@ This isn’t immediately obvious however.
 While `make` does return a `Make`, it is wrapped inside an `Option` so we need to account for a possible failure.
 This leads to our first attempt:
 
-  $bookmarks ${ann_FunctionComposition3.is}
+  $bookmarks
   ${ /** [[Scalaz]] */
 
     import SomeFunctions2._
@@ -298,7 +298,7 @@ We need to propagate this possibility in the composition. We can however lift pa
 Mark pointed out to me that $operator_lift is pretty much the same as $operator_map but with the arguments reversed.
 So the example above can be more succintly expressed as:
 
-  $bookmarks ${ann_FunctionComposition4.is}
+  $bookmarks
   ${
     import SomeFunctions3._
 
