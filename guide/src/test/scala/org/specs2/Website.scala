@@ -8,8 +8,15 @@ import org.specs2.runner._
 import org.specs2.specification.core.Env
 import org.specs2.ugbase.{VersionTag, UserGuide}
 
+//import scalaz.Kleisli
+
 import scalaz.Scalaz._
 import scalaz._
+//import scalaz.std.list._
+//import scalaz.syntax.bind._
+//import scalaz.syntax.traverse._
+////import scalaz.Kleisli
+////import scalaz.Kleisli._
 
 class Website extends Specification with ugbase.Specs2Variables with ugbase.Specs2Tags { def is = s2"""
 
@@ -46,7 +53,7 @@ class Website extends Specification with ugbase.Specs2Variables with ugbase.Spec
 
   def createUserGuide = { env1: Env =>
     val guideOutputDir = outputDir / "guide" / versionDirName
-    val env = env1.copy(arguments = Arguments.split(s"all html console html.search html.toc html.nostats html.outdir ${guideOutputDir.dirPath}"))
+    val env = env1.copy(arguments = Arguments.split(s"all markdown"))
     env.fileSystem.copyFile(guideOutputDir / "css")(resource("css/specs2-user.css")) >>
     ClassRunner.report(env)(UserGuide).as(true)
   }

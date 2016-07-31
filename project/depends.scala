@@ -15,7 +15,8 @@ object depends {
   def specs2(specs2Version: String) =
     Seq("org.specs2"        %% "specs2-core",
         "org.specs2"        %% "specs2-form",
-        "org.specs2"        %% "specs2-html").map(_ % specs2Version)
+        "org.specs2"        %% "specs2-html",
+        "org.specs2"        %% "specs2-markdown").map(_ % specs2Version)
 
   def scalaz(scalazVersion: String) =
     Seq("org.scalaz"        %% "scalaz-core",
