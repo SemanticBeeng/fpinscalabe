@@ -3,7 +3,6 @@ package org.fp.studies.kleisli
 import org.fp.concepts._
 import org.fp.resources._
 import org.fp.bookmarks._
-import org.specs2.specification.Snippets
 
 //
 import org.specs2.specification.dsl.mutable.{AutoExamples, TextDsl}
@@ -666,7 +665,28 @@ package object composition {
     }
   }
 
+  /**
+    *
+    */
+  object Spec6 extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
 
+    s"Some example".p
+
+    eg {
+      /**
+        * [[bookmarks]] http://scalaz.github.io/scalaz/scalaz-2.9.1-6.0.4/doc.sxr/scalaz/example/ExampleKleisli.scala.html
+        */
+      import scalaz.std.option._
+      import scalaz.Kleisli._
+
+      val f = kleisli((n: Int) => if (n % 2 == 0) None else Some((n + 1).toString))
+      val g = kleisli((s: String) => if (List(5, 7).exists(_ == s.length)) None else Some("[" + s + "]"))
+
+      // Kleisli composition
+      (List(7, 78, 98, 99, 100, 102, 998, 999, 10000) map (f >=> g apply _)) must_===
+        List(Some("[8]"), None, None, Some("[100]"), None, None, None, Some("[1000]"), None)
+    }
+  }
 }
 
 
