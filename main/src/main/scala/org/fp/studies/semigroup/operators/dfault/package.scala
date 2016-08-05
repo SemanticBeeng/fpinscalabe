@@ -33,8 +33,9 @@ package object dfault {
 
       val f_some : Int => Option[Int] = { i => i.some }
 
-      Semigroup[Option[Int]].append(1.some, 2.some) must_== 3.some
+      Semigroup[Option[Int]].append(1.some, 2.some)     must_== 3.some
       Semigroup[Option[Int]].append(1.some, f_some(2))  must_== 3.some
+      Semigroup[Option[Int]].append(1.some, None)       must_== 1.some
     }
 
     eg {
@@ -51,8 +52,9 @@ package object dfault {
 
       val f_some : Int => Option[Int] = { i => i.some }
 
-      Semigroup[Option[Int]].combine(1.some, 2.some) must_== 3.some
+      Semigroup[Option[Int]].combine(1.some, 2.some)     must_== 3.some
       Semigroup[Option[Int]].combine(1.some, f_some(2))  must_== 3.some
+      Semigroup[Option[Int]].combine(1.some, None)       must_== 1.some
     }
   }
 }
