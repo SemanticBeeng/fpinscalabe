@@ -62,7 +62,7 @@ package object dfault {
     eg { /** in [[Scalaz]] */
 
       object SZ extends scala.AnyRef
-        with scalaz.syntax.ToSemigroupOps
+        //with scalaz.syntax.ToSemigroupOps
         with scalaz.std.AnyValInstances
         with scalaz.std.MapInstances
 
@@ -85,7 +85,7 @@ package object dfault {
 //     import scalaz.Semigroup._
 //      import scalaz.std.map._
 //      import scalaz.syntax.std.map._
-//      import scalaz.syntax.semigroup._
+      import scalaz.syntax.semigroup._
 //      import syntax.monoid._
 
       val map1 = Map(1 -> 9 , 2 -> 20)
