@@ -22,8 +22,11 @@ package object concepts {
   val companionObject = "[companion object]"
   val taggedType = "[tagged type]"
   val higherKindedType = "[higher-Kinded type]"
-
+  val forComprehension = "[for comprehension]"
   //
+  val semigroup = "[semigroup]"
+  val monoid = "[monoid]"
+
   /**
     * See Functor.md
     */
@@ -102,9 +105,5 @@ package object concepts {
   val monadicContext = "[monadic context]"
   val monadicFunction = "[monadic function]"
   val monadicBind = "[monadic bind]"
-  //
-  val monoid = "[monoid]"
-  //
-  val forComprehension = "[for comprehension]"
 }
 

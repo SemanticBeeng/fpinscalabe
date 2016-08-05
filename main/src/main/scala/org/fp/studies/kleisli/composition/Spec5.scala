@@ -3,9 +3,11 @@ package org.fp.studies.kleisli.composition
 import org.fp.bookmarks._
 import org.fp.concepts._
 import org.fp.resources._
+//
 import org.specs2.specification.Snippets
 
 /**
+  * @todo determine how to verify the $snippets
   *
   */
 object Spec5 extends org.specs2.Specification with Snippets /*with TextDsl*/ {
