@@ -61,12 +61,12 @@ package object dfault {
 
     eg { /** in [[Scalaz]] */
 
-      object SZ extends scala.AnyRef
-        //with scalaz.syntax.ToSemigroupOps
-        with scalaz.std.AnyValInstances
-        with scalaz.std.MapInstances
-
-      import SZ._
+//      object SZ extends scala.AnyRef
+//        //with scalaz.syntax.ToSemigroupOps
+//        with scalaz.std.AnyValInstances
+//        //with scalaz.std.MapInstances
+//
+//      import SZ._
 //      import scalaz.syntax.ToSemigroupOps
 //      import scalaz.std.AnyValInstances
 //      import scalaz.std.MapInstances
@@ -83,7 +83,8 @@ package object dfault {
       //import scalaz.std.AllInstances._
 //      import scalaz.Semigroup
 //     import scalaz.Semigroup._
-//      import scalaz.std.map._
+      import scalaz.std.map._
+      import scalaz.std.anyVal._
 //      import scalaz.syntax.std.map._
       import scalaz.syntax.semigroup._
 //      import syntax.monoid._
