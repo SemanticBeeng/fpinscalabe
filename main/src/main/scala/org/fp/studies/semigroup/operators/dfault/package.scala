@@ -61,36 +61,17 @@ package object dfault {
 
     eg { /** in [[Scalaz]] */
 
-    object SZ extends scala.AnyRef
-      //with scalaz.syntax.ToTypeClassOps
-      with scalaz.syntax.ToSemigroupOps
-      //with scalaz.syntax.ToDataOps
-      //with scalaz.std.AllInstances
-      with scalaz.std.AnyValInstances
-      //with scalaz.std.FunctionInstances
-    //with scalaz.std.ListInstances
-    with scalaz.std.MapInstances
-    //with scalaz.std.OptionInstances
-    //with scalaz.std.SetInstances
-    //with scalaz.std.StringInstances
-    //with scalaz.std.StreamInstances
-    //with scalaz.std.TupleInstances
-    //with scalaz.std.VectorInstances
-    //with scalaz.std.FutureInstances
-    //with scalaz.std.EitherInstances
-    //with scalaz.std.PartialFunctionInstances
-    //with scalaz.std.TypeConstraintInstances
-    //with scalaz.std.math.BigDecimalInstances
-    //with scalaz.std.math.BigInts
-    //with scalaz.std.math.OrderingInstances
-    //with scalaz.std.java.util.MapInstances
-    //with scalaz.std.java.math.BigIntegerInstances
-    //with scalaz.std.java.EnumInstances
-    //with scalaz.std.java.util.concurrent.CallableInstances
-      //with scalaz.std.AllFunctions
-      //with scalaz.syntax.std.ToAllStdOps with scalaz.IdInstances
+      object SZ extends scala.AnyRef
+        with scalaz.syntax.ToSemigroupOps
+        with scalaz.std.AnyValInstances
+        with scalaz.std.MapInstances
+
       import SZ._
-//      import scalaz._
+//      import scalaz.syntax.ToSemigroupOps
+//      import scalaz.std.AnyValInstances
+//      import scalaz.std.MapInstances
+
+      //      import scalaz._
       //import scalaz.Scalaz._
 //      import scalaz.StateFunctions
 //      import scalaz.syntax.ToTypeClassOps
@@ -100,10 +81,10 @@ package object dfault {
 //      import scalaz.syntax.std.ToAllStdOps
 //      import scalaz.IdInstances
       //import scalaz.std.AllInstances._
-      import scalaz.Semigroup
-     import scalaz.Semigroup._
+//      import scalaz.Semigroup
+//     import scalaz.Semigroup._
 //      import scalaz.std.map._
-      import scalaz.syntax.std.map._
+//      import scalaz.syntax.std.map._
 //      import scalaz.syntax.semigroup._
 //      import syntax.monoid._
 
