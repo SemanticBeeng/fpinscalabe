@@ -56,7 +56,7 @@ package object dfault {
       Semigroup[Option[Int]].combine(1.some, None)       must_== 1.some
     }
 
-    s"$keyPoint Map forms a $semigroup if the values form a $monoid (would it have sufficed to be $semigroup?)"
+    s"$keyPoint Map[A, B] forms a $semigroup if `B` forms a $monoid"
     s"$bookmarks ..."
 
     eg { /** in [[Scalaz]] */
@@ -73,16 +73,6 @@ package object dfault {
       map1 |+| map2      must_== mergedMap
       map1.⊹(map2)      must_== mergedMap
       map1.mappend(map2) must_== mergedMap
-
-      val map3 = Map(1 -> "a", 2 -> "b")
-      val map4 = Map(1 -> "xy", 3 -> "c")
-
-      val mergedMap2: Map[Int, String] = Map(1 -> "axy", 2 -> "b", 3 -> "c")
-//      import scalaz.std.anyVal._
-//      map3 |+| map4      must_== mergedMap2
-//      map3.⊹(map4)      must_== mergedMap2
-//      map3.mappend(map4) must_== mergedMap2
-      success
     }
 
     eg {
@@ -97,9 +87,31 @@ package object dfault {
       val map2 = Map(1 -> 100, 3 -> 300)
 
       val mergedMap: Map[Int, Int] = Map(1 -> 109, 2 -> 20, 3 -> 300)
-      //@todo
+
       map1 |+| map2      must_== mergedMap
       map1.combine(map2) must_== mergedMap
+    }
+
+    s"$keyPoint Map[A, B] forms a $semigroup even if `B` forms $semigroup"
+    eg {
+      /** in [[Scalaz]] */
+
+      import scalaz.std.map._
+      import scalaz.syntax.semigroup._
+
+      val map1 = Map(1 -> "a", 2 -> "b")
+      val map2 = Map(1 -> "xy", 3 -> "c")
+
+      val mergedMap2: Map[Int, String] = Map(1 -> "axy", 2 -> "b", 3 -> "c")
+
+      import scalaz.Semigroup
+      implicit object StringSemigroup extends Semigroup[String] {
+        def append(f1: String, f2: => String): String = f1 + f2
+      }
+
+      map1 |+| map2      must_== mergedMap2
+      map1.⊹(map2)      must_== mergedMap2
+      map1.mappend(map2) must_== mergedMap2
     }
   }
 }
