@@ -11,10 +11,11 @@ object Semigroup_UserGuidePage extends UserGuidePage {
 
   def is = "Semigroup functor example".title ^ s2"""
 
-  ${concepts.semigroup} ....
-  Examples for a 'custom' ${concepts.semigroup}
+## Examples for a 'custom' ${concepts.semigroup} with ${resources.Scalaz.id} and ${resources.Cats.id} in
 
-    * with ${resources.Scalaz.id} and ${resources.Cats.id} in ${custom.Spec.is} and ${dfault.Spec.is}
+ * ${link(dfault.Spec1).hide}
+ * ${link(dfault.Spec2).hide}
+ * ${link(custom.Spec).hide}
 
 }
 
