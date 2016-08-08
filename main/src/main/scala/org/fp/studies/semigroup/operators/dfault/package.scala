@@ -36,6 +36,18 @@ package object dfault {
       Semigroup[Option[Int]].append(1.some, 2.some) must_== 3.some
       Semigroup[Option[Int]].append(1.some, f_some(2)) must_== 3.some
       Semigroup[Option[Int]].append(1.some, None) must_== 1.some
+
+      import scalaz.syntax.semigroup._
+
+      1.some |+| 2.some must_== 3.some
+      1.some |+| f_some(2) must_== 3.some
+      1.some |+| None must_== 1.some
+
+      import scalaz.Semigroup
+      implicit object StringSemigroup extends Semigroup[String] {
+        def append(f1: String, f2: => String): String = f1 + f2
+      }
+      "abc".some |+| "xyz".some must_== "abxxyz".some
     }
 
     eg {
@@ -55,6 +67,18 @@ package object dfault {
       Semigroup[Option[Int]].combine(1.some, 2.some) must_== 3.some
       Semigroup[Option[Int]].combine(1.some, f_some(2)) must_== 3.some
       Semigroup[Option[Int]].combine(1.some, None) must_== 1.some
+
+      import cats.syntax.semigroup._
+
+      1.some |+| 2.some must_== 3.some
+      1.some |+| f_some(2) must_== 3.some
+      1.some |+| None must_== 1.some
+
+      import cats.Semigroup
+      implicit object StringSemigroup extends Semigroup[String] {
+        def combine(f1: String, f2: String): String = f1 + f2
+      }
+      "abc".some |+| "xyz".some must_== "abxxyz".some
     }
   }
 
