@@ -23,13 +23,14 @@ package object dfault {
       /** in [[Scalaz]] */
 
       import scalaz.Semigroup
-      import scalaz.std.option._
-      import scalaz.syntax.std.option._
 
       s"But needs to be defined in $Scalaz".p
       implicit object IntSemigroup extends Semigroup[Int] {
         def append(f1: Int, f2: => Int): Int = f1 + f2
       }
+
+      import scalaz.std.option._
+      import scalaz.syntax.std.option._
 
       val f_some: Int => Option[Int] = { i => i.some }
 
@@ -43,7 +44,11 @@ package object dfault {
       1.some |+| f_some(2) must_== 3.some
       1.some |+| None must_== 1.some
 
-      import scalaz.Semigroup
+      s"$bookmarks $ann_Semigroup".p
+
+      import scalaz.std.list._
+      List(1, 2, 3) |+| List(4, 5, 6) must_== List(1, 2, 3, 4, 5, 6)
+
       implicit object StringSemigroup extends Semigroup[String] {
         def append(f1: String, f2: => String): String = f1 + f2
       }
@@ -54,13 +59,14 @@ package object dfault {
       /** in [[Cats]] */
 
       import cats.Semigroup
-      import cats.std.option._
-      import cats.syntax.option._
 
       s"But needs to be defined in $Cats as well".p
       implicit object IntSemigroup extends Semigroup[Int] {
         def combine(f1: Int, f2: Int): Int = f1 + f2
       }
+
+      import cats.std.option._
+      import cats.syntax.option._
 
       val f_some: Int => Option[Int] = { i => i.some }
 
@@ -74,7 +80,11 @@ package object dfault {
       1.some |+| f_some(2) must_== 3.some
       1.some |+| None must_== 1.some
 
-      import cats.Semigroup
+      s"$bookmarks $ann_Semigroup".p
+
+      import cats.std.list._
+      List(1, 2, 3) |+| List(4, 5, 6) must_== List(1, 2, 3, 4, 5, 6)
+
       implicit object StringSemigroup extends Semigroup[String] {
         def combine(f1: String, f2: String): String = f1 + f2
       }
@@ -159,6 +169,7 @@ package object dfault {
       }
 
       map1 |+| map2      must_== mergedMap
+      // '⊹' is not supported
       map1.combine(map2) must_== mergedMap
     }
   }
