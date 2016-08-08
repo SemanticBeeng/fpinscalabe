@@ -78,7 +78,7 @@ package object dfault {
     eg {
       /** in [[Cats]] */
 
-      //do not import import cats.std.map._
+      //do not import cats.std.map._
       import cats.std.all._
       import cats.syntax.semigroup._
 
@@ -118,7 +118,6 @@ package object dfault {
       /** in [[Cats]] */
 
       import cats.std.map._
-      //import cats.std.all._
       import cats.syntax.semigroup._
 
       val map1 = Map(1 -> "a", 2 -> "b")
