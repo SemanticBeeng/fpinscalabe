@@ -102,16 +102,37 @@ package object dfault {
       val map1 = Map(1 -> "a", 2 -> "b")
       val map2 = Map(1 -> "xy", 3 -> "c")
 
-      val mergedMap2: Map[Int, String] = Map(1 -> "axy", 2 -> "b", 3 -> "c")
+      val mergedMap: Map[Int, String] = Map(1 -> "axy", 2 -> "b", 3 -> "c")
 
       import scalaz.Semigroup
       implicit object StringSemigroup extends Semigroup[String] {
         def append(f1: String, f2: => String): String = f1 + f2
       }
 
-      map1 |+| map2      must_== mergedMap2
-      map1.⊹(map2)      must_== mergedMap2
-      map1.mappend(map2) must_== mergedMap2
+      map1 |+| map2      must_== mergedMap
+      map1.⊹(map2)       must_== mergedMap
+      map1.mappend(map2) must_== mergedMap
+    }
+
+    eg {
+      /** in [[Cats]] */
+
+      import cats.std.map._
+      //import cats.std.all._
+      import cats.syntax.semigroup._
+
+      val map1 = Map(1 -> "a", 2 -> "b")
+      val map2 = Map(1 -> "xy", 3 -> "c")
+
+      val mergedMap: Map[Int, String] = Map(1 -> "axy", 2 -> "b", 3 -> "c")
+
+      import cats.Semigroup
+      implicit object StringSemigroup extends Semigroup[String] {
+        def combine(f1: String, f2: String): String = f1 + f2
+      }
+
+      map1 |+| map2      must_== mergedMap
+      map1.combine(map2) must_== mergedMap
     }
   }
 }
