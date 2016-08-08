@@ -66,7 +66,7 @@ package object dfault {
       import scalaz.syntax.semigroup._
 
       s"So, Map[*, Int] forms a $semigroup".p
-      val map1 = Map(1 -> 9 , 2 -> 20)
+      val map1 = Map(1 -> 9,   2 -> 20)
       val map2 = Map(1 -> 100, 3 -> 300)
 
       val mergedMap: Map[Int, Int] = Map(1 -> 109, 2 -> 20, 3 -> 300)
@@ -83,7 +83,7 @@ package object dfault {
       import cats.syntax.semigroup._
 
       s"So, Map[*, Int] forms a $semigroup".p
-      val map1 = Map(1 -> 9 , 2 -> 20)
+      val map1 = Map(1 -> 9,   2 -> 20)
       val map2 = Map(1 -> 100, 3 -> 300)
 
       val mergedMap: Map[Int, Int] = Map(1 -> 109, 2 -> 20, 3 -> 300)
@@ -99,7 +99,7 @@ package object dfault {
       import scalaz.std.map._
       import scalaz.syntax.semigroup._
 
-      val map1 = Map(1 -> "a", 2 -> "b")
+      val map1 = Map(1 -> "a",  2 -> "b")
       val map2 = Map(1 -> "xy", 3 -> "c")
 
       val mergedMap: Map[Int, String] = Map(1 -> "axy", 2 -> "b", 3 -> "c")
@@ -120,7 +120,7 @@ package object dfault {
       import cats.std.map._
       import cats.syntax.semigroup._
 
-      val map1 = Map(1 -> "a", 2 -> "b")
+      val map1 = Map(1 -> "a",  2 -> "b")
       val map2 = Map(1 -> "xy", 3 -> "c")
 
       val mergedMap: Map[Int, String] = Map(1 -> "axy", 2 -> "b", 3 -> "c")
