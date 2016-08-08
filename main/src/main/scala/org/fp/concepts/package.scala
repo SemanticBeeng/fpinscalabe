@@ -92,12 +92,23 @@ package object concepts {
   /**
     *
     */
-  val monadLaws = "[monad laws]"
   val lawIdentity = "[identity law]"
+  val lawAssociativity = "[associativity law]"
+  val lawCommutativity = "[commutativity law]"
   val lawComposition = "[composition law]"
   val lawHomomorphism = "[homomorphism law]"
   val lawInterchange = "[interchange law]"
   val lawMapping = "[mapping law]" //@todo ??
+
+  /**
+    * [[lawAssociativity]]
+    */
+  val semigroupLaws = "[semigroup laws]"
+  /**
+    * [[lawAssociativity]]
+    * [[lawCommutativity]]
+    */
+  val monadLaws = "[monad laws]"
 
   //
   val monad = "[monad]"
