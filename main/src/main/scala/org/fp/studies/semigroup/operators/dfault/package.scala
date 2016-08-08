@@ -34,15 +34,15 @@ package object dfault {
 
       val f_some: Int => Option[Int] = { i => i.some }
 
-      Semigroup[Option[Int]].append(1.some, 2.some) must_== 3.some
-      Semigroup[Option[Int]].append(1.some, f_some(2)) must_== 3.some
-      Semigroup[Option[Int]].append(1.some, None) must_== 1.some
+      Semigroup[Option[Int]].append(1.some, 2.some)     must_== 3.some
+      Semigroup[Option[Int]].append(1.some, f_some(2))  must_== 3.some
+      Semigroup[Option[Int]].append(1.some, None)       must_== 1.some
 
       import scalaz.syntax.semigroup._
 
-      1.some |+| 2.some must_== 3.some
-      1.some |+| f_some(2) must_== 3.some
-      1.some |+| None must_== 1.some
+      1.some |+| 2.some     must_== 3.some
+      1.some |+| f_some(2)  must_== 3.some
+      1.some |+| None       must_== 1.some
 
       s"$bookmarks $ann_Semigroup".p
 
@@ -70,15 +70,15 @@ package object dfault {
 
       val f_some: Int => Option[Int] = { i => i.some }
 
-      Semigroup[Option[Int]].combine(1.some, 2.some) must_== 3.some
+      Semigroup[Option[Int]].combine(1.some, 2.some)    must_== 3.some
       Semigroup[Option[Int]].combine(1.some, f_some(2)) must_== 3.some
-      Semigroup[Option[Int]].combine(1.some, None) must_== 1.some
+      Semigroup[Option[Int]].combine(1.some, None)      must_== 1.some
 
       import cats.syntax.semigroup._
 
-      1.some |+| 2.some must_== 3.some
-      1.some |+| f_some(2) must_== 3.some
-      1.some |+| None must_== 1.some
+      1.some |+| 2.some     must_== 3.some
+      1.some |+| f_some(2)  must_== 3.some
+      1.some |+| None       must_== 1.some
 
       s"$bookmarks $ann_Semigroup".p
 
@@ -109,7 +109,7 @@ package object dfault {
 
       val mergedMap: Map[Int, Int] = Map(1 -> 109, 2 -> 20, 3 -> 300)
       map1 |+| map2      must_== mergedMap
-      map1.⊹(map2)      must_== mergedMap
+      map1.⊹(map2)       must_== mergedMap
       map1.mappend(map2) must_== mergedMap
     }
 
