@@ -56,7 +56,7 @@ package object dfault {
       Semigroup[Option[Int]].combine(1.some, None)       must_== 1.some
     }
 
-    s"$keyPoint Map forms a $semigroup"
+    s"$keyPoint Map forms a $semigroup if the values form a $monoid."
     s"$bookmarks ..."
 
     eg { /** in [[Scalaz]] */
@@ -65,20 +65,32 @@ package object dfault {
       import scalaz.std.anyVal._
       import scalaz.syntax.semigroup._
 
+      s"So, maps with Int values form a $semigroup".p
       val map1 = Map(1 -> 9 , 2 -> 20)
       val map2 = Map(1 -> 100, 3 -> 300)
 
-      map1 |+| map2 must_== Map(1 -> 109, 2 -> 20, 3 -> 300)
-      map1.mappend(map2) must_== Map(1 -> 109, 2 -> 20, 3 -> 300)
+      val mergedMap: Map[Int, Int] = Map(1 -> 109, 2 -> 20, 3 -> 300)
+      map1 |+| map2      must_== mergedMap
+      map1.⊹(map2)       must_== mergedMap
+      map1.mappend(map2) must_== mergedMap
     }
 
     eg {
       /** in [[Cats]] */
 
-      import cats.Semigroup
-      import cats.std.option._
-      import cats.syntax.option._
+      import cats.std.map._
+      //import cats.Anyva
+      import cats.syntax.semigroup._
 
+      s"So, maps with Int values form a $semigroup".p
+      val map1 = Map(1 -> 9 , 2 -> 20)
+      val map2 = Map(1 -> 100, 3 -> 300)
+
+      val mergedMap: Map[Int, Int] = Map(1 -> 109, 2 -> 20, 3 -> 300)
+      //@todo
+//      map1 |+| map2      must_== mergedMap
+//      map1.⊹(map2)       must_== mergedMap
+//      map1.mappend(map2) must_== mergedMap
       success
     }
   }

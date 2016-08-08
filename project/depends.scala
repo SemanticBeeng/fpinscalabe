@@ -54,7 +54,7 @@ object depends {
   def shapeless(scalaVersion: String) =
     Seq("com.chuusai" %% "shapeless" % "2.3.1")
 
-  def cats = Seq("org.typelevel" %% "cats" % "0.6.0-M1")
+  def cats = Seq("org.typelevel" %% "cats" % "0.6.1")
 
 //  lazy val pegdown = Seq("org.pegdown" % "pegdown" % "1.2.1")
 
