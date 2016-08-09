@@ -9,7 +9,7 @@ package object bookmarks {
   /**
     * Bookmarks for [[learningScalaz]]
     */
-  val ann_Semigroup! = Annotation(learningScalaz, "https://hyp.is/HcucFF2KEeajCHNqM5-_WA/eed3si9n.com/herding-cats/Semigroup.html")
+  val ann_Semigroup = Annotation(learningScalaz, "https://hyp.is/HcucFF2KEeajCHNqM5-_WA/eed3si9n.com/herding-cats/Semigroup.html")
   val ann_newType = Annotation(learningScalaz, "https://hyp.is/qEArpi17EeaSGQvCBfOHEw/archive.is/eGwcT")
   val ann_ApplicativeMoreThanFunctor = Annotation(learningScalaz, "https://hyp.is/Z4AHECohEea_Rd-tB4xR5A/archive.is/KjNlH")
   val ann_ApplicativeAsTypeConstructor = Annotation(learningScalaz, "https://hyp.is/KLsYjCokEeaG1D9bbI4Omg/archive.is/KjNlH")

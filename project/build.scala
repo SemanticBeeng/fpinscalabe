@@ -57,6 +57,7 @@ object build extends Build {
             //depends.scalaParser(scalaVersion.value) ++
             //depends.scalaXML(scalaVersion.value) ++
               depends.paradise(scalaVersion.value) ++
+              //depends.scalacheck(scalaVersion.value) ++
               depends.specs2(specs2Version.value)
         //scalacOptions in codata := Seq("-feature", "-language:_"),
         // packagedArtifacts := Map.empty

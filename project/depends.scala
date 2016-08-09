@@ -16,12 +16,16 @@ object depends {
     Seq("org.specs2"        %% "specs2-core",
         "org.specs2"        %% "specs2-form",
         "org.specs2"        %% "specs2-html",
-        "org.specs2"        %% "specs2-markdown").map(_ % specs2Version)
+        "org.specs2"        %% "specs2-markdown",
+        "org.specs2"        %% "specs2-scalacheck").map(_ % specs2Version) //++
+    //Seq("org.specs2"        %% "specs2-scalacheck").map(_ % specs2Version % "test")
 
   def scalaz(scalazVersion: String) =
-    Seq("org.scalaz"        %% "scalaz-core",
-      "org.scalaz"        %% "scalaz-effect",
-      "org.scalaz"        %% "scalaz-concurrent").map(_ % scalazVersion)
+    Seq("org.scalaz"      %% "scalaz-core",
+        "org.scalaz"      %% "scalaz-effect",
+        "org.scalaz"      %% "scalaz-concurrent",
+        "org.scalaz"      %% "scalaz-scalacheck-binding").map(_ % scalazVersion) //++
+    //Seq("org.scalaz"      %% "scalaz-scalacheck-binding").map(_ % scalazVersion % "test")
 
   //  def scalaParser(scalaVersion: String) =
 //    PartialFunction.condOpt(CrossVersion.partialVersion(scalaVersion)){
