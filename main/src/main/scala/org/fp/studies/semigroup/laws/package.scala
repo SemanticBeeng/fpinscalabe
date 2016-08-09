@@ -28,7 +28,7 @@ package object laws {
 
       import org.scalacheck.{Gen, Arbitrary}
       implicit val arbMyType: Arbitrary[Int] = Arbitrary(Gen.choose(1, 20))
-      prop { i : Int => semigroup.laws[Int] }
+      prop { i : Int => semigroup.laws[Int] }.collectArg(i => "tested with " + i)
     }
 
     eg {
@@ -42,7 +42,7 @@ package object laws {
       implicit val arbMyType: Arbitrary[Int] = Arbitrary(Gen.choose(1, 20))
 
       val rs1 = GroupLaws[Int].semigroup(Semigroup[Int])
-      prop { i : Int => rs1.all.check; success }
+      prop { i : Int => rs1.all.check; success }.collectArg(i => "tested with " + i)
     }
   }
 }
