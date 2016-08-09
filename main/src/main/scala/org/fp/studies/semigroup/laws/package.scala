@@ -24,16 +24,10 @@ package object laws {
     eg {
       /** in [[Scalaz]] */
 
-      import scalaz.Semigroup
       import scalaz.std.anyVal._
-      import scalaz.syntax.semigroup._
-
-//      implicit object IntSemigroup extends Semigroup[Int] {
-//        def append(f1: Int, f2: => Int): Int = f1 + f2
-//      }
 
       import org.scalacheck.{Gen, Arbitrary}
-      implicit val arbMyType: Arbitrary[Int] = Arbitrary(Gen.oneOf(1, 2, 3, 4, 5))
+      implicit val arbMyType: Arbitrary[Int] = Arbitrary(Gen.choose(1, 20))
       prop { i : Int => semigroup.laws[Int] }
     }
 
@@ -44,10 +38,11 @@ package object laws {
       import cats.std.all._
       import cats.kernel.laws.GroupLaws
 
-      val rs1 = GroupLaws[Int].semigroup(Semigroup[Int])
+      import org.scalacheck.{Gen, Arbitrary}
+      implicit val arbMyType: Arbitrary[Int] = Arbitrary(Gen.choose(1, 20))
 
-      rs1.all.check
-      success //@todo need to do better?
+      val rs1 = GroupLaws[Int].semigroup(Semigroup[Int])
+      prop { i : Int => rs1.all.check; success }
     }
   }
 }
