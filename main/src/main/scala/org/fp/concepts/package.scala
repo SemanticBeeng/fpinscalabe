@@ -110,6 +110,8 @@ package object concepts {
     */
   val monadLaws = "[monad laws]"
 
+  val functorLaws = "[functor laws]"
+
   //
   val monad = "[monad]"
   val monadicStructure = "[monadic structure]"

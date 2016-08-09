@@ -57,6 +57,11 @@ package object resources {
   val Scalaz = Resource[framework]("Scalaz", "https://github.com/scalaz/scalaz")
   val Cats = Resource[framework]("Cats", "https://github.com/typelevel/cats")
   val Simulacrum = Resource[framework]("Simulacrum", "https://github.com/mpilquist/simulacrum")
+  val ScalaCheck = Resource[framework]("ScalaCheck", "https://www.scalacheck.org/")
+  val Specs2 = Resource[framework]("Specs2", "https://etorreborre.github.io/specs2/")
+  val Discipline = Resource[framework]("Discipline", "https://github.com/typelevel/discipline")
+  val KindProjector = Resource[framework]("non/kind-projector", "https://github.com/non/kind-projector")
+
 
   val learningScalaz = Resource[blog]("Learning Scalaz", "http://eed3si9n.com/learning-scalaz/")
   val learningScalazFromLearningScalaz = Resource[blog]("Learning Scalaz from Learning Scalaz", "https://earldouglas.com/notes/learning-scalaz.html")
