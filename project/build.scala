@@ -123,7 +123,8 @@ object build extends Build {
     scalacOptions in Test ++= Seq("-Yrangepos"),
     scalacOptions in (Compile, doc) := Seq("-feature", "-language:_"),
     scalacOptions in (Compile, console) := Seq("-Yrangepos", "-feature", "-language:_"),
-    scalacOptions in (Test, console) := Seq("-Yrangepos", "-feature", "-language:_")
+    scalacOptions in (Test, console) := Seq("-Yrangepos", "-feature", "-language:_"),
+    addCompilerPlugin(depends.kindp("2.11")) //@todo scalaVersion.value
   )
 
   lazy val testingSettings: Seq[Settings] = Seq(

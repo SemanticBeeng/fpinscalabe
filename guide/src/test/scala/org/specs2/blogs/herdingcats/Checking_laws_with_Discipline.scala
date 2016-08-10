@@ -8,9 +8,7 @@ import scala.language.higherKinds
 
 //
 import org.specs2.specification.dsl.mutable.TextDsl
-//import org.specs2.specification.dsl.mutable.{TextDsl, AutoExamples}
 import org.specs2.ugbase.UserGuidePage
-import org.specs2.specification.Snippets
 
 /**
   *
@@ -20,11 +18,11 @@ import org.specs2.specification.Snippets
 /**
   *
   */
-class Checking_laws_with_Discipline extends UserGuidePage with TextDsl {
+object Checking_laws_with_Discipline extends UserGuidePage /*with TextDsl*/ {
 
   override def is = s"Checking laws with Discipline".title ^ s2"""
 
-The compiler can’t check for the laws, but $Cats ships with a FunctorLaws trait that describes this in code
+The compiler can’t check for the laws, but ${Cats.is} ships with a FunctorLaws trait that describes this in code
 https://github.com/typelevel/cats/blob/6785e6f856dc08fa31081013be27345aa5fe6d8e/laws/src/main/scala/cats/laws/FunctorLaws.scala:
 
 ${snippet{
@@ -54,13 +52,12 @@ ${snippet{
 
 ## Checking laws from the REPL
                                                                 |
-This is based on a library called $Discipline, which is a wrapper around $ScalaCheck.
-We can run these tests from the REPL with $ScalaCheck.
+This is based on a library called ${Discipline.is}, which is a wrapper around ${ScalaCheck.is}.
+We can run these tests from the REPL with ${ScalaCheck.is}.
 
 ${snippet{
     import cats._, cats.std.all._
 
-    import simulacrum._
     import cats.laws.discipline.FunctorTests
 
     val rs = FunctorTests[Either[Int, ?]].functor[Int, Int, Int]
@@ -76,9 +73,9 @@ ${snippet{
 
 rs.all returns `org.scalacheck.Properties`, which implements check method.
 
-## Checking laws with $Discipline + $Specs2
+## Checking laws with ${Discipline.is} + ${Specs2.is}
                                                                 |
-You can also bake your own cake pattern into a test framework of choice. Here’s for $Specs2:
+You can also bake your own cake pattern into a test framework of choice. Here’s for ${Specs2.is}:
 
 
 ${snippet{
@@ -91,7 +88,7 @@ ${snippet{
     trait CatsSpec extends Specification with Discipline with AllInstances with AllSyntax
 }}
 
-$Cats’ source include one for ScalaTest.
+${Cats.is}’ source include one for ScalaTest.
 The spec to check the $functorLaws for `Either[Int, Int]` looks like this:
 
 ${snippet{
@@ -110,7 +107,7 @@ ${snippet{
     }
 }}
 
-The `Either[Int, ?]` is using $KindProjector. Running the test from sbt displays the following output:
+The `Either[Int, ?]` is using ${KindProjector.is}. Running the test from sbt displays the following output:
 
 @todo how to show execution info?
 ```
@@ -160,7 +157,7 @@ ${snippet{
       }
     }
 
-    s"Here’s how we can use this:".p
+    //s"Here’s how we can use this:".p
 
     import cats._, cats.syntax.functor._
 //    import cats._
@@ -173,6 +170,16 @@ ${snippet{
     import cats._
     import cats.laws.discipline.{ FunctorTests }
     import org.scalacheck.{ Arbitrary, Gen }
+
+    //@todo duplicate
+    import cats.laws.discipline.FunctorTests
+    import org.specs2.Specification
+    import org.typelevel.discipline.specs2.Discipline
+    import cats.std.AllInstances
+    import cats.syntax.AllSyntax
+
+    trait CatsSpec extends Specification with Discipline with AllInstances with AllSyntax
+    // duplicate ends
 
     class COptionSpec extends CatsSpec {
       implicit def coptionArbiterary[A](implicit arbA: Arbitrary[A]): Arbitrary[COption[A]] =

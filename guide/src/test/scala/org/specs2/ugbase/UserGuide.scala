@@ -1,6 +1,7 @@
 package org.specs2.ugbase
 
 import org.specs2.arrow.Arrow_UserGuidePage
+import org.specs2.blogs.herdingcats.Checking_laws_with_Discipline
 import org.specs2.guide.applicative.Applicative_UserGuidePage
 import org.specs2.guide.apply.Apply_UserGuidePage
 import org.specs2.guide.functor._
@@ -16,49 +17,51 @@ object UserGuide extends UserGuidePage {
   //implicit val snippetParams = SnippetParams(evalCode = true)
   def is = "Functional Programming in Scala - by Example".title ^ s2"""
 
-    $specs2 is a library for writing executable software specifications in Scala.
-    In this user guide, you will find:
+$specs2 is a library for writing executable software specifications in Scala.
+In this user guide, you will find:
 
-    ## Typeclass examples
+## Typeclass examples
 
-    ${link(TypeclassDefinition_UserGuidePage).hide}
-    ${link(TypeTagging_UserGuidePage).hide}
+ * ${link(TypeclassDefinition_UserGuidePage)}
+ * ${link(TypeTagging_UserGuidePage)}
 
-    ## Functor examples
+## Functor examples
 
-    ${link(FunctorsMapping_UserGuidePage).hide}
-    ${link(FunctorFunctionLifting_UserGuidePage).hide}
-    ${link(FunctorFunctionComposition_UserGuidePage).hide}
-    ${link(FunctorMiscOperators_UserGuidePage).hide}
-    ${link(FunctorsLaws_UserGuidePage).hide}
+ * ${link(FunctorsMapping_UserGuidePage)}
+ * ${link(FunctorFunctionLifting_UserGuidePage)}
+ * ${link(FunctorFunctionComposition_UserGuidePage)}
+ * ${link(FunctorMiscOperators_UserGuidePage)}
+ * ${link(FunctorsLaws_UserGuidePage)}
 
-    ## Apply examples
+## Apply examples
 
-    ${link(Apply_UserGuidePage).hide}
+ * ${link(Apply_UserGuidePage)}
 
-    ## Applicative examples
+## Applicative examples
 
-    ${link(Applicative_UserGuidePage).hide}
+ * ${link(Applicative_UserGuidePage)}
 
-    ## Arrow examples
+## Arrow examples
 
-    ${link(Arrow_UserGuidePage).hide}
+ * ${link(Arrow_UserGuidePage)}
 
-    ## Monoid examples
+## Monoid examples
 
-    ${link(Monoid_UserGuidePage).hide}
+ * ${link(Monoid_UserGuidePage)}
 
-    ## Traverse examples
+## Traverse examples
 
-    ${link(Traverse_UserGuidePage).hide}
+ * ${link(Traverse_UserGuidePage)}
 
-    ## Kleisli examples
+## Kleisli examples
 
-    ${link(Kleisli_UserGuidePage).hide}
+ * ${link(Kleisli_UserGuidePage)}
 
-    ## Monad examples
-    ## link(Monad_UserGuidePage).hide
+## Monad examples
+ * tbd
 
-    """
+## Examples for use of Specs
+ * ${link(Checking_laws_with_Discipline)}
+"""
 
 }
