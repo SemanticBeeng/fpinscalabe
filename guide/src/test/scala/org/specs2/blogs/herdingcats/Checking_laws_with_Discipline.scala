@@ -18,7 +18,7 @@ import org.specs2.ugbase.UserGuidePage
 /**
   *
   */
-object Checking_laws_with_Discipline extends UserGuidePage /*with TextDsl*/ {
+object Checking_laws_with_Discipline extends UserGuidePage  {
 
   override def is = s"Checking laws with Discipline".title ^ s2"""
 
@@ -71,10 +71,10 @@ ${snippet{
   |+ functor.invariant identity: OK, passed 100 tests.
 ```
 
-rs.all returns `org.scalacheck.Properties`, which implements check method.
+`rs.all` returns `org.scalacheck.Properties`, which implements check method.
 
 ## Checking laws with ${Discipline.md} + ${Specs2.md}
-                                                                |
+
 You can also bake your own cake pattern into a test framework of choice. Here’s for ${Specs2.md}:
 
 
@@ -138,7 +138,7 @@ The `Either[Int, ?]` is using ${KindProjector.md}. Running the test from sbt dis
 
 Let’s try breaking the law.
 
-${snippet{
+${snippet {
     /**/
     import cats._
 
@@ -150,6 +150,7 @@ ${snippet{
       implicit def coptionEq[A]: Eq[COption[A]] = new Eq[COption[A]] {
         def eqv(a1: COption[A], a2: COption[A]): Boolean = a1 == a2
       }
+
       implicit val coptionFunctor = new Functor[COption] {
         def map[A, B](fa: COption[A])(f: A => B): COption[B] =
           fa match {
@@ -163,15 +164,52 @@ ${snippet{
 
     import cats._, cats.syntax.functor._
 
-    (CSome(0, "ho"): COption[String]) map {identity} must_== CSome(1,"ho")
+    (CSome(0, "ho"): COption[String]) map {
+      identity
+    } must_== CSome(1, "ho")
+}}
 
-    s"This breaks the first law because the result of the identity function is not equal to the input. " +
-      s"To catch this we need to supply an “arbitrary” COption[A] implicitly:"
+This breaks the first law because the result of the identity function is not equal to the input.
+To catch this we need to supply an “arbitrary” COption[A] implicitly:
+
+${snippet{
+// 8<--
+    /**/
+    import cats._
+
+    sealed trait COption[+A]
+    case class CSome[A](counter: Int, a: A) extends COption[A]
+    case object CNone extends COption[Nothing]
+
+    object COption {
+      implicit def coptionEq[A]: Eq[COption[A]] = new Eq[COption[A]] {
+        def eqv(a1: COption[A], a2: COption[A]): Boolean = a1 == a2
+      }
+
+      implicit val coptionFunctor = new Functor[COption] {
+        def map[A, B](fa: COption[A])(f: A => B): COption[B] =
+          fa match {
+            case CNone => CNone
+            case CSome(c, a) => CSome(c + 1, f(a))
+          }
+      }
+    }
+// 8<--
+
+    //s"Here’s how we can use this:".p
+
+    import cats._, cats.syntax.functor._
+
+    (CSome(0, "ho"): COption[String]) map {
+      identity
+    } must_== CSome(1, "ho")
+
+
     import cats._
     import cats.laws.discipline.{ FunctorTests }
     import org.scalacheck.{ Arbitrary, Gen }
 
-    //@todo duplicate
+    // 8<--
     import cats.laws.discipline.FunctorTests
     import org.specs2.Specification
     import org.typelevel.discipline.specs2.Discipline
@@ -179,7 +217,7 @@ ${snippet{
     import cats.syntax.AllSyntax
 
     trait CatsSpec extends Specification with Discipline with AllInstances with AllSyntax
-    // duplicate ends
+// 8<--
 
     class COptionSpec extends CatsSpec {
       implicit def coptionArbiterary[A](implicit arbA: Arbitrary[A]): Arbitrary[COption[A]] =
