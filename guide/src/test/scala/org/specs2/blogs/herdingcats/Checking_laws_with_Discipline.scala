@@ -93,13 +93,17 @@ The spec to check the $functorLaws for `Either[Int, Int]` looks like this:
 
 ${snippet{
     /**/
-    import cats.laws.discipline.FunctorTests
+    // 8<--
     import org.specs2.Specification
     import org.typelevel.discipline.specs2.Discipline
     import cats.std.AllInstances
     import cats.syntax.AllSyntax
 
     trait CatsSpec extends Specification with Discipline with AllInstances with AllSyntax
+    // 8<--
+
+    import cats.laws.discipline.FunctorTests
+
     class EitherSpec extends CatsSpec { def is = s2"""
       Either[Int, ?] forms a functor                           $e1
       """
@@ -160,7 +164,7 @@ ${snippet {
       }
     }
 
-    //s"Here’s how we can use this:".p
+    //s"Here’s how we can use this:".p @todo: how to use TextDsl?
 
     import cats._, cats.syntax.functor._
 
@@ -173,7 +177,7 @@ This breaks the first law because the result of the identity function is not equ
 To catch this we need to supply an “arbitrary” COption[A] implicitly:
 
 ${snippet{
-// 8<--
+// 8<-- start
     /**/
     import cats._
 
@@ -194,7 +198,7 @@ ${snippet{
           }
       }
     }
-// 8<--
+// 8<-- end
 
     //s"Here’s how we can use this:".p
 
@@ -209,7 +213,7 @@ ${snippet{
     import cats.laws.discipline.{ FunctorTests }
     import org.scalacheck.{ Arbitrary, Gen }
 
-    // 8<--
+    // 8<-- start
     import cats.laws.discipline.FunctorTests
     import org.specs2.Specification
     import org.typelevel.discipline.specs2.Discipline
@@ -217,7 +221,7 @@ ${snippet{
     import cats.syntax.AllSyntax
 
     trait CatsSpec extends Specification with Discipline with AllInstances with AllSyntax
-// 8<--
+    // 8<-- end
 
     class COptionSpec extends CatsSpec {
       implicit def coptionArbiterary[A](implicit arbA: Arbitrary[A]): Arbitrary[COption[A]] =
