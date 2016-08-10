@@ -22,7 +22,7 @@ object Checking_laws_with_Discipline extends UserGuidePage /*with TextDsl*/ {
 
   override def is = s"Checking laws with Discipline".title ^ s2"""
 
-The compiler can’t check for the laws, but ${Cats.is} ships with a FunctorLaws trait that describes this in code
+The compiler can’t check for the laws, but ${Cats.md} ships with a FunctorLaws trait that describes this in code
 https://github.com/typelevel/cats/blob/6785e6f856dc08fa31081013be27345aa5fe6d8e/laws/src/main/scala/cats/laws/FunctorLaws.scala:
 
 ${snippet{
@@ -52,8 +52,8 @@ ${snippet{
 
 ## Checking laws from the REPL
                                                                 |
-This is based on a library called ${Discipline.is}, which is a wrapper around ${ScalaCheck.is}.
-We can run these tests from the REPL with ${ScalaCheck.is}.
+This is based on a library called ${Discipline.md}, which is a wrapper around ${ScalaCheck.md}.
+We can run these tests from the REPL with ${ScalaCheck.md}.
 
 ${snippet{
     import cats._, cats.std.all._
@@ -73,9 +73,9 @@ ${snippet{
 
 rs.all returns `org.scalacheck.Properties`, which implements check method.
 
-## Checking laws with ${Discipline.is} + ${Specs2.is}
+## Checking laws with ${Discipline.md} + ${Specs2.md}
                                                                 |
-You can also bake your own cake pattern into a test framework of choice. Here’s for ${Specs2.is}:
+You can also bake your own cake pattern into a test framework of choice. Here’s for ${Specs2.md}:
 
 
 ${snippet{
@@ -88,7 +88,7 @@ ${snippet{
     trait CatsSpec extends Specification with Discipline with AllInstances with AllSyntax
 }}
 
-${Cats.is}’ source include one for ScalaTest.
+${Cats.md}’ source include one for ScalaTest.
 The spec to check the $functorLaws for `Either[Int, Int]` looks like this:
 
 ${snippet{
@@ -107,7 +107,7 @@ ${snippet{
     }
 }}
 
-The `Either[Int, ?]` is using ${KindProjector.is}. Running the test from sbt displays the following output:
+The `Either[Int, ?]` is using ${KindProjector.md}. Running the test from sbt displays the following output:
 
 @todo how to show execution info?
 ```
@@ -160,8 +160,6 @@ ${snippet{
     //s"Here’s how we can use this:".p
 
     import cats._, cats.syntax.functor._
-//    import cats._
-    import cats.syntax.functor._
 
     (CSome(0, "ho"): COption[String]) map {identity} must_== CSome(1,"ho")
 

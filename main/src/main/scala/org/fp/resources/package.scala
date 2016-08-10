@@ -2,6 +2,8 @@ package org.fp
 
 import org.fp.resources.intf.ResourceType.{book, blog, framework, ResourceTypeVal}
 
+import scala.reflect.ClassTag
+
 /**
   *
   */
@@ -35,19 +37,23 @@ package object resources {
     }
   }
 
-  case class Resource[R <: ResourceTypeVal](id: String, /*kind: R, */url: String) extends intf.Resource[R] {
+  case class Resource[R <: ResourceTypeVal](id: String, url: String)(implicit m: ClassTag[R]) extends intf.Resource[R] {
 
     override def toString : String = {
-      "resource(" + url +")"
+      //@todo s"[${m.runtimeClass.getSimpleName} $id]"
+      s"(resource)$id"
     }
     def is = toString
+    def md = s"[$id]($url)"
 
   }
-  case class Annotation[R <: ResourceTypeVal](resource: Resource[R], reference: String) extends intf.Annotation[R] {
+  case class Annotation[R <: ResourceTypeVal](resource: Resource[R], reference: String)(implicit m: ClassTag[R]) extends intf.Annotation[R] {
     override def toString : String = {
-      "annotation(" + reference +")"
+      //@todo s"[${m.runtimeClass.getSimpleName} annotation ${resource.is}]"
+      s"annotation of ${resource.is}"
     }
     def is = toString
+    def md = s"`$is`"
   }
 
   /**
