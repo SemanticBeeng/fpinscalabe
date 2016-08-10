@@ -26,7 +26,7 @@ The compiler can’t check for the laws, but ${Cats.md} ships with a FunctorLaws
 https://github.com/typelevel/cats/blob/6785e6f856dc08fa31081013be27345aa5fe6d8e/laws/src/main/scala/cats/laws/FunctorLaws.scala:
 
 ${snippet{
-
+    /**/
     import cats.Functor
     import cats.syntax.functor._
     import cats.laws.{InvariantLaws, IsEq, IsEqArrow}
@@ -56,8 +56,8 @@ This is based on a library called ${Discipline.md}, which is a wrapper around ${
 We can run these tests from the REPL with ${ScalaCheck.md}.
 
 ${snippet{
-    import cats._, cats.std.all._
-
+    /**/
+    import cats.std.all._
     import cats.laws.discipline.FunctorTests
 
     val rs = FunctorTests[Either[Int, ?]].functor[Int, Int, Int]
@@ -79,7 +79,7 @@ You can also bake your own cake pattern into a test framework of choice. Here’
 
 
 ${snippet{
-
+    /**/
     import org.specs2.Specification
     import org.typelevel.discipline.specs2.Discipline
     import cats.std.AllInstances
@@ -92,6 +92,7 @@ ${Cats.md}’ source include one for ScalaTest.
 The spec to check the $functorLaws for `Either[Int, Int]` looks like this:
 
 ${snippet{
+    /**/
     import cats.laws.discipline.FunctorTests
     import org.specs2.Specification
     import org.typelevel.discipline.specs2.Discipline
@@ -138,6 +139,7 @@ The `Either[Int, ?]` is using ${KindProjector.md}. Running the test from sbt dis
 Let’s try breaking the law.
 
 ${snippet{
+    /**/
     import cats._
 
     sealed trait COption[+A]
