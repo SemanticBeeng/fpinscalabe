@@ -7,7 +7,6 @@ import org.fp.bookmarks._
 import scala.language.higherKinds
 
 //
-import org.specs2.specification.dsl.mutable.TextDsl
 import org.specs2.ugbase.UserGuidePage
 import org.scalacheck.Properties
 import org.specs2.{ScalaCheck, Specification}
@@ -55,7 +54,7 @@ ${snippet{
 }}
 
 ## Checking laws from the REPL
-                                                                |
+
 This is based on a library called ${Discipline.md}, which is a wrapper around ${ScalaCheck.md}.
 We can run these tests from the REPL with ${ScalaCheck.md}.
 
@@ -116,8 +115,9 @@ ${snippet{
 
       def e1 = checkAll("Either[Int, Int]", FunctorTests[Either[Int, ?]].functor[Int, Int, Int])
     }
-
-run(new EitherSpec)
+    // 8<--
+    run(new EitherSpec)
+    // 8<--
 }.eval}
 
 The `Either[Int, ?]` is using ${KindProjector.md}. Running the test from sbt displays the following output:
@@ -172,15 +172,14 @@ ${snippet {
       }
     }
 
-//t Here's how we can use this
-
-    import cats._, cats.syntax.functor._
+//code snippet will break here <$--$> Here's how we can use this
+    import cats.syntax.functor._
 
     check((CSome(0, "ho"): COption[String]).map(identity) must_== CSome(1, "ho"))
 }.eval}
 
 This breaks the first law because the result of the identity function is not equal to the input.
-To catch this we need to supply an â€œarbitraryâ€ COption[A] implicitly:
+To catch this we need to supply an "arbitrary" `COption[A]` implicitly:
 
 ${snippet{
 // 8<-- start
@@ -206,17 +205,14 @@ ${snippet{
     }
 // 8<-- end
 
-//t Here's how we can use this
+// <$--$> Here's how we can use this
 
-    import cats._, cats.syntax.functor._
+    import cats.syntax.functor._
 
     (CSome(0, "ho"): COption[String]) map {
       identity
     } must_== CSome(1, "ho")
 
-
-    import cats._
-    import cats.laws.discipline.{ FunctorTests }
     import org.scalacheck.{ Arbitrary, Gen }
 
     // 8<-- start
@@ -287,12 +283,6 @@ The tests failed as expected.
     SnippetParams(asCode = markdownCode(multilineQuotes = inlineText))
   }
 
-  def inlineText = (code: String) =>
-    s"""|```
-        |${code.split("\n").map(l => if (l.contains("//t")) "\n```\n"+l.replace("//t", "")+"\n```\n" else l).mkString("\n") }
-        |```
-     """.stripMargin
-
   def check(properties: Properties): Result = {
     properties.properties.foldLeft(Success(): Result) { case (result, (name, p)) =>
       val r = AsResult(p :| name)
@@ -308,4 +298,24 @@ The tests failed as expected.
 
   def run(specification: Specification) =
     "\n" + org.specs2.runner.TextRunner.run(specification).output
+
+  /**
+    * A big hack to break the markdown code snippet at the poin(s0 when text lines occur
+    */
+  def inlineText = (code: String) => {
+    val sep = "<$--$>"
+    val markdownCodeMarker = "\n```\n"
+
+    s"""|```
+        |${code.split("\n").map(l =>
+            if (l.contains(sep))
+              markdownCodeMarker +
+                  l.substring(l.indexOf(sep) + sep.length) +
+              markdownCodeMarker
+            else
+              l).mkString("\n") }
+        |```
+     """.stripMargin
+  }
+
 }
