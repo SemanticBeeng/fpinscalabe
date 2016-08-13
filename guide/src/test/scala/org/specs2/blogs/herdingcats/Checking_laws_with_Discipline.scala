@@ -232,17 +232,18 @@ The tests failed as expected.
     */
   def inlineText = (code: String) => {
     val sep = "<$--$>"
-    val markdownCodeMarker = "\n```\n"
+    val mardownSep = "|```"
+    val markdownBlockDelim = s"\n$mardownSep\n"
 
-    s"""|```
+    s"""$mardownSep
         |${code.split("\n").map(l =>
             if (l.contains(sep))
-              markdownCodeMarker +
+              markdownBlockDelim +
                   l.substring(l.indexOf(sep) + sep.length) +
-              markdownCodeMarker
+              markdownBlockDelim
             else
               l).mkString("\n") }
-        |```
+        $mardownSep
      """.stripMargin
   }
 

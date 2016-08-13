@@ -25,7 +25,7 @@ trait CheckedSpec { self : ScalaCheck =>
     AsResult(m)
 
   def run(specification: Specification) =
-    "Output:\n" + org.specs2.runner.TextRunner.run(specification).output
+    "Verification output:\n" + org.specs2.runner.TextRunner.run(specification).output
 
 }
 
