@@ -12,6 +12,11 @@ object versions {
   val scalaMacrosParadise = "2.1.0"
   val kindProjector = "0.8.0"
   val simulacrum = "0.7.0"
+  /**
+    * from @etorreborre: "The problem comes from the fact that I think you are checking laws with scalaz-scalacheck-bindings
+    * which depends on scalacheck 1.12.5 only.
+    * One alternative would be to use cats only and the typelevel discipline project to check laws."
+    */
   val specs2 = "3.8.4-scalacheck-1.12.5"
   val scalaCheck = "1.12.5" //@todo 1.13.1"
   val discipline = "0.4"

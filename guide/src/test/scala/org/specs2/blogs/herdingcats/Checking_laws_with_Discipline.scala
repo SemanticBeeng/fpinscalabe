@@ -282,8 +282,10 @@ Here's the output:
 The tests failed as expected.
 
 """
-  implicit override def snippetParams[T]: SnippetParams[T] =
+  implicit override def snippetParams[T]: SnippetParams[T] = {
+    super.snippetParams
     SnippetParams(asCode = markdownCode(multilineQuotes = inlineText))
+  }
 
   def inlineText = (code: String) =>
     s"""|```
