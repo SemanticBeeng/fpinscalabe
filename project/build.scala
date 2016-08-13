@@ -56,7 +56,10 @@ object build extends Build {
               depends.cats ++
             //depends.scalaParser(scalaVersion.value) ++
             //depends.scalaXML(scalaVersion.value) ++
+              depends.reflect(scalaVersion.value) ++
               depends.paradise(scalaVersion.value) ++
+              depends.discipline(scalaVersion.value) ++
+              depends.scalacheck(scalaVersion.value) ++
               depends.specs2(specs2Version.value)
         //scalacOptions in codata := Seq("-feature", "-language:_"),
         // packagedArtifacts := Map.empty
@@ -80,11 +83,10 @@ object build extends Build {
     */
   lazy val commonSettings: Seq[Settings] = Seq(
     organization := "SemanticBeeng",
-    specs2Version := "3.7",
     //shellPrompt,
-    scalaVersion := "2.11.8",
-    specs2Version := "3.7",
-    scalazVersion := "7.2.4",
+    scalaVersion := versions.scala,
+    scalazVersion := versions.scalaz,
+    specs2Version := versions.specs2,
     crossScalaVersions := Seq(scalaVersion.value/*, "2.12.0-M4", "2.10.6"*/))
 
   lazy val specs2Version = settingKey[String]("defines the current specs2 version")

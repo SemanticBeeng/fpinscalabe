@@ -9,6 +9,11 @@ import scala.language.higherKinds
 //
 import org.specs2.specification.dsl.mutable.TextDsl
 import org.specs2.ugbase.UserGuidePage
+import org.scalacheck.Properties
+import org.specs2.{ScalaCheck, Specification}
+import org.specs2.execute._
+import org.specs2.matcher.MatchResult
+import Snippet._
 
 /**
   *
@@ -18,11 +23,10 @@ import org.specs2.ugbase.UserGuidePage
 /**
   *
   */
-object Checking_laws_with_Discipline extends UserGuidePage  {
+object Checking_laws_with_Discipline extends UserGuidePage with ScalaCheck {
+  def is = s"Checking laws with Discipline".title ^ s2"""
 
-  override def is = s"Checking laws with Discipline".title ^ s2"""
-
-The compiler can’t check for the laws, but ${Cats.md} ships with a FunctorLaws trait that describes this in code
+The compiler can't check for the laws, but ${Cats.md} ships with a FunctorLaws trait that describes this in code
 https://github.com/typelevel/cats/blob/6785e6f856dc08fa31081013be27345aa5fe6d8e/laws/src/main/scala/cats/laws/FunctorLaws.scala:
 
 ${snippet{
@@ -61,7 +65,7 @@ ${snippet{
     import cats.laws.discipline.FunctorTests
 
     val rs = FunctorTests[Either[Int, ?]].functor[Int, Int, Int]
-    rs.all.check
+    check(rs.all)
 }}
 @todo : can I show runtime results?
 ```
@@ -75,7 +79,7 @@ ${snippet{
 
 ## Checking laws with ${Discipline.md} + ${Specs2.md}
 
-You can also bake your own cake pattern into a test framework of choice. Here’s for ${Specs2.md}:
+You can also bake your own cake pattern into a test framework of choice. Here's for ${Specs2.md}:
 
 
 ${snippet{
@@ -88,7 +92,7 @@ ${snippet{
     trait CatsSpec extends Specification with Discipline with AllInstances with AllSyntax
 }}
 
-${Cats.md}’ source include one for ScalaTest.
+${Cats.md}' source include one for ScalaTest.
 The spec to check the $functorLaws for `Either[Int, Int]` looks like this:
 
 ${snippet{
@@ -105,12 +109,16 @@ ${snippet{
     import cats.laws.discipline.FunctorTests
 
     class EitherSpec extends CatsSpec { def is = s2"""
-      Either[Int, ?] forms a functor                           $e1
+
+      Either[Int, ?] forms a functor $e1
+
       """
 
       def e1 = checkAll("Either[Int, Int]", FunctorTests[Either[Int, ?]].functor[Int, Int, Int])
     }
-}}
+
+run(new EitherSpec)
+}.eval}
 
 The `Either[Int, ?]` is using ${KindProjector.md}. Running the test from sbt displays the following output:
 
@@ -137,10 +145,10 @@ The `Either[Int, ?]` is using ${KindProjector.md}. Running the test from sbt dis
 ## Breaking the law
 
 ### LYAHFGG:
-  <i>Let’s take a look at a pathological example of a type constructor being an instance of the $functor $typeClass but not really
-  being a $functor, because it doesn’t satisfy the laws.</i>
+  <i>Let's take a look at a pathological example of a type constructor being an instance of the $functor $typeClass but not really
+  being a $functor, because it doesn't satisfy the laws.</i>
 
-Let’s try breaking the law.
+Let's try breaking the law.
 
 ${snippet {
     /**/
@@ -164,17 +172,15 @@ ${snippet {
       }
     }
 
-    //s"Here’s how we can use this:".p @todo: how to use TextDsl?
+//t Here's how we can use this
 
     import cats._, cats.syntax.functor._
 
-    (CSome(0, "ho"): COption[String]) map {
-      identity
-    } must_== CSome(1, "ho")
-}}
+    check((CSome(0, "ho"): COption[String]).map(identity) must_== CSome(1, "ho"))
+}.eval}
 
 This breaks the first law because the result of the identity function is not equal to the input.
-To catch this we need to supply an “arbitrary” COption[A] implicitly:
+To catch this we need to supply an â€œarbitraryâ€ COption[A] implicitly:
 
 ${snippet{
 // 8<-- start
@@ -200,7 +206,7 @@ ${snippet{
     }
 // 8<-- end
 
-    //s"Here’s how we can use this:".p
+//t Here's how we can use this
 
     import cats._, cats.syntax.functor._
 
@@ -242,7 +248,7 @@ ${snippet{
     }
 }}
 
-Here’s the output:
+Here's the output:
 
 ```
   |[info] COptionSpec
@@ -276,4 +282,28 @@ Here’s the output:
 The tests failed as expected.
 
 """
+  implicit override def snippetParams[T]: SnippetParams[T] =
+    SnippetParams(asCode = markdownCode(multilineQuotes = inlineText))
+
+  def inlineText = (code: String) =>
+    s"""|```
+        |${code.split("\n").map(l => if (l.contains("//t")) "\n```\n"+l.replace("//t", "")+"\n```\n" else l).mkString("\n") }
+        |```
+     """.stripMargin
+
+  def check(properties: Properties): Result = {
+    properties.properties.foldLeft(Success(): Result) { case (result, (name, p)) =>
+      val r = AsResult(p :| name)
+      val message = s"${result.message}|+ $name: $r\n  "
+
+      if (r.isSuccess) Success(message)
+      else             Failure(message)
+    }.mapMessage(_.trim)
+  }
+
+  def check[T](m: MatchResult[T]): Result =
+    AsResult(m)
+
+  def run(specification: Specification) =
+    "\n" + org.specs2.runner.TextRunner.run(specification).output
 }
