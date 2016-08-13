@@ -8,11 +8,8 @@ import scala.language.higherKinds
 
 //
 import org.specs2.ugbase.UserGuidePage
-import org.scalacheck.Properties
-import org.specs2.{ScalaCheck, Specification}
-import org.specs2.execute._
-import org.specs2.matcher.MatchResult
-import Snippet._
+import org.specs2.execute.SnippetParams
+import org.specs2.execute.Snippet._
 
 /**
   *
@@ -22,7 +19,7 @@ import Snippet._
 /**
   *
   */
-object Checking_laws_with_Discipline extends UserGuidePage with ScalaCheck {
+object Checking_laws_with_Discipline extends UserGuidePage /*with ScalaCheck*/ {
   def is = s"Checking laws with Discipline".title ^ s2"""
 
 The compiler can't check for the laws, but ${Cats.md} ships with a FunctorLaws trait that describes this in code
@@ -65,14 +62,9 @@ ${snippet{
 
     val rs = FunctorTests[Either[Int, ?]].functor[Int, Int, Int]
     check(rs.all)
+
+    // <$--$> Output:
 }}
-@todo : can I show runtime results?
-```
-  |+ functor.covariant composition: OK, passed 100 tests.
-  |+ functor.covariant identity: OK, passed 100 tests.
-  |+ functor.invariant composition: OK, passed 100 tests.
-  |+ functor.invariant identity: OK, passed 100 tests.
-```
 
 `rs.all` returns `org.scalacheck.Properties`, which implements check method.
 
@@ -115,32 +107,15 @@ ${snippet{
 
       def e1 = checkAll("Either[Int, Int]", FunctorTests[Either[Int, ?]].functor[Int, Int, Int])
     }
+
+    // <$--$> Running the test from sbt displays the following output:
     // 8<--
     run(new EitherSpec)
     // 8<--
-}.eval}
+}}
 
-The `Either[Int, ?]` is using ${KindProjector.md}. Running the test from sbt displays the following output:
+The `Either[Int, ?]` is using ${KindProjector.md}.
 
-@todo how to show execution info?
-```
-  |> test
-  |[info] EitherSpec
-  |[info]
-  |[info]
-  |[info] functor laws must hold for Either[Int, Int]
-  |[info]
-  |[info]  + functor.covariant composition
-  |[info]  + functor.covariant identity
-  |[info]  + functor.invariant composition
-  |[info]  + functor.invariant identity
-  |[info]
-  |[info]
-  |[info] Total for specification EitherSpec
-  |[info] Finished in 14 ms
-  |[info] 4 examples, 400 expectations, 0 failure, 0 error
-  |[info] Passed: Total 4, Failed 0, Errors 0, Passed 4
-```
 
 ## Breaking the law
 
@@ -176,7 +151,7 @@ ${snippet {
     import cats.syntax.functor._
 
     check((CSome(0, "ho"): COption[String]).map(identity) must_== CSome(1, "ho"))
-}.eval}
+}}
 
 This breaks the first law because the result of the identity function is not equal to the input.
 To catch this we need to supply an "arbitrary" `COption[A]` implicitly:
@@ -242,62 +217,18 @@ ${snippet{
 
       def e1 = checkAll("COption[Int]", FunctorTests[COption].functor[Int, Int, Int])
     }
+    // <$--$> Here's the output:
+    // 8<--
+    run(new COptionSpec)
+    // 8<--
 }}
-
-Here's the output:
-
-```
-  |[info] COptionSpec
-  |[info]
-  |[info]
-  |[info] functor laws must hold for COption[Int]
-  |[info]
-  |[info]  x functor.covariant composition
-  |[error]    A counter-example is [CSome(-1,-1), <function1>, <function1>] (after 0 try)
-  |[error]    (CSome(1,1358703086) ?== CSome(0,1358703086)) failed
-  |[info]
-  |[info]  x functor.covariant identity
-  |[error]    A counter-example is 'CSome(1781926821,82888113)' (after 0 try)
-  |[error]    (CSome(1781926822,82888113) ?== CSome(1781926821,82888113)) failed
-  |[info]
-  |[info]  x functor.invariant composition
-  |[error]    A counter-example is [CSome(-17878015,0), <function1>, <function1>, <function1>, <function1>] (after 1 try)
-  |[error]    (CSome(-17878013,-1351608161) ?== CSome(-17878014,-1351608161)) failed
-  |[info]
-  |[info]  x functor.invariant identity
-  |[error]    A counter-example is 'CSome(-1699259031,1)' (after 0 try)
-  |[error]    (CSome(-1699259030,1) ?== CSome(-1699259031,1)) failed
-  |[info]
-  |[info]
-  |[info]
-  |[info] Total for specification COptionSpec
-  |[info] Finished in 13 ms
-  |[info] 4 examples, 4 failures, 0 error
-```
 
 The tests failed as expected.
 
 """
   implicit override def snippetParams[T]: SnippetParams[T] = {
-    super.snippetParams
-    SnippetParams(asCode = markdownCode(multilineQuotes = inlineText))
+    defaultSnippetParameters[T].copy(evalCode = true, asCode = markdownCode(multilineQuotes = inlineText))
   }
-
-  def check(properties: Properties): Result = {
-    properties.properties.foldLeft(Success(): Result) { case (result, (name, p)) =>
-      val r = AsResult(p :| name)
-      val message = s"${result.message}|+ $name: $r\n  "
-
-      if (r.isSuccess) Success(message)
-      else             Failure(message)
-    }.mapMessage(_.trim)
-  }
-
-  def check[T](m: MatchResult[T]): Result =
-    AsResult(m)
-
-  def run(specification: Specification) =
-    "\n" + org.specs2.runner.TextRunner.run(specification).output
 
   /**
     * A big hack to break the markdown code snippet at the poin(s0 when text lines occur
