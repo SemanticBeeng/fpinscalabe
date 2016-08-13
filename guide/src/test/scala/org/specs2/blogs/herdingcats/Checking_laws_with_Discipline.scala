@@ -62,8 +62,6 @@ ${snippet{
 
     val rs = FunctorTests[Either[Int, ?]].functor[Int, Int, Int]
     check(rs.all)
-
-    // <$--$> Output:
 }}
 
 `rs.all` returns `org.scalacheck.Properties`, which implements check method.
@@ -108,7 +106,6 @@ ${snippet{
       def e1 = checkAll("Either[Int, Int]", FunctorTests[Either[Int, ?]].functor[Int, Int, Int])
     }
 
-    // <$--$> Running the test from sbt displays the following output:
     // 8<--
     run(new EitherSpec)
     // 8<--
@@ -147,7 +144,7 @@ ${snippet {
       }
     }
 
-//code snippet will break here <$--$> Here's how we can use this
+    // <$--$> Here's how we can use this
     import cats.syntax.functor._
 
     check((CSome(0, "ho"): COption[String]).map(identity) must_== CSome(1, "ho"))
@@ -180,7 +177,7 @@ ${snippet{
     }
 // 8<-- end
 
-// <$--$> Here's how we can use this
+    // <$--$> Here's how we can use this:
 
     import cats.syntax.functor._
 
@@ -217,7 +214,7 @@ ${snippet{
 
       def e1 = checkAll("COption[Int]", FunctorTests[COption].functor[Int, Int, Int])
     }
-    // <$--$> Here's the output:
+
     // 8<--
     run(new COptionSpec)
     // 8<--
