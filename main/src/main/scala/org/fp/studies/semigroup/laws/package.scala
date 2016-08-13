@@ -4,11 +4,10 @@ import org.fp.concepts._
 import org.fp.resources._
 import org.fp.bookmarks._
 
-import scalaz.scalacheck.ScalazProperties.semigroup
-
 //
 import org.specs2.specification.dsl.mutable.{TextDsl, AutoExamples}
 import org.specs2.ScalaCheck
+import org.specs2.common.CheckedSpec
 
 /**
   *
@@ -16,7 +15,7 @@ import org.specs2.ScalaCheck
   */
 package object laws {
 
-  object Spec extends org.specs2.mutable.Spec with AutoExamples with TextDsl with ScalaCheck {
+  object Spec extends org.specs2.mutable.Spec with AutoExamples with TextDsl with ScalaCheck with CheckedSpec {
 
     s"$keyPoint The only law for is a $semigroup is $lawAssociativity".p
     s"see $lawIdentity"
@@ -24,11 +23,12 @@ package object laws {
     eg {
       /** in [[Scalaz]] */
 
+      import scalaz.scalacheck.ScalazProperties.semigroup
       import scalaz.std.anyVal._
 
       import org.scalacheck.{Gen, Arbitrary}
       implicit val arbMyType: Arbitrary[Int] = Arbitrary(Gen.choose(1, 20))
-      prop { i : Int => semigroup.laws[Int] }.collectArg(i => "tested with " + i)
+      check(semigroup.laws[Int])
     }
 
     eg {
@@ -42,7 +42,7 @@ package object laws {
       implicit val arbMyType: Arbitrary[Int] = Arbitrary(Gen.choose(1, 20))
 
       val rs1 = GroupLaws[Int].semigroup(Semigroup[Int])
-      prop { i : Int => rs1.all.check; success }.collectArg(i => "tested with " + i)
+      check(rs1.all)
     }
   }
 }
