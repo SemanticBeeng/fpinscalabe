@@ -1,6 +1,5 @@
 package org.specs2.ugbase
 
-import org.fp.studies.typeclass.variance.VarianceSpec
 import org.specs2.arrow.Arrow_UserGuidePage
 import org.specs2.blogs.herdingcats.Checking_laws_with_Discipline
 import org.specs2.guide.applicative.Applicative_UserGuidePage
@@ -9,7 +8,7 @@ import org.specs2.guide.functor._
 import org.specs2.guide.kleisli.Kleisli_UserGuidePage
 import org.specs2.guide.monoid.Monoid_UserGuidePage
 import org.specs2.guide.traverse.Traverse_UserGuidePage
-import org.specs2.guide.typeclass.{TypeTagging_UserGuidePage, TypeclassDefinition_UserGuidePage}
+import org.specs2.guide.typeclass.{Variance_UserGuidePage, TypeTagging_UserGuidePage, TypeclassDefinition_UserGuidePage}
 
 //import org.specs2.execute.SnippetParams
 
@@ -25,6 +24,7 @@ In this user guide, you will find:
 
  * ${link(TypeclassDefinition_UserGuidePage)}
  * ${link(TypeTagging_UserGuidePage)}
+ * ${link(Variance_UserGuidePage)}
 
 ## Functor examples
 

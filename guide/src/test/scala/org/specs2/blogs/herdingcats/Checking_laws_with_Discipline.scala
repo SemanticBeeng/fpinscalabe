@@ -19,7 +19,7 @@ import org.specs2.execute.Snippet._
 /**
   *
   */
-object Checking_laws_with_Discipline extends UserGuidePage /*with ScalaCheck*/ {
+object Checking_laws_with_Discipline extends UserGuidePage {
   def is = s"Checking laws with Discipline".title ^ s2"""
 
 The compiler can't check for the laws, but ${Cats.md} ships with a `FunctorLaws` trait that describes this in code
