@@ -2,9 +2,10 @@ package org.fp.studies.typeclass.definition.manual
 
 import org.fp.bookmarks._
 import org.fp.concepts._
-import org.fp.studies.typeclass.definition.manual
+import org.fp.resources._
 
 //
+import org.fp.studies.typeclass.definition.manual
 import org.specs2.common.SnippetHelper._
 import org.specs2.specification.Snippets
 

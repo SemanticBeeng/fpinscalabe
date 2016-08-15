@@ -1,5 +1,6 @@
 package org.specs2.ugbase
 
+import org.fp.studies.typeclass.variance.VarianceSpec
 import org.specs2.arrow.Arrow_UserGuidePage
 import org.specs2.blogs.herdingcats.Checking_laws_with_Discipline
 import org.specs2.guide.applicative.Applicative_UserGuidePage
