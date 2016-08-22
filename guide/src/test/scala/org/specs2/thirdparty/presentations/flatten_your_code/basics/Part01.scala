@@ -1,9 +1,9 @@
 package org.specs2.thirdparty.presentations.flatten_your_code.basics
 
-import org.fp.thirdparty.flatten_your_code.snippets.API01
 import org.specs2.ugbase.UserGuidePage
 import org.specs2.common.SnippetHelper._
-
+//
+import org.fp.thirdparty.flatten_your_code.snippets.API01
 
 /**
   *

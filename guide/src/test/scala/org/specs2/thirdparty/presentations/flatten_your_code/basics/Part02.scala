@@ -1,10 +1,9 @@
 package org.specs2.thirdparty.presentations.flatten_your_code.basics
 
-import org.fp.thirdparty.flatten_your_code.snippets.API02
 import org.specs2.common.SnippetHelper._
 import org.specs2.ugbase.UserGuidePage
-import shapeless.test.illTyped
-
+//
+import org.fp.thirdparty.flatten_your_code.snippets.API02
 
 /**
   *
@@ -76,8 +75,8 @@ ${snippet{
       username <- getUserName(data).right
       user <- getUser(username).right
       //illTyped("""email = getEmail(user)""")
-      validatedEmail <- validateEmail("email").right
-      success <- sendEmail("email").right
+      validatedEmail <- validateEmail("no email").right
+      success <- sendEmail("no email").right
 
     } yield success
 
