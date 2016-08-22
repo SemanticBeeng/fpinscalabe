@@ -58,11 +58,11 @@ object Variance_UserGuidePage extends UserGuidePage with Snippets with ScalaChec
     val obj = f _
     val mirror = runtimeMirror(obj.getClass.getClassLoader)
     val insMirror = mirror reflect obj
-    val originType = insMirror.symbol.typeSignature
+    val originType = insMirror.symbol.toTypeConstructor
 
     println(originType.toString)
-    //check(typeOf[(A1) => B1] =:= originType must_== true)
-    check(typeOf[A1] <:< typeOf[A2] must_== true)
+    check(typeOf[(A1) => B1].typeConstructor =:= originType.typeConstructor must_== true)
+    check(typeOf[A1].typeConstructor <:< typeOf[A2].typeConstructor must_== true)
   }}
 
   And this works nice.
