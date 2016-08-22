@@ -1,4 +1,4 @@
-package org.specs2.blogs.herdingcats
+package org.specs2.thirdparty.blogs.herdingcats
 
 import org.fp.concepts._
 import org.fp.resources._

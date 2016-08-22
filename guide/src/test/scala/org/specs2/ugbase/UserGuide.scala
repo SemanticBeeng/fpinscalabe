@@ -1,7 +1,6 @@
 package org.specs2.ugbase
 
 import org.specs2.arrow.Arrow_UserGuidePage
-import org.specs2.blogs.herdingcats.Checking_laws_with_Discipline
 import org.specs2.guide.applicative.Applicative_UserGuidePage
 import org.specs2.guide.apply.Apply_UserGuidePage
 import org.specs2.guide.functor._
@@ -11,6 +10,8 @@ import org.specs2.guide.traverse.Traverse_UserGuidePage
 import org.specs2.guide.typeclass.{Variance_UserGuidePage, TypeTagging_UserGuidePage, TypeclassDefinition_UserGuidePage}
 
 //import org.specs2.execute.SnippetParams
+//
+import org.specs2.thirdparty._
 
 object UserGuide extends UserGuidePage {
 
@@ -61,8 +62,11 @@ In this user guide, you will find:
 ## Monad examples
  * tbd
 
-## Examples for use of Specs
- * ${link(Checking_laws_with_Discipline)}
+## Blogs
+ * ${link(blogs.herdingcats.Checking_laws_with_Discipline)}
+
+## Presentations
+ * ${link(presentations.flatten_your_code.basics.Part01)}
 """
 
 }
