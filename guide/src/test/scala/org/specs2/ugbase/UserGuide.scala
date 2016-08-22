@@ -68,6 +68,7 @@ In this user guide, you will find:
 ## Presentations
  * ${link(presentations.flatten_your_code.basics.Part01)}
  * ${link(presentations.flatten_your_code.basics.Part02)}
+ * ${link(presentations.flatten_your_code.basics.Part03)}
 """
 
 }

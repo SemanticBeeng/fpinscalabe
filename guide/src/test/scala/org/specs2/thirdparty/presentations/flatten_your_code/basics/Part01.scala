@@ -1,5 +1,9 @@
 package org.specs2.thirdparty.presentations.flatten_your_code.basics
 
+import org.fp.concepts._
+import org.fp.resources._
+import org.fp.bookmarks._
+//
 import org.specs2.ugbase.UserGuidePage
 import org.specs2.common.SnippetHelper._
 //
@@ -36,7 +40,7 @@ Not great: nested maps and flatMaps!
     success
   }}
 
-Exercise, rewrite the above as a for-comprehension
+Exercise, rewrite the above as a $forComprehension
 
 Solution:
 
