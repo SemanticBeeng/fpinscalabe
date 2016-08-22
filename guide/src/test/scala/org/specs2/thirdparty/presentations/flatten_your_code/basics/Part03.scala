@@ -2,7 +2,6 @@ package org.specs2.thirdparty.presentations.flatten_your_code.basics
 
 import org.fp.concepts._
 import org.fp.resources._
-import org.fp.bookmarks._
 
 //
 import org.specs2.common.SnippetHelper._
@@ -37,7 +36,9 @@ Here are our service methods again, but now changed to return a ${Scalaz.md} `\/
 
 ${incl[API03]}
 
-Exercise, write the same program as in ${link(Part01).hide} and ${link(Part02).hide}, with a $forComprehension:
+### Exercise
+
+Write the same program as in ${link(Part01).hide} and ${link(Part02).hide}, with a $forComprehension:
 
 Now we can get rid of the `.right` that we had on Scala's `Either`, because `\/` is right-biased.
 
