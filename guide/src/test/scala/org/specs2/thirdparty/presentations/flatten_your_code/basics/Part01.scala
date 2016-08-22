@@ -1,6 +1,6 @@
 package org.specs2.thirdparty.presentations.flatten_your_code.basics
 
-import org.fp.thirdparty.flatten_your_code.snippets.API
+import org.fp.thirdparty.flatten_your_code.snippets.API01
 import org.specs2.ugbase.UserGuidePage
 import org.specs2.common.SnippetHelper._
 
@@ -8,14 +8,14 @@ import org.specs2.common.SnippetHelper._
 /**
   *
   */
-object Part01 extends UserGuidePage with API {
+object Part01 extends UserGuidePage with API01 {
 
   def is = s"Flatten your code : basics, part 1".title ^ s2"""
 
 These are the service methods from which we're going to build a program.
 We'll reuse these five methods in all the parts, although they will evolve a bit.
 
-${incl[API]}
+${incl[API01]}
 
 The program that we're making is also very similar in all the parts.
 We're getting a username from a Map with data, then we lookup the corresponding user.

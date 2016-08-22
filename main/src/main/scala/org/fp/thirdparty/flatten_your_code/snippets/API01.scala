@@ -2,7 +2,7 @@
 package org.fp.thirdparty.flatten_your_code.snippets
 
 // 8<--
-trait API {
+trait API01 {
 
   // These are the service methods from which we're going to build a program.
   // We'll reuse these five methods in all the parts, although they will evolve a bit.
