@@ -36,7 +36,9 @@ Not great: nested maps and flatMaps!
     success
   }}
 
- Exercise, rewrite the above as a for-comprehension
+Exercise, rewrite the above as a for-comprehension
+
+Solution:
 
 ${snippet{
 
