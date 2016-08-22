@@ -34,8 +34,8 @@ ${snippet{
     import scalaz.{ \/, \/-, -\/ }
     import scalaz.syntax.std.option._
 
-    Some(5).toRightDisjunction("Left side!") must_== \/-(5)
-    None.toRightDisjunction("Left side!")    must_== -\/("Left side!")
+    Some(5).toRightDisjunction("Right side!") must_==  \/-(5)
+    None.toRightDisjunction("Left side!")     must_== -\/("Left side!")
   }}
 
 There's a symbolic method for this as well: `\/>`
@@ -45,7 +45,7 @@ ${snippet{
     import scalaz.{ \/, \/- }
     import scalaz.syntax.std.option._
 // 8<--
-    check(Some(5) \/> "Left side!" must_== \/-(5))
+    check(Some(5) \/> "Right side!"           must_== \/-(5))
   }}
 
 ### Exercise
