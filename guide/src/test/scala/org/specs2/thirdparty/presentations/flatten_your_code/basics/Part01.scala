@@ -32,10 +32,25 @@ Not great: nested maps and flatMaps!
         }
       }
     }
- }}
+
+    success
+  }}
 
  Exercise, rewrite the above as a for-comprehension
 
+${snippet{
+
+    for {
+      username  <- getUserName(data)
+      user      <- getUser(username)
+      email     =  getEmail(user) // String type has no a `flatMap`
+      _         <- validateEmail(email)
+      result    <- sendEmail(email)
+
+    } yield result
+
+    success
+  }}
 
     """
 }
