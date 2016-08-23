@@ -70,7 +70,7 @@ Same thing, but with `\/>` instead of `toRightDisjunction`
 
 ${snippet{
 /**/
-    import scalaz.\/
+    import scalaz.{-\/, \/}
     import scalaz.syntax.std.option._
 
     for {
@@ -89,6 +89,8 @@ ${snippet{
       success <- sendEmail(email)
 
     } yield success
+
+    check(success must_== None) //-\/("No user found"
   }}
 
 If you're entirely not interested in error messages, you can also decide to 'downgrade' the `\/` values to `Option`.
@@ -104,6 +106,8 @@ So we can now use three kinds of values in our $forComprehension:
 Write the program again, but now downgrading `\/` to `Option`.
 
 ${snippet{
+/**/
+    import scalaz.-\/
 
     for {
       username <- getUserName(data).toOption
@@ -120,7 +124,7 @@ ${snippet{
 
     } yield success
 
-    success must_== None
+    check(success must_== None)
   }}
     """
 }
