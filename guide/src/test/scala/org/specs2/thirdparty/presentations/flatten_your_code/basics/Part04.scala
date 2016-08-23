@@ -120,6 +120,7 @@ ${snippet{
 
     } yield success
 
+    success must_== None
   }}
     """
 }
