@@ -50,7 +50,7 @@ ${snippet{
 
 ### Exercise
 
-Write our usual program with a $forComprehension, using 'toRightDisjunction' or '\/>'
+Write our usual program with a $forComprehension, using `toRightDisjunction` or `\/>`
 ${snippet{
     /**/
     import scalaz.syntax.std.option._
@@ -78,7 +78,7 @@ ${snippet{
 
     workWithRepo(emptyUserRepo)
 
-    val r = for {
+    for {
 
       username <- getUserName
       user <- getUser(username) \/> "User not found"
@@ -95,12 +95,10 @@ ${snippet{
       result <- sendEmail(email)
 
     } yield result
-
-    check(r must_== -\/("No user found"))
   }}
 
 If you're entirely not interested in error messages, you can also decide to 'downgrade' the `\/` values to `Option`.
-There's a 'toOption' method on `\/` for that.
+There's a `toOption` method on `\/` for that.
 
 ### Bonus exercise
 
@@ -115,7 +113,7 @@ ${snippet{
     /**/
     workWithRepo(emptyUserRepo)
 
-    val r = for {
+    for {
 
       username <- getUserName.toOption
       user <- getUser(username)
@@ -130,8 +128,6 @@ ${snippet{
       result <- sendEmail(validatedEmail).toOption
 
     } yield result
-
-    check(r must_== None)
   }}
 
 Both versions work the same - "No user found" - but the one based on `\/` reports the error.
@@ -147,7 +143,7 @@ ${snippet{
 
     workWithRepo (userRepo)
 
-    val r = for {
+    for {
 
       username <- getUserName
       user <- getUser(username) \/> "User not found"
@@ -161,9 +157,6 @@ ${snippet{
       result <- sendEmail(email)
 
     } yield result
-
-    check (r must_== -\/("user1@email.com"))
-
   }}
 
 A user with an invalid email address
@@ -175,7 +168,7 @@ ${snippet{
 
     workWithRepo (userRepo)
 
-    val r = for {
+    for {
 
       username <- getUserName2
       user <- getUser(username) \/> "User not found"
@@ -189,8 +182,6 @@ ${snippet{
       result <- sendEmail(email)
 
     } yield result
-
-    check (r must_== -\/("Invalid e-mail address user2$email.com"))
   }}
 
 Next ${link(Part05).hide}
