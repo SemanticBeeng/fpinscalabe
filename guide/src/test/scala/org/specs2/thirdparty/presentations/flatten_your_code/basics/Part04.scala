@@ -31,10 +31,10 @@ This is done with the method `toRightDisjunction`:
 
 ${snippet{
 /**/
-    import scalaz.{ \/, \/-, -\/ }
+    import scalaz.{ \/-, -\/ }
     import scalaz.syntax.std.option._
 
-    Some(5).toRightDisjunction("Right side!") must_==  \/-(5)
+    Some(5).toRightDisjunction("Left side!")  must_==  \/-(5)
     None.toRightDisjunction("Left side!")     must_== -\/("Left side!")
   }}
 
@@ -45,14 +45,14 @@ ${snippet{
     import scalaz.{ \/, \/- }
     import scalaz.syntax.std.option._
 // 8<--
-    check(Some(5) \/> "Right side!"           must_== \/-(5))
+    Some(5) \/> "Left side!"                  must_== \/-(5)
   }}
 
 ### Exercise
 
-Write our usual program with a for-comprehension, using 'toRightDisjunction' or '\/>'
+Write our usual program with a $forComprehension, using 'toRightDisjunction' or '\/>'
 
-If you're entirely not interested in error messages, you can also decide to 'downgrade' the \/ values to Option.
+If you're entirely not interested in error messages, you can also decide to 'downgrade' the `\/` values to `Option`.
 There's a 'toOption' method on `\/` for that.
 
 ### Bonus exercise
