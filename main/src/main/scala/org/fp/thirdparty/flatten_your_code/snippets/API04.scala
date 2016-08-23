@@ -35,10 +35,13 @@ trait API04 {
   def workWithRepo(repo: Repo): Unit = theRepo = repo
 
   lazy val emptyUserRepo = Map[String, User]()
-  lazy val userRepo = Map[String, User] {
-    "user1" -> UserImpl("user1", "user1@email.com")
-    "user2" -> UserImpl("user1", "user2$email.com")
-  }
+
+  val user1: (String, UserImpl) = "user1" -> UserImpl("user1", "user1@email.com")
+  val user2: (String, UserImpl) = "user2" -> UserImpl("user1", "user2$email.com")
+
+  def getUserName2 = \/-(user2._1)
+
+  lazy val userRepo = Map[String, User] (user1, user2)
 }
 
 case class UserImpl(name: String, email: String) extends User

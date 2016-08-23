@@ -58,5 +58,6 @@ ${snippet{
     success
   }}
 
+Next: ${link(Part02).hide}
     """
 }

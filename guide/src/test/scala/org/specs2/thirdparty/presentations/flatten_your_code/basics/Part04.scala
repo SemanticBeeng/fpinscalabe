@@ -108,7 +108,7 @@ So we can now use three kinds of values in our $forComprehension:
  - Values inside a `\/` with `<-`,
  - Plain values with `=`
  - Option values with `<-` and `\/>`.
-                                                            |
+
 Write the program again, but now downgrading `\/` to `Option`.
 
 ${snippet{
@@ -136,6 +136,66 @@ ${snippet{
 
 Both versions work the same - "No user found" - but the one based on `\/` reports the error.
 
+### Working with more scenarios
 
+A user with a valid email address
+
+${snippet{
+/**/
+
+    import scalaz.{-\/, \/}
+    import scalaz.syntax.std.option._
+
+    workWithRepo (userRepo)
+
+    val r = for {
+
+      username <- getUserName
+      user <- getUser(username) \/> "User not found"
+      email = getEmail(user)
+
+      validatedEmail <- validateEmail(email) \/> s"Invalid e-mail address $email"
+
+      // Note the use of `validatedEmail` (left side auto extracted)
+      result <- sendEmail(validatedEmail)
+
+      result <- sendEmail(email)
+
+    } yield result
+
+    check (r must_== -\/("user1@email.com"))
+
+  }}
+
+A user with an invalid email address
+
+${snippet{
+    /**/
+
+    import scalaz.{-\/, \/}
+    import scalaz.syntax.std.option._
+
+    workWithRepo (userRepo)
+
+    val r = for {
+
+      username <- getUserName2
+      user <- getUser(username) \/> "User not found"
+      email = getEmail(user)
+
+      validatedEmail <- validateEmail(email) \/> s"Invalid e-mail address $email"
+
+      // Note the use of `validatedEmail` (left side auto extracted)
+      result <- sendEmail(validatedEmail)
+
+      result <- sendEmail(email)
+
+    } yield result
+
+    check (r must_== -\/("Invalid e-mail address user2$email.com"))
+
+  }}
+
+Next {link(Part05).hide}
     """
 }

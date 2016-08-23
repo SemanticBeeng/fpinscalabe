@@ -53,5 +53,7 @@ ${snippet{
     } yield success
 
   }}
+
+Next ${link(Part04).hide}
     """
 }
