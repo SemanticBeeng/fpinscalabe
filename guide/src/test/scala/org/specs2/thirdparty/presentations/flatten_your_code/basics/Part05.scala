@@ -39,17 +39,16 @@ ${snippet{
     val fa = Future(3)
     val fb = Future(5)
 
-    for {
-      a <- fa
-      b <- fb
-    } yield a + b
-
+      for {
+        a <- fa
+        b <- fb
+      } yield a + b
   }}
 
 ### Debugging!
 
-Lines in a $forComprehension *must* be a generator (<-) or a value definition(=).
-What if we just want to println an intermediate value?
+Lines in a $forComprehension *must* be a generator (`<-`) or a value definition (`=`).
+What if we just want to `println` an intermediate value?
 
 ${snippet{
 /**/
@@ -63,7 +62,7 @@ ${snippet{
 
   }}
 
-If your yield gets unwieldy, you can also just assign it to a value
+If your yield gets unwieldy, you can also just assign it to a value.
 
 ${snippet{
 /**/
