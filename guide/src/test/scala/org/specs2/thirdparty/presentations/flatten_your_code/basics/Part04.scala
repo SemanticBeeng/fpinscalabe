@@ -108,8 +108,6 @@ Write the program again, but now downgrading `\/` to `Option`.
 
 ${snippet{
 /**/
-    import scalaz.-\/
-
     val r = for {
       username <- getUserName(emptyUserRepo).toOption
       user <- getUser(username)
@@ -128,5 +126,9 @@ ${snippet{
     println(r)
     check(r must_== None)
   }}
+
+Both versions work the same - "No user found" - but the one based on `\/` reports the error.
+
+
     """
 }
