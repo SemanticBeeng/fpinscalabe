@@ -30,9 +30,9 @@ In this case, that would probably be `\/`. We can upgrade `Option` to `\/` by sp
 This is done with the method `toRightDisjunction`:
 
 ${snippet{
-/**/
-    import scalaz.{ \/-, -\/ }
+    /**/
     import scalaz.syntax.std.option._
+    import scalaz.{-\/, \/-}
 
     Some(5).toRightDisjunction("Left side!")  must_==  \/-(5)
     None.toRightDisjunction("Left side!")     must_== -\/("Left side!")
@@ -41,10 +41,10 @@ ${snippet{
 There's a symbolic method for this as well: `\/>`
 
 ${snippet{
-// 8<--
+    // 8<--
     import scalaz.\/-
     import scalaz.syntax.std.option._
-// 8<--
+    // 8<--
     Some(5) \/> "Left side!"                  must_== \/-(5)
   }}
 
@@ -52,7 +52,7 @@ ${snippet{
 
 Write our usual program with a $forComprehension, using 'toRightDisjunction' or '\/>'
 ${snippet{
-/**/
+    /**/
     import scalaz.syntax.std.option._
 
     workWithRepo(emptyUserRepo)
@@ -72,9 +72,9 @@ ${snippet{
 Same thing, but with `\/>` instead of `toRightDisjunction`
 
 ${snippet{
-/**/
-    import scalaz.{-\/, \/}
+    /**/
     import scalaz.syntax.std.option._
+    import scalaz.{-\/, \/}
 
     workWithRepo(emptyUserRepo)
 
@@ -112,7 +112,7 @@ So we can now use three kinds of values in our $forComprehension:
 Write the program again, but now downgrading `\/` to `Option`.
 
 ${snippet{
-/**/
+    /**/
     workWithRepo(emptyUserRepo)
 
     val r = for {
@@ -141,8 +141,8 @@ Both versions work the same - "No user found" - but the one based on `\/` report
 A user with a valid email address
 
 ${snippet{
-/**/
-    import scalaz.{-\/, \/}
+    /**/
+    import scalaz.-\/
     import scalaz.syntax.std.option._
 
     workWithRepo (userRepo)
@@ -193,6 +193,7 @@ ${snippet{
     check (r must_== -\/("Invalid e-mail address user2$email.com"))
   }}
 
-Next {link(Part05).hide}
-    """
+Next ${link(Part05).hide}
+"""
+
 }
