@@ -142,7 +142,6 @@ A user with a valid email address
 
 ${snippet{
 /**/
-
     import scalaz.{-\/, \/}
     import scalaz.syntax.std.option._
 
@@ -171,8 +170,7 @@ A user with an invalid email address
 
 ${snippet{
     /**/
-
-    import scalaz.{-\/, \/}
+    import scalaz.-\/
     import scalaz.syntax.std.option._
 
     workWithRepo (userRepo)
@@ -193,7 +191,6 @@ ${snippet{
     } yield result
 
     check (r must_== -\/("Invalid e-mail address user2$email.com"))
-
   }}
 
 Next {link(Part05).hide}
