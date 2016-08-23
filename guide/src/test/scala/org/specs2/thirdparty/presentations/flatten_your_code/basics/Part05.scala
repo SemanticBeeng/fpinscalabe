@@ -3,7 +3,6 @@ package org.specs2.thirdparty.presentations.flatten_your_code.basics
 import org.fp.concepts._
 
 //
-import org.specs2.common.SnippetHelper._
 import org.specs2.ugbase.UserGuidePage
 //
 import org.fp.thirdparty.flatten_your_code.snippets.API04
@@ -73,5 +72,7 @@ ${snippet{
       result = a + b + c
     } yield result
   }}
+
+Next ${link(Part06)}
   """
 }
