@@ -44,7 +44,7 @@ trait API04 {
       \/-(false)
   }
 
-  val data = Map[String, String]()
+  val emptyUserRepo = Map[String, String]()
 }
 
 class UserImpl extends User {

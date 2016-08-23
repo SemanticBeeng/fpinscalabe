@@ -56,7 +56,7 @@ ${snippet{
     import scalaz.syntax.std.option._
 
     for {
-      username <- getUserName(data)
+      username <- getUserName(emptyUserRepo)
       user <- getUser(username).toRightDisjunction("User not found")
       email = getEmail(user)
       validatedEmail <- validateEmail(email).toRightDisjunction("Invalid e-mail address")
@@ -74,7 +74,7 @@ ${snippet{
     import scalaz.syntax.std.option._
 
     val r = for {
-      username <- getUserName(data)
+      username <- getUserName(emptyUserRepo)
       user <- getUser(username) \/> "User not found"
       email = getEmail(user)
 
@@ -111,7 +111,7 @@ ${snippet{
     import scalaz.-\/
 
     val r = for {
-      username <- getUserName(data).toOption
+      username <- getUserName(emptyUserRepo).toOption
       user <- getUser(username)
       email = getEmail(user)
 
