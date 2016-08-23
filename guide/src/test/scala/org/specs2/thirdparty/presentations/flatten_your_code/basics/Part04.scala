@@ -60,9 +60,9 @@ ${snippet{
       user <- getUser(username).toRightDisjunction("User not found")
       email = getEmail(user)
       validatedEmail <- validateEmail(email).toRightDisjunction("Invalid e-mail address")
-      success <- sendEmail(email)
+      result <- sendEmail(email)
 
-    } yield success
+    } yield result
 
   }}
 
@@ -73,7 +73,7 @@ ${snippet{
     import scalaz.{-\/, \/}
     import scalaz.syntax.std.option._
 
-    for {
+    val r = for {
       username <- getUserName(data)
       user <- getUser(username) \/> "User not found"
       email = getEmail(user)
@@ -84,13 +84,14 @@ ${snippet{
       val validatedEmail2: \/[String, String] = validateEmail(email) \/> "Invalid e-mail address"
 
       // Note the use of `validatedEmail` (left side auto extracted)
-      success <- sendEmail(validatedEmail)
+      result <- sendEmail(validatedEmail)
 
-      success <- sendEmail(email)
+      result <- sendEmail(email)
 
-    } yield success
+    } yield result
 
-    check(success must_== None) //-\/("No user found"
+    println(r)
+    check(r must_== -\/("No user found"))
   }}
 
 If you're entirely not interested in error messages, you can also decide to 'downgrade' the `\/` values to `Option`.
@@ -109,7 +110,7 @@ ${snippet{
 /**/
     import scalaz.-\/
 
-    for {
+    val r = for {
       username <- getUserName(data).toOption
       user <- getUser(username)
       email = getEmail(user)
@@ -120,11 +121,12 @@ ${snippet{
       val validatedEmail1: Option[String] = validateEmail(email)
 
       // Note the use of `validatedEmail` (left side auto extracted)
-      success <- sendEmail(validatedEmail).toOption
+      result <- sendEmail(validatedEmail).toOption
 
-    } yield success
+    } yield result
 
-    check(success must_== None)
+    println(r)
+    check(r must_== None)
   }}
     """
 }
