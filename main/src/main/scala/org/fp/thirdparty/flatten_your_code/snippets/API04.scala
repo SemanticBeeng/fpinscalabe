@@ -6,32 +6,16 @@ import scalaz.{-\/, \/-, \/}
 // 8<--
 trait API04 {
 
-  def getUserName(data: Map[String, String]): \/[String, String] = {
+  def getUserName: \/[String, String] = if(theRepo.nonEmpty)  \/-(theRepo.head._1) else -\/("No user found")
 
-    if(data.nonEmpty) {
-      val v: \/[String, String] = \/-(s"user: $data.head._1 $data.head._2")
-      v
-    }
-    else {
-      val v: \/[String, String] = -\/("No user found")
-      v
-    }
-  }
+  def getUser(name: String): Option[User] = theRepo.get(name)
 
-  def getUser(name: String): Option[User] = {
-
-    if(name.startsWith("user"))
-      Some(new UserImpl)
-    else
-      None
-  }
-
-  def getEmail(user: User): String = "user@email.com"
+  def getEmail(user: User): String = user.email
 
   def validateEmail(email: String): Option[String] = {
 
-    if(email.nonEmpty)
-      Some("user@email.com")
+    if(email.contains("@"))
+      Some(email)
     else
       None
   }
@@ -44,11 +28,19 @@ trait API04 {
       \/-(false)
   }
 
-  val emptyUserRepo = Map[String, String]()
+  type Repo = Map[String, User]
+
+  var theRepo : Repo = emptyUserRepo
+
+  def workWithRepo(repo: Repo): Unit = theRepo = repo
+
+  lazy val emptyUserRepo = Map[String, User]()
+  lazy val userRepo = Map[String, User] {
+    "user1" -> UserImpl("user1", "user1@email.com")
+    "user2" -> UserImpl("user1", "user2$email.com")
+  }
 }
 
-class UserImpl extends User {
-
-}
+case class UserImpl(name: String, email: String) extends User
 
 

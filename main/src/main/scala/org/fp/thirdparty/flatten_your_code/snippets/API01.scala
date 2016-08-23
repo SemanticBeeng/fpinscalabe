@@ -16,4 +16,8 @@ trait API01 {
   val data = Map[String, String]()
 }
 
-trait User
+trait User {
+  def name: String
+
+  def email : String
+}

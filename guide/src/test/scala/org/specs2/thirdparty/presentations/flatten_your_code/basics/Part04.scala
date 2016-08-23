@@ -55,8 +55,11 @@ ${snippet{
 /**/
     import scalaz.syntax.std.option._
 
+    workWithRepo(emptyUserRepo)
+
     for {
-      username <- getUserName(emptyUserRepo)
+
+      username <- getUserName
       user <- getUser(username).toRightDisjunction("User not found")
       email = getEmail(user)
       validatedEmail <- validateEmail(email).toRightDisjunction("Invalid e-mail address")
@@ -73,8 +76,11 @@ ${snippet{
     import scalaz.{-\/, \/}
     import scalaz.syntax.std.option._
 
+    workWithRepo(emptyUserRepo)
+
     val r = for {
-      username <- getUserName(emptyUserRepo)
+
+      username <- getUserName
       user <- getUser(username) \/> "User not found"
       email = getEmail(user)
 
@@ -90,7 +96,6 @@ ${snippet{
 
     } yield result
 
-    println(r)
     check(r must_== -\/("No user found"))
   }}
 
@@ -108,8 +113,11 @@ Write the program again, but now downgrading `\/` to `Option`.
 
 ${snippet{
 /**/
+    workWithRepo(emptyUserRepo)
+
     val r = for {
-      username <- getUserName(emptyUserRepo).toOption
+
+      username <- getUserName.toOption
       user <- getUser(username)
       email = getEmail(user)
 
@@ -123,7 +131,6 @@ ${snippet{
 
     } yield result
 
-    println(r)
     check(r must_== None)
   }}
 
