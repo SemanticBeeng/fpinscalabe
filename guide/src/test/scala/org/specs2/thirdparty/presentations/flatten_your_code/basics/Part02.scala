@@ -82,6 +82,6 @@ ${snippet{
 
   }}
 
-Next ${link(Part03).hide}
+Next ${link(Part03)}
     """
 }

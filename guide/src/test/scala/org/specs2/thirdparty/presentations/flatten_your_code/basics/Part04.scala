@@ -56,9 +56,7 @@ ${snippet{
     import scalaz.syntax.std.option._
 
     workWithRepo(emptyUserRepo)
-
     for {
-
       username <- getUserName
       user <- getUser(username).toRightDisjunction("User not found")
       email = getEmail(user)
@@ -77,21 +75,15 @@ ${snippet{
     import scalaz.{-\/, \/}
 
     workWithRepo(emptyUserRepo)
-
     for {
-
       username <- getUserName
       user <- getUser(username) \/> "User not found"
       email = getEmail(user)
-
       validatedEmail <- validateEmail(email) \/> "Invalid e-mail address"
-
       // Alternative to see the type
       val validatedEmail2: \/[String, String] = validateEmail(email) \/> "Invalid e-mail address"
-
       // Note the use of `validatedEmail` (left side auto extracted)
       result <- sendEmail(validatedEmail)
-
       result <- sendEmail(email)
 
     } yield result
@@ -112,18 +104,14 @@ Write the program again, but now downgrading `\/` to `Option`.
 ${snippet{
     /**/
     workWithRepo(emptyUserRepo)
-
     for {
-
       username <- getUserName.toOption
       user <- getUser(username)
       email = getEmail(user)
 
       validatedEmail <- validateEmail(email)
-
       // Alternative to see the type
       val validatedEmail1: Option[String] = validateEmail(email)
-
       // Note the use of `validatedEmail` (left side auto extracted)
       result <- sendEmail(validatedEmail).toOption
 
@@ -138,22 +126,17 @@ A user with a valid email address
 
 ${snippet{
     /**/
-    import scalaz.-\/
     import scalaz.syntax.std.option._
 
     workWithRepo (userRepo)
-
     for {
-
       username <- getUserName
       user <- getUser(username) \/> "User not found"
       email = getEmail(user)
 
       validatedEmail <- validateEmail(email) \/> s"Invalid e-mail address $email"
-
       // Note the use of `validatedEmail` (left side auto extracted)
       result <- sendEmail(validatedEmail)
-
       result <- sendEmail(email)
 
     } yield result
@@ -163,28 +146,23 @@ A user with an invalid email address
 
 ${snippet{
     /**/
-    import scalaz.-\/
     import scalaz.syntax.std.option._
 
     workWithRepo (userRepo)
-
     for {
-
       username <- getUserName2
       user <- getUser(username) \/> "User not found"
       email = getEmail(user)
 
       validatedEmail <- validateEmail(email) \/> s"Invalid e-mail address $email"
-
       // Note the use of `validatedEmail` (left side auto extracted)
       result <- sendEmail(validatedEmail)
-
       result <- sendEmail(email)
 
     } yield result
   }}
 
-Next ${link(Part05).hide}
+Next ${link(Part05)}
 """
 
 }

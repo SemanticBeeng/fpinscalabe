@@ -38,7 +38,7 @@ ${incl[API03]}
 
 ### Exercise
 
-Write the same program as in ${link(Part01).hide} and ${link(Part02).hide}, with a $forComprehension:
+Write the same program as in ${link(Part01)} and ${link(Part02)}, with a $forComprehension:
 
 Now we can get rid of the `.right` that we had on Scala's `Either`, because `\/` is right-biased.
 
@@ -54,6 +54,6 @@ ${snippet{
 
   }}
 
-Next ${link(Part04).hide}
+Next ${link(Part04)}
     """
 }
