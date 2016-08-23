@@ -42,7 +42,7 @@ There's a symbolic method for this as well: `\/>`
 
 ${snippet{
 // 8<--
-    import scalaz.{ \/, \/- }
+    import scalaz.\/-
     import scalaz.syntax.std.option._
 // 8<--
     Some(5) \/> "Left side!"                  must_== \/-(5)
@@ -51,13 +51,75 @@ ${snippet{
 ### Exercise
 
 Write our usual program with a $forComprehension, using 'toRightDisjunction' or '\/>'
+${snippet{
+/**/
+    import scalaz.syntax.std.option._
+
+    for {
+      username <- getUserName(data)
+      user <- getUser(username).toRightDisjunction("User not found")
+      email = getEmail(user)
+      validatedEmail <- validateEmail(email).toRightDisjunction("Invalid e-mail address")
+      success <- sendEmail(email)
+
+    } yield success
+
+  }}
+
+Same thing, but with `\/>` instead of `toRightDisjunction`
+
+${snippet{
+/**/
+    import scalaz.\/
+    import scalaz.syntax.std.option._
+
+    for {
+      username <- getUserName(data)
+      user <- getUser(username) \/> "User not found"
+      email = getEmail(user)
+
+      validatedEmail <- validateEmail(email) \/> "Invalid e-mail address"
+
+      // Alternative to see the type
+      val validatedEmail2: \/[String, String] = validateEmail(email) \/> "Invalid e-mail address"
+
+      // Note the use of `validatedEmail` (left side auto extracted)
+      success <- sendEmail(validatedEmail)
+
+      success <- sendEmail(email)
+
+    } yield success
+  }}
 
 If you're entirely not interested in error messages, you can also decide to 'downgrade' the `\/` values to `Option`.
 There's a 'toOption' method on `\/` for that.
 
 ### Bonus exercise
 
+So we can now use three kinds of values in our $forComprehension:
+ - Values inside a `\/` with `<-`,
+ - Plain values with `=`
+ - Option values with `<-` and `\/>`.
+                                                            |
 Write the program again, but now downgrading `\/` to `Option`.
 
+${snippet{
+
+    for {
+      username <- getUserName(data).toOption
+      user <- getUser(username)
+      email = getEmail(user)
+
+      validatedEmail <- validateEmail(email)
+
+      // Alternative to see the type
+      val validatedEmail1: Option[String] = validateEmail(email)
+
+      // Note the use of `validatedEmail` (left side auto extracted)
+      success <- sendEmail(validatedEmail).toOption
+
+    } yield success
+
+  }}
     """
 }
