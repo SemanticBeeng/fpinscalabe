@@ -107,6 +107,6 @@ This eliminates syntactic overhead.
 This pattern is called $typeClass-es. Our trait `Serializable[A]` is called the $typeClass.
 The implemented $glueObject `StringSerializable` and `IntSerializable` are called $typeClassInstance-es'.
 
-Next ${link(Part08)}
+Next ${link(Part09)}
   """
 }
