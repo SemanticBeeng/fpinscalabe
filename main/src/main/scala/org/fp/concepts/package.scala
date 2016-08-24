@@ -9,6 +9,7 @@ package object concepts {
   val bookmarks = "$$bookmarks$$"
 
   //
+  val partialFunction = "[partial function]"
   val selfType = "self-type"
   val ad_hocPolymorphism = "[ad-hoc polymorphism]"
   val functionOverloading = "[function overloading]"
@@ -37,6 +38,10 @@ package object concepts {
     */
   val functor = "[functor]"
   val biFunctor = "[bi functor]"
+  /**
+    * @wiki Applies [[partialFunction]] nested in a instance of [[functor]] F to an argument nested in an instance of F and returns the result in instance of F.
+    *      If the [[partialFunction]] has more than 1 argument then it may apply multiple arguments but the function needs to be in curried form.
+    */
   val applyFunctor = "[apply functor]"
   val applicativeFunctor = "[applicative functor]"
   val applicativeBuilder = "[applicative builder]"

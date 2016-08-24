@@ -29,11 +29,9 @@ package object dfault {
 
       s"We can use <*>:".p
 
-      9.some <*> {(_: Int) + 3}.some must_== Some(12)
+      9.some <*> {(_: Int) + 3}.some must_== 12.some
 
-      3.some <*> { 9.some <*> {(_: Int) + (_: Int)}.curried.some } must_== Some(12)
-
-      3.some <*> { 9.some <*> {(_: Int) + (_: Int)}.curried.some } must_== Some(12)
+      3.some <*> { 9.some <*> {(_: Int) + (_: Int)}.curried.some } must_== 12.some
 
       s"Another thing I found in 7.0.0-M3 is a new notation that extracts values from containers and apply them to a single function.".p
 
