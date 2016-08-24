@@ -26,7 +26,7 @@ So what we need is a `flatMap` operation, that treats these two containers as a 
 
 Let's make that! We'll create a new data structure that can get the A value out of a `Future[Option[A]]`, apply a function to it, and put it back.
 
-### Exercise: Finish FutureOption
+### Exercise: Finish `FutureOption`
 
 ${incl[API07]}
 
