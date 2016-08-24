@@ -30,7 +30,6 @@ These are equivalent:
 ${snippet{
 
     import scalaz.Scalaz._
-    import scalaz._
 
     def double(i: Int) = i * 2
 
@@ -52,7 +51,6 @@ ${snippet{
     import scala.concurrent.Future
     import scalaz.std.scalaFuture.futureInstance
     import scalaz.OptionT
-    //import scalaz.syntax.std.option._
     import scalaz.Scalaz._
 
     for {
