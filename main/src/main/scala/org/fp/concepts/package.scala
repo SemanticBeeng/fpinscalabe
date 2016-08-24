@@ -85,6 +85,7 @@ package object concepts {
   //
   val operator_andThen = "[andThen operator]"
   val operator_>=> = "[>=> operator]" /** alias for [[operator_andThen]]*/
+  val operator_>>= = "[>>= operator]"
   //
   val operator_andThenK = "[andThenK operator]"
   val operator_>==> = "[>==> operator]" /** alias for [[operator_andThenK]]*/

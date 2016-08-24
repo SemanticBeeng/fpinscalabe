@@ -34,7 +34,7 @@ The $monad $typeClass that we defined looks like:
 
 ${incl[API10]}
 
-But it turns out that we can define `map` in terms of `flatMap` and `create`.
+$keyPoint But it turns out that we can define `map` in terms of `flatMap` and `create`.
 
 ${snippet{
 /**/
@@ -42,21 +42,21 @@ ${snippet{
       def flatMap[A, B](container: F[A])(function: A => F[B]): F[B]
       def create[B](value: B): F[B]
 
-      def map[A, B](container: F[A])(function: A => B): F[B] = flatMap(container)(function andThen create)
+      def map[A, B](container: F[A])(f: A => B): F[B] = flatMap(container)(f andThen create)
     }
   }}
 
 This means that if we define an instance, we only need to define `flatMap` and `create`.
 
  * `FlatMap` is called `bind` in ${Scalaz.md}.
- * It also often has the symbol >>=.
- * `Create` is called 'point' in ${Scalaz.md}.
+ * It also often has the ${operator_>>=}.
+ * `Create` is called $operator_point in ${Scalaz.md}.
 
 We called the implicit $monadInstance parameter `monadInstanceForF`.
 ${Scalaz.md} typically call these instances the same as the type they are for:
 
- * Our version:    `(implicit monadInstanceForF: Monad[F])`
- * Typical Scalaz: `(implicit F: Monad[F])`
+ * Our version:          `(implicit monadInstanceForF: Monad[F])`
+ * Typical ${Scalaz.md}: `(implicit F: Monad[F])`
 
 ${Scalaz.md} calls the 'contents' parameter 'run', so you can do: `myTransformer.run` to get the original structure out.
 
