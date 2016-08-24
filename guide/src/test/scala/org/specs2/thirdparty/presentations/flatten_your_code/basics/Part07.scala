@@ -89,6 +89,6 @@ ${snippet{
 
   }}
 
-Next ${link(Part06)}
+Next ${link(Part08)}
   """
 }

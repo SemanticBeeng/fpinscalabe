@@ -10,6 +10,10 @@ package object concepts {
 
   //
   val selfType = "self-type"
+  val ad_hocPolymorphism = "[ad-hoc polymorphism]"
+  val functionOverloading = "[function overloading]"
+  val glueObject = "[glue object]"
+
   /**
     * @todo https://hyp.is/iJIsfC2GEeam8q-I4gf9FA/archive.is/KAdCc
     */
@@ -19,6 +23,7 @@ package object concepts {
   val constructor = "[constructor]"
   val typeConstructor = "[type constructor]"
   val typeClass = "[type class]"
+  val typeClassInstance = "[type class instance]"
   val companionObject = "[companion object]"
   val taggedType = "[tagged type]"
   val higherKindedType = "[higher-Kinded type]"
