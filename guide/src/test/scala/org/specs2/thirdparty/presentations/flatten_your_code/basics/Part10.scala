@@ -1,6 +1,9 @@
 package org.specs2.thirdparty.presentations.flatten_your_code.basics
 
 import org.fp.concepts._
+
+import scala.language.higherKinds
+
 //
 import org.specs2.ugbase.UserGuidePage
 import org.specs2.common.SnippetHelper._
@@ -16,6 +19,53 @@ object Part10 extends UserGuidePage with API07_2  {
 Here's `FutureOption` again:
 
 ${incl[API07_2]}
+
+Note that from the outer container, `Future`, we only use the following:
+ - The `map` method
+ - The `flatMap` method
+ - Creating a new one: `Future.successful`
+
+As it turns out, these functionalities are part of a $typeClass called $monad:
+
+${snippet{
+/**/
+    import scala.concurrent.Future
+    import scala.concurrent.ExecutionContext.Implicits.global
+
+    trait Monad[F[_]] {
+      def map[A, B](container: F[A])(function: A => B): F[B]
+      def flatMap[A, B](container: F[A])(function: A => F[B]): F[B]
+      def create[B](value: B): F[B]
+    }
+
+    // Instance for Future:
+    val futureMonad = new Monad[Future] {
+      override def map[A, B](container: Future[A])(function: A => B) = container.map(function)
+      override def flatMap[A, B](container: Future[A])(function: A => Future[B]) = container.flatMap(function)
+      override def create[B](value: B) = Future.successful(value)
+    }
+
+  }}
+
+### Exercise
+
+Create a $monad instance for `Option`
+
+${snippet{
+    //8 <-- @todo duplicate
+    trait Monad[F[_]] {
+      def map[A, B](container: F[A])(function: A => B): F[B]
+      def flatMap[A, B](container: F[A])(function: A => F[B]): F[B]
+      def create[B](value: B): F[B]
+    }
+    //8 <--
+
+    val optionMonad = new Monad[Option] {
+      override def map[A, B](container: Option[A])(function: A => B) = container.map(function)
+      override def flatMap[A, B](container: Option[A])(function: A => Option[B]) = container.flatMap(function)
+      override def create[B](value: B) = Some(value)
+    }
+  }}
 
 Next ${link(Part08)}
   """

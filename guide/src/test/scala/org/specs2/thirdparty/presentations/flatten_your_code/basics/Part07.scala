@@ -11,8 +11,9 @@ import org.fp.thirdparty.flatten_your_code.snippets._
 /**
   *
   */
-object Part07 extends UserGuidePage with API07 with API07_2 {
+object Part07 extends UserGuidePage {
 
+  object Includes extends API07 with API07_2
   implicit lazy val ee = Env().executionEnv
   implicit lazy val ec = ee.ec
 
@@ -36,7 +37,7 @@ ${snippet{
 /**/
     // 8<--
     import scala.concurrent.Future
-    import Code07._
+    import Includes.Code07._
     // 8<--
 
     val multiBoxedA = Future(Option(5))
@@ -60,7 +61,7 @@ ${snippet{
 /**/
 // 8<--
     import scala.concurrent.Future
-    import Code07_2._
+    import Includes.Code07_2._
 // 8<--
     val multiBoxedA = Future(Option(5))
     val multiBoxedB = Future(Option(3))
