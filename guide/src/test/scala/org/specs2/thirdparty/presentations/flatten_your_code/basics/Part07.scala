@@ -1,19 +1,17 @@
 package org.specs2.thirdparty.presentations.flatten_your_code.basics
 
 import org.fp.concepts._
-//import org.specs2.guide.matchers.FutureMatchers._
-
 //
 import org.specs2.common.SnippetHelper._
-import org.specs2.matcher.FutureMatchers
 import org.specs2.specification.core.Env
 import org.specs2.ugbase.UserGuidePage
+//
 import org.fp.thirdparty.flatten_your_code.snippets.API07
 
 /**
   *
   */
-object Part07 extends UserGuidePage /*with FutureMatchers*/ with API07 {
+object Part07 extends UserGuidePage with API07 {
 
   implicit lazy val ee = Env().executionEnv
   implicit lazy val ec = ee.ec
@@ -35,8 +33,8 @@ ${incl[API07]}
 So we can use it like this:
 
 ${snippet{
+/**/
     // 8<--
-    import scala.concurrent.ExecutionContext.Implicits.global
     import scala.concurrent.Future
     import Code07._
     // 8<--
@@ -57,11 +55,8 @@ ${snippet{
 ### Solution
 
 ${snippet{
-    // 8<--
-//    import scala.concurrent.ExecutionContext.Implicits.global
+/**/
     import scala.concurrent.Future
-
-    // 8<--
 
     case class FutureOption[A](contents: Future[Option[A]]) {
       def flatMap[B](fn: A => FutureOption[B]) = FutureOption {

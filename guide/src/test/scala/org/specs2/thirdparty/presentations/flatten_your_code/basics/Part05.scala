@@ -1,6 +1,7 @@
 package org.specs2.thirdparty.presentations.flatten_your_code.basics
 
 import org.fp.concepts._
+import org.specs2.specification.core.Env
 
 //
 import org.specs2.ugbase.UserGuidePage
@@ -11,6 +12,9 @@ import org.fp.thirdparty.flatten_your_code.snippets.API04
   *
   */
 object Part05 extends UserGuidePage with API04 {
+
+  implicit lazy val ee = Env().executionEnv
+  implicit lazy val ec = ee.ec
 
   def is = s"Flatten your code : basics, part 5".title ^ s2"""
 
@@ -33,7 +37,6 @@ Future has a `flatMap` and `map` method as well, so can also be used in a $forCo
 ${snippet{
 /**/
     import scala.concurrent.Future
-    import scala.concurrent.ExecutionContext.Implicits.global
 
     val fa = Future(3)
     val fb = Future(5)
