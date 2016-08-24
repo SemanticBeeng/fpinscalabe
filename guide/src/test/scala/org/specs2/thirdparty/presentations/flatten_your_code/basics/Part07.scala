@@ -1,16 +1,22 @@
 package org.specs2.thirdparty.presentations.flatten_your_code.basics
 
 import org.fp.concepts._
+//import org.specs2.guide.matchers.FutureMatchers._
 
 //
 import org.specs2.common.SnippetHelper._
+import org.specs2.matcher.FutureMatchers
+import org.specs2.specification.core.Env
 import org.specs2.ugbase.UserGuidePage
 import org.fp.thirdparty.flatten_your_code.snippets.API07
 
 /**
   *
   */
-object Part07 extends UserGuidePage with API07 {
+object Part07 extends UserGuidePage /*with FutureMatchers*/ with API07 {
+
+  implicit lazy val ee = Env().executionEnv
+  implicit lazy val ec = ee.ec
 
   def is = s"Flatten your code : basics, part 7".title ^ s2"""
 
@@ -52,12 +58,12 @@ ${snippet{
 
 ${snippet{
     // 8<--
-    import scala.concurrent.ExecutionContext.Implicits.global
+//    import scala.concurrent.ExecutionContext.Implicits.global
     import scala.concurrent.Future
-    import Code07._
+
     // 8<--
 
-    case class FinishedFutureOption[A](contents: Future[Option[A]]) {
+    case class FutureOption[A](contents: Future[Option[A]]) {
       def flatMap[B](fn: A => FutureOption[B]) = FutureOption {
         contents.flatMap {
           case Some(value) => fn(value).contents
@@ -71,6 +77,21 @@ ${snippet{
         }
       }
     }
+
+    val multiBoxedA = Future(Option(5))
+    val multiBoxedB = Future(Option(3))
+
+    // Here, `a` and `b` are Int!
+    val result = for {
+      a <- FutureOption(multiBoxedA)
+      b <- FutureOption(multiBoxedB)
+    } yield a + b
+
+    // Then at the end, get the regular structure out of our FutureOption class
+    val finalFuture: Future[Option[Int]] = result.contents
+
+    check(finalFuture must be_==(Some(8)).await)
+
   }}
 
 Next ${link(Part06)}
