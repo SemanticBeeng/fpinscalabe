@@ -29,14 +29,12 @@ These are equivalent:
 
 ${snippet{
 
-    import scalaz.Scalaz._
+    import scalaz.syntax.id._
 
     def double(i: Int) = i * 2
 
-    val y1 = double(5)
-    val y2 = 5 |> double
-
-    }}
+    check(double(5) must_== 5 |> double)
+  }}
 
 ### Exercise
 
@@ -51,7 +49,7 @@ ${snippet{
     import scala.concurrent.Future
     import scalaz.std.scalaFuture.futureInstance
     import scalaz.OptionT
-    import scalaz.Scalaz._
+    import scalaz.syntax.id._
 
     for {
       username <- getUserName(data) |> Future.successful |> OptionT.apply

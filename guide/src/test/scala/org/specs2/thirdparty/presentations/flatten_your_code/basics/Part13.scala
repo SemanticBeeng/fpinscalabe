@@ -57,7 +57,7 @@ Now we need to do two things:
 1) Upgrade the `Option[A]` values to `Option[Future[A]]`, so they're all the same container type
 2) Put all `Option[Future[A]]` into an $optionTransformer, OptionT.
 
- |### Exercise: Make a $forComprehension
+### Exercise: Make a $forComprehension
 
   ${snippet {
       // 8 <--
@@ -78,6 +78,7 @@ Now we need to do two things:
     }}
 
 $keyPoint We finally have a compatible containers inside the $forComprehension.
-Next ${link(Part08)}
+
+Next ${link(Part14)}
 """
 }
