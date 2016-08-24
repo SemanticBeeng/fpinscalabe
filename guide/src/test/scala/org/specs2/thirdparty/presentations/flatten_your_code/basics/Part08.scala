@@ -31,8 +31,7 @@ ${snippet{
 
 Often impractical, because all classes must extend `Serializable`. What if we want to serialize `String` or `Int`???
 
-An alternative is $ad_hocPolymorphism
-$ad_hocPolymorphism is also known as $functionOverloading:
+An alternative is $ad_hocPolymorphism, also known as $functionOverloading:
 
 ${snippet{
 /**/
