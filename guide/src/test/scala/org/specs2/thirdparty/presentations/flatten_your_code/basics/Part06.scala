@@ -37,8 +37,8 @@ ${snippet{
       a <- fa
       b <- fb
 
-    } yield a.get - b.get
     //} @doesnotcompile yield a - b
+    } yield a.get - b.get
   }}
 
   """
