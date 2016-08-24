@@ -18,6 +18,7 @@ object Part13 extends UserGuidePage {
   object Includes extends API06
 
   def is = s"Flatten your code : basics, part 13".title ^ s2"""
+
 In parts ${link(Part08)} to ${link(Part12)}, we've derived a $monadTransformer, a class that transforms two containers
 into a single container, that can be conveniently used in a $forComprehension.
 
