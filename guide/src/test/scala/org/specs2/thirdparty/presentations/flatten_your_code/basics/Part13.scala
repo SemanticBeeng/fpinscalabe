@@ -63,10 +63,10 @@ Now we need to do two things:
       // 8 <--
       import Includes._
       // 8 <--
-    import scalaz.OptionT
-    import scala.concurrent.Future
-    import scala.concurrent.ExecutionContext.Implicits.global
-    import scalaz.std.scalaFuture.futureInstance
+      import scalaz.OptionT
+      import scala.concurrent.Future
+      import scala.concurrent.ExecutionContext.Implicits.global
+      import scalaz.std.scalaFuture.futureInstance
 
       for {
         username <- OptionT(Future.successful(getUserName(data)))
@@ -77,6 +77,7 @@ Now we need to do two things:
       } yield result
     }}
 
+$keyPoint We finally have a compatible containers inside the $forComprehension.
 Next ${link(Part08)}
 """
 }
