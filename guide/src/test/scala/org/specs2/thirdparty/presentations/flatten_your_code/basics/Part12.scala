@@ -27,7 +27,7 @@ ${Scalaz.md} defines a similar thing, and calls it $optionTransformer. The class
 
 Similarly, there is also an `EitherT`, an $eitherTransformer, which combines a `\/` (so not a `scala.Either`) with any other $monad.
 
-Keep in mind that an `OptionT` works when the `Option` is the *inner* container, so `Future[Option[A]]`, and not `Option[Future[A]]`.
+$keyPoint Keep in mind that an `OptionT` works when the `Option` is the *inner* container, so `Future[Option[A]]`, and not `Option[Future[A]]`.
 Similarly, an `EitherT` works with `Future[String \/ A]` or `Option[Throwable \/ A]` but not `String \/ Option[A]`.
 
 The $monad $typeClass that we defined looks like:
@@ -48,12 +48,15 @@ ${snippet{
 
 This means that if we define an instance, we only need to define `flatMap` and `create`.
 
-`flatMap` is called `bind` in ${Scalaz.md}. It also often has the symbol >>=. `create` is called 'point' in ${Scalaz.md}.
+ * `FlatMap` is called `bind` in ${Scalaz.md}.
+ * It also often has the symbol >>=.
+ * `Create` is called 'point' in ${Scalaz.md}.
 
 We called the implicit $monadInstance parameter `monadInstanceForF`.
 ${Scalaz.md} typically call these instances the same as the type they are for:
-Our version:    `(implicit monadInstanceForF: Monad[F])`
-Typical Scalaz: `(implicit F: Monad[F])`
+
+ * Our version:    `(implicit monadInstanceForF: Monad[F])`
+ * Typical Scalaz: `(implicit F: Monad[F])`
 
 ${Scalaz.md} calls the 'contents' parameter 'run', so you can do: `myTransformer.run` to get the original structure out.
 
