@@ -72,6 +72,8 @@ In this user guide, you will find:
  * ${link(presentations.flatten_your_code.basics.Part04)}
  * ${link(presentations.flatten_your_code.basics.Part05)}
  * ${link(presentations.flatten_your_code.basics.Part06)}
+ * ${link(presentations.flatten_your_code.basics.Part07)}
+
 """
 
 }

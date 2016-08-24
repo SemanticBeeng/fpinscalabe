@@ -1,8 +1,8 @@
 // 8<--
 package org.fp.thirdparty.flatten_your_code.snippets
 
-// 8<--
 trait API01 {
+  // 8<--
 
   // These are the service methods from which we're going to build a program.
   // We'll reuse these five methods in all the parts, although they will evolve a bit.
@@ -14,10 +14,11 @@ trait API01 {
   def sendEmail(email: String): Option[Boolean] = ???
 
   val data = Map[String, String]()
+  // 8<--
 }
+// 8<--
 
 trait User {
   def name: String
-
   def email : String
 }

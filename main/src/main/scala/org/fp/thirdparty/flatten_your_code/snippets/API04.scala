@@ -3,8 +3,8 @@ package org.fp.thirdparty.flatten_your_code.snippets
 
 import scalaz.{-\/, \/-, \/}
 
-// 8<--
 trait API04 {
+  // 8<--
 
   def getUserName: \/[String, String] =
     if(theRepo.nonEmpty) \/-(theRepo.head._1)
@@ -30,8 +30,9 @@ trait API04 {
 
   def getUserName2 = \/-(user2._1)
   lazy val userRepo = Map[String, User] (user1, user2)
+  // 8<--
 }
+// 8<--
 
-case class UserImpl(name: String, email: String) extends User
 
-
+  case class UserImpl(name: String, email: String) extends User

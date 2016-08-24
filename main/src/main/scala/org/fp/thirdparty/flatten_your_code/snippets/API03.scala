@@ -3,8 +3,8 @@ package org.fp.thirdparty.flatten_your_code.snippets
 
 import scalaz.\/
 
-// 8<--
 trait API03 {
+  // 8<--
 
   def getUserName(data: Map[String, String]): String \/ String = ???
   def getUser(name: String): String \/ User = ???
@@ -13,6 +13,8 @@ trait API03 {
   def sendEmail(email: String): String \/ Boolean = ???
 
   val data = Map[String, String]()
+  // 8<--
 }
+// 8<--
 
 

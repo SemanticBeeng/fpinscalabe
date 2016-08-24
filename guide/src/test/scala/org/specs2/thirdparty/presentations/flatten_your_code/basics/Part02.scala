@@ -76,9 +76,9 @@ ${snippet{
       user <- getUser(username).right
       //illTyped("""email = getEmail(user)""")
       validatedEmail <- validateEmail("no email").right
-      success <- sendEmail("no email").right
+      result <- sendEmail("no email").right
 
-    } yield success
+    } yield result
 
   }}
 

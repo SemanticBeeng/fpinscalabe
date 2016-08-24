@@ -42,15 +42,18 @@ Write the same program as in ${link(Part01)} and ${link(Part02)}, with a $forCom
 
 Now we can get rid of the `.right` that we had on Scala's `Either`, because `\/` is right-biased.
 
+### Solution
+
+
 ${snippet{
     for {
       username        <- getUserName(data)
       user            <- getUser(username)
       email            = getEmail(user)
       validatedEmail  <- validateEmail(email)
-      success         <- sendEmail(email)
+      result          <- sendEmail(email)
 
-    } yield success
+    } yield result
 
   }}
 

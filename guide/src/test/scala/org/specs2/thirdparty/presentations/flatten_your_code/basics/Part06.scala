@@ -41,5 +41,6 @@ ${snippet{
     } yield a.get - b.get
   }}
 
+Next ${link(Part07)}
   """
 }

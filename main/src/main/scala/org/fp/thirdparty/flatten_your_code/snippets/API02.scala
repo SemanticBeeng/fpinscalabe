@@ -1,8 +1,8 @@
 // 8<--
 package org.fp.thirdparty.flatten_your_code.snippets
 
-// 8<--
 trait API02 {
+  // 8<--
 
   def getUserName(data: Map[String, String]): Either[String, String] = ???
   def getUser(name: String): Either[String, User] = ???
@@ -11,6 +11,8 @@ trait API02 {
   def sendEmail(email: String): Either[String, Boolean] = ???
 
   val data = Map[String, String]()
+  // 8<--
 }
+// 8<--
 
 

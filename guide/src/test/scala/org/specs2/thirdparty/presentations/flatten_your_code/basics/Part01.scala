@@ -36,8 +36,6 @@ Not great: nested maps and flatMaps!
         }
       }
     }
-
-    success
   }}
 
 Exercise, rewrite the above as a $forComprehension
@@ -54,8 +52,6 @@ ${snippet{
       result    <- sendEmail(email)
 
     } yield result
-
-    success
   }}
 
 Next: ${link(Part02)}

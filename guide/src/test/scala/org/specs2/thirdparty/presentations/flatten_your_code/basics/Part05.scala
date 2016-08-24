@@ -56,7 +56,6 @@ ${snippet{
       b <- Option(5)
       _ = println("A = " + a)
       c <- Option(11)
-
     } yield a + b + c
 
   }}
