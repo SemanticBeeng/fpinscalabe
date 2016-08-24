@@ -79,6 +79,8 @@ Now we need to do two things:
 
 $keyPoint We finally have a compatible containers inside the $forComprehension.
 
+Prev ${link(Part12)}
+
 Next ${link(Part14)}
 """
 }

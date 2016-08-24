@@ -75,6 +75,8 @@ ${snippet{
     } yield result
   }}
 
+Prev ${link(Part05)}
+
 Next ${link(Part06)}
   """
 }

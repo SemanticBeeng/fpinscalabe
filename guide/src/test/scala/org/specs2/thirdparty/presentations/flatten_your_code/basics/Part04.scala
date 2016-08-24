@@ -162,6 +162,8 @@ ${snippet{
     } yield result
   }}
 
+Prev ${link(Part03)}
+
 Next ${link(Part05)}
 """
 

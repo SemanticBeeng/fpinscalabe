@@ -8,7 +8,6 @@ import org.fp.thirdparty.flatten_your_code.snippets.API06
 import scala.language.higherKinds
 //
 import org.specs2.ugbase.UserGuidePage
-//
 
 /**
   *
@@ -60,5 +59,6 @@ ${snippet{
     } yield success
   }}
 
+Prev ${link(Part13)}
 """
 }

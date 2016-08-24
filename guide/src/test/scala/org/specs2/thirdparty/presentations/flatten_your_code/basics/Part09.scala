@@ -38,6 +38,8 @@ ${snippet{
     }
   }}
 
+Prev ${link(Part08)}
+
 Next ${link(Part10)}
   """
 }

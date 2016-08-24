@@ -78,6 +78,8 @@ ${snippet{
     check(finalFuture must be_==(Some(8)).await)
   }}
 
+Prev ${link(Part06)}
+
 Next ${link(Part08)}
   """
 }
