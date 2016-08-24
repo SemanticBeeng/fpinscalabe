@@ -60,6 +60,6 @@ ${Scalaz.md} typically call these instances the same as the type they are for:
 
 ${Scalaz.md} calls the 'contents' parameter 'run', so you can do: `myTransformer.run` to get the original structure out.
 
-Next ${link(Part08)}
+Next ${link(Part12)}
   """
 }
