@@ -6,12 +6,12 @@ import org.specs2.common.SnippetHelper._
 import org.specs2.specification.core.Env
 import org.specs2.ugbase.UserGuidePage
 //
-import org.fp.thirdparty.flatten_your_code.snippets.API07
+import org.fp.thirdparty.flatten_your_code.snippets._
 
 /**
   *
   */
-object Part07 extends UserGuidePage with API07 {
+object Part07 extends UserGuidePage with API07 with API07_2 {
 
   implicit lazy val ee = Env().executionEnv
   implicit lazy val ec = ee.ec
@@ -54,25 +54,14 @@ ${snippet{
 
 ### Solution
 
+${incl[API07_2]}
+
 ${snippet{
 /**/
+// 8<--
     import scala.concurrent.Future
-
-    case class FutureOption[A](contents: Future[Option[A]]) {
-      def flatMap[B](fn: A => FutureOption[B]) = FutureOption {
-        contents.flatMap {
-          case Some(value) => fn(value).contents
-          case None => Future.successful(None)
-        }
-      }
-
-      def map[B](fn: A => B) = FutureOption {
-        contents.map { option =>
-          option.map(fn)
-        }
-      }
-    }
-
+    import Code07_2._
+// 8<--
     val multiBoxedA = Future(Option(5))
     val multiBoxedB = Future(Option(3))
 
@@ -86,7 +75,6 @@ ${snippet{
     val finalFuture: Future[Option[Int]] = result.contents
 
     check(finalFuture must be_==(Some(8)).await)
-
   }}
 
 Next ${link(Part08)}

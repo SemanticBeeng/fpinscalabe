@@ -22,6 +22,7 @@ Without looking at the previous part, create a type class `Serializable`, a func
 $typeClass, and instances for `Int` and `String`.
 
 ${snippet{
+/**/
     trait Serializable[A] {
       def serialize(value: A): Array[Byte]
     }
@@ -37,6 +38,6 @@ ${snippet{
     }
   }}
 
-Next ${link(Part08)}
+Next ${link(Part10)}
   """
 }
