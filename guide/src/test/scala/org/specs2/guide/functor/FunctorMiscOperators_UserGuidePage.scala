@@ -14,7 +14,7 @@ object FunctorMiscOperators_UserGuidePage extends UserGuidePage {
   A ${concepts.functor} has other operators besides ${concepts.operator_map}: ${concepts.operator_void}, ${concepts.operator_Fproduct}, ${concepts.operator_as}
   See examples:
 
-    * in ${resources.Scalaz.id} and ${resources.Cats.id}: ${Spec.is}
+    * in ${resources.Scalaz.id} and ${resources.Cats.id}: ${link(Spec)}
 
 """
 }

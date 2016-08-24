@@ -13,8 +13,7 @@ object FunctorFunctionComposition_UserGuidePage extends UserGuidePage {
 
   ${concepts.typeClass}s can be defined manually, the default ${resources.Scala.id} way, or automated using ${resources.Simulacrum.id}
 
-    * in ${resources.Scalaz.id} and  ${resources.Cats.id}: ${Spec.is}
-
+    * in ${resources.Scalaz.id} and  ${resources.Cats.id}: ${link(Spec)}
 
 """
 }

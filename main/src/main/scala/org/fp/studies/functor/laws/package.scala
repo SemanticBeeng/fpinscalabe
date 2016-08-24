@@ -25,8 +25,6 @@ package object laws {
       val identity: Int => Int = x => x
 
       import org.scalacheck.Arbitrary
-
-      import org.scalacheck.Arbitrary
       val anyList:List[Int] = Arbitrary.arbitrary[List[Int]].sample.get
       anyList map identity must_== anyList
     }

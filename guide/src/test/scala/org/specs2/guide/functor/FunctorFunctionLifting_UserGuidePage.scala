@@ -13,7 +13,7 @@ object FunctorFunctionLifting_UserGuidePage extends UserGuidePage {
 
   ${concepts.functor} ${concepts.functionLifting} makes sense for single argument functions
 
-    * in ${resources.Scalaz.id} ${Spec.is}
+    * in ${resources.Scalaz.id} ${link(Spec)}
 
 """
 }
