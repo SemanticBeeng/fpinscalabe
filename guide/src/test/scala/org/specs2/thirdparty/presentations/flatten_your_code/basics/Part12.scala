@@ -62,6 +62,6 @@ ${Scalaz.md} calls the 'contents' parameter 'run', so you can do: `myTransformer
 
 Prev ${link(Part11)}
 
-Next ${link(Part12)}
+Next ${link(Part13)}
   """
 }
