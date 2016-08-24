@@ -44,13 +44,16 @@ ${snippet{
 Rewrite the $forComprehension from ${link(Part13)}, but use `|>` for applying `Future.successful` and `EitherT.apply`
 
 ${snippet{
-
-    import scala.concurrent.Future
-    import scala.concurrent.ExecutionContext.Implicits.global
-    import scalaz.std.scalaFuture.futureInstance
-    import scalaz.Scalaz._
-    import scalaz._
+    // 8<--
     import Includes._
+    // 8<--
+
+    import scala.concurrent.ExecutionContext.Implicits.global
+    import scala.concurrent.Future
+    import scalaz.std.scalaFuture.futureInstance
+    import scalaz.OptionT
+    //import scalaz.syntax.std.option._
+    import scalaz.Scalaz._
 
     for {
       username <- getUserName(data) |> Future.successful |> OptionT.apply
