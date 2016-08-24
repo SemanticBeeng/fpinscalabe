@@ -7,9 +7,9 @@ package org.fp.thirdparty.flatten_your_code.snippets
 trait API07 {
 
   object Code07 {
-    // 8<--
 
     import scala.concurrent.ExecutionContext.Implicits.global
+    // 8<--
     import scala.concurrent.Future
 
     case class FutureOption[A](contents: Future[Option[A]]) {
