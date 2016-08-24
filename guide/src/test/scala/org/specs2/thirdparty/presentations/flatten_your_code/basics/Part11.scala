@@ -48,7 +48,7 @@ ${snippet{
     }
   }}
 
-So now you can not only use it for `Future[Option[Int]`, but for any other outer $monad as well, like `Option[Option[Int]]` or `String \/ Option[Int]`
+$keyPoint So now you can not only use it for `Future[Option[Int]`, but for any other outer $monad as well, like `Option[Option[Int]]` or `String \/ Option[Int]`
 
 Next ${link(Part08)}
   """
