@@ -7,12 +7,14 @@ import scala.language.higherKinds
 //
 import org.specs2.ugbase.UserGuidePage
 import org.specs2.common.SnippetHelper._
-import org.fp.thirdparty.flatten_your_code.snippets.API07_2
+import org.fp.thirdparty.flatten_your_code.snippets.{API10, API07_2}
 
 /**
   *
   */
-object Part10 extends UserGuidePage with API07_2  {
+object Part10 extends UserGuidePage {
+
+  object Includes extends API07_2 with API10
 
   def is = s"Flatten your code : basics, part 10".title ^ s2"""
 
@@ -27,16 +29,15 @@ Note that from the outer container, `Future`, we only use the following:
 
 As it turns out, these functionalities are part of a $typeClass called $monad:
 
+${incl[API10]}
+
 ${snippet{
 /**/
+    // 8<--
+    import Includes.Code10._
+    // 8<--
     import scala.concurrent.Future
     import scala.concurrent.ExecutionContext.Implicits.global
-
-    trait Monad[F[_]] {
-      def map[A, B](container: F[A])(function: A => B): F[B]
-      def flatMap[A, B](container: F[A])(function: A => F[B]): F[B]
-      def create[B](value: B): F[B]
-    }
 
     // Instance for Future:
     val futureMonad = new Monad[Future] {
@@ -52,13 +53,9 @@ ${snippet{
 Create a $monad instance for `Option`
 
 ${snippet{
-    //8 <-- @todo duplicate
-    trait Monad[F[_]] {
-      def map[A, B](container: F[A])(function: A => B): F[B]
-      def flatMap[A, B](container: F[A])(function: A => F[B]): F[B]
-      def create[B](value: B): F[B]
-    }
-    //8 <--
+    // 8<--
+    import Includes.Code10._
+    // 8<--
 
     val optionMonad = new Monad[Option] {
       override def map[A, B](container: Option[A])(function: A => B) = container.map(function)
