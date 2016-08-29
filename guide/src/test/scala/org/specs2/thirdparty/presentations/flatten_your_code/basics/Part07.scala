@@ -51,6 +51,7 @@ ${snippet{
 
     // Then at the end, get the regular structure out of our FutureOption class
     val finalFuture: Future[Option[Int]] = result.contents
+    finalFuture
   }}
 
 ### Solution

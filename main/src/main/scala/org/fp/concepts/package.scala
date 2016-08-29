@@ -133,5 +133,10 @@ package object concepts {
   val monadTransformer = "[monad transformer]"
   val optionTransformer = "[Option transformer]"
   val eitherTransformer = "[Either transformer]"
+
+  /**
+    *
+    */
+  val disjunction = "[disjunction]"
 }
 
