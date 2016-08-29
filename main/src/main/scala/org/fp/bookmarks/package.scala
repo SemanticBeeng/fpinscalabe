@@ -84,6 +84,6 @@ package object bookmarks {
   val ann_FunctionComposition2 = Annotation(misc, "https://hyp.is/PNXgflPfEeaHsM_E9LlnXA/archive.is/KxWQi")
   val ann_FunctionComposition3 = Annotation(misc, "https://hyp.is/Cfyb6lPTEeavpluPrCcJIg/archive.is/KxWQi")
   val ann_FunctionComposition4 = Annotation(misc, "https://hyp.is/tsV47lPWEea2UM_9Ok-g8A/archive.is/KxWQi")
-
+  val ann_ScalazDisjunction = Annotation(misc, "http://codegists.com/snippet/scala/scalaz-disjunctionscala_manjuraj_scala")
 
 }

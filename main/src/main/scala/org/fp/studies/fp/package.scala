@@ -13,16 +13,18 @@ import org.specs2.specification.dsl.mutable.{AutoExamples, TextDsl}
 package object fp {
 
   /**
+    * [[disjunction]] in [[Scalaz]]
     *
     */
-  object Spec1 extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
+  object Spec1 extends org.specs2.mutable.Specification with AutoExamples with TextDsl {
 
+    s"$bookmarks: $ann_ScalazDisjunction"
     s"$keyPoint About $disjunction" +
-    s"""
-       |Disjunction - aka $Scalaz Either `\/[A, B]` is an alternative to `Either[A, B]`.
+    s2"""
+       |Disjunction - aka ${Scalaz.md} Either `\/[A, B]` is an alternative to `Either[A, B]`.
        |
-       |- `-\/` is Left  (usually represents failure by convention)
-       |- `\/-` is Right (usually represents success by convention)
+       | * `-\/` is Left  (usually represents failure by convention)
+       | * `\/-` is Right (usually represents success by convention)
        |
        ### |Left or Right - which side of the Disjunction does the "-" appear?
        |
@@ -52,7 +54,7 @@ package object fp {
        |
        """.stripMargin.p
 
-    s"""Builders:
+    s2"""Builders:
         |- using the disjunction singleton instances \/- and -\/
         |- left method
         |- right method
@@ -71,7 +73,7 @@ package object fp {
       (\/.left("left"): \/[String, Nothing]) must_== -\/("left")
     }
 
-    s"Isomorphism: Either[A, B] <> \/[A, B]".p
+    s2"""Isomorphism: Either[A, B] <> \/[A, B]""".p
     eq {
       import scalaz.{\/, -\/, \/-}
 
@@ -162,7 +164,7 @@ package object fp {
       fc3 must_== -\/("e")
     }
 
-    s"""Option[A] => \/[E, A]
+    s2"""Option[A] => \/[E, A]
         |\/>[E]
         |toRightDisjunction[E](e: => E): E \/ A = o.toRight(self)(e)
         |toLeftDisjunction[A]
