@@ -66,6 +66,9 @@ package object concepts {
   val operator_map = "[map operator]"
   val operator_mapK = "[mapK operator]"
   val operator_flatMap = "[flatMap operator]"
+  val operator_leftMap = "[leftMap operator]"
+  val operator_swap = "[swap operator]"
+  val operator_swapped = "[swapped operator]"
   val operator_lift = "[lift operator]"
   val operator_void = "[void operator]"
   val operator_Fproduct = "[fproduct operator]"
@@ -138,5 +141,7 @@ package object concepts {
     *
     */
   val disjunction = "[disjunction]"
+  val leftProjection = "[left projection]"
+  val rightProjection = "[right projection]"
 }
 

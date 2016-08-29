@@ -26,33 +26,33 @@ package object fp {
        | * `-\/` is Left  (usually represents failure by convention)
        | * `\/-` is Right (usually represents success by convention)
        |
-       ### |Left or Right - which side of the Disjunction does the "-" appear?
+       |### Left or Right - which side of the $disjunction does the "-" appear?
        |
-       |Prefer infix notation to express Disjunction Type `v: String \/ Double`
+       |Prefer infix notation to express $disjunction type `v: String \/ Double`
        |
        |References
-       |- http://eed3si9n.com/learning-scalaz/Either.html
+       |- http://eed3si9n.com/learning-scalaz/Either.html @todo
        |
-       |A common use of a disjunction is to explicitly represent the possibility of failure in a result as opposed to throwing an
+       |A common use of a $disjunction is to explicitly represent the possibility of failure in a result as opposed to throwing an
        |exception. By convention, the `Left -\/` is used for errors and the right `\/-` is reserved for successes.
        |
        |For example, a function that attempts to parse an integer from a string may have a return type of `\/[NumberFormatException, Int]`.
        |
-       |However, since there is no need to actually throw an exception, the type A chosen for the "left" could be any type representing an error and has
-       |no need to actually extend Exception
+       |However, since there is no need to actually throw an exception, the type `A` chosen for the "left" could be any type representing
+       |an error and has no need to actually extend Exception
        |
-       |`\/[A, B]` is isomorphic to `scala.Either[A, B]`, but `\/` is is right-biased, so methods such as `$operator_map` and `$operator_flatMap` apply
-       |only in the context of the "right" case. This right bias makes `\/` more convenient to use than `scala.Either` in a $monadicContext.
+       |`\/[A, B]` is isomorphic to `scala.Either[A, B]`, but `\/` is is right-biased, so methods such as `$operator_map` and `$operator_flatMap`
+       |apply only in the context of the "right" case. This right bias makes `\/` more convenient to use than `scala.Either` in a $monadicContext.
        |
        |
-       |Methods such as `swap`, `swapped`, and `leftMap` provide functionality that `scala.Either` exposes through left projections
+       |Methods such as $operator_swap, $operator_swapped, and $operator_leftMap provide functionality that `scala.Either` exposes through $leftProjection.
        |
-       |`\/[A, B\` is also isomorphic to `Validation[A, B]`. The subtle but important difference is that $applyFunctor instances for `Validation`
+       |`\/[A, B]` is also isomorphic to `Validation[A, B]`. The subtle but important difference is that $applicativeFunctor instances for `Validation`
        |accumulates errors ("lefts") while $applyFunctor instances for `\/` "fail fast" on the first "left" they evaluate.
        |
-       |This fail-fast behavior allows `\/` to have lawful $monad instances that are consistent with their $applyFunctor instances, while Validation cannot.
+       |This fail-fast behavior allows `\/` to have lawful $monad instances that are consistent with their $applicativeFunctor instances, while `Validation` cannot.
        |
-       """.stripMargin.p
+       """
 
     s2"""Builders:
         |- using the disjunction singleton instances \/- and -\/
@@ -61,19 +61,23 @@ package object fp {
         |- fromEither method
         |""".p
     eg {
-
       import scalaz.{\/, -\/, \/-}
 
-      (\/-("right"): \/-[String]) must_== \/-("right")
+      \/-("right") must beAnInstanceOf[\/-[String]]
+      \/-("right") must_== \/-("right")
 
-      (-\/("left"): -\/[String]) must_== -\/("left")
+      \/.right("right") must beAnInstanceOf[\/[Nothing, String]]
+      \/.right("right") must_== \/-("right")
 
-      (\/.right("right"): \/[Nothing, String]) must_== \/-("right")
+      -\/("left")  must beAnInstanceOf[-\/[String]]
+      -\/("left")  must_== -\/("left")
 
-      (\/.left("left"): \/[String, Nothing]) must_== -\/("left")
+      \/.left("left")   must beAnInstanceOf[\/[String, Nothing]]
+      \/.left("left")   must_== -\/("left")
     }
 
-    s2"""Isomorphism: Either[A, B] <> \/[A, B]""".p
+    s2"""There is an isomorphism between `Either[A, B]` and `\/[A, B]`.""".p
+    s2"""From `\/[A, B]` to `Either[A, B]`.""".p
     eq {
       import scalaz.{\/, -\/, \/-}
 
@@ -94,6 +98,7 @@ package object fp {
       e_left.toEither must_== Left("left")
     }
 
+    s2"""From `Either[A, B]` to `\/[A, B]`.""".p
     eg {
       import scalaz.{\/, -\/, \/-}
       import scalaz.syntax.std.either._
@@ -105,9 +110,9 @@ package object fp {
       Right("right").disjunction must_== \/-("right")
     }
 
-    s2"""Try[A] => \/[Throwable, A]""".p
+    s2"""From `Try[A]` to `\/[Throwable, A]`.""".p
     eg {
-      import scalaz.{\/, -\/, \/-}
+      import scalaz.{\/, -\/}
 
       val e1 = \/.fromTryCatchNonFatal[Int](throw new RuntimeException("runtime error"))
 
@@ -120,6 +125,7 @@ package object fp {
       e2 must_== -\/(new java.lang.ArithmeticException("/ by zero"))
     }
 
+    s2"""Implicit comversion to `\/[A, Nothing]` and `\/[A, B]`.""".p
     eg {
       import scalaz.{\/, -\/, \/-}
       import scalaz.syntax.either._
@@ -135,6 +141,12 @@ package object fp {
 
       "left".left[Double] must beAnInstanceOf[\/[String, Double]]
       "left".left[Double] must_== -\/("left")
+    }
+
+    s2"""Use of `\/[A, B]` in $forComprehension-s.""".p
+    eg {
+      import scalaz.{\/, -\/, \/-}
+      import scalaz.syntax.either._
 
       val fc1 = for {
         a <- "a".right[String]
@@ -163,11 +175,11 @@ package object fp {
       fc3 must_== -\/("e")
     }
 
-    s2"""Option[A] => \/[E, A]
-        |\/>[E]
-        |toRightDisjunction[E](e: => E): E \/ A = o.toRight(self)(e)
-        |toLeftDisjunction[A]
-        |<\/[A]
+    s2"""From `Option[A]` to `\/[E, A]`
+        |`\/>[E]`
+        |`toRightDisjunction[E](e: => E): E \/ A = o.toRight(self)(e)`
+        |`toLeftDisjunction[A]`
+        |`<\/[A]`
       """.p
     eg {
       import scalaz._
