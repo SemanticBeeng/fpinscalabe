@@ -105,6 +105,8 @@ object Spec1 extends org.specs2.mutable.Specification with AutoExamples with Tex
     import scalaz.{\/, -\/}
 
     val r_excp: RuntimeException = new scala.RuntimeException("runtime error")
+
+    s"`fromTryCatchNonFatal` catches any specific exception, and returns a $disjunction".p
     val e1 = \/.fromTryCatchNonFatal[Int](throw r_excp)
 
     e1 must beAnInstanceOf[Throwable \/ Int]
