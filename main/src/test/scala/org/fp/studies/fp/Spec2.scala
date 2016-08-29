@@ -8,9 +8,6 @@ import org.fp.bookmarks._
 import org.specs2.specification.dsl.mutable.{AutoExamples, TextDsl}
 
 /**
-  *
-  */
-/**
   * [[disjunction]] in [[Scalaz]]
   *
   */
@@ -110,10 +107,11 @@ object Spec2 extends org.specs2.mutable.Specification with AutoExamples with Tex
   eg {
     import scalaz.{\/, -\/}
 
-    val e1 = \/.fromTryCatchNonFatal[Int](throw new RuntimeException("runtime error"))
+    val excp: RuntimeException = new scala.RuntimeException("runtime error")
+    val e1 = \/.fromTryCatchNonFatal[Int](throw excp)
 
     e1 must beAnInstanceOf[Throwable \/ Int]
-    e1 must_== -\/(new RuntimeException("runtime error"))
+    e1 must_== -\/(excp)
 
     val e2 = \/.fromTryCatchNonFatal[Int](1 / 0)
 
