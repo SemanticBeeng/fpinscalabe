@@ -81,6 +81,7 @@ In this user guide, you will find:
  * ${link(presentations.flatten_your_code.basics.Part13)}
  * ${link(presentations.flatten_your_code.basics.Part14)}
 
+ * ${link(org.fp.studies.fp.Spec1)}
  * ${link(org.fp.studies.fp.Spec2)}
 """
 
