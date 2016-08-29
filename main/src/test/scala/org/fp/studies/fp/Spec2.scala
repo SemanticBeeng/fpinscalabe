@@ -256,6 +256,7 @@ object Spec2 extends org.specs2.mutable.Specification with AutoExamples with Tex
         if (born.isAfter(LocalDate.now().minusYears(12))) AGE_TOO_YOUNG.failure
         else born.success
 
+      // compose field level validations
       (validName(musician.name) |@| validateAge(musician.born))((_, _) => musician)
     }
 
