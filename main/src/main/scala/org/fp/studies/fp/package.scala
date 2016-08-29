@@ -19,14 +19,12 @@ package object fp {
   object Spec1 extends org.specs2.mutable.Specification with AutoExamples with TextDsl {
 
     s"$bookmarks: $ann_ScalazDisjunction"
-    s"$keyPoint About $disjunction" +
-    s2"""
-       |Disjunction - aka ${Scalaz.md} Either `\/[A, B]` is an alternative to `Either[A, B]`.
+    s2"""$keyPoint Disjunction - aka ${Scalaz.md} Either `\/[A, B]` is an alternative to `Either[A, B]`.
        |
        | * `-\/` is Left  (usually represents failure by convention)
        | * `\/-` is Right (usually represents success by convention)
        |
-       |### Left or Right - which side of the $disjunction does the "-" appear?
+       |Left or Right - which side of the $disjunction does the "-" appear?
        |
        |Prefer infix notation to express $disjunction type `v: String \/ Double`
        |
