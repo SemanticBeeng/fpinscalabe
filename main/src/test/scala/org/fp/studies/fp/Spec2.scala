@@ -159,7 +159,7 @@ object Spec2 extends org.specs2.mutable.Specification with AutoExamples with Tex
     } yield (a, e)
 
     fc2 must beAnInstanceOf[String \/ (String, Int)]
-    fc2 must_== -\/("e1")
+    fc2 must_== -\/("e")
 
     val fc3 = for {
       a <- "a".right[String]
