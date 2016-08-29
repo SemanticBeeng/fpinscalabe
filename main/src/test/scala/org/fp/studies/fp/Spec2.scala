@@ -231,26 +231,29 @@ object Spec2 extends org.specs2.mutable.Specification with AutoExamples with Tex
     List(1, 2, 3).map(f).sequenceU must_== -\/("failure")
   }
 
+  s2"""Validation""".p
   eg {
     import scalaz.{\/, -\/, \/-, Validation}
-    import scalaz.syntax.std.string._
-    import scalaz.syntax.validation._
-    import scalaz.syntax.applicative._
-    import scalaz.std.AllInstances._
 
     import java.time.LocalDate
 
     case class Musician(name: String, born: LocalDate)
 
+    object Errors {
+      val NAME_EMPTY = "name: cannot be empty."
+      val AGE_TOO_YOUNG = "age: too young."
+    }
+
     def validate(musician: Musician): Validation[String, Musician] = {
+      import Errors._
       import scalaz.Scalaz._
 
       def validName(name: String): Validation[String, String] =
-        if (name.isEmpty) "name cannot be empty".failure
+        if (name.isEmpty) NAME_EMPTY.failure
         else name.success
 
       def validateAge(born: LocalDate): Validation[String, LocalDate] =
-        if (born.isAfter(LocalDate.now().minusYears(12))) "too young".failure
+        if (born.isAfter(LocalDate.now().minusYears(12))) AGE_TOO_YOUNG.failure
         else born.success
 
       (validName(musician.name) |@| validateAge(musician.born))((_, _) => musician)
@@ -263,6 +266,7 @@ object Spec2 extends org.specs2.mutable.Specification with AutoExamples with Tex
       case _ => \/-(Musician("", LocalDate.now()))
     }
 
-    r must_== -\/("name cannot be emptytoo young")
+    //@todo improve the error collection
+    r must_== -\/(Errors.NAME_EMPTY + Errors.AGE_TOO_YOUNG)
   }
 }
