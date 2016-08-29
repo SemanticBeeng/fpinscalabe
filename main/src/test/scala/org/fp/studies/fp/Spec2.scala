@@ -45,14 +45,14 @@ object Spec2 extends org.specs2.mutable.Specification with AutoExamples with Tex
      |
        |This fail-fast behavior allows `\/` to have lawful $monad instances that are consistent with their $applicativeFunctor instances, while `Validation` cannot.
      |
-       """
+       """.stripMargin.p
 
   s2"""Builders:
        |- using the disjunction singleton instances \/- and -\/
        |- left method
        |- right method
        |- fromEither method
-       |""".p
+       |""".stripMargin.p
   eg {
     import scalaz.{\/, -\/, \/-}
 
@@ -180,7 +180,7 @@ object Spec2 extends org.specs2.mutable.Specification with AutoExamples with Tex
        |`toRightDisjunction[E](e: => E): E \/ A = o.toRight(self)(e)`
        |`toLeftDisjunction[A]`
        |`<\/[A]`
-      """.p
+      """.stripMargin.p
   eg {
     import scalaz._
     import syntax.std.option._
