@@ -143,5 +143,6 @@ package object concepts {
   val disjunction = "[disjunction]"
   val leftProjection = "[left projection]"
   val rightProjection = "[right projection]"
+  val validation = "[validation]"
 }
 

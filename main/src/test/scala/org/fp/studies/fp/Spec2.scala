@@ -13,7 +13,7 @@ import org.specs2.specification.dsl.mutable.{AutoExamples, TextDsl}
   */
 object Spec2 extends org.specs2.mutable.Specification with AutoExamples with TextDsl {
 
-  s"$bookmarks: $ann_ScalazDisjunction"
+  s"$bookmarks: $ann_ScalazDisjunction1"
   s2"""$keyPoint Disjunction - aka ${Scalaz.md} Either `\/[A, B]` is an alternative to `Either[A, B]`.
      |
        | * `-\/` is Left  (usually represents failure by convention)
@@ -62,11 +62,11 @@ object Spec2 extends org.specs2.mutable.Specification with AutoExamples with Tex
     \/.right("right") must beAnInstanceOf[Nothing \/ String]
     \/.right("right") must_== \/-("right")
 
-    -\/("left")  must beAnInstanceOf[-\/[String]]
-    -\/("left")  must_== -\/("left")
+    -\/("left") must beAnInstanceOf[-\/[String]]
+    -\/("left") must_== -\/("left")
 
-    \/.left("left")   must beAnInstanceOf[String \/ Nothing]
-    \/.left("left")   must_== -\/("left")
+    \/.left("left") must beAnInstanceOf[String \/ Nothing]
+    \/.left("left") must_== -\/("left")
   }
 
   s2"""There is an isomorphism between `Either[A, B]` and `\/[A, B]`.""".p
@@ -114,7 +114,7 @@ object Spec2 extends org.specs2.mutable.Specification with AutoExamples with Tex
     e1 must_== -\/(r_excp)
 
     val excp = new java.lang.ArithmeticException()
-    def div(a: Int, b: Int) : Int = b match {
+    def div(a: Int, b: Int): Int = b match {
       case 0 => throw excp
       case _ => a / b
     }
@@ -222,7 +222,7 @@ object Spec2 extends org.specs2.mutable.Specification with AutoExamples with Tex
     List(1, 2, 3).traverseU(f) must_== -\/("failure")
 
     List(3, 4, 5).traverseU(f) must beAnInstanceOf[String \/ List[Int]]
-    List(3, 4, 5).traverseU(f)  must_== \/-(List(3, 4, 5))
+    List(3, 4, 5).traverseU(f) must_== \/-(List(3, 4, 5))
 
     List(3, 4, 5).map(f).sequenceU must beAnInstanceOf[String \/ List[Int]]
     List(3, 4, 5).map(f).sequenceU must_== \/-(List(3, 4, 5))
@@ -231,9 +231,10 @@ object Spec2 extends org.specs2.mutable.Specification with AutoExamples with Tex
     List(1, 2, 3).map(f).sequenceU must_== -\/("failure")
   }
 
+  s"$bookmarks: $ann_ScalazValidation1"
   s2"""Validation""".p
   eg {
-    import scalaz.{\/, -\/, \/-, Validation}
+    import scalaz.{\/, -\/, \/-, ValidationNel, NonEmptyList}
 
     import java.time.LocalDate
 
@@ -244,20 +245,21 @@ object Spec2 extends org.specs2.mutable.Specification with AutoExamples with Tex
       val AGE_TOO_YOUNG = "age: too young."
     }
 
-    def validate(musician: Musician): Validation[String, Musician] = {
+    def validate(musician: Musician): ValidationNel[String, Musician] = {
       import Errors._
       import scalaz.Scalaz._
 
-      def validName(name: String): Validation[String, String] =
-        if (name.isEmpty) NAME_EMPTY.failure
+      def validName(name: String): ValidationNel[String, String] =
+        if (name.isEmpty) NAME_EMPTY.failureNel
         else name.success
 
-      def validateAge(born: LocalDate): Validation[String, LocalDate] =
-        if (born.isAfter(LocalDate.now().minusYears(12))) AGE_TOO_YOUNG.failure
+      def validateAge(born: LocalDate): ValidationNel[String, LocalDate] =
+        if (born.isAfter(LocalDate.now().minusYears(12))) AGE_TOO_YOUNG.failureNel
         else born.success
 
-      // compose field level validations
-      (validName(musician.name) |@| validateAge(musician.born))((_, _) => musician)
+      s"$validation in an $applicativeFunctor: many can be composed or chained together".p
+      s"$bookmarks: $ann_ScalazValidation2"
+      (validName(musician.name) |@| validateAge(musician.born)) ((_, _) => musician)
     }
 
     val either: \/[String, Musician] = \/-(Musician("", LocalDate.now().minusYears(11)))
@@ -268,6 +270,148 @@ object Spec2 extends org.specs2.mutable.Specification with AutoExamples with Tex
     }
 
     //@todo improve the error collection
-    r must_== -\/(Errors.NAME_EMPTY + Errors.AGE_TOO_YOUNG)
+    s"If any failure in the chain, failure wins: All errors get appended together".p
+    r must_== -\/(NonEmptyList(Errors.NAME_EMPTY, Errors.AGE_TOO_YOUNG))
   }
+
+/*
+  s"$bookmarks: $ann_ScalazValidation3"
+  eg {
+    import scalaz._
+    import Scalaz._
+    import scalaz.Validation.FlatMap._
+
+    def loadCsv(): List[String] = {
+      List("1,me,3,4", "2,he,0,100", "No3,aaaaaaaaaaaaaaaa,1,10")
+    }
+
+    case class ScoreRange(min: Int, max: Int)
+    case class Entity(id: Long, name: String, scoreRange: ScoreRange)
+
+    def batchUpdate(entities: List[Entity]) = println(entities)
+    def outputErrors(errors: List[String]) = println(errors)
+    def validate(records: List[String]): ValidationNel[String, List[Entity]] = {
+      records.foldMap { record =>
+        for {
+          columns <- validateColumn(record)
+          entity <- validateEntity(columns)
+        } yield List(entity)
+      }
+    }
+
+    //----------
+    def validate2(record: String): ValidationNel[ErrorInfo, Entity] = {
+      (for {
+        columns <- validateColumn(record)
+        entity <- validateEntity(columns)
+      } yield entity) leftMap { e =>
+        (e.toList, record).wrapNel
+      }
+    }
+    //----------
+
+    def validateColumn(record: String): ValidationNel[String, Array[String]] = {
+      val columns = record.split(",")
+      if (columns.size == 4) columns.successNel
+      else "less columns".failureNel
+    }
+    def validateEntity(col: Array[String]): ValidationNel[String, Entity] = {
+      (validateId(col(0)) |@|
+        validateName(col(1)) |@|
+        validateScoreRange(col(2), col(3))) (Entity)
+    }
+    def validateId(id: String): ValidationNel[String, Long] = {
+      Validation.fromTryCatchNonFatal(id.toLong).leftMap(_ => NonEmptyList("invalid id"))
+    }
+    def validateName(name: String): ValidationNel[String, String] = {
+      if (name.size <= 10) name.successNel
+      else "name too long".failureNel
+    }
+    def validateScoreNum(num: String, column: String): ValidationNel[String, Int] = {
+      Validation.fromTryCatchNonFatal(num.toInt).leftMap(_ => NonEmptyList(s"invalid $column"))
+    }
+    def validateMinMax(min: String, max: String): ValidationNel[String, (Int, Int)] = {
+      (validateScoreNum(min, "min") |@| validateScoreNum(max, "max")) ((x, y) => (x, y))
+    }
+    def validateScoreRangeConstraint(min: Int, max: Int): ValidationNel[String, ScoreRange] = {
+      if (min <= max) ScoreRange(min, max).successNel
+      else "min is grater than max".failureNel
+    }
+    def validateScoreRange(min: String, max: String): ValidationNel[String, ScoreRange] = {
+      validateMinMax(min, max).flatMap { case (n, x) => validateScoreRangeConstraint(n, x) }
+    }
+
+    val records: List[String] = loadCsv()
+    val validated: ValidationNel[String, List[Entity]] = validate(records)
+
+    println("== validated1 ==")
+    validated match {
+      case Success(entities) => batchUpdate(entities)
+      case Failure(errors) => outputErrors(errors.toList)
+    }
+
+    type ErrorInfo = (List[String], String)
+    val validated2: List[ValidationNel[ErrorInfo, Entity]] = records.map(validate2)
+    val results2: (List[ErrorInfo], List[Entity]) = validated2.foldMap {
+      case Success(s) => (Nil, List(s))
+      case Failure(f) => (f.toList, Nil)
+    }
+    println("== validated2 ==")
+    println("errors:")
+    println(results2._1)
+    println("entities:")
+    println(results2._2)
+
+    //  object X {
+    //object X extends App {
+    import scalaz.std.list._
+    import scalaz.std.tuple._
+    import scalaz.syntax.foldable._
+
+    // def tuple2[A, B](ma: Monoid[A], mb: Monoid[B]): Monoid[(A, B)]
+    // new Monoid[(A, B)] {
+    //   def zero: (A, B) = (ma.zero, mb.zero)
+    //   def append(x: (A, B), y: (A, B)): (A, B) = {
+    //     (ma.append(x._1, y._1), mb.append(x._2, y._2))
+    //   }
+    // }
+
+    case class Product(name: String)
+
+    case class Item(name: String)
+
+    val products: List[Product] = List(
+      Product("foo"),
+      Product("bar")
+    )
+
+    def createItem(product: Product): Item = Item(product.name)
+
+    def createCodes(name: String, item: Item): List[String] = List(name)
+
+    // val allItems = products.foldMap { p => List(createItem(p)) }
+    // val allCodes = products.foldMap { p =>
+    //   createCodes(p.name, createItem(p))
+    // }
+
+    val (allItems, allCodes) = products.foldMap { p =>
+      val item = createItem(p)
+      (List(item), createCodes(p.name, item))
+    }
+
+    println(allItems)
+    println(allCodes)
+
+    allItems must_== List()
+    //1 must_== 1
+  }
+*/
+
+  /**
+    * @todo http://codegists.com/snippet/scala/scalaz-validationscala_animatedlew_scala
+    * @todo http://codegists.com/snippet/scala/scalaz-nelscala_manjuraj_scala
+    * @todo http://codegists.com/snippet/scala/scalaz-examplesscala_rodoherty1_scala
+    * @todo http://codegists.com/snippet/scala/scalaz-monad-transformersscala_matterche_scala
+    * @todo http://codegists.com/snippet/scala/scalaz-streams-task-esscala_taisukeoe_scala
+    */
 }
