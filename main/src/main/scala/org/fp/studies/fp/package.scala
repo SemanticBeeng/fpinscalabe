@@ -199,7 +199,6 @@ package object fp {
     }
 
     eg {
-      //import scalaz._
       import scalaz.{\/, -\/, \/-}
       import scalaz.std.list._
       import scalaz.syntax.traverse._
