@@ -230,4 +230,39 @@ object Spec2 extends org.specs2.mutable.Specification with AutoExamples with Tex
     List(1, 2, 3).map(f).sequenceU must beAnInstanceOf[String \/ List[Int]]
     List(1, 2, 3).map(f).sequenceU must_== -\/("failure")
   }
+
+  eg {
+    import scalaz.{\/, -\/, \/-, Validation}
+    import scalaz.syntax.std.string._
+    import scalaz.syntax.validation._
+    import scalaz.syntax.applicative._
+    import scalaz.std.AllInstances._
+
+    import java.time.LocalDate
+
+    case class Musician(name: String, born: LocalDate)
+
+    def validate(musician: Musician): Validation[String, Musician] = {
+      import scalaz.Scalaz._
+
+      def validName(name: String): Validation[String, String] =
+        if (name.isEmpty) "name cannot be empty".failure
+        else name.success
+
+      def validateAge(born: LocalDate): Validation[String, LocalDate] =
+        if (born.isAfter(LocalDate.now().minusYears(12))) "too young".failure
+        else born.success
+
+      (validName(musician.name) |@| validateAge(musician.born))((_, _) => musician)
+    }
+
+    val either: \/[String, Musician] = \/-(Musician("", LocalDate.now().minusYears(11)))
+
+    val r = either match {
+      case \/-(value) => either.@\?/(_ => validate(value))
+      case _ => \/-(Musician("", LocalDate.now()))
+    }
+
+    r must_== -\/("name cannot be emptytoo young")
+  }
 }
