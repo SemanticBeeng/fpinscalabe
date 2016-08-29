@@ -107,19 +107,25 @@ object Spec2 extends org.specs2.mutable.Specification with AutoExamples with Tex
   eg {
     import scalaz.{\/, -\/}
 
-    val excp: RuntimeException = new scala.RuntimeException("runtime error")
-    val e1 = \/.fromTryCatchNonFatal[Int](throw excp)
+    val r_excp: RuntimeException = new scala.RuntimeException("runtime error")
+    val e1 = \/.fromTryCatchNonFatal[Int](throw r_excp)
 
     e1 must beAnInstanceOf[Throwable \/ Int]
-    e1 must_== -\/(excp)
+    e1 must_== -\/(r_excp)
 
-    val e2 = \/.fromTryCatchNonFatal[Int](1 / 0)
+    val excp = new java.lang.ArithmeticException()
+    def div(a: Int, b: Int) : Int = b match {
+      case 0 => throw excp
+      case _ => a / b
+    }
+
+    val e2 = \/.fromTryCatchNonFatal[Int](div(1, 0))
 
     e2 must beAnInstanceOf[Throwable \/ Int]
-    e2 must_== -\/(new java.lang.ArithmeticException("/ by zero"))
+    e2 must beEqualTo(-\/(excp))
   }
 
-  s2"""Implicit comversion to `\/[A, Nothing]` and `\/[A, B]`.""".p
+  s2"""Implicit conversion to `\/[A, Nothing]` and `\/[A, B]`.""".p
   eg {
     import scalaz.{\/, -\/, \/-}
     import scalaz.syntax.either._
