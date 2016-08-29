@@ -1,6 +1,5 @@
 package org.specs2.ugbase
 
-import org.fp.studies.fp.Spec1
 import org.specs2.arrow.Arrow_UserGuidePage
 import org.specs2.guide.applicative.Applicative_UserGuidePage
 import org.specs2.guide.apply.Apply_UserGuidePage
@@ -82,7 +81,7 @@ In this user guide, you will find:
  * ${link(presentations.flatten_your_code.basics.Part13)}
  * ${link(presentations.flatten_your_code.basics.Part14)}
 
-* ${link(Spec1)}
+* ${link(org.fp.studies.fp.Spec2)}
 """
 
 }
