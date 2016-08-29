@@ -64,13 +64,13 @@ package object fp {
       \/-("right") must beAnInstanceOf[\/-[String]]
       \/-("right") must_== \/-("right")
 
-      \/.right("right") must beAnInstanceOf[\/[Nothing, String]]
+      \/.right("right") must beAnInstanceOf[Nothing \/ String]
       \/.right("right") must_== \/-("right")
 
       -\/("left")  must beAnInstanceOf[-\/[String]]
       -\/("left")  must_== -\/("left")
 
-      \/.left("left")   must beAnInstanceOf[\/[String, Nothing]]
+      \/.left("left")   must beAnInstanceOf[String \/ Nothing]
       \/.left("left")   must_== -\/("left")
     }
 
@@ -81,7 +81,7 @@ package object fp {
 
       val e_right = \/.fromEither(Right("right"))
 
-      e_right must beAnInstanceOf[\/[Nothing, String]]
+      e_right must beAnInstanceOf[Nothing \/ String]
       e_right must_== \/-("right")
 
       e_right.toEither must beAnInstanceOf[Either[Nothing, String]]
@@ -89,7 +89,7 @@ package object fp {
 
       val e_left = \/.fromEither(Left("left"))
 
-      e_left must beAnInstanceOf[\/[String, Nothing]]
+      e_left must beAnInstanceOf[String \/ Nothing]
       e_left must_== -\/("left")
 
       e_left.toEither must beAnInstanceOf[Either[String, Nothing]]
@@ -101,10 +101,10 @@ package object fp {
       import scalaz.{\/, -\/, \/-}
       import scalaz.syntax.std.either._
 
-      Left("left").disjunction must beAnInstanceOf[\/[String, Nothing]]
+      Left("left").disjunction must beAnInstanceOf[String \/ Nothing]
       Left("left").disjunction must_== -\/("left")
 
-      Right("right").disjunction must beAnInstanceOf[\/[Nothing, String]]
+      Right("right").disjunction must beAnInstanceOf[Nothing \/ String]
       Right("right").disjunction must_== \/-("right")
     }
 
@@ -114,12 +114,12 @@ package object fp {
 
       val e1 = \/.fromTryCatchNonFatal[Int](throw new RuntimeException("runtime error"))
 
-      e1 must beAnInstanceOf[\/[Throwable, Int]]
+      e1 must beAnInstanceOf[Throwable \/ Int]
       e1 must_== -\/(new RuntimeException("runtime error"))
 
       val e2 = \/.fromTryCatchNonFatal[Int](1 / 0)
 
-      e2 must beAnInstanceOf[\/[Throwable, Int]]
+      e2 must beAnInstanceOf[Throwable \/ Int]
       e2 must_== -\/(new java.lang.ArithmeticException("/ by zero"))
     }
 
@@ -128,16 +128,16 @@ package object fp {
       import scalaz.{\/, -\/, \/-}
       import scalaz.syntax.either._
 
-      "right".right must beAnInstanceOf[\/[Nothing, String]]
+      "right".right must beAnInstanceOf[Nothing \/ String]
       "right".right must_== \/-("right")
 
-      "left".left must beAnInstanceOf[\/[String, Nothing]]
+      "left".left must beAnInstanceOf[String \/ Nothing]
       "left".left must_== -\/("left")
 
-      "right".right[Int] must beAnInstanceOf[\/[Int, String]]
+      "right".right[Int] must beAnInstanceOf[Int \/ String]
       "right".right[Int] must_== \/-("right")
 
-      "left".left[Double] must beAnInstanceOf[\/[String, Double]]
+      "left".left[Double] must beAnInstanceOf[String \/ Double]
       "left".left[Double] must_== -\/("left")
     }
 
@@ -152,7 +152,7 @@ package object fp {
 
       } yield (a, b)
 
-      fc1 must beAnInstanceOf[\/[String, (String, String)]]
+      fc1 must beAnInstanceOf[String \/ (String, String)]
       fc1 must_== \/-(("a", "b"))
 
       val fc2 = for {
@@ -160,7 +160,7 @@ package object fp {
         e <- "e".left[Int]
       } yield (a, e)
 
-      fc2 must beAnInstanceOf[\/[String, (String, Int)]]
+      fc2 must beAnInstanceOf[String \/ (String, Int)]
       fc2 must_== -\/("e")
 
       val fc3 = for {
@@ -169,7 +169,7 @@ package object fp {
         f <- "f".left[Int]
       } yield (a, e, f)
 
-      fc3 must beAnInstanceOf[\/[String, (String, Int, Int)]]
+      fc3 must beAnInstanceOf[String \/ (String, Int, Int)]
       fc3 must_== -\/("e")
     }
 
@@ -183,10 +183,10 @@ package object fp {
       import scalaz._
       import syntax.std.option._
 
-      Some(10) \/> "message" must beAnInstanceOf[\/[String, Int]]
+      Some(10) \/> "message" must beAnInstanceOf[String \/ Int]
       Some(10) \/> "message" must_== \/-(10)
 
-      Some(10).toRightDisjunction("message") must beAnInstanceOf[\/[String, Int]]
+      Some(10).toRightDisjunction("message") must beAnInstanceOf[String \/ Int]
       Some(10).toRightDisjunction("message") must_== \/-(10)
 
       //@todo None \/> "message" must beAnInstanceOf[\/[String, A]]
@@ -195,10 +195,10 @@ package object fp {
       //@todo None.toRightDisjunction("message") must beAnInstanceOf[\/[String, A]]
       None.toRightDisjunction("message") must_== -\/("message")
 
-      Some(10) <\/ "message" must beAnInstanceOf[\/[Int, String]]
+      Some(10) <\/ "message" must beAnInstanceOf[Int \/ String]
       Some(10) <\/ "message" must_== -\/(10)
 
-      Some(10).toLeftDisjunction("message") must beAnInstanceOf[\/[Int, String]]
+      Some(10).toLeftDisjunction("message") must beAnInstanceOf[Int \/ String]
       Some(10).toLeftDisjunction("message") must_== -\/(10)
 
       //@todo None <\/ "message" must beAnInstanceOf[\/[A, String]]
@@ -216,16 +216,16 @@ package object fp {
 
       def f(x: Int): \/[String, Int] = if (x > 2) x.right[String] else "failure".left[Int]
 
-      List(1, 2, 3).traverseU(f) must beAnInstanceOf[\/[String,List[Int]]]
+      List(1, 2, 3).traverseU(f) must beAnInstanceOf[String \/ List[Int]]
       List(1, 2, 3).traverseU(f) must_== -\/("failure")
 
-      List(3, 4, 5).traverseU(f) must beAnInstanceOf[\/[String,List[Int]]]
+      List(3, 4, 5).traverseU(f) must beAnInstanceOf[String \/ List[Int]]
       List(3, 4, 5).traverseU(f)  must_== \/-(List(3, 4, 5))
 
-      List(3, 4, 5).map(f).sequenceU must beAnInstanceOf[scalaz.\/[String,List[Int]]]
+      List(3, 4, 5).map(f).sequenceU must beAnInstanceOf[String \/ List[Int]]
       List(3, 4, 5).map(f).sequenceU must_== \/-(List(3, 4, 5))
 
-      List(1, 2, 3).map(f).sequenceU must beAnInstanceOf[\/[String,List[Int]]]
+      List(1, 2, 3).map(f).sequenceU must beAnInstanceOf[String \/ List[Int]]
       List(1, 2, 3).map(f).sequenceU must_== -\/("failure")
     }
   }
