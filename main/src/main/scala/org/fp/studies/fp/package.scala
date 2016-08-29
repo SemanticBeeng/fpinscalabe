@@ -88,10 +88,10 @@ package object fp {
       val e_left = \/.fromEither(Left("left"))
 
       e_left must beAnInstanceOf[\/[String, Nothing]]
-      e_left must_== -\/(left)
+      e_left must_== -\/("left")
 
       e_left.toEither must beAnInstanceOf[Either[String, Nothing]]
-      e_left must_== Left(left)
+      e_left.toEither must_== Left("left")
     }
 
     eg {
@@ -105,7 +105,7 @@ package object fp {
       Right("right").disjunction must_== \/-("right")
     }
 
-    s"Try[A] => \/[Throwable, A]".p
+    s2"""Try[A] => \/[Throwable, A]""".p
     eg {
       import scalaz.{\/, -\/, \/-}
 
@@ -122,7 +122,6 @@ package object fp {
 
     eg {
       import scalaz.{\/, -\/, \/-}
-      //import scalaz._
       import scalaz.syntax.either._
 
       "right".right must beAnInstanceOf[\/[Nothing, String]]
@@ -171,9 +170,6 @@ package object fp {
         |<\/[A]
       """.p
     eg {
-//      import scalaz._
-//      import scalaz.std.either._
-//
       import scalaz._
       import syntax.std.option._
 
@@ -224,5 +220,4 @@ package object fp {
       List(1, 2, 3).map(f).sequenceU must_== -\/("failure")
     }
   }
-
 }
