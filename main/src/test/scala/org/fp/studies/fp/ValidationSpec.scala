@@ -11,10 +11,9 @@ import org.specs2.specification.dsl.mutable.{AutoExamples, TextDsl}
   * [[disjunction]] in [[Scalaz]]
   *
   */
-object Spec2 extends org.specs2.mutable.Specification with AutoExamples with TextDsl {
+object ValidationSpec extends org.specs2.mutable.Specification with AutoExamples with TextDsl {
 
-  s"$bookmarks: $ann_ScalazDisjunction1"
-  s2"""$keyPoint (continued from ${link(org.fp.studies.fp.Spec1)}) `\/[A, B]` is also isomorphic to `Validation[A, B].
+  s2"""$keyPoint (continued from ${link(org.fp.studies.fp.DisjunctionSpec)}) `\/[A, B]` is also isomorphic to `Validation[A, B].
      |
      |The subtle but important difference is that $applicativeFunctor instances for `Validation`
      |accumulates errors ("lefts") while $applyFunctor instances for `\/` "fail fast" on the first "left" they evaluate.
@@ -186,6 +185,7 @@ object Spec2 extends org.specs2.mutable.Specification with AutoExamples with Tex
       //   createCodes(p.name, createItem(p))
       // }
 
+      //@todo https://gist.github.com/tonymorris/4366536
       val (allItems, allCodes) = products.foldMap { p =>
         val item = createItem(p)
         (List(item), createCodes(p.name, item))

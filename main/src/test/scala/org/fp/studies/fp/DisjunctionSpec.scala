@@ -11,7 +11,7 @@ import org.specs2.specification.dsl.mutable.{AutoExamples, TextDsl}
   * [[disjunction]] in [[Scalaz]]
   *
   */
-object Spec1 extends org.specs2.mutable.Specification with AutoExamples with TextDsl {
+object DisjunctionSpec extends org.specs2.mutable.Specification /**with AutoExamples with TextDsl*/ {
 
   s"$bookmarks: $ann_ScalazDisjunction1"
   s2"""$keyPoint Disjunction - aka ${Scalaz.md} Either `\/[A, B]` is an alternative to `Either[A, B]`.
@@ -40,7 +40,7 @@ object Spec1 extends org.specs2.mutable.Specification with AutoExamples with Tex
      |
      |Methods such as $operator_swap, $operator_swapped, and $operator_leftMap provide functionality that `scala.Either` exposes through $leftProjection.
      |
-     | Continues to ${link(org.fp.studies.fp.Spec2)}
+     | Continues to ${link(org.fp.studies.fp.ValidationSpec)}
      |
      """.stripMargin.p
 
