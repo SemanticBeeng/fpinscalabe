@@ -14,17 +14,17 @@ import org.specs2.specification.dsl.mutable.{AutoExamples, TextDsl}
   */
 object ValidationSpec extends org.specs2.mutable.Specification with AutoExamples with Snippets with TextDsl {
 
-  override def is = s2"""
+  "Specification for Iterables extensions".title
 
-      THis is a spec with def is
-${snippet{
-    val a = "value"
-  }}
- - report the execution of specifications
- - provide a user guide like this one
+  "The sameElementsAs function returns true" >> {
+    "if 2 lists of lists contain the same elements in a different order" >> {
+      List(List(1), List(2, 3)) must_== 1
+    }
 
-    """
-//  s2"""$keyPoint (continued from ${link(org.fp.studies.fp.DisjunctionSpec)}) `\/[A, B]` is also isomorphic to `Validation[A, B].
+  }
+
+
+  //  s2"""$keyPoint (continued from ${link(org.fp.studies.fp.DisjunctionSpec)}) `\/[A, B]` is also isomorphic to `Validation[A, B].
 //     |
 //     |The subtle but important difference is that $applicativeFunctor instances for `Validation`
 //     |accumulates errors ("lefts") while $applyFunctor instances for `\/` "fail fast" on the first "left" they evaluate.
