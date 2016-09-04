@@ -12,9 +12,9 @@ object Usages extends org.specs2.mutable.Specification with Usages {
   import Definitions._
 
   "Some examples of usages".p
-  eg {
-    "Here’s how we can define typeclass instances for Int:".p
 
+  "Here’s how we can define typeclass instances for Int:".p
+  eg {
     implicit val intCanTruthy: CanTruthy[Int] = CanTruthy.fromTruthy({
       case 0 => false
       case _ => true
@@ -24,8 +24,8 @@ object Usages extends org.specs2.mutable.Specification with Usages {
     10.truthy must_== true
   }
 
+  "Next is for List[A]: ".p
   eg {
-    "Next is for List[A]: ".p
 
     implicit def listCanTruthy[A]: CanTruthy[List[A]] = CanTruthy.fromTruthy({
       case Nil => false
@@ -36,8 +36,8 @@ object Usages extends org.specs2.mutable.Specification with Usages {
     List("foo").truthy must_== true
   }
 
+  "It looks like we need to treat Nil specially because of the nonvariance.".p
   eg {
-    "It looks like we need to treat Nil specially because of the nonvariance.".p
 
     implicit val nilCanTruthy: CanTruthy[scala.collection.immutable.Nil.type] = CanTruthy.fromTruthy(_ => false)
 
@@ -45,8 +45,8 @@ object Usages extends org.specs2.mutable.Specification with Usages {
     Nil.truthy must_== false
   }
 
+  "And for Boolean using identity: ".p
   eg {
-    "And for Boolean using identity: ".p
 
     implicit val booleanCanTruthy: CanTruthy[Boolean] = CanTruthy.fromTruthy(identity)
 
@@ -54,10 +54,10 @@ object Usages extends org.specs2.mutable.Specification with Usages {
     false.truthy must_== false
   }
 
+  s2"""Using CanTruthy typeclass, let’s define truthyIf like LYAHFGG
+  <i>Now let’s make a function that mimics the if statement, but that works with YesNo values.</i>
+  To delay the evaluation of the passed arguments, we can use pass-by-name: """.p
   eg {
-    "Using CanTruthy typeclass, let’s define truthyIf like LYAHFGG ".p
-    "<i>Now let’s make a function that mimics the if statement, but that works with YesNo values.</i>".p
-    "To delay the evaluation of the passed arguments, we can use pass-by-name: ".p
 
     import CanTruthy.ops._
     def truthyIf[A: CanTruthy, B, C](cond: A)(ifyes: => B)(ifno: => C) =
