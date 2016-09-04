@@ -288,7 +288,7 @@ object build extends Build {
     testTaskDefinition(generateWebsiteTask, Seq(Tests.Filter(_.endsWith("Website"))))
 
   lazy val generateWebsiteTask = TaskKey[Tests.Output]("generate-website", "generate the website")
-//  lazy val generateWebsite     = executeStepTask(generateWebsiteTask in guide, "Generating the website", Test)
+  lazy val generateWebsite     = executeStepTask(generateWebsiteTask in guide, "Generating the website", Test)
 //
 //  lazy val publishSite = ReleaseStep { st: State =>
 //    val st2 = executeStepTask(makeSite, "Making the site")(st)
@@ -376,38 +376,38 @@ object build extends Build {
 //    if (providedDependenciesInAggregate.exists(dep.name.startsWith)) dep.copy(configurations = Some("provided"))
 //    else dep
 //
-//  /* A list of dependency module names that should be marked as "provided" for the aggregate artifact */
-//  lazy val providedDependenciesInAggregate = Seq("shapeless")
-//
-//  private def executeStepTask(task: TaskKey[_], info: String) = ReleaseStep { st: State =>
-//    executeTask(task, info)(st)
-//  }
-//
-//  private def executeAggregateTask(task: TaskKey[_], info: String) = (st: State) => {
-//    st.log.info(info)
-//    val extracted = Project.extract(st)
-//    val ref: ProjectRef = extracted.get(thisProjectRef)
-//    extracted.runAggregated(task in ref, st)
-//  }
-//
-//  private def executeTask(task: TaskKey[_], info: String) = (st: State) => {
-//    st.log.info(info)
-//    val extracted = Project.extract(st)
-//    val ref: ProjectRef = extracted.get(thisProjectRef)
-//    extracted.runTask(task in ref, st)._1
-//  }
-//
-//  private def executeStepTask(task: TaskKey[_], info: String, configuration: Configuration) = ReleaseStep { st: State =>
-//    executeTask(task, info, configuration)(st)
-//  }
-//
-//  private def executeTask(task: TaskKey[_], info: String, configuration: Configuration) = (st: State) => {
-//    st.log.info(info)
-//    val extracted = Project.extract(st)
-//    val ref: ProjectRef = extracted.get(thisProjectRef)
-//    extracted.runTask(task in configuration, st)._1
-//  }
-//
+  /* A list of dependency module names that should be marked as "provided" for the aggregate artifact */
+  lazy val providedDependenciesInAggregate = Seq("shapeless")
+
+  private def executeStepTask(task: TaskKey[_], info: String) = ReleaseStep { st: State =>
+    executeTask(task, info)(st)
+  }
+
+  private def executeAggregateTask(task: TaskKey[_], info: String) = (st: State) => {
+    st.log.info(info)
+    val extracted = Project.extract(st)
+    val ref: ProjectRef = extracted.get(thisProjectRef)
+    extracted.runAggregated(task in ref, st)
+  }
+
+  private def executeTask(task: TaskKey[_], info: String) = (st: State) => {
+    st.log.info(info)
+    val extracted = Project.extract(st)
+    val ref: ProjectRef = extracted.get(thisProjectRef)
+    extracted.runTask(task in ref, st)._1
+  }
+
+  private def executeStepTask(task: TaskKey[_], info: String, configuration: Configuration) = ReleaseStep { st: State =>
+    executeTask(task, info, configuration)(st)
+  }
+
+  private def executeTask(task: TaskKey[_], info: String, configuration: Configuration) = (st: State) => {
+    st.log.info(info)
+    val extracted = Project.extract(st)
+    val ref: ProjectRef = extracted.get(thisProjectRef)
+    extracted.runTask(task in configuration, st)._1
+  }
+
 //  private def commitCurrent(commitMessage: String): State => State = { st: State =>
 //    vcs(st).add(".") !! st.log
 //    val status = (vcs(st).status !!).trim
