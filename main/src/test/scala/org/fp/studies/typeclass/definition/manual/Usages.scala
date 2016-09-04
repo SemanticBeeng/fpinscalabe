@@ -21,7 +21,7 @@ object Usages extends org.specs2.mutable.Specification with Usages {
     })
 
     import CanTruthy.ops._
-    10.truthy must_== true
+    10.truthy must_== false
   }
 
   "Next is for List[A]: ".p
