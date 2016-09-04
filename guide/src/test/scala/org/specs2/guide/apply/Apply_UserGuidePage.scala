@@ -11,10 +11,9 @@ object Apply_UserGuidePage extends UserGuidePage {
 
   def is = "Apply functor example".title ^ s2"""
 
-  ${concepts.applyFunctor} ....
-  Examples for a 'custom' ${concepts.applyFunctor}
-
-    * with ${resources.Scalaz.id} and ${resources.Cats.id} in ${custom.Spec.is} and ${dfault.Spec.is}
+### ${concepts.applyFunctor} examples for a 'custom' ${concepts.applyFunctor} with ${resources.Scalaz.id} and ${resources.Cats.id} in
+ * ${link(custom.CustomSpec)}
+ * ${link(dfault.DefaultSpec)}
 
 }
 

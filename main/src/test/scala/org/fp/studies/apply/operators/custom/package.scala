@@ -89,7 +89,7 @@ package object custom {
     }
   }
 
-  object Spec extends org.specs2.mutable.Spec with AutoExamples {
+  object CustomSpec extends org.specs2.mutable.Spec with AutoExamples {
 
     s"$keyPoint The $applyFunctor $operator_apply can have a few equivalent forms:"
     s"$bookmarks $ann_ApplicativeExtractsFunction2"

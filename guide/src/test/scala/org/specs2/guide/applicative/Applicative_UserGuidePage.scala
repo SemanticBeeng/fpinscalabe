@@ -14,7 +14,7 @@ object Applicative_UserGuidePage extends UserGuidePage {
   ${concepts.applicativeFunctor} mapping (of a function) preserves the type/shape of the ${concepts.applicativeFunctor}
   Examples for a 'custom' ${concepts.applicativeFunctor}
 
-    * with ${resources.Scalaz.id} and ${resources.Cats.id} in ${custom.Spec.is} and ${dfault.Spec.is}
+    * with ${resources.Scalaz.id} and ${resources.Cats.id} in ${link(custom.Spec)} and ${link(dfault.Spec)}
 
 }
 

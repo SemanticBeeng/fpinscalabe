@@ -14,7 +14,7 @@ import org.specs2.specification.dsl.mutable.{TextDsl, AutoExamples}
   */
 package object dfault {
 
-  object Spec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
+  object DefaultSpec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
 
     s"$keyPoint The $applyFunctor $operator_apply can have a few equivalent forms:"
     s"$bookmarks $ann_ApplicativeExtractsFunction2"
