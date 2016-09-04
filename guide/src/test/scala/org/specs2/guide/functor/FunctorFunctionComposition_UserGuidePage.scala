@@ -1,7 +1,7 @@
 package org.specs2.guide.functor
 
 import org.fp._
-import org.fp.studies.functor.composition.Spec
+import org.fp.studies._
 import org.specs2.ugbase.UserGuidePage
 
 /**
@@ -11,9 +11,11 @@ object FunctorFunctionComposition_UserGuidePage extends UserGuidePage {
 
   def is = s"Functor function composition".title ^ s2"""
 
-  ${concepts.typeClass}s can be defined manually, the default ${resources.Scala.id} way, or automated using ${resources.Simulacrum.id}
+### ${concepts.typeClass}s can be defined manually
 
-    * in ${resources.Scalaz.id} and  ${resources.Cats.id}: ${link(Spec)}
+ The default ${resources.Scala.md} way, or automated using ${resources.Simulacrum.md} with ${resources.Scalaz.md} and ${resources.Cats.md}:
+
+ * ${link(functor.composition.Spec)}
 
 """
 }

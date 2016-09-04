@@ -12,18 +12,18 @@ object Semigroup_UserGuidePage extends UserGuidePage {
 
   def is = "Semigroup functor example".title ^ s2"""
 
-## Examples for a 'default' ${concepts.semigroup} with ${resources.Scalaz.id} and ${resources.Cats.id}
+## Examples for a 'default' ${concepts.semigroup} with ${resources.Scalaz.md} and ${resources.Cats.md}
 
- * ${link(operators.dfault.Spec1).hide}
- * ${link(operators.dfault.Spec2).hide}
+ * ${link(operators.dfault.Spec1)}
+ * ${link(operators.dfault.Spec2)}
 
-## Examples for a 'custom' ${concepts.semigroup} with ${resources.Scalaz.id} and ${resources.Cats.id}
+## Examples for a 'custom' ${concepts.semigroup} with ${resources.Scalaz.md} and ${resources.Cats.md}
 
- * ${link(operators.custom.Spec).hide}
+ * ${link(operators.custom.Spec)}
 
-## Examples for a ${concepts.semigroupLaws} with ${resources.Scalaz.id} and ${resources.Cats.id}
+## Examples for a ${concepts.semigroupLaws} with ${resources.Scalaz.md} and ${resources.Cats.md}
 
- * ${link(laws.Spec).hide}
+ * ${link(laws.Spec)}
 
 }
 

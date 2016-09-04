@@ -1,6 +1,6 @@
 package org.specs2.ugbase
 
-import org.specs2.arrow.Arrow_UserGuidePage
+import org.specs2.guide.arrow.Arrow_UserGuidePage
 import org.specs2.guide.applicative.Applicative_UserGuidePage
 import org.specs2.guide.apply.Apply_UserGuidePage
 import org.specs2.guide.functor._

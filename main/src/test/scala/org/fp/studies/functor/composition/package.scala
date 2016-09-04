@@ -65,7 +65,7 @@ package object composition {
       (func3(1) : Double) must_== 2.0
     }
 
-    s"$keyPoint Compose a $functor-s $operator_map with the ${Scala.id} collection map function:".p
+    s"$keyPoint Compose a $functor-s $operator_map with the ${Scala.md} collection map function:".p
 
     eg { /** in [[Scalaz]] */
       val func1 = (x: String) => x.length

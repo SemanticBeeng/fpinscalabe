@@ -1,7 +1,7 @@
 package org.specs2.guide.typeclass
 
 import org.fp._
-import org.fp.studies.typeclass.tagging.Spec
+import org.fp.studies._
 import org.specs2.ugbase.UserGuidePage
 
 /**
@@ -11,9 +11,9 @@ object TypeTagging_UserGuidePage extends UserGuidePage {
 
   def is = "Tagging types".title ^ s2"""
 
-  ${concepts.functor}s enable ${concepts.functorComposition}
+  ${concepts.functor}s enable ${concepts.functorComposition} ${resources.Scala.md} and ${resources.Simulacrum.md} in
 
-    * in ${resources.Scala.id} and ${resources.Simulacrum.id} : ${Spec.is}
+ * ${link(typeclass.tagging.Spec)}
 
 """
 }
