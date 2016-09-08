@@ -38,7 +38,7 @@ object Defs {
 /**
   *
   */
-object Variance_UserGuidePage extends UserGuidePage with Snippets with ScalaCheck with CheckedSpec {
+object Variance_UserGuidePage extends UserGuidePage /*with Snippets with ScalaCheck with CheckedSpec*/ {
 
   def is = s"Variance example".title ^ s2"""
 

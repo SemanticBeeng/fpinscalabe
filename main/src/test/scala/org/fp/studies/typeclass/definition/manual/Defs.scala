@@ -4,7 +4,7 @@ package org.fp.studies.typeclass.definition.manual
 /**
   *
   */
-trait Definitions {
+trait Defs {
 
 // 8<---
   trait CanTruthy[A] {
@@ -41,6 +41,6 @@ trait Definitions {
 // 8<---
 }
 
-object Definitions extends Definitions
+object Defs extends Defs
 
 
