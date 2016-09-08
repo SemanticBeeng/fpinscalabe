@@ -21,7 +21,7 @@ object ScalaSpec extends org.specs2.Specification with Snippets with ScalaCheck 
 
   implicit def snippetParams[T]: SnippetParams[T] = defaultSnippetParameters[T].copy(evalCode = true)
 
-  def is = s"Typeclass manual definition".title ^ s2"""Defining $typeClass-es manually
+  def is = s"Defining $typeClass-es manualy".title ^ s2"""Defining $typeClass-es manually
 
 ### Boiler plate code to define the $typeClass related stuff manually
 
@@ -41,7 +41,7 @@ object ScalaSpec extends org.specs2.Specification with Snippets with ScalaCheck 
     })
 
     import CanTruthy.ops._
-    10.truthy must_== true
+    check(10.truthy must_== true)
 
   }}
 
@@ -57,7 +57,7 @@ object ScalaSpec extends org.specs2.Specification with Snippets with ScalaCheck 
     })
 
     import CanTruthy.ops._
-    List("foo").truthy must_== true
+    check(List("foo").truthy must_== true)
   }}
 
   It looks like we need to treat `Nil` specially because of the nonvariance.
@@ -82,7 +82,7 @@ object ScalaSpec extends org.specs2.Specification with Snippets with ScalaCheck 
     implicit val booleanCanTruthy: CanTruthy[Boolean] = CanTruthy.fromTruthy(identity)
 
     import CanTruthy.ops._
-    false.truthy must_== false
+    check(false.truthy must_== false)
 
   }}
 
@@ -109,9 +109,9 @@ object ScalaSpec extends org.specs2.Specification with Snippets with ScalaCheck 
     //@todo Duplicate but good to see what needs to be in scope
     implicit val booleanCanTruthy: CanTruthy[Boolean] = CanTruthy.fromTruthy(identity)
 
-    truthyIf(Nil: List[String]) { "YEAH!" } { "NO!" } must_== "NO!"
-    truthyIf(2 :: 3 :: 4 :: Nil) { "YEAH!" } { "NO!" } must_== "YEAH!"
-    truthyIf(true) { "YEAH!" } { "NO!" } must_== "YEAH!"
+    check(truthyIf(Nil: List[String]) { "YEAH!" } { "NO!" } must_== "NO!")
+    check(truthyIf(2 :: 3 :: 4 :: Nil) { "YEAH!" } { "NO!" } must_== "YEAH!")
+    check(truthyIf(true) { "YEAH!" } { "NO!" } must_== "YEAH!")
 
   }}
   """.stripMargin
