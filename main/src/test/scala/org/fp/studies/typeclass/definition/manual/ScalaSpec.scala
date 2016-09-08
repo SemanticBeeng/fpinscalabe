@@ -32,7 +32,7 @@ object ScalaSpec extends org.specs2.mutable.Specification with Snippets {
   "Some examples of usages".p
 
   "Here’s how we can define typeclass instances for Int:".p
-  eg {
+  snippet {
     implicit val intCanTruthy: CanTruthy[Int] = CanTruthy.fromTruthy({
       case 0 => false
       case _ => true
@@ -43,7 +43,7 @@ object ScalaSpec extends org.specs2.mutable.Specification with Snippets {
   }
 
   "Next is for List[A]: ".p
-  eg {
+  snippet {
 
     implicit def listCanTruthy[A]: CanTruthy[List[A]] = CanTruthy.fromTruthy({
       case Nil => false
@@ -55,7 +55,7 @@ object ScalaSpec extends org.specs2.mutable.Specification with Snippets {
   }
 
   "It looks like we need to treat Nil specially because of the nonvariance.".p
-  eg {
+  snippet {
 
     implicit val nilCanTruthy: CanTruthy[scala.collection.immutable.Nil.type] = CanTruthy.fromTruthy(_ => false)
 
@@ -64,7 +64,7 @@ object ScalaSpec extends org.specs2.mutable.Specification with Snippets {
   }
 
   "And for Boolean using identity: ".p
-  eg {
+  snippet {
 
     implicit val booleanCanTruthy: CanTruthy[Boolean] = CanTruthy.fromTruthy(identity)
 
@@ -75,7 +75,7 @@ object ScalaSpec extends org.specs2.mutable.Specification with Snippets {
   s2"""Using CanTruthy typeclass, let’s define truthyIf like LYAHFGG
   <i>Now let’s make a function that mimics the if statement, but that works with YesNo values.</i>
   To delay the evaluation of the passed arguments, we can use pass-by-name: """.p
-  eg {
+  snippet {
 
     import CanTruthy.ops._
     def truthyIf[A: CanTruthy, B, C](cond: A)(ifyes: => B)(ifno: => C) =
