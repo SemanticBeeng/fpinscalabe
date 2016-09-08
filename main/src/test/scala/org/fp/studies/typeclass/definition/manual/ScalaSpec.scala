@@ -8,7 +8,7 @@ import org.fp.studies.typeclass.definition.manual
 //
 import org.specs2.ScalaCheck
 import org.specs2.common.CheckedSpec
-import org.specs2.specification.Snippets
+import org.specs2.specification.{AllExpectations, Snippets}
 import org.specs2.common.SnippetHelper._
 import org.specs2.execute.SnippetParams
 
@@ -17,15 +17,15 @@ import org.specs2.execute.SnippetParams
   * @see [[org.fp.resources.Scala]] [[org.fp.resources.Scalaz]]
   * @see [[ann_makeYourOwnTypeClasses]]
   */
-object ScalaSpec extends org.specs2.Specification with Snippets with ScalaCheck with CheckedSpec {
+object ScalaSpec extends org.specs2.Specification with Snippets with ScalaCheck with CheckedSpec with AllExpectations {
 
-  implicit def snippetParams[T]: SnippetParams[T] = defaultSnippetParameters[T].copy(evalCode = true)
+  implicit def snippetParams[T]: SnippetParams[T] = defaultSnippetParameters[T].copy(evalCode = true).offsetIs(-4)
 
   def is = s"Defining $typeClass-es manualy".title ^ s2"""Defining $typeClass-es manually
 
 ### Boiler plate code to define the $typeClass related stuff manually
 
-   ${incl[manual.Defs]}
+  ${incl[manual.Defs]}
 
 ### And now usages to exemplify
 
@@ -109,9 +109,12 @@ object ScalaSpec extends org.specs2.Specification with Snippets with ScalaCheck 
     //@todo Duplicate but good to see what needs to be in scope
     implicit val booleanCanTruthy: CanTruthy[Boolean] = CanTruthy.fromTruthy(identity)
 
-    check(truthyIf(Nil: List[String]) { "YEAH!" } { "NO!" } must_== "NO!")
-    check(truthyIf(2 :: 3 :: 4 :: Nil) { "YEAH!" } { "NO!" } must_== "YEAH!")
-    check(truthyIf(true) { "YEAH!" } { "NO!" } must_== "YEAH!")
+    // @todo clarify this
+    check {
+      truthyIf(Nil: List[String]) { "YEAH!" } { "NO!" } must_== "NO!"
+      truthyIf(2 :: 3 :: 4 :: Nil) { "YEAH!" } { "NO!" } must_== "YEAH!"
+      truthyIf(true) { "YEAH!" } { "NO!" } must_== "YEAH!"
+    }
 
   }}
   """.stripMargin
