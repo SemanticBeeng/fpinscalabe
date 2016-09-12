@@ -21,7 +21,7 @@ object ScalaSpec extends org.specs2.Specification with Snippets with ScalaCheck 
 
   implicit def snippetParams[T]: SnippetParams[T] = defaultSnippetParameters[T].copy(evalCode = true).offsetIs(-4)
 
-  def is = s"Defining $typeClass-es manualy".title ^ s2"""Defining $typeClass-es manually
+  def is = s"Defining $typeClass-es manually".title ^ s2"""Defining $typeClass-es manually
 
 ### Boiler plate code to define the $typeClass related stuff manually
 
@@ -61,7 +61,7 @@ object ScalaSpec extends org.specs2.Specification with Snippets with ScalaCheck 
   }}
 
   It looks like we need to treat `Nil` specially because of the nonvariance.
-  ${snippet {
+  ${snippet{
     // 8<--
     import Defs._
     // 8<--

@@ -5,26 +5,32 @@ import org.fp.concepts._
 import org.fp.resources._
 
 //
-import org.specs2.specification.dsl.mutable.{AutoExamples, TextDsl}
+import org.specs2.ScalaCheck
+import org.specs2.common.CheckedSpec
+import org.specs2.specification.Snippets
+import org.specs2.execute.SnippetParams
+import org.specs2.common.SnippetHelper._
 
 /**
   * [[disjunction]] in [[Scalaz]]
   *
   */
-object ValidationSpec extends org.specs2.mutable.Specification with AutoExamples with TextDsl {
+object ValidationSpec extends org.specs2.Specification with Snippets with ScalaCheck with CheckedSpec  {
 
-  s2"""$keyPoint (continued from ${link(org.fp.studies.fp.DisjunctionSpec)}) `\/[A, B]` is also isomorphic to `Validation[A, B].
-     |
-     |The subtle but important difference is that $applicativeFunctor instances for `Validation`
-     |accumulates errors ("lefts") while $applyFunctor instances for `\/` "fail fast" on the first "left" they evaluate.
-     |
-     |This fail-fast behavior allows `\/` to have lawful $monad instances that are consistent with their $applicativeFunctor instances, while `Validation` cannot.
-     |
-       """.stripMargin.p
+  implicit def snippetParams[T]: SnippetParams[T] = defaultSnippetParameters[T].copy(evalCode = true).offsetIs(-4)
 
-  s"$bookmarks: $ann_ScalazValidation1"
-  s2"""Validation""".p
-  eg {
+  def is = s"$validation ".title ^ s2"""(continued from ${link(org.fp.studies.fp.DisjunctionSpec)})
+
+`\/[A, B]` is also isomorphic to `Validation[A, B]`.
+
+The subtle but important difference is that $applicativeFunctor instances for `Validation`
+accumulates errors ("lefts") while $applyFunctor instances for `\/` "fail fast" on the first "left" they evaluate.
+
+This fail-fast behavior allows `\/` to have lawful $monad instances that are consistent with their $applicativeFunctor instances, while `Validation` cannot.
+
+$bookmarks: ${ann_ScalazValidation1.md}
+
+${snippet{
     import scalaz.{\/, -\/, \/-, ValidationNel, NonEmptyList}
 
     import java.time.LocalDate
@@ -48,8 +54,8 @@ object ValidationSpec extends org.specs2.mutable.Specification with AutoExamples
         if (born.isAfter(LocalDate.now().minusYears(12))) AGE_TOO_YOUNG.failureNel
         else born.success
 
-      s"$validation in an $applicativeFunctor: many can be composed or chained together".p
-      s"$bookmarks: $ann_ScalazValidation2".p
+      s"$validation in an $applicativeFunctor: many can be composed or chained together"
+      s"$bookmarks: ${ann_ScalazValidation2.md}"
       (validName(musician.name) |@| validateAge(musician.born)) ((_, _) => musician)
     }
 
@@ -61,11 +67,12 @@ object ValidationSpec extends org.specs2.mutable.Specification with AutoExamples
     }
 
     //@todo improve the error collection
-    s"If any failure in the chain, failure wins: All errors get appended together".p
-    r must_== -\/(NonEmptyList(Errors.NAME_EMPTY, Errors.AGE_TOO_YOUNG))
-  }
+    s"If any failure in the chain, failure wins: All errors get appended together"
+    check(r must_== -\/(NonEmptyList(Errors.NAME_EMPTY, Errors.AGE_TOO_YOUNG)))
+  }}
 
-  /*
+  ${snippet{
+
     s"$bookmarks: $ann_ScalazValidation3"
     eg {
       import scalaz._
@@ -81,6 +88,8 @@ object ValidationSpec extends org.specs2.mutable.Specification with AutoExamples
 
       def batchUpdate(entities: List[Entity]) = println(entities)
       def outputErrors(errors: List[String]) = println(errors)
+
+      //----------
       def validate(records: List[String]): ValidationNel[String, List[Entity]] = {
         records.foldMap { record =>
           for {
@@ -99,8 +108,8 @@ object ValidationSpec extends org.specs2.mutable.Specification with AutoExamples
           (e.toList, record).wrapNel
         }
       }
-      //----------
 
+      //----------
       def validateColumn(record: String): ValidationNel[String, Array[String]] = {
         val columns = record.split(",")
         if (columns.size == 4) columns.successNel
@@ -186,10 +195,10 @@ object ValidationSpec extends org.specs2.mutable.Specification with AutoExamples
       // }
 
       //@todo https://gist.github.com/tonymorris/4366536
-      val (allItems, allCodes) = products.foldMap { p =>
+      val (allItems, allCodes) = products.map { p:Product =>
         val item = createItem(p)
         (List(item), createCodes(p.name, item))
-      }
+      }.unzip
 
       println(allItems)
       println(allCodes)
@@ -197,7 +206,11 @@ object ValidationSpec extends org.specs2.mutable.Specification with AutoExamples
       allItems must_== List()
       //1 must_== 1
     }
-  */
+
+  }}
+
+      """.stripMargin
+
 
   /**
     * @todo http://codegists.com/snippet/scala/scalaz-validationscala_animatedlew_scala
@@ -206,4 +219,5 @@ object ValidationSpec extends org.specs2.mutable.Specification with AutoExamples
     * @todo http://codegists.com/snippet/scala/scalaz-monad-transformersscala_matterche_scala
     * @todo http://codegists.com/snippet/scala/scalaz-streams-task-esscala_taisukeoe_scala
     */
+
 }
