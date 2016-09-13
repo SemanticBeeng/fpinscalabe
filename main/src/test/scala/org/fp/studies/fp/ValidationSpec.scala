@@ -69,8 +69,10 @@ This fail-fast behavior allows `\/` to have lawful $monad instances that are con
     check(r must_== -\/(NonEmptyList(Errors.NAME_EMPTY, Errors.AGE_TOO_YOUNG)))
   }}
 
-  s"$bookmarks: ${ann_ScalazValidation3.md}".p
+### A more complex example
+
   ${snippet {
+    s"$bookmarks: ${ann_ScalazValidation3.md}".p
 
     import scalaz.std.tuple._
     import scalaz.std.list._
@@ -179,19 +181,13 @@ This fail-fast behavior allows `\/` to have lawful $monad instances that are con
     System.batchUpdate(results2._2)
   }}
 
+### Another example
+
   ${snippet {
 
     import scalaz.std.list._
     import scalaz.std.tuple._
     import scalaz.syntax.foldable._
-
-    // def tuple2[A, B](ma: Monoid[A], mb: Monoid[B]): Monoid[(A, B)]
-    // new Monoid[(A, B)] {
-    //   def zero: (A, B) = (ma.zero, mb.zero)
-    //   def append(x: (A, B), y: (A, B)): (A, B) = {
-    //     (ma.append(x._1, y._1), mb.append(x._2, y._2))
-    //   }
-    // }
 
     case class Product(name: String)
 
