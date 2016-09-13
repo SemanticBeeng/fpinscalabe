@@ -70,16 +70,16 @@ This fail-fast behavior allows `\/` to have lawful $monad instances that are con
   }}
 
   s"$bookmarks: ${ann_ScalazValidation3.md}".p
-  ${snippet{
+  ${snippet {
 
+    import scalaz.std.tuple._
+    import scalaz.std.list._
+    import scalaz.syntax.apply._
+    import scalaz.syntax.foldable._
     import scalaz.{Validation, Success, Failure, ValidationNel, NonEmptyList}
     import scalaz.Validation.FlatMap._
     import scalaz.syntax.validation._
-    import scalaz.syntax.apply._
     import scalaz.syntax.nel._
-    import scalaz.std.tuple._
-    import scalaz.syntax.foldable._
-    import scalaz.std.list._
 
     case class ScoreRange(min: Int, max: Int)
     case class Entity(id: Long, name: String, scoreRange: ScoreRange)
@@ -97,61 +97,61 @@ This fail-fast behavior allows `\/` to have lawful $monad instances that are con
 
     object Validator {
 
-        def validate(records: List[String]): ValidationNel[String, List[Entity]] = {
-          records.foldMap { record =>
-            for {
-              columns <- validateColumn(record)
-              entity <- validateEntity(columns)
-            } yield List(entity)
-          }
-        }
-
-        def validate2(record: String): ValidationNel[ErrorInfo, Entity] = {
-          (for {
+      def validate(records: List[String]): ValidationNel[String, List[Entity]] = {
+        records.foldMap { record =>
+          for {
             columns <- validateColumn(record)
             entity <- validateEntity(columns)
-          } yield entity) leftMap { e =>
-            (e.toList, record).wrapNel
-          }
+          } yield List(entity)
         }
+      }
 
-        def validateColumn(record: String): ValidationNel[String, Array[String]] = {
-          val columns = record.split(",")
-          if (columns.size == 4) columns.successNel
-          else "less columns".failureNel
+      def validate2(record: String): ValidationNel[ErrorInfo, Entity] = {
+        (for {
+          columns <- validateColumn(record)
+          entity <- validateEntity(columns)
+        } yield entity) leftMap { e =>
+          (e.toList, record).wrapNel
         }
+      }
 
-        def validateEntity(col: Array[String]): ValidationNel[String, Entity] = {
-          (validateId(col(0)) |@|
-            validateName(col(1)) |@|
-            validateScoreRange(col(2), col(3))) (Entity)
-        }
+      def validateColumn(record: String): ValidationNel[String, Array[String]] = {
+        val columns = record.split(",")
+        if (columns.size == 4) columns.successNel
+        else "less columns".failureNel
+      }
 
-        def validateId(id: String): ValidationNel[String, Long] = {
-          Validation.fromTryCatchNonFatal(id.toLong).leftMap(_ => NonEmptyList("invalid id"))
-        }
+      def validateEntity(col: Array[String]): ValidationNel[String, Entity] = {
+        (validateId(col(0)) |@|
+          validateName(col(1)) |@|
+          validateScoreRange(col(2), col(3))) (Entity)
+      }
 
-        def validateName(name: String): ValidationNel[String, String] = {
-          if (name.size <= 10) name.successNel
-          else "name too long".failureNel
-        }
+      def validateId(id: String): ValidationNel[String, Long] = {
+        Validation.fromTryCatchNonFatal(id.toLong).leftMap(_ => NonEmptyList("invalid id"))
+      }
 
-        def validateScoreNum(num: String, column: String): ValidationNel[String, Int] = {
-          Validation.fromTryCatchNonFatal(num.toInt).leftMap(_ => NonEmptyList(s"invalid $column"))
-        }
+      def validateName(name: String): ValidationNel[String, String] = {
+        if (name.size <= 10) name.successNel
+        else "name too long".failureNel
+      }
 
-        def validateMinMax(min: String, max: String): ValidationNel[String, (Int, Int)] = {
-          (validateScoreNum(min, "min") |@| validateScoreNum(max, "max")) ((x, y) => (x, y))
-        }
+      def validateScoreNum(num: String, column: String): ValidationNel[String, Int] = {
+        Validation.fromTryCatchNonFatal(num.toInt).leftMap(_ => NonEmptyList(s"invalid $column"))
+      }
 
-        def validateScoreRangeConstraint(min: Int, max: Int): ValidationNel[String, ScoreRange] = {
-          if (min <= max) ScoreRange(min, max).successNel
-          else "min is grater than max".failureNel
-        }
+      def validateMinMax(min: String, max: String): ValidationNel[String, (Int, Int)] = {
+        (validateScoreNum(min, "min") |@| validateScoreNum(max, "max")) ((x, y) => (x, y))
+      }
 
-        def validateScoreRange(min: String, max: String): ValidationNel[String, ScoreRange] = {
-          validateMinMax(min, max).flatMap { case (n, x) => validateScoreRangeConstraint(n, x) }
-        }
+      def validateScoreRangeConstraint(min: Int, max: Int): ValidationNel[String, ScoreRange] = {
+        if (min <= max) ScoreRange(min, max).successNel
+        else "min is grater than max".failureNel
+      }
+
+      def validateScoreRange(min: String, max: String): ValidationNel[String, ScoreRange] = {
+        validateMinMax(min, max).flatMap { case (n, x) => validateScoreRangeConstraint(n, x) }
+      }
     }
 
     val records: List[String] = System.loadCsv()
@@ -177,9 +177,10 @@ This fail-fast behavior allows `\/` to have lawful $monad instances that are con
     println("== validated2 ==")
     System.outputErrors(results2._1.head._1)
     System.batchUpdate(results2._2)
+  }}
 
-    //  object X {
-    //object X extends App {
+  ${snippet {
+
     import scalaz.std.list._
     import scalaz.std.tuple._
     import scalaz.syntax.foldable._
@@ -205,22 +206,14 @@ This fail-fast behavior allows `\/` to have lawful $monad instances that are con
 
     def createCodes(name: String, item: Item): List[String] = List(name)
 
-    // val allItems = products.foldMap { p => List(createItem(p)) }
-    // val allCodes = products.foldMap { p =>
-    //   createCodes(p.name, createItem(p))
-    // }
-
     //@todo https://gist.github.com/tonymorris/4366536
-    val (allItems, allCodes) = products.foldMap { p:Product =>
+    val (allItems, allCodes) = products.foldMap { p =>
       val item = createItem(p)
       (List(item), createCodes(p.name, item))
     }
 
-    println(allItems)
-    println(allCodes)
-
-    allItems must_== List()
-    //1 must_== 1
+    allItems must_== List(Item("foo"), Item("bar"))
+    allCodes must_== List("foo", "bar")
   }}
   """.stripMargin
 
