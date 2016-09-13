@@ -7,122 +7,141 @@ import org.fp.bookmarks._
 import scala.language.higherKinds
 
 //
-import org.specs2.specification.dsl.mutable.{TextDsl, AutoExamples}
+import org.specs2.ScalaCheck
+import org.specs2.common.CheckedSpec
+import org.specs2.specification.Snippets
+import org.specs2.execute.SnippetParams
+import org.specs2.specification.dsl.mutable.TextDsl
 
 /**
   *
   */
 package object custom {
 
-  object Spec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
+  object CustomTraverseSpec extends org.specs2.mutable.Specification with Snippets with ScalaCheck with CheckedSpec with TextDsl {
 
-    s"$keyPoint Both $operator_sequence and $operator_traverse come in 'Unapply' varieties: sequenceU and traverseU." +
-      s" These are useful in the case when the scala compiler fails to infer an implicit $applicativeFunctor instance  for the 'inner' type. " +
-      s"This will commonly happen when there is a 'Kind mismatch'. For example this happens with Validation, which is " +
-      s"kind *,* -> * instead of the expected * -> * kind of an $applicativeFunctor, since the Validation type constructor takes two arguments instead of one."
+    implicit def snippetParams[T]: SnippetParams[T] = defaultSnippetParameters[T].copy(evalCode = true).offsetIs(-4)
 
-    s"$bookmarks ... "
+    override def is = s"Custom $traverseFunctor ".title ^ s2"""
 
-    eg { /** in [[Scalaz]] */
+Both $operator_sequence and $operator_traverse come in 'Unapply' varieties: `sequenceU` and `traverseU`.
 
-      import scalaz.{IList, NonEmptyList, ValidationNel}
+These are useful in the case when the scala compiler fails to infer an implicit $applicativeFunctor instance  for the 'inner' type.
+This will commonly happen when there is a 'Kind mismatch'.
 
-      import scalaz.std.list._
-      import scalaz.std.vector._
-      import scalaz.std.anyVal._
-      import scalaz.syntax.equal._      // for === syntax
-      import scalaz.syntax.validation._ // for .success and .failure syntax
-      import scalaz.syntax.traverse._
+For example this happens with $validation, which is `kind *,* -> *` instead of the expected `* -> * kind` of an $applicativeFunctor,
+since the `Validation` type constructor takes two arguments instead of one.
 
-      val validations: Vector[ValidationNel[String,Int]] =
-        Vector(1.success, "failure2".failureNel, 3.success, "failure4".failureNel)
+### Example in ${Scalaz.md}
 
-      s"this would not compile:".p
-      // val result = validations.sequence
+    $bookmarks ...
+    ${snippet{
 
-      s"It gives you the perhaps hard to understand error:".p
-      s"could not find implicit value for parameter ev: scalaz.Leibniz.===[scalaz.Validation[String,Int],G[B]".p
+    import scalaz.{IList, NonEmptyList, ValidationNel}
 
-      s"These however work:".p
-      val result: ValidationNel[String, Vector[Int]] = validations.sequenceU
-      result must_== NonEmptyList("failure2","failure4").failure[Vector[Int]]
+    import scalaz.std.list._
+    import scalaz.std.vector._
+    import scalaz.std.anyVal._
+    import scalaz.syntax.equal._ // for === syntax
+    import scalaz.syntax.validation._
+    // for .success and .failure syntax
+    import scalaz.syntax.traverse._
 
-      val onlyEvenAllowed: Int => ValidationNel[String, Int] =
-        x => if(x % 2 === 0) x.successNel else (x.toString + " is not even").failureNel
+    val validations: Vector[ValidationNel[String, Int]] =
+      Vector(1.success, "failure2".failureNel, 3.success, "failure4".failureNel)
 
-      val evens = IList(2,4,6,8)
-      val notAllEvens = List(1,2,3,4)
+    s"this would not compile:".p
+    // val result = validations.sequence
 
-      evens.traverseU(onlyEvenAllowed) must_== IList(2,4,6,8).success
-      notAllEvens.traverseU(onlyEvenAllowed) must_== NonEmptyList("1 is not even", "3 is not even").failure
+    s"It gives you the perhaps hard to understand error:".p
+    s"could not find implicit value for parameter ev: scalaz.Leibniz.===[scalaz.Validation[String,Int],G[B]".p
+
+    s"These however work:".p
+    val result: ValidationNel[String, Vector[Int]] = validations.sequenceU
+    result must_== NonEmptyList("failure2", "failure4").failure[Vector[Int]]
+
+    val onlyEvenAllowed: Int => ValidationNel[String, Int] =
+      x => if (x % 2 === 0) x.successNel else (x.toString + " is not even").failureNel
+
+    val evens = IList(2, 4, 6, 8)
+    val notAllEvens = List(1, 2, 3, 4)
+
+    evens.traverseU(onlyEvenAllowed) must_== IList(2, 4, 6, 8).success
+    notAllEvens.traverseU(onlyEvenAllowed) must_== NonEmptyList("1 is not even", "3 is not even").failure
+    }}
+
+### Example in ${Cats.md}
+
+    ${snippet{
+
+    import cats._
+    import cats.std.list._
+    import cats.std.option._
+
+    //@todo
+    success
+    }}
+
+The $operator_traverse comes in a form, `traverseS`, that allows traversing a structure with with a function while
+carrying a state through the computation.
+
+$bookmarks ..
+
+### Example in ${Scalaz.md}
+
+    ${snippet{
+
+    import scalaz._
+
+    import scalaz.State._
+    import scalaz.std.list._
+    import scalaz.std.option._
+    import scalaz.std.anyVal._
+    import scalaz.syntax.equal._
+    // for === syntax
+    import scalaz.syntax.traverse._
+
+    s"The state stores the last seen Int, returns whether of not the current was a repeat".p
+    val checkForRepeats: Int => State[Option[Int], Boolean] = { next =>
+      for {
+        last <- get
+        _ <- put(scalaz.std.option.some(next))
+      } yield last === scalaz.std.option.some(next)
     }
 
-    eg { /** in [[Cats]] */
+    val nonRepeating = List(1, 2, 3, 4)
+    val repeating = List(1, 2, 3, 3, 4)
 
-      import cats._
-      import cats.std.list._
-      import cats.std.option._
+    s"Traverse the lists with None as the starting state, we get back a list of Booleans meaning this element was a repeat of the previous".p
 
-      //@todo
-      success
-    }
+    val res1: List[Boolean] = nonRepeating.traverseS(checkForRepeats).eval(None)
+    val res2: List[Boolean] = repeating.traverseS(checkForRepeats).eval(None)
 
-    s"$keyPoint The $operator_traverse comes in a form, traverseS, that allows traversing a structure with with a function while " +
-      s"carrying a state through the computation."
+    Tag.unwrap(res1.foldMap(Tags.Disjunction(_))) must_== false
+    Tag.unwrap(res2.foldMap(Tags.Disjunction(_))) must_== true
 
-    s"$bookmarks .. "
+    //@todo can this be done in a more economical in terms of intermediate data structure?
 
-    eg { /** in [[Scalaz]] */
+    s"Here's a variation of above which might be a bit of a head scratcher, but this works because a $monoid gives rise to an $applicativeFunctor." +
+      s"Because Boolean is not a * -> * $typeConstructor, we need traverseU instead of $operator_traverse to find the $applicativeFunctor.".p
 
-      import scalaz._
+    //@todo: understand the role of this function; does not seem used
+    import scalaz.Applicative.monoidApplicative
 
-      import scalaz.State._
-      import scalaz.std.list._
-      import scalaz.std.option._
-      import scalaz.std.anyVal._
-      import scalaz.syntax.equal._      // for === syntax
-      import scalaz.syntax.traverse._
+    Tag.unwrap(res1.traverseU(Tags.Disjunction(_))) must_== false
+    Tag.unwrap(res2.traverseU(Tags.Disjunction(_))) must_== true
+    }}
 
-      s"The state stores the last seen Int, returns whether of not the current was a repeat".p
-      val checkForRepeats: Int => State[Option[Int], Boolean] = { next =>
-        for {
-          last <- get
-          _ <- put(scalaz.std.option.some(next))
-        } yield last === scalaz.std.option.some(next)
-      }
+  ${snippet {
+  /** in [[Cats]] */
 
-      val nonRepeating = List(1,2,3,4)
-      val repeating = List(1,2,3,3,4)
+  import cats._
+  import cats.std.list._
+  import cats.std.option._
 
-      s"Traverse the lists with None as the starting state, we get back a list of Booleans meaning this element was a repeat of the previous".p
-
-      val res1: List[Boolean] = nonRepeating.traverseS(checkForRepeats).eval(None)
-      val res2: List[Boolean] = repeating.traverseS(checkForRepeats).eval(None)
-
-      Tag.unwrap(res1.foldMap(Tags.Disjunction(_))) must_== false
-      Tag.unwrap(res2.foldMap(Tags.Disjunction(_))) must_== true
-
-      //@todo can this be done in a more economical in terms of intermediate data structure?
-
-      s"Here's a variation of above which might be a bit of a head scratcher, but this works because a $monoid gives rise to an $applicativeFunctor." +
-        s"Because Boolean is not a * -> * $typeConstructor, we need traverseU instead of $operator_traverse to find the $applicativeFunctor.".p
-
-      //@todo: understand the role of this function; does not seem used
-      import scalaz.Applicative.monoidApplicative
-
-      Tag.unwrap(res1.traverseU(Tags.Disjunction(_))) must_== false
-      Tag.unwrap(res2.traverseU(Tags.Disjunction(_))) must_== true
-    }
-
-    eg { /** in [[Cats]] */
-
-      import cats._
-      import cats.std.list._
-      import cats.std.option._
-
-      //@todo
-      success
-    }
-
+  //@todo
+  success
+  }}
+      """.stripMargin
   }
 }

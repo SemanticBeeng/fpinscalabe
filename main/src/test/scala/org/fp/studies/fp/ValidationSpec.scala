@@ -3,13 +3,13 @@ package org.fp.studies.fp
 import org.fp.bookmarks._
 import org.fp.concepts._
 import org.fp.resources._
-import org.specs2.specification.dsl.mutable.TextDsl
 
 //
 import org.specs2.ScalaCheck
 import org.specs2.common.CheckedSpec
 import org.specs2.specification.Snippets
 import org.specs2.execute.SnippetParams
+import org.specs2.specification.dsl.mutable.TextDsl
 
 /**
   * [[disjunction]] in [[Scalaz]]
