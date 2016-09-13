@@ -84,7 +84,7 @@ This fail-fast behavior allows `\/` to have lawful $monad instances that are con
     import scalaz.std.anyVal._
     //import scalaz.std.function._
     //import scalaz.std.list._
-    //import scalaz.std.tuple._
+    import scalaz.std.tuple._
 //    import scalaz.std.vector._
 //    import scalaz.syntax.arrow._
 //    import scalaz.syntax.monoid._
