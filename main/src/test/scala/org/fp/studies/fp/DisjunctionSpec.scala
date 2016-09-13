@@ -229,4 +229,8 @@ object DisjunctionSpec extends org.specs2.mutable.Specification /**with AutoExam
     List(1, 2, 3).map(f).sequenceU must beAnInstanceOf[String \/ List[Int]]
     List(1, 2, 3).map(f).sequenceU must_== -\/("failure")
   }
+
+  /**
+    * @todo cover the [[scalaz.DisjunctionTest]]
+    */
 }
