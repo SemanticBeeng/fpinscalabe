@@ -82,7 +82,7 @@ This fail-fast behavior allows `\/` to have lawful $monad instances that are con
     //import scalaz.std.AllInstances._
     import scalaz.syntax.monoid._
     import scalaz.std.anyVal._
-    import scalaz.std.function._
+    //import scalaz.std.function._
     //import scalaz.std.list._
     //import scalaz.std.tuple._
 //    import scalaz.std.vector._
@@ -107,7 +107,7 @@ This fail-fast behavior allows `\/` to have lawful $monad instances that are con
 
     //----------
     def validate(records: List[String]): ValidationNel[String, List[Entity]] = {
-      Foldable[List].foldMap(records) { record =>
+      records.foldMap { record =>
         for {
           columns <- validateColumn(record)
           entity <- validateEntity(columns)
@@ -168,7 +168,7 @@ This fail-fast behavior allows `\/` to have lawful $monad instances that are con
 
     type ErrorInfo = (List[String], String)
     val validated2: List[ValidationNel[ErrorInfo, Entity]] = records.map(validate2)
-    val results2: (List[ErrorInfo], List[Entity]) = Foldable[List].foldMap(validated2) {
+    val results2: (List[ErrorInfo], List[Entity]) = validated2.foldMap {
       case Success(s) => (Nil, List(s))
       case Failure(f) => (f.toList, Nil)
     }
@@ -211,7 +211,7 @@ This fail-fast behavior allows `\/` to have lawful $monad instances that are con
     // }
 
     //@todo https://gist.github.com/tonymorris/4366536
-    val (allItems, allCodes) = Foldable[List].foldMap(products) { p:Product =>
+    val (allItems, allCodes) = products.foldMap { p:Product =>
       val item = createItem(p)
       (List(item), createCodes(p.name, item))
     }
