@@ -75,108 +75,108 @@ This fail-fast behavior allows `\/` to have lawful $monad instances that are con
     import scalaz.{Validation, Success, Failure, ValidationNel, NonEmptyList}
     import scalaz.Validation.FlatMap._
     import scalaz.syntax.validation._
-    import scalaz.Foldable
     import scalaz.syntax.apply._
     import scalaz.syntax.nel._
-    import scalaz.syntax.nel
-    //import scalaz.std.AllInstances._
-    import scalaz.syntax.monoid._
-    import scalaz.std.anyVal._
-    //import scalaz.std.function._
-    //import scalaz.std.list._
     import scalaz.std.tuple._
-//    import scalaz.std.vector._
-//    import scalaz.syntax.arrow._
-//    import scalaz.syntax.monoid._
-//    import scalaz.syntax.traverse._
     import scalaz.syntax.foldable._
     import scalaz.std.list._
-
-    //import scalaz.Scalaz._
-
-
-    def loadCsv(): List[String] = {
-      List("1,me,3,4", "2,he,0,100", "No3,aaaaaaaaaaaaaaaa,1,10")
-    }
 
     case class ScoreRange(min: Int, max: Int)
     case class Entity(id: Long, name: String, scoreRange: ScoreRange)
 
-    def batchUpdate(entities: List[Entity]) = println(entities)
-    def outputErrors(errors: List[String]) = println(errors)
+    object System {
 
-    //----------
-    def validate(records: List[String]): ValidationNel[String, List[Entity]] = {
-      records.foldMap { record =>
-        for {
-          columns <- validateColumn(record)
-          entity <- validateEntity(columns)
-        } yield List(entity)
+      def loadCsv(): List[String] = {
+        List("1,me,3,4", "2,he,0,100", "No3,aaaaaaaaaaaaaaaa,1,10")
       }
+
+      def batchUpdate(entities: List[Entity]) = println("Updating = " + entities)
+
+      def outputErrors(errors: List[String]) = println("Errors = " + errors)
     }
 
-    //----------
-    def validate2(record: String): ValidationNel[ErrorInfo, Entity] = {
-      (for {
-        columns <- validateColumn(record)
-        entity <- validateEntity(columns)
-      } yield entity) leftMap { e =>
-        (e.toList, record).wrapNel
-      }
+    object Validator {
+
+        def validate(records: List[String]): ValidationNel[String, List[Entity]] = {
+          records.foldMap { record =>
+            for {
+              columns <- validateColumn(record)
+              entity <- validateEntity(columns)
+            } yield List(entity)
+          }
+        }
+
+        def validate2(record: String): ValidationNel[ErrorInfo, Entity] = {
+          (for {
+            columns <- validateColumn(record)
+            entity <- validateEntity(columns)
+          } yield entity) leftMap { e =>
+            (e.toList, record).wrapNel
+          }
+        }
+
+        def validateColumn(record: String): ValidationNel[String, Array[String]] = {
+          val columns = record.split(",")
+          if (columns.size == 4) columns.successNel
+          else "less columns".failureNel
+        }
+
+        def validateEntity(col: Array[String]): ValidationNel[String, Entity] = {
+          (validateId(col(0)) |@|
+            validateName(col(1)) |@|
+            validateScoreRange(col(2), col(3))) (Entity)
+        }
+
+        def validateId(id: String): ValidationNel[String, Long] = {
+          Validation.fromTryCatchNonFatal(id.toLong).leftMap(_ => NonEmptyList("invalid id"))
+        }
+
+        def validateName(name: String): ValidationNel[String, String] = {
+          if (name.size <= 10) name.successNel
+          else "name too long".failureNel
+        }
+
+        def validateScoreNum(num: String, column: String): ValidationNel[String, Int] = {
+          Validation.fromTryCatchNonFatal(num.toInt).leftMap(_ => NonEmptyList(s"invalid $column"))
+        }
+
+        def validateMinMax(min: String, max: String): ValidationNel[String, (Int, Int)] = {
+          (validateScoreNum(min, "min") |@| validateScoreNum(max, "max")) ((x, y) => (x, y))
+        }
+
+        def validateScoreRangeConstraint(min: Int, max: Int): ValidationNel[String, ScoreRange] = {
+          if (min <= max) ScoreRange(min, max).successNel
+          else "min is grater than max".failureNel
+        }
+
+        def validateScoreRange(min: String, max: String): ValidationNel[String, ScoreRange] = {
+          validateMinMax(min, max).flatMap { case (n, x) => validateScoreRangeConstraint(n, x) }
+        }
     }
 
-    //----------
-    def validateColumn(record: String): ValidationNel[String, Array[String]] = {
-      val columns = record.split(",")
-      if (columns.size == 4) columns.successNel
-      else "less columns".failureNel
-    }
-    def validateEntity(col: Array[String]): ValidationNel[String, Entity] = {
-      (validateId(col(0)) |@|
-        validateName(col(1)) |@|
-        validateScoreRange(col(2), col(3))) (Entity)
-    }
-    def validateId(id: String): ValidationNel[String, Long] = {
-      Validation.fromTryCatchNonFatal(id.toLong).leftMap(_ => NonEmptyList("invalid id"))
-    }
-    def validateName(name: String): ValidationNel[String, String] = {
-      if (name.size <= 10) name.successNel
-      else "name too long".failureNel
-    }
-    def validateScoreNum(num: String, column: String): ValidationNel[String, Int] = {
-      Validation.fromTryCatchNonFatal(num.toInt).leftMap(_ => NonEmptyList(s"invalid $column"))
-    }
-    def validateMinMax(min: String, max: String): ValidationNel[String, (Int, Int)] = {
-      (validateScoreNum(min, "min") |@| validateScoreNum(max, "max")) ((x, y) => (x, y))
-    }
-    def validateScoreRangeConstraint(min: Int, max: Int): ValidationNel[String, ScoreRange] = {
-      if (min <= max) ScoreRange(min, max).successNel
-      else "min is grater than max".failureNel
-    }
-    def validateScoreRange(min: String, max: String): ValidationNel[String, ScoreRange] = {
-      validateMinMax(min, max).flatMap { case (n, x) => validateScoreRangeConstraint(n, x) }
-    }
+    val records: List[String] = System.loadCsv()
 
-    val records: List[String] = loadCsv()
-    val validated: ValidationNel[String, List[Entity]] = validate(records)
+    val validated: ValidationNel[String, List[Entity]] = Validator.validate(records)
 
     println("== validated1 ==")
+    validated must_== Failure(NonEmptyList("invalid id", "name too long"))
+
     validated match {
-      case Success(entities) => batchUpdate(entities)
-      case Failure(errors) => outputErrors(errors.toList)
+      case Success(entities) => System.batchUpdate(entities)
+      case Failure(errors) => System.outputErrors(errors.toList)
     }
 
     type ErrorInfo = (List[String], String)
-    val validated2: List[ValidationNel[ErrorInfo, Entity]] = records.map(validate2)
+
+    val validated2: List[ValidationNel[ErrorInfo, Entity]] = records.map(Validator.validate2)
+
     val results2: (List[ErrorInfo], List[Entity]) = validated2.foldMap {
       case Success(s) => (Nil, List(s))
       case Failure(f) => (f.toList, Nil)
     }
     println("== validated2 ==")
-    println("errors:")
-    println(results2._1)
-    println("entities:")
-    println(results2._2)
+    System.outputErrors(results2._1.head._1)
+    System.batchUpdate(results2._2)
 
     //  object X {
     //object X extends App {
