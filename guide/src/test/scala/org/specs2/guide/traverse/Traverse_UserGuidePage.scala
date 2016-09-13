@@ -14,7 +14,7 @@ object Traverse_UserGuidePage extends UserGuidePage {
   ${concepts.traverseFunctor} ...
   Examples for a 'custom' ${concepts.traverseFunctor} with ${resources.Scalaz.md} and ${resources.Cats.md} in
 
- * ${link(traverse.operators.custom.CustomTraverseSpec)} and ${link(traverse.operators.dfault.Spec)}
+ * ${link(traverse.operators.custom.CustomTraverseSpec)} and ${link(traverse.operators.dfault.DefaultTraverseSpec)}
 
 }
 
