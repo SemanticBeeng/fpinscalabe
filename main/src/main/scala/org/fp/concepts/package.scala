@@ -52,6 +52,7 @@ package object concepts {
   val KleisliArrow = "[Kleisli arrow]"
   val KleisliFunction = "[Kleisli function]"
   val coProduct = "[coproduct]"
+  val freeMonad = "[free monad]"
 
   /**
     * @todo related to [[operator_lift]]

@@ -12,7 +12,7 @@ import org.specs2.ugbase.UserGuidePage
 
 /**
   *
-  * @see [[coProduct]]
+  * @see [[freeMonad]], [[coProduct]]
   */
 
 /**
@@ -29,11 +29,13 @@ We will implement movement in a 2 dimensional space.
 ### Creating set of instructions (AST)
 
 Ok, let’s say we have some set of instructions that we want to use in order to create program.
+
 Using the LOGO example I would like to implement basic functionality like moving forward and backward,
 rotating left or right and showing the current position.
 To do that I’ve created a few simple classes to represent those actions.
 
-These are just simple case classes. Type A will be the type that Free Monad will be working on. That means if we use a flatMap we will have to provide a function of type A => Instruction[B].
+These are just simple case classes. Type A will be the type that $freeMonad will be working on.
+That means if we use a $operator_flatMap we will have to provide a function of type `A => Instruction[B]`.
 
 ${snippet{
     /**/
@@ -63,6 +65,43 @@ ${snippet {
      val value = d % 360
    }
 }}
+
+At this point we have defined only our actions with some additional types, but it does not compute anything, it’s abstract.
+
+## Creating the DSL
+
+DSL is a Domain Specific Language. It contains functions that refer to the domain. Such functions make the code more readable
+and expressive. To make it easier to use I’ve created some helper methods that will create $freeMonad-s wrapping our actions,
+by lifting `Instruction[A]` into `Free[Instruction, A]`.
+
+${snippet{
+    /**/
+    // 8<--
+    case class Position(x: Double, y: Double, heading: Degree)
+    case class Degree(private val d: Int) {
+      val value = d % 360
+    }
+    object Logo {
+      sealed trait Instruction[A]
+      case class Forward(position: Position, length: Int) extends Instruction[Position]
+      case class Backward(position: Position, length: Int) extends Instruction[Position]
+      case class RotateLeft(position: Position, degree: Degree) extends Instruction[Position]
+      case class RotateRight(position: Position, degree: Degree) extends Instruction[Position]
+      case class ShowPosition(position: Position) extends Instruction[Unit]
+    }
+
+    import Logo._
+    // 8<--
+
+    import cats.free.Free
+
+    def forward(pos: Position, l: Int): Free[Instruction, Position] = Free.liftF(Forward(pos, l))
+    def backward(pos: Position, l: Int): Free[Instruction, Position] = Free.liftF(Backward(pos, l))
+    def left(pos: Position, degree: Degree): Free[Instruction, Position] = Free.liftF(RotateLeft(pos, degree))
+    def right(pos: Position, degree: Degree): Free[Instruction, Position] = Free.liftF(RotateRight(pos, degree))
+    def showPosition(pos: Position): Free[Instruction, Unit] = Free.liftF(ShowPosition(pos))
+
+  }}
 
 """.stripMargin
 
