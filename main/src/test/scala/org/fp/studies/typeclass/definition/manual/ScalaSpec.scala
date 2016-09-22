@@ -19,8 +19,6 @@ import org.specs2.execute.SnippetParams
   */
 object ScalaSpec extends org.specs2.Specification with Snippets with ScalaCheck with CheckedSpec with AllExpectations {
 
-  implicit def snippetParams[T]: SnippetParams[T] = defaultSnippetParameters[T].copy(evalCode = true).offsetIs(-4)
-
   def is = s"Defining $typeClass-es manually".title ^ s2"""Defining $typeClass-es manually
 
 ### Boiler plate code to define the $typeClass related stuff manually
@@ -118,4 +116,6 @@ object ScalaSpec extends org.specs2.Specification with Snippets with ScalaCheck 
 
   }}
   """.stripMargin
+
+  implicit def snippetParams[T]: SnippetParams[T] = defaultSnippetParameters[T].copy(evalCode = true).offsetIs(-4)
 }

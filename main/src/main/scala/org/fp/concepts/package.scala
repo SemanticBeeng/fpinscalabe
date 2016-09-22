@@ -51,6 +51,7 @@ package object concepts {
   val FunctionArrow = "[function arrow]"
   val KleisliArrow = "[Kleisli arrow]"
   val KleisliFunction = "[Kleisli function]"
+  val coProduct = "[coproduct]"
 
   /**
     * @todo related to [[operator_lift]]

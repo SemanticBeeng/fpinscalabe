@@ -64,6 +64,7 @@ In this user guide, you will find:
 
 ## Blogs
  * ${link(blogs.herdingcats.Checking_laws_with_Discipline)}
+ * ${link(blogs.scalac.Overview_of_free_monad_in_cats)}
 
 ## Presentations
  * ${link(presentations.flatten_your_code.basics.Part01)}
