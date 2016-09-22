@@ -5,7 +5,6 @@ import org.fp.resources._
 import org.fp.bookmarks._
 
 import scala.language.higherKinds
-//import org.specs2.matcher.{EitherBaseMatchers => _}
 
 //
 import org.specs2.ugbase.UserGuidePage
@@ -75,6 +74,8 @@ ${snippet{
     // 8<--
     import API02._
     import API02.Logo._
+    import org.specs2.matcher.{EitherBaseMatchers => _, _}
+
     // 8<--
     import cats.free.Free
 
@@ -82,7 +83,7 @@ ${snippet{
       start: Position =>
         for {
           p1 <- forward(start, 10)
-          p2 <- rightM(p1, Degree(90))
+          p2 <- API02.right(p1, Degree(90))
           p3 <- forward(p2, 10)
         } yield p3
     }

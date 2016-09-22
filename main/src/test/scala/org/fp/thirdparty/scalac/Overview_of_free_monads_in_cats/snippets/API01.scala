@@ -22,5 +22,4 @@ trait API01 {
 
 // 8<--
 object API01 extends API01
-//object Logo extends API01.Logo
 // 8<--
