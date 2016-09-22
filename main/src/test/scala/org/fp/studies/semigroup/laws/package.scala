@@ -35,7 +35,7 @@ package object laws {
       /** in [[Cats]] */
 
       import cats.Semigroup
-      import cats.std.all._
+      import cats.instances.all._
       import cats.kernel.laws.GroupLaws
 
       import org.scalacheck.{Gen, Arbitrary}

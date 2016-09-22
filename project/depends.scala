@@ -5,7 +5,7 @@ object versions {
 
   val scala = "2.11.8"
   val scalaz = "7.2.4"
-  val cats = "0.6.1"
+  val cats = "0.7.2"
 
   val tagsoup = "1.2"
 

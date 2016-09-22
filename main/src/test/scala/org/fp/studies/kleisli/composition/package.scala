@@ -71,7 +71,7 @@ package object composition {
       import cats.data.Kleisli
       import cats.syntax.flatMap._
 
-      import cats.std.option._
+      import cats.instances.option._
       import Catnip._
 
       val f = Kleisli { (x: Int) => (x + 1).some }
@@ -90,7 +90,7 @@ package object composition {
       s"$Kleisli also has some interesting methods like $operator_lift, which allows you to lift a $monadicFunction " +
         s"into another $applicativeFunctor.".p
 
-      import cats.std.list._
+      import cats.instances.list._
 
       val l = f.lift[List]
 
@@ -384,7 +384,7 @@ package object composition {
       eg {
         /** [[Cats]] */
 
-        import cats.std.option._
+        import cats.instances.option._
         import cats.syntax.option._
 
         import SomeFunctions._
@@ -657,7 +657,7 @@ package object composition {
     eg {
       /** [[Cats]] */
 
-      import cats.std.option._
+      import cats.instances.option._
       import cats.syntax.option._
 
       //@todo

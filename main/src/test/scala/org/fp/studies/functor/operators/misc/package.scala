@@ -33,7 +33,7 @@ package object misc {
 
     eg { /** in [[Cats]] */
       // 8<--
-      import cats.std.list._
+      import cats.instances.list._
       import cats.syntax.functor._
       // 8<--
       val len: String => Int = _.length
@@ -55,7 +55,7 @@ package object misc {
     eg { /** in [[Cats]] */
       // 8<--
       import cats.Functor
-      import cats.std.option._
+      import cats.instances.option._
       // 8<--
 
       Functor[Option].void(Some(1)) must_== Some(())
@@ -72,7 +72,7 @@ package object misc {
 
     s"$keyPoint The $operator_as transforms F[A] into a F[B].".p
     eg { /** in [[Cats]] */
-      import cats.std.list._
+      import cats.instances.list._
       import cats.syntax.functor._
       // 8<--
 
@@ -97,7 +97,7 @@ package object misc {
 
     eg { /** in [[Cats]] */
       import cats.syntax.functor._
-      import cats.std.list._
+      import cats.instances.list._
 
       //@todo List(1, 2, 3) >| "x" must_== List("x", "x", "x")
       List(1, 2, 3) as "x" must_== List("x", "x", "x")

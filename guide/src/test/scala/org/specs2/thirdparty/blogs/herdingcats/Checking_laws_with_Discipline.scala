@@ -57,7 +57,7 @@ We can run these tests from the REPL with ${ScalaCheck.md}.
 
 ${snippet{
     /**/
-    import cats.std.all._
+    import cats.instances.all._
     import cats.laws.discipline.FunctorTests
 
     val rs = FunctorTests[Either[Int, ?]].functor[Int, Int, Int]
@@ -75,7 +75,7 @@ ${snippet{
     /**/
     import org.specs2.Specification
     import org.typelevel.discipline.specs2.Discipline
-    import cats.std.AllInstances
+    import cats.instances.AllInstances
     import cats.syntax.AllSyntax
 
     trait CatsSpec extends Specification with Discipline with AllInstances with AllSyntax
@@ -89,7 +89,7 @@ ${snippet{
     // 8<--
     import org.specs2.Specification
     import org.typelevel.discipline.specs2.Discipline
-    import cats.std.AllInstances
+    import cats.instances.AllInstances
     import cats.syntax.AllSyntax
 
     trait CatsSpec extends Specification with Discipline with AllInstances with AllSyntax
@@ -191,7 +191,7 @@ ${snippet{
     import cats.laws.discipline.FunctorTests
     import org.specs2.Specification
     import org.typelevel.discipline.specs2.Discipline
-    import cats.std.AllInstances
+    import cats.instances.AllInstances
     import cats.syntax.AllSyntax
 
     trait CatsSpec extends Specification with Discipline with AllInstances with AllSyntax

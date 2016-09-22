@@ -72,8 +72,8 @@ since the `Validation` type constructor takes two arguments instead of one.
   ${snippet{
 
   import cats._
-  import cats.std.list._
-  import cats.std.option._
+  import cats.instances.list._
+  import cats.instances.option._
 
   //@todo
   success
@@ -131,8 +131,8 @@ $bookmarks ..
   ${snippet {
 
   import cats._
-  import cats.std.list._
-  import cats.std.option._
+  import cats.instances.list._
+  import cats.instances.option._
 
   //@todo
   success

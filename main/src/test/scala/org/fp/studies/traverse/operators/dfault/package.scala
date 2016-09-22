@@ -47,8 +47,8 @@ $bookmarks ${ann_TraverseUsage.md}
 
   ${snippet{
   import cats._
-  import cats.std.list._
-  import cats.std.option._
+  import cats.instances.list._
+  import cats.instances.option._
 
   val list1: List[Option[Int]] = List(Some(1), Some(2), Some(3), Some(4))
   Traverse[List].sequence(list1) must_== Some(List(1,2,3,4))
@@ -75,8 +75,8 @@ Importing the $traverseFunctor syntax will enhance values which have an availabl
 
   ${snippet{
 
-  import cats.std.list._
-  import cats.std.option._
+  import cats.instances.list._
+  import cats.instances.option._
   import cats.syntax.traverse._
 
   val list1: List[Option[Int]] = List(Some(1), Some(2), Some(3), Some(4))
@@ -115,8 +115,8 @@ So when you find yourself calling fa.map(f).sequence, it can be replaced with ju
 ### Example in ${Cats.md}}
 
   ${snippet{
-  import cats.std.list._
-  import cats.std.option._
+  import cats.instances.list._
+  import cats.instances.option._
   import cats.syntax.traverse._
 
   val smallNumbers = List(1,2,3,4,5)
@@ -167,8 +167,8 @@ $bookmarks ${ann_Traverse.md}
   ${snippet{
 
   import cats._
-  import cats.std.list._
-  import cats.std.option._
+  import cats.instances.list._
+  import cats.instances.option._
 
   //@todo
   success

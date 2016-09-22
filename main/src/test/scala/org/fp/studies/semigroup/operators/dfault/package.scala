@@ -65,7 +65,7 @@ package object dfault {
         def combine(f1: Int, f2: Int): Int = f1 + f2
       }
 
-      import cats.std.option._
+      import cats.instances.option._
       import cats.syntax.option._
 
       val f_some: Int => Option[Int] = { i => i.some }
@@ -82,7 +82,7 @@ package object dfault {
 
       s"$bookmarks $ann_Semigroup".p
 
-      import cats.std.list._
+      import cats.instances.list._
       List(1, 2, 3) |+| List(4, 5, 6) must_== List(1, 2, 3, 4, 5, 6)
 
       implicit object StringSemigroup extends Semigroup[String] {
@@ -116,8 +116,8 @@ package object dfault {
     eg {
       /** in [[Cats]] */
 
-      //do not import cats.std.map._
-      import cats.std.all._
+      //do not import cats.instances.map._
+      import cats.instances.all._
       import cats.syntax.semigroup._
 
       s"So, Map[*, Int] forms a $semigroup".p
@@ -155,7 +155,7 @@ package object dfault {
     eg {
       /** in [[Cats]] */
 
-      import cats.std.map._
+      import cats.instances.map._
       import cats.syntax.semigroup._
 
       val map1 = Map(1 -> "a",  2 -> "b")

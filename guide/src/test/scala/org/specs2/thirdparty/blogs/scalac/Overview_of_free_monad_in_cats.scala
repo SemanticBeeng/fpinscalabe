@@ -89,6 +89,56 @@ ${snippet{
     }
 }}
 
+As we can see the program is just a function that takes a starting position and moves the turtle.
+The result of calling the function is also a $freeMonad and that’s great news because it’s very easy to compose another function using this one.
+We can simply think of creating functions to draw basic geometric shapes and then using these functions to draw something more complicated;
+furthermore, it’s going to compose very well. It’s like that because of referential transparency property of the $freeMonad.
+
+Another advantage is that we don’t worry how it is computed. We are just expressing how program should work using the DSL.
+
+## Interpreter
+
+At this moment we have our program description, but we want to execute it. In order to do that a $naturalTransformation is needed.
+It’s a function that can transform one $typeConstructor into another one. A $naturalTransformation from `F` to `G` is often written as `F[_] ~> G[_]`.
+What is important, is that we have to provide implicit conversion from `G` to a `Monad[G]`.
+
+It’s possible to have multiple interpreters, e.g. one for testing and another one for production.
+This is very useful when we create an AST for interacting with a database or some other external service.
+The simplest $monad is the identity monad Id, which is defined in ${Cats.md} as a simple type container.
+
+${snippet{
+    type Id[A] = A
+  }}
+
+It has all necessary functions implemented and implicit value that is a `Monad[Id]`.
+In the ${Cats.md} package object there is an implicit instance that helps with conversion to an Id.
+
+Let’s use it to write our own interpreter.
+
+${snippet{
+    /**/
+    // 8<--
+    import API02._
+    import API02.Logo._
+
+    //type Id[A] = A
+    // 8<--
+    import cats.{Id, ~>}
+    //import cats.free.Free
+
+    object InterpreterId extends (Instruction ~> Id) {
+      //import Computations._
+      override def apply[A](fa: Instruction[A]): Id[A] = fa match {
+        case Forward(p, length) => forward(p, length)
+        case Backward(p, length) => backward(p, length)
+        case RotateLeft(p, degree) => left(p, degree)
+        case RotateRight(p, degree) => API02.right(p, degree)
+        case ShowPosition(p) => println(s"showing position $p")
+      }
+    }
+  }}
+
+
 """.stripMargin
 
   implicit override def snippetParams[T]: SnippetParams[T] = defaultSnippetParameters[T].copy(evalCode = true).offsetIs(-4)

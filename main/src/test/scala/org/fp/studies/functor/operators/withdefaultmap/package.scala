@@ -36,14 +36,14 @@ package object withdefaultmap {
     }
 
     eg { /** in [[Cats]] */
-      import cats.{Functor, std}
+      import cats.{Functor, instances}
       val len: String => Int = _.length
 
-      import std.option._
+      import instances.option._
       Functor[Option].map(Some("adsf"))(len)           must_== Some(4)
       Functor[Option].map(None)(len)                   must_== None
 
-      import std.list._
+      import instances.list._
       Functor[List]  .map(List("qwer", "adsfg"))(len)  must_== List(4,5)
       Functor[List]  .map(List(1, 2, 3))(_ * 2)        must_== List(2, 4, 6)
     }
@@ -59,9 +59,9 @@ package object withdefaultmap {
     }
 
     eg { /** in [[Cats]] */
-      import cats.{Functor, std}
+      import cats.{Functor, instances}
       import cats.syntax.functor._
-      import std.either._
+      import cats.instances.either._
       val increment: Int => Int = i => i + 1 // a bit of help for Intellij type inference
       (Right(1): Either[String, Int]) map increment must_== Right(2)
     }

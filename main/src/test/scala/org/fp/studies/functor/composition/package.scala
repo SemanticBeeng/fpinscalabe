@@ -51,7 +51,7 @@ package object composition {
       val func2 = (y: Double) => y * 2
 
       import cats.syntax.functor._
-      import cats.std.function._
+      import cats.instances.function._
 
       s"Function1 can be thought as infinite $operator_map from the domain to the range. ".p
       s"$bookmarks: $ann_Function1asMap".p
@@ -89,7 +89,7 @@ package object composition {
       val func2 = (y: Int) => y > 0
 
       import cats.syntax.functor._
-      import cats.std.function._
+      import cats.instances.function._
 
       val func3 = func1 map func2
 
@@ -116,8 +116,8 @@ package object composition {
     eg { /** in [[Cats]] */
 
       import cats.Functor
-      import cats.std.option._
-      import cats.std.list._
+      import cats.instances.option._
+      import cats.instances.list._
 
       val listOpt = Functor[List] compose Functor[Option]
 

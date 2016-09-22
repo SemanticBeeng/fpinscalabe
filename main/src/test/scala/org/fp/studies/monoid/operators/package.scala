@@ -28,7 +28,7 @@ package object dfault {
     eg { /** in [[Cats]] */
       /*@todo
             import cats.Monoid
-            import cats.std.anyVal._
+            import cats.instances.anyVal._
             import cats.syntax.m
 
             Monoid[Int].append(10,20) must_== 30

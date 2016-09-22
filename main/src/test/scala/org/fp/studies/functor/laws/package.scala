@@ -31,7 +31,7 @@ package object laws {
 
     eg { /** in [[Cats]] */
       import cats.syntax.functor._
-      import cats.std.list._
+      import cats.instances.list._
 
       import org.scalacheck.Arbitrary
       val anyList:List[Int] = Arbitrary.arbitrary[List[Int]].sample.get
@@ -59,10 +59,10 @@ package object laws {
 
     eg { /** in [[Cats]] */
       import cats.Functor
-      import cats.{std, syntax}
+      import cats.{instances, syntax}
       import syntax.functor._
-      import std.list._
-      import std.function._
+      import instances.list._
+      import instances.function._
 
       val f = (_: Int) * 3
       val g = (_: Int) + 1

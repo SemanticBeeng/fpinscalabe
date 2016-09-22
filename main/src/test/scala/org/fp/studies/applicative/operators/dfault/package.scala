@@ -32,8 +32,8 @@ package object dfault {
 
     eg { /** in [[Cats]] */
 
-      import cats.std.list._
-      import cats.std.option._
+      import cats.instances.list._
+      import cats.instances.option._
       import cats.syntax.applicative._
 
       //@todo

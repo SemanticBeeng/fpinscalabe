@@ -53,6 +53,7 @@ package object concepts {
   val KleisliFunction = "[Kleisli function]"
   val coProduct = "[coproduct]"
   val freeMonad = "[free monad]"
+  val naturalTransformation = "[natural transformation]"
 
   /**
     * @todo related to [[operator_lift]]
