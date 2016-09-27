@@ -210,6 +210,154 @@ ${snippet{
       }
     }
   }}
+
+We defined `nonNegative` as a part of the interpreter - the reason is that it’s an implementation detail not connected to the business logic.
+And now if we run the program with such definition
+
+${snippet{
+    // 8<--
+    import API02._
+    import API02.Logo._
+
+    import cats.{Id, ~>}
+    import cats.free.Free
+    // 8<--
+
+    val program2: (Position => Free[Instruction, Unit]) = {
+      s: Position =>
+        for {
+          p1 <- forward(s, 10)
+          p2 <- right_(p1, Degree(90))
+          p3 <- forward(p2, 10)
+          p4 <- backward(p3, 20)//Here the computation stops, because result will be None
+          _ <- showPosition(p4)
+        } yield ()
+    }
+  }}
+
+It’ll not print the position, so we achieved our goal.
+
+We can easily think about another interpreter that could be implemented for this AST. It could be a graphical representation of our program.
+
+### Composing
+
+$freeMonad-s are a really powerful tool. One of the reasons is composition.
+
+Our example is rather simple, but you can imagine that you’ve built a whole instruction set for your business logic.
+It is completely separated from other code in application.
+Then you can add set of instructions for logging, accessing the database, failure handling or just another business logic but for some reason separated from the previous one.
+Each of such DSLs can be easily tested.
+Writing the program doesn’t change much. You have to do some adjustments.
+
+Let’s say we want to add to our LOGO application two new instructions - `PencilUp` and `PencilDown`, but they will be in other instruction set.
+First thing is defining `PencilInstruction`.
+
+${snippet{
+    // 8<--
+    import API02._
+    // 8<--
+
+    sealed trait PencilInstruction[A]
+    case class PencilUp(position: Position) extends PencilInstruction[Unit]
+    case class PencilDown(position: Position) extends PencilInstruction[Unit]
+
+  }}
+
+The problem with the program type is that `PencilInstruction` and `Instruction` don’t have a common supertype, and they shouldn’t have.
+We need to define some type that will be either former or latter of these two type constructors and still be able to pass them type parameter.
+
+Luckily, there is a $coProduct, which is made exactly for such tasks. It’s a wrapper for `Xor` type ($disjunction), which is more or less the same thing as Scala’s `Either`.
+
+$coProduct requires two $typeConstructor-s and type that will be inserted into them. In this way we can make superset of two sets of instructions and create a supertype for them.
+
+${snippet{
+    import cats.data.Xor
+
+    final case class Coproduct[F[_], G[_], A](run: F[A] Xor G[A])
+  }}
+
+Let’s define our common type.
+
+${snippet{
+
+    // 8<--
+    import API02._
+    import API02.Logo._
+
+    sealed trait PencilInstruction[A]
+    case class PencilUp(position: Position) extends PencilInstruction[Unit]
+    case class PencilDown(position: Position) extends PencilInstruction[Unit]
+    // 8<--
+
+    import cats.data.Coproduct
+    type LogoApp[A] = Coproduct[Instruction, PencilInstruction, A]
+  }}
+
+In application we will be using `LogoApp` as a whole set of instructions.
+To make the mixing of these two ASTs possible we need to be able to lift both of them to $coProduct type.
+
+To do this we have to change our lifting methods - instead of using `Free.liftF` method we will use an injecting function.
+
+${snippet{
+    import cats.free.{Free, Inject}
+
+    final class FreeInjectPartiallyApplied[F[_], G[_]] private[free] {
+      def apply[A](fa: F[A])(implicit I : Inject[F, G]): Free[G, A] =
+        Free.liftF(I.inj(fa))
+    }
+
+    def inject[F[_], G[_]]: FreeInjectPartiallyApplied[F, G] = new FreeInjectPartiallyApplied
+
+  }}
+
+It basically means that we can lift our `Instruction` or `PencilInstruction` set into the $coProduct which is the superset of both of them.
+
+Because we want to be flexible about the $coProduct types we will define classes wrapping our DSL.
+These classes will take type parameter, which will be corresponding to the $coProduct.
+
+This is what our Logo definition will look like
+
+${incl[API02]}
+${snippet{
+
+
+    // 8<--
+    import API02._
+    import API02.Logo
+    // 8<--
+
+
+  }}
+
+Moves and PencilActions will be implicitly needed in our program.
+They gonna be parametrized by our `LogoApp` type, and will have all methods lifted to `Free` that will be operating on the `LogoApp`.
+
+That means we can mix them in one $forComprehension expression. Now our program definition will look like this:
+
+${snippet{
+    // 8<--
+    import API02._
+    import API02.Logo._
+
+    import cats.{Id, ~>}
+    import cats.free.Free
+    // 8<--
+
+    def program(implicit M: Moves[LogoApp], P: PencilActions[LogoApp]): (Position => Free[LogoApp, Unit]) = {
+      import M._, P._
+      s: Position =>
+        for {
+          p1 <- forward(s, 10)
+          p2 <- right(p1, Degree(90))
+          _ <- pencilUp(p2)
+          p3 <- forward(p2, 10)
+          _ <- pencilDown(p3)
+          p4 <- backward(p3, 20)
+          _ <- showPosition(p4)
+        } yield ()
+    }
+  }}
+
 """.stripMargin
 
   implicit override def snippetParams[T]: SnippetParams[T] = defaultSnippetParameters[T].copy(evalCode = true).offsetIs(-4)

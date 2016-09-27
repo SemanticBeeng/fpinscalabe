@@ -10,9 +10,6 @@ trait API02 extends API01 {
   import Logo._
   import cats.free.Free
   import cats.Id
-  import cats._
-  import cats.syntax.comonad._
-
 
   implicit def liftPosition[P](i: Instruction[P]): Free[Instruction, P] = Free.liftF(i)
   implicit def runInstruction(i: Free[Instruction, Position]): Id[Position] = i.run

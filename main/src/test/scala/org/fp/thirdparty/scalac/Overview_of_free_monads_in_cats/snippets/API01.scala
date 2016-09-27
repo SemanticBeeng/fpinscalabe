@@ -10,7 +10,7 @@ trait API01 {
     val value = d % 360
   }
 
-  object Logo {
+  trait Logo {
     sealed trait Instruction[A]
     case class Forward(position: Position, length: Int) extends Instruction[Position]
     case class Backward(position: Position, length: Int) extends Instruction[Position]
@@ -22,4 +22,6 @@ trait API01 {
 
 // 8<--
 object API01 extends API01
+
+object Logo extends API01.Logo
 // 8<--
