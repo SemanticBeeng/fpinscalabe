@@ -83,7 +83,7 @@ ${snippet{
       start: Position =>
         for {
           p1 <- forward(start, 10)
-          p2 <- API02.right(p1, Degree(90))
+          p2 <- API02.right_(p1, Degree(90))
           p3 <- forward(p2, 10)
         } yield p3
     }
@@ -124,21 +124,92 @@ ${snippet{
     //type Id[A] = A
     // 8<--
     import cats.{Id, ~>}
-    //import cats.free.Free
+    import cats.free.Free
 
     object InterpreterId extends (Instruction ~> Id) {
       //import Computations._
-      override def apply[A](fa: Instruction[A]): Id[A] = fa match {
+
+      override def apply(fa: Instruction[Position]): Id[Position] = fa match {
+
         case Forward(p, length) => forward(p, length)
         case Backward(p, length) => backward(p, length)
-        case RotateLeft(p, degree) => left(p, degree)
-        case RotateRight(p, degree) => API02.right(p, degree)
-        case ShowPosition(p) => println(s"showing position $p")
+        case RotateLeft(p, degree) => left_(p, degree)
+        case RotateRight(p, degree) => right_(p, degree)
+        case ShowPosition(p) => println(s"showing position $p"); p
       }
     }
   }}
 
+`InterpreterId` is defined as a $naturalTransformation from `Instruction` to `Id`.
+`Computations` object has all the functions that are necessary to compute a new position.
+Functions used in first 4 cases return value of type `Position` which is equal to `Id[Position]`.
+The `Id` does not modify value, it is just a container that provides $monadicFunction-s.
+If you put `Position` value `pos` into `Id[Position].pure(pos)` it will return value `pos` of type `Position`.
+If you want to $operator_map over the `Id` using function `f: Position => B`, it will behave the same as if you apply the `pos` into the `f`.
 
+### Running the program
+
+To run the program we need to simply $operator_foldMap it using the interpreter and pass a parameter to the function to start evaluation.
+
+${snippet{
+    // 8<--
+    import API02._
+    import API02.Logo._
+
+    import cats.free.Free
+
+    val program: (Position => Free[Instruction, Position]) = {
+      start: Position =>
+        for {
+          p1 <- forward(start, 10)
+          p2 <- API02.right_(p1, Degree(90))
+          p3 <- forward(p2, 10)
+        } yield p3
+    }
+    // 8<--
+//@todo
+//    val startPosition = Position(0.0, 0.0, Degree(0))
+//
+//    program(startPosition).foldMap(InterpreterId)
+  }}
+
+The result of this operation will be just a `Position` because last the instruction of program was forward and we yielded the result of it.
+When we look at the definition of `Forward` we can see that it extends `Instruction[Position]` and that type parameter specifies that we will
+have a value of `Position` type as result.
+
+### Another Interpreter
+
+Let’s assume we want to move on a surface that has only non-negative coordinates. Whenever the value of `x` or `y` in `Position` becomes negative we want to stop further computation.
+
+The simplest solution is to change the interpreter so that it’ll transform `Instruction` into `Option`.
+Function $operator_foldMap is using the $operator_flatMap of the $monad that our `Instruction` is transformed into.
+So if we going to return `None` then the computation will be stopped.
+Let’s implement it.
+
+${snippet{
+    // 8<--
+    import API02._
+    import API02.Logo._
+
+    import cats.{Id, ~>}
+    import cats.free.Free
+    // 8<--
+
+    object InterpretOpt extends (Instruction ~> Option) {
+      //import Computations._
+      val nonNegative: (Position) => Option[Position] = {
+        p => if (p.x >= 0 &&p.y >= 0) Some(p) else None
+      }
+
+      override def apply (fa: Instruction[Position]) = fa match {
+        case Forward(p, length) => nonNegative(forward(p, length))
+        case Backward(p, length) => nonNegative(backward(p, length))
+        case RotateLeft(p, degree) => Some(left_(p, degree))
+        case RotateRight(p, degree) => Some(right_(p, degree))
+        case ShowPosition(p) => Some(println(s"showing position $p")); p
+      }
+    }
+  }}
 """.stripMargin
 
   implicit override def snippetParams[T]: SnippetParams[T] = defaultSnippetParameters[T].copy(evalCode = true).offsetIs(-4)
