@@ -326,13 +326,13 @@ That means we can mix them in one $forComprehension expression. Now our program 
 
 ${snippet{
     // 8<--
-    import API03._
-    import API03.Logo._
-    import API03.Logo.dsl._
-
     import cats.{Id, ~>}
     import cats.free.Free
     import cats.data.Coproduct
+
+    import API03._
+    import API03.Logo._
+    import API03.Logo.dsl._
 
     type LogoApp[A] = Coproduct[Instruction, PencilInstruction, A]
     // 8<--

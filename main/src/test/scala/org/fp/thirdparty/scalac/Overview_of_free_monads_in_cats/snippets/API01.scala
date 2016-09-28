@@ -11,6 +11,7 @@ trait API01 {
   }
 
   trait Logo {
+
     sealed trait Instruction[A]
     case class Forward(position: Position, length: Int) extends Instruction[Position]
     case class Backward(position: Position, length: Int) extends Instruction[Position]
