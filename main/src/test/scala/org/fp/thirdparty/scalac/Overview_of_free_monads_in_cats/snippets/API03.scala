@@ -17,8 +17,6 @@ trait API03 extends API02 {
 
     object dsl {
 
-      //import API02.Logo._
-
       class Moves[F[_]](implicit I: Inject[Instruction, F]) {
         def forward(pos: Position, l: Int): Free[F, Position] = Free.inject[Instruction, F](Forward(pos, l))
         def backward(pos: Position, l: Int): Free[F, Position] = Free.inject[Instruction, F](Backward(pos, l))
