@@ -7,9 +7,10 @@ import scala.language.implicitConversions
   */
 trait API02 extends API01 {
 
-  import Logo._
   import cats.free.Free
   import cats.Id
+
+  import Logo._
 
   implicit def liftPosition[P](i: Instruction[P]): Free[Instruction, P] = Free.liftF(i)
   implicit def runInstruction(i: Free[Instruction, Position]): Id[Position] = i.run

@@ -18,10 +18,12 @@ trait API01 {
     case class RotateRight(position: Position, degree: Degree) extends Instruction[Position]
     case class ShowPosition(position: Position) extends Instruction[Unit]
   }
+
+  // 8<--
+  object Logo extends Logo
+  // 8<--
 }
 
 // 8<--
 object API01 extends API01
-
-object Logo extends API01.Logo
 // 8<--

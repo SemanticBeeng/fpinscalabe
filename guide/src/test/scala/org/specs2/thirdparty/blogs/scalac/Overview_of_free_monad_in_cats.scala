@@ -11,7 +11,7 @@ import org.specs2.ugbase.UserGuidePage
 import org.specs2.common.SnippetHelper._
 import org.specs2.execute.SnippetParams
 
-import org.fp.thirdparty.scalac.Overview_of_free_monads_in_cats.snippets.{API01, API02}
+import org.fp.thirdparty.scalac.Overview_of_free_monads_in_cats.snippets.{API01, API02, API03}
 
 /**
   *
@@ -318,16 +318,6 @@ These classes will take type parameter, which will be corresponding to the $coPr
 This is what our Logo definition will look like
 
 ${incl[API02]}
-${snippet{
-
-
-    // 8<--
-    import API02._
-    import API02.Logo
-    // 8<--
-
-
-  }}
 
 Moves and PencilActions will be implicitly needed in our program.
 They gonna be parametrized by our `LogoApp` type, and will have all methods lifted to `Free` that will be operating on the `LogoApp`.
@@ -336,11 +326,15 @@ That means we can mix them in one $forComprehension expression. Now our program 
 
 ${snippet{
     // 8<--
-    import API02._
-    import API02.Logo._
+    import API03._
+    import API03.Logo._
+    import API03.Logo.dsl._
 
     import cats.{Id, ~>}
     import cats.free.Free
+    import cats.data.Coproduct
+
+    type LogoApp[A] = Coproduct[Instruction, PencilInstruction, A]
     // 8<--
 
     def program(implicit M: Moves[LogoApp], P: PencilActions[LogoApp]): (Position => Free[LogoApp, Unit]) = {

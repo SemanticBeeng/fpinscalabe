@@ -12,9 +12,6 @@ trait API03 extends API02 {
   trait Logo extends API02.Logo {
 
     sealed trait PencilInstruction[A]
-    //
-    //      case class Position(x: Double = 0, y: Double = 0, heading: Degree = Degree())
-    //      case class Degree(private val d: Int = 0) {...}
     case class PencilUp(position: Position) extends PencilInstruction[Unit]
     case class PencilDown(position: Position) extends PencilInstruction[Unit]
 
@@ -42,10 +39,12 @@ trait API03 extends API02 {
       }
     }
   }
+
+  // 8<--
+  object Logo extends Logo
+  // 8<--
 }
 
 // 8<--
 object API03 extends API03
-
-object Logo extends API03.Logo
 // 8<--
