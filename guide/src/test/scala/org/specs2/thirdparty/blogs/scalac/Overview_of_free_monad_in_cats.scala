@@ -74,6 +74,7 @@ ${snippet{
     // 8<--
     import API02._
     import API02.Logo._
+    import API02.dsl._
     import org.specs2.matcher.{EitherBaseMatchers => _, _}
 
     // 8<--
@@ -83,7 +84,7 @@ ${snippet{
       start: Position =>
         for {
           p1 <- forward(start, 10)
-          p2 <- API02.right_(p1, Degree(90))
+          p2 <- right_(p1, Degree(90))
           p3 <- forward(p2, 10)
         } yield p3
     }
@@ -120,6 +121,7 @@ ${snippet{
     // 8<--
     import API02._
     import API02.Logo._
+    import API02.dsl._
 
     //type Id[A] = A
     // 8<--
@@ -155,6 +157,7 @@ ${snippet{
     // 8<--
     import API02._
     import API02.Logo._
+    import API02.dsl._
 
     import cats.free.Free
 
@@ -162,7 +165,7 @@ ${snippet{
       start: Position =>
         for {
           p1 <- forward(start, 10)
-          p2 <- API02.right_(p1, Degree(90))
+          p2 <- right_(p1, Degree(90))
           p3 <- forward(p2, 10)
         } yield p3
     }
@@ -190,6 +193,7 @@ ${snippet{
     // 8<--
     import API02._
     import API02.Logo._
+    import API02.dsl._
 
     import cats.{Id, ~>}
     import cats.free.Free
@@ -216,11 +220,12 @@ And now if we run the program with such definition
 
 ${snippet{
     // 8<--
-    import API02._
-    import API02.Logo._
-
     import cats.{Id, ~>}
     import cats.free.Free
+
+    import API02._
+    import API02.Logo._
+    import API02.dsl._
     // 8<--
 
     val program2: (Position => Free[Instruction, Unit]) = {
@@ -230,7 +235,7 @@ ${snippet{
           p2 <- right_(p1, Degree(90))
           p3 <- forward(p2, 10)
           p4 <- backward(p3, 20)//Here the computation stops, because result will be None
-          _ <- showPosition(p4)
+          _  <- showPosition(p4)
         } yield ()
     }
   }}
@@ -343,11 +348,11 @@ ${snippet{
         for {
           p1 <- forward(s, 10)
           p2 <- right(p1, Degree(90))
-          _ <- pencilUp(p2)
+          _  <- pencilUp(p2)
           p3 <- forward(p2, 10)
-          _ <- pencilDown(p3)
+          _  <- pencilDown(p3)
           p4 <- backward(p3, 20)
-          _ <- showPosition(p4)
+          _  <- showPosition(p4)
         } yield ()
     }
   }}

@@ -9,13 +9,15 @@ trait API03 extends API02 {
 
   import cats.free.{Free, Inject}
 
-  trait Logo extends API02.Logo {
+  object Logo extends API02.Logo {
 
     sealed trait PencilInstruction[A]
     case class PencilUp(position: Position) extends PencilInstruction[Unit]
     case class PencilDown(position: Position) extends PencilInstruction[Unit]
 
     object dsl {
+
+      //import API02.Logo._
 
       class Moves[F[_]](implicit I: Inject[Instruction, F]) {
         def forward(pos: Position, l: Int): Free[F, Position] = Free.inject[Instruction, F](Forward(pos, l))
@@ -41,7 +43,7 @@ trait API03 extends API02 {
   }
 
   // 8<--
-  object Logo extends Logo
+  //object Logo extends Logo
   // 8<--
 }
 
