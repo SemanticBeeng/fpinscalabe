@@ -74,7 +74,7 @@ ${snippet{
     // 8<--
     import API02._
     import API02.Logo._
-    import API02.dsl._
+    //import API02.dsl._
     import org.specs2.matcher.{EitherBaseMatchers => _, _}
 
     // 8<--
@@ -121,7 +121,7 @@ ${snippet{
     // 8<--
     import API02._
     import API02.Logo._
-    import API02.dsl._
+    //import API02.dsl._
 
     //type Id[A] = A
     // 8<--
@@ -157,7 +157,7 @@ ${snippet{
     // 8<--
     import API02._
     import API02.Logo._
-    import API02.dsl._
+    //import API02.dsl._
 
     import cats.free.Free
 
@@ -193,7 +193,7 @@ ${snippet{
     // 8<--
     import API02._
     import API02.Logo._
-    import API02.dsl._
+    //import API02.dsl._
 
     import cats.{Id, ~>}
     import cats.free.Free
@@ -225,7 +225,7 @@ ${snippet{
 
     import API02._
     import API02.Logo._
-    import API02.dsl._
+    //import API02.dsl._
     // 8<--
 
     val program2: (Position => Free[Instruction, Unit]) = {
@@ -337,7 +337,7 @@ ${snippet{
 
     import API03._
     import API03.Logo._
-    import API03.Logo.dsl._
+    //import API03.Logo.dsl._
 
     type LogoApp[A] = Coproduct[Instruction, PencilInstruction, A]
     // 8<--
