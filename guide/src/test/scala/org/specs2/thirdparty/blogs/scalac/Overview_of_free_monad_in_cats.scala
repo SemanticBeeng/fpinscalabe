@@ -276,12 +276,12 @@ Luckily, there is a $coProduct, which is made exactly for such tasks. It’s a w
 $coProduct requires two $typeConstructor-s and type that will be inserted into them. In this way we can make superset of two sets of instructions and create a supertype for them.
 
 ${snippet{
-    import cats.data.Xor
 
-    final case class Coproduct[F[_], G[_], A](run: F[A] Xor G[A])
+
+    final case class Coproduct[F[_], G[_], A](run: F[A] Either G[A])
   }}
 
-Let’s define our common type.
+Let’s define our common type. ($coProduct is renamed to EitherK)
 
 ${snippet{
 
@@ -294,8 +294,8 @@ ${snippet{
     case class PencilDown(position: Position) extends PencilInstruction[Unit]
     // 8<--
 
-    import cats.data.Coproduct
-    type LogoApp[A] = Coproduct[Instruction, PencilInstruction, A]
+    import cats.data.EitherK
+    type LogoApp[A] = EitherK[Instruction, PencilInstruction, A]
   }}
 
 In application we will be using `LogoApp` as a whole set of instructions.
@@ -304,7 +304,8 @@ To make the mixing of these two ASTs possible we need to be able to lift both of
 To do this we have to change our lifting methods - instead of using `Free.liftF` method we will use an injecting function.
 
 ${snippet{
-    import cats.free.{Free, Inject}
+    import cats.free.Free
+    import cats.Inject
 
     final class FreeInjectPartiallyApplied[F[_], G[_]] private[free] {
       def apply[A](fa: F[A])(implicit I : Inject[F, G]): Free[G, A] =
@@ -330,31 +331,31 @@ They gonna be parametrized by our `LogoApp` type, and will have all methods lift
 That means we can mix them in one $forComprehension expression. Now our program definition will look like this:
 
 ${snippet{
-    // 8<--
-    import cats.{Id, ~>}
-    import cats.free.Free
-    import cats.data.Coproduct
-
-    import API03._
-    import API03.Logo._
-    //import API03.Logo.dsl._
-
-    type LogoApp[A] = Coproduct[Instruction, PencilInstruction, A]
-    // 8<--
-
-    def program(implicit M: Moves[LogoApp], P: PencilActions[LogoApp]): (Position => Free[LogoApp, Unit]) = {
-      import M._, P._
-      s: Position =>
-        for {
-          p1 <- forward(s, 10)
-          p2 <- right(p1, Degree(90))
-          _  <- pencilUp(p2)
-          p3 <- forward(p2, 10)
-          _  <- pencilDown(p3)
-          p4 <- backward(p3, 20)
-          _  <- showPosition(p4)
-        } yield ()
-    }
+//    // 8<--
+//    import cats.{Id, ~>}
+//    import cats.free.Free
+//    import cats.data.Coproduct
+//
+//    import API03._
+//    import API03.Logo._
+//    //import API03.Logo.dsl._
+//
+//    type LogoApp[A] = Coproduct[Instruction, PencilInstruction, A]
+//    // 8<--
+//
+//    def program(implicit M: Moves[LogoApp], P: PencilActions[LogoApp]): (Position => Free[LogoApp, Unit]) = {
+//      import M._, P._
+//      s: Position =>
+//        for {
+//          p1 <- forward(s, 10)
+//          p2 <- right(p1, Degree(90))
+//          _  <- pencilUp(p2)
+//          p3 <- forward(p2, 10)
+//          _  <- pencilDown(p3)
+//          p4 <- backward(p3, 20)
+//          _  <- showPosition(p4)
+//        } yield ()
+//    }
   }}
 
 """.stripMargin

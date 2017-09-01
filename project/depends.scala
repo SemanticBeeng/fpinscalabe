@@ -4,20 +4,20 @@ import Keys._
 object versions {
 
   val scala = "2.11.8"
-  val scalaz = "7.2.4"
-  val cats = "0.7.2"
+  val scalaz = "7.2.15"
+  val cats = "1.0.0-MF"
 
   val tagsoup = "1.2"
 
   val scalaMacrosParadise = "2.1.0"
-  val kindProjector = "0.8.0"
-  val simulacrum = "0.7.0"
+  val kindProjector = "0.9.4"
+  val simulacrum = "0.10.0"
   /**
     * from @etorreborre: "The problem comes from the fact that I think you are checking laws with scalaz-scalacheck-bindings
     * which depends on scalacheck 1.12.5 only.
     * One alternative would be to use cats only and the typelevel discipline project to check laws."
     */
-  val specs2 = "3.8.4-scalacheck-1.12.5"
+  val specs2 = "3.9.5"
   val scalaCheck = "1.12.5" //@todo 1.13.1"
   val discipline = "0.4"
 }
@@ -80,7 +80,11 @@ object depends {
   def shapeless(scalaVersion: String) =
     Seq("com.chuusai" %% "shapeless" % "2.3.1")
 
-  def cats = Seq("org.typelevel" %% "cats" % versions.cats)
+  def catsCore = Seq("org.typelevel" %% "cats-core" % versions.cats)
+  def catsKernel = Seq("org.typelevel" %% "cats-kernel" % versions.cats)
+  def catsMacros = Seq("org.typelevel" %% "cats-macros" % versions.cats)
+  def catsLaws = Seq("org.typelevel" %% "cats-laws" % versions.cats)
+  def catsFree = Seq("org.typelevel" %% "cats-free" % versions.cats)
 
 //  lazy val pegdown = Seq("org.pegdown" % "pegdown" % "1.2.1")
 

@@ -17,6 +17,10 @@ package object composition {
     */
   object Spec extends org.specs2.mutable.Spec with AutoExamples with TextDsl {
 
+    //import org.specs2.matcher.{ShouldExpectable ⇒ _, MustExpectable ⇒ _}
+    import org.specs2.matcher.{ShouldExpectable => _}
+    import org.specs2.matcher.{* => _}
+
     s"$keyPoint Compose a function f : A => B with g : B => C by first lifting into a $functor:".p
     eg { /** in [[Scalaz]] */
 
