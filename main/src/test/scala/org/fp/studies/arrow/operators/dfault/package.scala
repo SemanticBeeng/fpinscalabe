@@ -44,10 +44,10 @@ package object dfault {
       (plus1.second apply ("def", 14)) must_=== ("def", 15)
 
       s"Combine plus1 and rev on the $FunctionArrow to apply across both elements of a pair.".p
-      ((plus1 *** rev) apply (7, "abc")) must_=== (8, "cba")
+      (plus1 *** rev apply (7, "abc")) must_=== (8, "cba")
 
       s"Perform both plus1 and times2 on a value using the $FunctionArrow".p
-      ((plus1 &&& times2) apply (7)) must_=== (8, 14)
+      (plus1 &&& times2 apply 7) must_=== (8, 14)
 
       s"Perform plus1 on a pair using the $FunctionArrow".p
       (plus1.product apply (9, 99)) must_=== (10, 100)

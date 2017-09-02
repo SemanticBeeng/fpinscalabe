@@ -122,7 +122,7 @@ lazy val compilationSettings = Seq(
       Seq("-Xfatal-warnings:false",
         "-Xlint",
         "-Ywarn-unused-import:false",
-        "-Yno-adapted-args",
+        //"-Yno-adapted-args",
         "-Ywarn-numeric-widen",
         //"-Ywarn-unused:locals",
         "-Ywarn-value-discard",
