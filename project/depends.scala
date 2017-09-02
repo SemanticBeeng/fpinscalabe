@@ -1,9 +1,10 @@
 import sbt._
 import Keys._
+import org.scalajs.sbtplugin.ScalaJSPlugin.AutoImport._
 
 object versions {
 
-  val scala = "2.11.8"
+  val scala = "2.12.3"
   val scalaz = "7.2.15"
   val cats = "1.0.0-MF"
 
@@ -11,15 +12,16 @@ object versions {
 
   val scalaMacrosParadise = "2.1.0"
   val kindProjector = "0.9.4"
-  val simulacrum = "0.10.0"
+  val simulacrum = "0.11.0"
   /**
     * from @etorreborre: "The problem comes from the fact that I think you are checking laws with scalaz-scalacheck-bindings
     * which depends on scalacheck 1.12.5 only.
     * One alternative would be to use cats only and the typelevel discipline project to check laws."
     */
-  val specs2 = "3.9.5"
-  val scalaCheck = "1.12.5" //@todo 1.13.1"
-  val discipline = "0.4"
+  val specs2 = "4.0.0-RC4"
+  val scalaCheck = "1.13.5"
+  val discipline = "0.7.3"
+  val shapeless = "2.3.2"
 }
 
 object depends {
@@ -71,14 +73,14 @@ object depends {
     Seq(  "org.typelevel" %% "discipline" % versions.discipline)
 
   def simulacrum(scalaVersion: String) =
-    Seq("com.github.mpilquist" % "simulacrum_2.11" % versions.simulacrum)
+    Seq("com.github.mpilquist" % "simulacrum_2.12" % versions.simulacrum)
 
   //lazy val mockito       = Seq("org.mockito"    %  "mockito-core"  % "1.9.5")
   //lazy val junit         = Seq("junit"          %  "junit"         % "4.12")
   //lazy val hamcrest      = Seq("org.hamcrest"   %  "hamcrest-core" % "1.3")
 
   def shapeless(scalaVersion: String) =
-    Seq("com.chuusai" %% "shapeless" % "2.3.1")
+    Seq("com.chuusai" %% "shapeless" % "2.3.2")
 
   def catsCore = Seq("org.typelevel" %% "cats-core" % versions.cats)
   def catsKernel = Seq("org.typelevel" %% "cats-kernel" % versions.cats)
@@ -108,7 +110,4 @@ object depends {
         Resolver.typesafeIvyRepo("releases"),
         "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases")
     }
-
 }
-
-

@@ -11,7 +11,7 @@ import org.specs2.specification.dsl.mutable.{AutoExamples, TextDsl}
   */
 package object tagging {
 
-
+    import impl._
     /**
       * @see [[ann_newType]]
       */

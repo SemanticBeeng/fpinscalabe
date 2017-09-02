@@ -6,6 +6,8 @@ import org.fp.resources._
   */
 package object bookmarks {
 
+  import impl._
+
   /**
     * Bookmarks for [[learningScalaz]]
     */

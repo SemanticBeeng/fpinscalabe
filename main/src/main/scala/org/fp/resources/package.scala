@@ -2,7 +2,7 @@ package org.fp
 
 import org.fp.resources.intf.ResourceType.{book, blog, framework, ResourceTypeVal}
 
-import scala.reflect.ClassTag
+//import scala.reflect.ClassTag
 
 /**
   *
@@ -37,24 +37,29 @@ package object resources {
     }
   }
 
-  case class Resource[R <: ResourceTypeVal](id: String, url: String)(implicit m: ClassTag[R]) extends intf.Resource[R] {
+  object impl {
 
-    override def toString : String = {
-      //@todo s"[${m.runtimeClass.getSimpleName} $id]"
-      s"(resource)$id"
-    }
-    def is = toString
-    def md = s"[$id]($url)"
+    case class Resource[R <: ResourceTypeVal](id: String, url: String)/*(implicit m: ClassTag[R])*/ extends intf.Resource[R] {
 
-  }
-  case class Annotation[R <: ResourceTypeVal](resource: Resource[R], reference: String)(implicit m: ClassTag[R]) extends intf.Annotation[R] {
-    override def toString : String = {
-      //@todo s"[${m.runtimeClass.getSimpleName} annotation ${resource.is}]"
-      s"annotation of ${resource.is}"
+      override def toString : String = {
+        //@todo s"[${m.runtimeClass.getSimpleName} $id]"
+        s"(resource)$id"
+      }
+      def is = toString
+      def md = s"[$id]($url)"
+
     }
-    def is = toString
-    def md = s"`$is`"
+    case class Annotation[R <: ResourceTypeVal](resource: Resource[R], reference: String)/*(implicit m: ClassTag[R])*/ extends intf.Annotation[R] {
+      override def toString : String = {
+        //@todo s"[${m.runtimeClass.getSimpleName} annotation ${resource.is}]"
+        s"annotation of ${resource.is}"
+      }
+      def is = toString
+      def md = s"`$is`"
+    }
   }
+
+  import impl._
 
   /**
     * Resources specific to this project about "functional programming in Scala"
