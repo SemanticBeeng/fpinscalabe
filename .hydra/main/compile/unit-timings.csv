@@ -1,0 +1,4 @@
+Worker ID, File, Total Time (ms), lateFile?, totalSpans
+0, main/src/main/scala/org/fp/concepts/package.scala, 659, false, 215
+0, main/src/main/scala/org/fp/resources/package.scala, 1082, false, 158
+1, main/src/main/scala/org/fp/bookmarks/package.scala, 942, false, 107
