@@ -1,0 +1,361 @@
+15:45:16.607 INFO  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - Outline parse 3 files in 1 roots. took 60 ms.
+15:45:16.620 INFO  c.t.h.Hydra$ - Hydra Scala version: 2.12.3-hydra17
+15:45:16.620 INFO  c.t.h.Hydra$ - Hydra version:       0.9.3
+15:45:16.632 INFO  c.t.h.SourcePartitioner$ - No automatically balanced partition file /Users/etorreborre/projects/scala/fpinscalabe/.hydra/main/compile/partition.hydra exist yet. Using plain partition strategy.
+15:45:16.645 INFO  c.t.h.Hydra$ - [worker.0]: Starting worker with 2 files.
+15:45:16.645 INFO  c.t.h.Hydra$ - [worker.1]: Starting worker with 1 files.
+15:45:18.856 INFO  c.t.h.WorkerThread - [worker.1]: 2209 ms 	1 sources.
+15:45:18.912 INFO  c.t.h.WorkerThread - [worker.0]: 2266 ms 	2 sources.
+15:45:18.912 INFO  c.t.h.Hydra$ - Hydra compiling: 2268 ms
+15:45:18.921 INFO  worker.0 - Total time in late files: 0 ms in 0 late files
+15:45:18.921 INFO  worker.1 - Total time in late files: 441 ms in 1 late files
+15:45:18.923 INFO  c.t.h.Hydra$ - Compile time threshold for reporting unbalanced workers is 4209 ms.
+15:45:19.065 WARN  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - /Users/etorreborre/projects/scala/fpinscalabe/main/src/test/scala/org/fp/studies/monoid/operators/package.scala: package object dfault must be placed inside org/fp/studies/monoid/dfault/package.scala
+15:45:19.094 INFO  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - Outline parse 42 files in 1 roots. took 67 ms.
+15:45:19.099 INFO  c.t.h.Hydra$ - Hydra Scala version: 2.12.3-hydra17
+15:45:19.099 INFO  c.t.h.Hydra$ - Hydra version:       0.9.3
+15:45:19.100 INFO  c.t.h.SourcePartitioner$ - No automatically balanced partition file /Users/etorreborre/projects/scala/fpinscalabe/.hydra/main/test/partition.hydra exist yet. Using plain partition strategy.
+15:45:19.101 INFO  c.t.h.PlainSourcePartitioner - Adding package files List(/Users/etorreborre/projects/scala/fpinscalabe/main/src/test/scala/org/fp/studies/fp/package.scala) to worker 1
+15:45:19.101 INFO  c.t.h.PlainSourcePartitioner - Adding package files List(/Users/etorreborre/projects/scala/fpinscalabe/main/src/test/scala/org/fp/studies/fp/package.scala) to worker 2
+15:45:19.101 INFO  c.t.h.PlainSourcePartitioner - Adding package files List(/Users/etorreborre/projects/scala/fpinscalabe/main/src/test/scala/org/fp/studies/kleisli/composition/package.scala) to worker 3
+15:45:19.104 INFO  c.t.h.Hydra$ - [worker.0]: Starting worker with 11 files.
+15:45:19.104 INFO  c.t.h.Hydra$ - [worker.1]: Starting worker with 12 files.
+15:45:19.104 INFO  c.t.h.Hydra$ - [worker.2]: Starting worker with 12 files.
+15:45:19.104 INFO  c.t.h.Hydra$ - [worker.3]: Starting worker with 10 files.
+15:45:22.887 INFO  c.t.h.WorkerThread - [worker.2]: 3783 ms 	12 sources.
+15:45:22.948 INFO  c.t.h.WorkerThread - [worker.3]: 3843 ms 	10 sources.
+15:45:22.965 INFO  c.t.h.WorkerThread - [worker.0]: 3861 ms 	11 sources.
+15:45:23.206 INFO  c.t.h.WorkerThread - [worker.1]: 4102 ms 	12 sources.
+15:45:23.206 INFO  c.t.h.Hydra$ - Hydra compiling: 4102 ms
+15:45:23.206 INFO  worker.0 - Total time in late files: 37 ms in 2 late files
+15:45:23.206 INFO  worker.1 - Total time in late files: 190 ms in 4 late files
+15:45:23.206 INFO  worker.2 - Total time in late files: 659 ms in 2 late files
+15:45:23.206 INFO  worker.3 - Total time in late files: 268 ms in 3 late files
+15:46:24.396 WARN  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - /Users/etorreborre/projects/scala/fpinscalabe/main/src/test/scala/org/fp/studies/monoid/operators/package.scala: package object dfault must be placed inside org/fp/studies/monoid/dfault/package.scala
+15:46:24.410 INFO  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - Outline parse 42 files in 1 roots. took 26 ms.
+15:46:24.414 INFO  c.t.h.Hydra$ - Hydra Scala version: 2.12.3-hydra17
+15:46:24.414 INFO  c.t.h.Hydra$ - Hydra version:       0.9.3
+15:46:24.415 INFO  c.t.h.SourcePartitioner$ - No automatically balanced partition file /Users/etorreborre/projects/scala/fpinscalabe/.hydra/main/test/partition.hydra exist yet. Using plain partition strategy.
+15:46:24.416 INFO  c.t.h.PlainSourcePartitioner - Adding package files List(/Users/etorreborre/projects/scala/fpinscalabe/main/src/test/scala/org/fp/studies/fp/package.scala) to worker 1
+15:46:24.416 INFO  c.t.h.PlainSourcePartitioner - Adding package files List(/Users/etorreborre/projects/scala/fpinscalabe/main/src/test/scala/org/fp/studies/fp/package.scala) to worker 2
+15:46:24.416 INFO  c.t.h.PlainSourcePartitioner - Adding package files List(/Users/etorreborre/projects/scala/fpinscalabe/main/src/test/scala/org/fp/studies/kleisli/composition/package.scala) to worker 3
+15:46:24.420 INFO  c.t.h.Hydra$ - [worker.0]: Starting worker with 11 files.
+15:46:24.420 INFO  c.t.h.Hydra$ - [worker.1]: Starting worker with 12 files.
+15:46:24.420 INFO  c.t.h.Hydra$ - [worker.2]: Starting worker with 12 files.
+15:46:24.420 INFO  c.t.h.Hydra$ - [worker.3]: Starting worker with 10 files.
+15:46:27.048 INFO  c.t.h.WorkerThread - [worker.0]: 2628 ms 	11 sources.
+15:46:27.076 INFO  c.t.h.WorkerThread - [worker.2]: 2654 ms 	12 sources.
+15:46:27.127 INFO  c.t.h.WorkerThread - [worker.3]: 2705 ms 	10 sources.
+15:46:27.365 INFO  c.t.h.WorkerThread - [worker.1]: 2945 ms 	12 sources.
+15:46:27.365 INFO  c.t.h.Hydra$ - Hydra compiling: 2945 ms
+15:46:27.366 INFO  worker.0 - Total time in late files: 16 ms in 2 late files
+15:46:27.366 INFO  worker.1 - Total time in late files: 177 ms in 4 late files
+15:46:27.366 INFO  worker.2 - Total time in late files: 629 ms in 2 late files
+15:46:27.366 INFO  worker.3 - Total time in late files: 386 ms in 3 late files
+15:47:27.052 WARN  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - /Users/etorreborre/projects/scala/fpinscalabe/main/src/test/scala/org/fp/studies/monoid/operators/package.scala: package object dfault must be placed inside org/fp/studies/monoid/dfault/package.scala
+15:47:27.063 INFO  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - Outline parse 42 files in 1 roots. took 21 ms.
+15:47:27.067 INFO  c.t.h.Hydra$ - Hydra Scala version: 2.12.3-hydra17
+15:47:27.067 INFO  c.t.h.Hydra$ - Hydra version:       0.9.3
+15:47:27.070 INFO  c.t.h.SourcePartitioner$ - No automatically balanced partition file /Users/etorreborre/projects/scala/fpinscalabe/.hydra/main/test/partition.hydra exist yet. Using plain partition strategy.
+15:47:27.071 INFO  c.t.h.PlainSourcePartitioner - Adding package files List(/Users/etorreborre/projects/scala/fpinscalabe/main/src/test/scala/org/fp/studies/fp/package.scala) to worker 1
+15:47:27.071 INFO  c.t.h.PlainSourcePartitioner - Adding package files List(/Users/etorreborre/projects/scala/fpinscalabe/main/src/test/scala/org/fp/studies/fp/package.scala) to worker 2
+15:47:27.071 INFO  c.t.h.PlainSourcePartitioner - Adding package files List(/Users/etorreborre/projects/scala/fpinscalabe/main/src/test/scala/org/fp/studies/kleisli/composition/package.scala) to worker 3
+15:47:27.073 INFO  c.t.h.Hydra$ - [worker.0]: Starting worker with 11 files.
+15:47:27.073 INFO  c.t.h.Hydra$ - [worker.1]: Starting worker with 12 files.
+15:47:27.073 INFO  c.t.h.Hydra$ - [worker.2]: Starting worker with 12 files.
+15:47:27.073 INFO  c.t.h.Hydra$ - [worker.3]: Starting worker with 10 files.
+15:47:29.778 INFO  c.t.h.WorkerThread - [worker.2]: 2705 ms 	12 sources.
+15:47:29.786 INFO  c.t.h.WorkerThread - [worker.0]: 2713 ms 	11 sources.
+15:47:29.811 INFO  c.t.h.WorkerThread - [worker.3]: 2738 ms 	10 sources.
+15:47:29.984 INFO  c.t.h.WorkerThread - [worker.1]: 2911 ms 	12 sources.
+15:47:29.984 INFO  c.t.h.Hydra$ - Hydra compiling: 2911 ms
+15:47:29.984 INFO  worker.0 - Total time in late files: 19 ms in 2 late files
+15:47:29.985 INFO  worker.1 - Total time in late files: 236 ms in 4 late files
+15:47:29.985 INFO  worker.2 - Total time in late files: 474 ms in 2 late files
+15:47:29.985 INFO  worker.3 - Total time in late files: 192 ms in 3 late files
+15:51:51.174 WARN  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - /Users/etorreborre/projects/scala/fpinscalabe/main/src/test/scala/org/fp/studies/monoid/operators/package.scala: package object dfault must be placed inside org/fp/studies/monoid/dfault/package.scala
+15:51:51.186 INFO  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - Outline parse 42 files in 1 roots. took 24 ms.
+15:51:51.191 INFO  c.t.h.Hydra$ - Hydra Scala version: 2.12.3-hydra17
+15:51:51.191 INFO  c.t.h.Hydra$ - Hydra version:       0.9.3
+15:51:51.193 INFO  c.t.h.SourcePartitioner$ - No automatically balanced partition file /Users/etorreborre/projects/scala/fpinscalabe/.hydra/main/test/partition.hydra exist yet. Using plain partition strategy.
+15:51:51.194 INFO  c.t.h.PlainSourcePartitioner - Adding package files List(/Users/etorreborre/projects/scala/fpinscalabe/main/src/test/scala/org/fp/studies/fp/package.scala) to worker 1
+15:51:51.194 INFO  c.t.h.PlainSourcePartitioner - Adding package files List(/Users/etorreborre/projects/scala/fpinscalabe/main/src/test/scala/org/fp/studies/fp/package.scala) to worker 2
+15:51:51.195 INFO  c.t.h.PlainSourcePartitioner - Adding package files List(/Users/etorreborre/projects/scala/fpinscalabe/main/src/test/scala/org/fp/studies/kleisli/composition/package.scala) to worker 3
+15:51:51.198 INFO  c.t.h.Hydra$ - [worker.0]: Starting worker with 11 files.
+15:51:51.198 INFO  c.t.h.Hydra$ - [worker.1]: Starting worker with 12 files.
+15:51:51.198 INFO  c.t.h.Hydra$ - [worker.2]: Starting worker with 12 files.
+15:51:51.198 INFO  c.t.h.Hydra$ - [worker.3]: Starting worker with 10 files.
+15:51:56.120 INFO  c.t.h.WorkerThread - [worker.3]: 4922 ms 	10 sources.
+15:51:56.133 INFO  c.t.h.WorkerThread - [worker.2]: 4932 ms 	12 sources.
+15:51:56.159 INFO  c.t.h.WorkerThread - [worker.0]: 4960 ms 	11 sources.
+15:51:56.681 INFO  c.t.h.WorkerThread - [worker.1]: 5483 ms 	12 sources.
+15:51:56.682 INFO  c.t.h.Hydra$ - Hydra compiling: 5483 ms
+15:51:56.682 INFO  worker.0 - Total time in late files: 30 ms in 2 late files
+15:51:56.682 INFO  worker.1 - Total time in late files: 353 ms in 4 late files
+15:51:56.682 INFO  worker.2 - Total time in late files: 828 ms in 2 late files
+15:51:56.683 INFO  worker.3 - Total time in late files: 294 ms in 3 late files
+15:52:10.826 WARN  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - /Users/etorreborre/projects/scala/fpinscalabe/main/src/test/scala/org/fp/studies/monoid/operators/package.scala: package object dfault must be placed inside org/fp/studies/monoid/dfault/package.scala
+15:52:10.841 INFO  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - Outline parse 42 files in 1 roots. took 37 ms.
+15:52:10.846 INFO  c.t.h.Hydra$ - Hydra Scala version: 2.12.3-hydra17
+15:52:10.846 INFO  c.t.h.Hydra$ - Hydra version:       0.9.3
+15:52:10.848 INFO  c.t.h.SourcePartitioner$ - No automatically balanced partition file /Users/etorreborre/projects/scala/fpinscalabe/.hydra/main/test/partition.hydra exist yet. Using plain partition strategy.
+15:52:10.849 INFO  c.t.h.PlainSourcePartitioner - Adding package files List(/Users/etorreborre/projects/scala/fpinscalabe/main/src/test/scala/org/fp/studies/fp/package.scala) to worker 1
+15:52:10.849 INFO  c.t.h.PlainSourcePartitioner - Adding package files List(/Users/etorreborre/projects/scala/fpinscalabe/main/src/test/scala/org/fp/studies/fp/package.scala) to worker 2
+15:52:10.849 INFO  c.t.h.PlainSourcePartitioner - Adding package files List(/Users/etorreborre/projects/scala/fpinscalabe/main/src/test/scala/org/fp/studies/kleisli/composition/package.scala) to worker 3
+15:52:10.852 INFO  c.t.h.Hydra$ - [worker.0]: Starting worker with 11 files.
+15:52:10.852 INFO  c.t.h.Hydra$ - [worker.1]: Starting worker with 12 files.
+15:52:10.852 INFO  c.t.h.Hydra$ - [worker.2]: Starting worker with 12 files.
+15:52:10.852 INFO  c.t.h.Hydra$ - [worker.3]: Starting worker with 10 files.
+15:52:15.941 INFO  c.t.h.WorkerThread - [worker.2]: 5084 ms 	12 sources.
+15:52:15.944 INFO  c.t.h.WorkerThread - [worker.3]: 5091 ms 	10 sources.
+15:52:16.500 INFO  c.t.h.WorkerThread - [worker.1]: 5647 ms 	12 sources.
+15:52:16.761 INFO  c.t.h.WorkerThread - [worker.0]: 5908 ms 	11 sources.
+15:52:16.761 INFO  c.t.h.Hydra$ - Hydra compiling: 5909 ms
+15:52:16.761 INFO  worker.0 - Total time in late files: 38 ms in 2 late files
+15:52:16.761 INFO  worker.1 - Total time in late files: 408 ms in 4 late files
+15:52:16.761 INFO  worker.2 - Total time in late files: 760 ms in 2 late files
+15:52:16.761 INFO  worker.3 - Total time in late files: 342 ms in 3 late files
+15:52:55.079 WARN  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - /Users/etorreborre/projects/scala/fpinscalabe/main/src/test/scala/org/fp/studies/monoid/operators/package.scala: package object dfault must be placed inside org/fp/studies/monoid/dfault/package.scala
+15:52:55.088 INFO  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - Outline parse 42 files in 1 roots. took 17 ms.
+15:52:55.092 INFO  c.t.h.Hydra$ - Hydra Scala version: 2.12.3-hydra17
+15:52:55.092 INFO  c.t.h.Hydra$ - Hydra version:       0.9.3
+15:52:55.093 INFO  c.t.h.SourcePartitioner$ - No automatically balanced partition file /Users/etorreborre/projects/scala/fpinscalabe/.hydra/main/test/partition.hydra exist yet. Using plain partition strategy.
+15:52:55.093 INFO  c.t.h.PlainSourcePartitioner - Adding package files List(/Users/etorreborre/projects/scala/fpinscalabe/main/src/test/scala/org/fp/studies/fp/package.scala) to worker 1
+15:52:55.093 INFO  c.t.h.PlainSourcePartitioner - Adding package files List(/Users/etorreborre/projects/scala/fpinscalabe/main/src/test/scala/org/fp/studies/fp/package.scala) to worker 2
+15:52:55.093 INFO  c.t.h.PlainSourcePartitioner - Adding package files List(/Users/etorreborre/projects/scala/fpinscalabe/main/src/test/scala/org/fp/studies/kleisli/composition/package.scala) to worker 3
+15:52:55.096 INFO  c.t.h.Hydra$ - [worker.0]: Starting worker with 11 files.
+15:52:55.096 INFO  c.t.h.Hydra$ - [worker.1]: Starting worker with 12 files.
+15:52:55.096 INFO  c.t.h.Hydra$ - [worker.2]: Starting worker with 12 files.
+15:52:55.096 INFO  c.t.h.Hydra$ - [worker.3]: Starting worker with 10 files.
+15:52:57.603 INFO  c.t.h.WorkerThread - [worker.0]: 2507 ms 	11 sources.
+15:52:59.070 INFO  c.t.h.WorkerThread - [worker.2]: 3974 ms 	12 sources.
+15:52:59.116 INFO  c.t.h.WorkerThread - [worker.3]: 4018 ms 	10 sources.
+15:52:59.508 INFO  c.t.h.WorkerThread - [worker.1]: 4412 ms 	12 sources.
+15:52:59.508 INFO  c.t.h.Hydra$ - Hydra compiling: 4412 ms
+15:52:59.759 INFO  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - Outline parse 38 files in 1 roots. took 29 ms.
+15:52:59.763 INFO  c.t.h.Hydra$ - Hydra Scala version: 2.12.3-hydra17
+15:52:59.764 INFO  c.t.h.Hydra$ - Hydra version:       0.9.3
+15:52:59.764 INFO  c.t.h.SourcePartitioner$ - No automatically balanced partition file /Users/etorreborre/projects/scala/fpinscalabe/.hydra/guide/test/partition.hydra exist yet. Using plain partition strategy.
+15:52:59.766 INFO  c.t.h.Hydra$ - [worker.0]: Starting worker with 10 files.
+15:52:59.766 INFO  c.t.h.Hydra$ - [worker.1]: Starting worker with 10 files.
+15:52:59.767 INFO  c.t.h.Hydra$ - [worker.2]: Starting worker with 10 files.
+15:52:59.767 INFO  c.t.h.Hydra$ - [worker.3]: Starting worker with 8 files.
+15:52:59.841 INFO  c.t.h.WorkerThread - [worker.2]: 73 ms 	10 sources.
+15:52:59.845 INFO  c.t.h.WorkerThread - [worker.3]: 77 ms 	8 sources.
+15:52:59.845 INFO  c.t.h.WorkerThread - [worker.1]: 78 ms 	10 sources.
+15:52:59.845 INFO  c.t.h.WorkerThread - [worker.0]: 77 ms 	10 sources.
+15:52:59.845 INFO  c.t.h.Hydra$ - Hydra compiling: 79 ms
+15:52:59.845 INFO  worker.0 - Total time in late files: 0 ms in 0 late files
+15:52:59.846 INFO  worker.1 - Total time in late files: 0 ms in 0 late files
+15:52:59.846 INFO  worker.2 - Total time in late files: 0 ms in 0 late files
+15:52:59.846 INFO  worker.3 - Total time in late files: 0 ms in 0 late files
+15:54:45.795 INFO  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - Outline parse 38 files in 1 roots. took 32 ms.
+15:54:45.801 INFO  c.t.h.Hydra$ - Hydra Scala version: 2.12.3-hydra17
+15:54:45.801 INFO  c.t.h.Hydra$ - Hydra version:       0.9.3
+15:54:45.803 INFO  c.t.h.SourcePartitioner$ - No automatically balanced partition file /Users/etorreborre/projects/scala/fpinscalabe/.hydra/guide/test/partition.hydra exist yet. Using plain partition strategy.
+15:54:45.809 INFO  c.t.h.Hydra$ - [worker.0]: Starting worker with 10 files.
+15:54:45.810 INFO  c.t.h.Hydra$ - [worker.1]: Starting worker with 10 files.
+15:54:45.810 INFO  c.t.h.Hydra$ - [worker.2]: Starting worker with 10 files.
+15:54:45.810 INFO  c.t.h.Hydra$ - [worker.3]: Starting worker with 8 files.
+15:54:48.046 INFO  c.t.h.WorkerThread - [worker.1]: 2235 ms 	10 sources.
+15:54:48.096 INFO  c.t.h.WorkerThread - [worker.3]: 2276 ms 	8 sources.
+15:54:50.083 INFO  c.t.h.Hydra$ - Hydra compiling: 4274 ms
+15:54:50.085 INFO  worker.0 - Total time in late files: 667 ms in 25 late files
+15:54:50.085 INFO  worker.1 - Total time in late files: 563 ms in 8 late files
+15:54:50.085 INFO  worker.2 - Total time in late files: 638 ms in 27 late files
+15:54:50.085 INFO  worker.3 - Total time in late files: 932 ms in 11 late files
+15:54:50.964 INFO  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - Outline parse 38 files in 1 roots. took 35 ms.
+15:54:50.973 INFO  c.t.h.Hydra$ - Hydra Scala version: 2.12.3-hydra17
+15:54:50.973 INFO  c.t.h.Hydra$ - Hydra version:       0.9.3
+15:54:50.975 INFO  c.t.h.SourcePartitioner$ - No automatically balanced partition file /Users/etorreborre/projects/scala/fpinscalabe/.hydra/guide/test/partition.hydra exist yet. Using plain partition strategy.
+15:54:50.981 INFO  c.t.h.Hydra$ - [worker.0]: Starting worker with 10 files.
+15:54:50.981 INFO  c.t.h.Hydra$ - [worker.1]: Starting worker with 10 files.
+15:54:50.981 INFO  c.t.h.Hydra$ - [worker.2]: Starting worker with 10 files.
+15:54:50.981 INFO  c.t.h.Hydra$ - [worker.3]: Starting worker with 8 files.
+15:54:53.379 INFO  c.t.h.WorkerThread - [worker.1]: 2396 ms 	10 sources.
+15:54:53.583 INFO  c.t.h.WorkerThread - [worker.3]: 2600 ms 	8 sources.
+15:54:55.283 INFO  c.t.h.Hydra$ - Hydra compiling: 4301 ms
+15:54:55.283 INFO  worker.0 - Total time in late files: 566 ms in 25 late files
+15:54:55.283 INFO  worker.1 - Total time in late files: 827 ms in 8 late files
+15:54:55.284 INFO  worker.2 - Total time in late files: 715 ms in 27 late files
+15:54:55.284 INFO  worker.3 - Total time in late files: 1248 ms in 11 late files
+15:56:51.523 INFO  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - Outline parse 38 files in 1 roots. took 27 ms.
+15:56:51.527 INFO  c.t.h.Hydra$ - Hydra Scala version: 2.12.3-hydra17
+15:56:51.527 INFO  c.t.h.Hydra$ - Hydra version:       0.9.3
+15:56:51.529 INFO  c.t.h.SourcePartitioner$ - No automatically balanced partition file /Users/etorreborre/projects/scala/fpinscalabe/.hydra/guide/test/partition.hydra exist yet. Using plain partition strategy.
+15:56:51.534 INFO  c.t.h.Hydra$ - [worker.0]: Starting worker with 10 files.
+15:56:51.534 INFO  c.t.h.Hydra$ - [worker.1]: Starting worker with 10 files.
+15:56:51.534 INFO  c.t.h.Hydra$ - [worker.2]: Starting worker with 10 files.
+15:56:51.535 INFO  c.t.h.Hydra$ - [worker.3]: Starting worker with 8 files.
+15:56:54.321 INFO  c.t.h.WorkerThread - [worker.1]: 2785 ms 	10 sources.
+15:56:54.455 INFO  c.t.h.WorkerThread - [worker.3]: 2918 ms 	8 sources.
+15:56:55.334 INFO  c.t.h.Hydra$ - Hydra compiling: 3800 ms
+15:56:55.334 INFO  worker.0 - Total time in late files: 510 ms in 25 late files
+15:56:55.334 INFO  worker.1 - Total time in late files: 647 ms in 8 late files
+15:56:55.335 INFO  worker.2 - Total time in late files: 413 ms in 27 late files
+15:56:55.335 INFO  worker.3 - Total time in late files: 1352 ms in 11 late files
+15:57:30.858 INFO  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - Outline parse 38 files in 1 roots. took 22 ms.
+15:57:30.862 INFO  c.t.h.Hydra$ - Hydra Scala version: 2.12.3-hydra17
+15:57:30.863 INFO  c.t.h.Hydra$ - Hydra version:       0.9.3
+15:57:30.864 INFO  c.t.h.SourcePartitioner$ - No automatically balanced partition file /Users/etorreborre/projects/scala/fpinscalabe/.hydra/guide/test/partition.hydra exist yet. Using plain partition strategy.
+15:57:30.869 INFO  c.t.h.Hydra$ - [worker.0]: Starting worker with 10 files.
+15:57:30.869 INFO  c.t.h.Hydra$ - [worker.1]: Starting worker with 10 files.
+15:57:30.869 INFO  c.t.h.Hydra$ - [worker.2]: Starting worker with 10 files.
+15:57:30.869 INFO  c.t.h.Hydra$ - [worker.3]: Starting worker with 8 files.
+15:57:34.216 INFO  c.t.h.WorkerThread - [worker.1]: 3345 ms 	10 sources.
+15:57:34.419 INFO  c.t.h.WorkerThread - [worker.3]: 3546 ms 	8 sources.
+15:57:36.027 INFO  c.t.h.Hydra$ - Hydra compiling: 5158 ms
+15:57:36.028 INFO  worker.0 - Total time in late files: 601 ms in 25 late files
+15:57:36.028 INFO  worker.1 - Total time in late files: 583 ms in 8 late files
+15:57:36.029 INFO  worker.2 - Total time in late files: 767 ms in 27 late files
+15:57:36.029 INFO  worker.3 - Total time in late files: 1313 ms in 11 late files
+15:57:48.821 INFO  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - Outline parse 38 files in 1 roots. took 40 ms.
+15:57:48.826 INFO  c.t.h.Hydra$ - Hydra Scala version: 2.12.3-hydra17
+15:57:48.826 INFO  c.t.h.Hydra$ - Hydra version:       0.9.3
+15:57:48.828 INFO  c.t.h.SourcePartitioner$ - No automatically balanced partition file /Users/etorreborre/projects/scala/fpinscalabe/.hydra/guide/test/partition.hydra exist yet. Using plain partition strategy.
+15:57:48.835 INFO  c.t.h.Hydra$ - [worker.0]: Starting worker with 10 files.
+15:57:48.835 INFO  c.t.h.Hydra$ - [worker.1]: Starting worker with 10 files.
+15:57:48.835 INFO  c.t.h.Hydra$ - [worker.2]: Starting worker with 10 files.
+15:57:48.835 INFO  c.t.h.Hydra$ - [worker.3]: Starting worker with 8 files.
+15:57:51.090 INFO  c.t.h.WorkerThread - [worker.1]: 2253 ms 	10 sources.
+15:57:51.281 INFO  c.t.h.WorkerThread - [worker.3]: 2443 ms 	8 sources.
+15:57:52.715 INFO  c.t.h.Hydra$ - Hydra compiling: 3880 ms
+15:57:52.715 INFO  worker.0 - Total time in late files: 632 ms in 25 late files
+15:57:52.715 INFO  worker.1 - Total time in late files: 781 ms in 8 late files
+15:57:52.716 INFO  worker.2 - Total time in late files: 571 ms in 27 late files
+15:57:52.716 INFO  worker.3 - Total time in late files: 1185 ms in 11 late files
+15:58:23.600 INFO  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - Outline parse 38 files in 1 roots. took 19 ms.
+15:58:23.613 INFO  c.t.h.Hydra$ - Hydra Scala version: 2.12.3-hydra17
+15:58:23.613 INFO  c.t.h.Hydra$ - Hydra version:       0.9.3
+15:58:23.614 INFO  c.t.h.SourcePartitioner$ - No automatically balanced partition file /Users/etorreborre/projects/scala/fpinscalabe/.hydra/guide/test/partition.hydra exist yet. Using plain partition strategy.
+15:58:23.618 INFO  c.t.h.Hydra$ - [worker.0]: Starting worker with 10 files.
+15:58:23.618 INFO  c.t.h.Hydra$ - [worker.1]: Starting worker with 10 files.
+15:58:23.618 INFO  c.t.h.Hydra$ - [worker.2]: Starting worker with 10 files.
+15:58:23.618 INFO  c.t.h.Hydra$ - [worker.3]: Starting worker with 8 files.
+15:58:25.436 INFO  c.t.h.WorkerThread - [worker.1]: 1817 ms 	10 sources.
+15:58:25.562 INFO  c.t.h.WorkerThread - [worker.3]: 1940 ms 	8 sources.
+15:58:27.083 INFO  c.t.h.Hydra$ - Hydra compiling: 3465 ms
+15:58:27.084 INFO  worker.0 - Total time in late files: 484 ms in 25 late files
+15:58:27.084 INFO  worker.1 - Total time in late files: 614 ms in 8 late files
+15:58:27.084 INFO  worker.2 - Total time in late files: 476 ms in 27 late files
+15:58:27.084 INFO  worker.3 - Total time in late files: 921 ms in 11 late files
+15:58:54.461 INFO  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - Outline parse 38 files in 1 roots. took 25 ms.
+15:58:54.463 INFO  c.t.h.Hydra$ - Hydra Scala version: 2.12.3-hydra17
+15:58:54.465 INFO  c.t.h.Hydra$ - Hydra version:       0.9.3
+15:58:54.466 INFO  c.t.h.SourcePartitioner$ - No automatically balanced partition file /Users/etorreborre/projects/scala/fpinscalabe/.hydra/guide/test/partition.hydra exist yet. Using plain partition strategy.
+15:58:54.468 INFO  c.t.h.Hydra$ - [worker.0]: Starting worker with 10 files.
+15:58:54.468 INFO  c.t.h.Hydra$ - [worker.1]: Starting worker with 10 files.
+15:58:54.468 INFO  c.t.h.Hydra$ - [worker.2]: Starting worker with 10 files.
+15:58:54.468 INFO  c.t.h.Hydra$ - [worker.3]: Starting worker with 8 files.
+15:58:55.934 INFO  c.t.h.WorkerThread - [worker.1]: 1464 ms 	10 sources.
+15:58:56.033 INFO  c.t.h.WorkerThread - [worker.3]: 1562 ms 	8 sources.
+15:58:57.058 INFO  c.t.h.Hydra$ - Hydra compiling: 2590 ms
+15:58:57.059 INFO  worker.0 - Total time in late files: 319 ms in 25 late files
+15:58:57.059 INFO  worker.1 - Total time in late files: 436 ms in 8 late files
+15:58:57.059 INFO  worker.2 - Total time in late files: 434 ms in 27 late files
+15:58:57.059 INFO  worker.3 - Total time in late files: 752 ms in 11 late files
+15:59:18.833 INFO  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - Outline parse 38 files in 1 roots. took 24 ms.
+15:59:18.838 INFO  c.t.h.Hydra$ - Hydra Scala version: 2.12.3-hydra17
+15:59:18.838 INFO  c.t.h.Hydra$ - Hydra version:       0.9.3
+15:59:18.840 INFO  c.t.h.SourcePartitioner$ - No automatically balanced partition file /Users/etorreborre/projects/scala/fpinscalabe/.hydra/guide/test/partition.hydra exist yet. Using plain partition strategy.
+15:59:18.843 INFO  c.t.h.Hydra$ - [worker.0]: Starting worker with 10 files.
+15:59:18.843 INFO  c.t.h.Hydra$ - [worker.1]: Starting worker with 10 files.
+15:59:18.843 INFO  c.t.h.Hydra$ - [worker.2]: Starting worker with 10 files.
+15:59:18.843 INFO  c.t.h.Hydra$ - [worker.3]: Starting worker with 8 files.
+15:59:20.436 INFO  c.t.h.WorkerThread - [worker.1]: 1550 ms 	10 sources.
+15:59:20.591 INFO  c.t.h.WorkerThread - [worker.3]: 1680 ms 	8 sources.
+15:59:21.409 INFO  c.t.h.Hydra$ - Hydra compiling: 2566 ms
+15:59:21.410 INFO  worker.0 - Total time in late files: 306 ms in 25 late files
+15:59:21.410 INFO  worker.1 - Total time in late files: 381 ms in 8 late files
+15:59:21.410 INFO  worker.2 - Total time in late files: 298 ms in 27 late files
+15:59:21.410 INFO  worker.3 - Total time in late files: 608 ms in 11 late files
+15:59:43.083 INFO  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - Outline parse 38 files in 1 roots. took 16 ms.
+15:59:43.086 INFO  c.t.h.Hydra$ - Hydra Scala version: 2.12.3-hydra17
+15:59:43.086 INFO  c.t.h.Hydra$ - Hydra version:       0.9.3
+15:59:43.088 INFO  c.t.h.SourcePartitioner$ - No automatically balanced partition file /Users/etorreborre/projects/scala/fpinscalabe/.hydra/guide/test/partition.hydra exist yet. Using plain partition strategy.
+15:59:43.092 INFO  c.t.h.Hydra$ - [worker.0]: Starting worker with 10 files.
+15:59:43.093 INFO  c.t.h.Hydra$ - [worker.1]: Starting worker with 10 files.
+15:59:43.093 INFO  c.t.h.Hydra$ - [worker.2]: Starting worker with 10 files.
+15:59:43.093 INFO  c.t.h.Hydra$ - [worker.3]: Starting worker with 8 files.
+15:59:44.424 INFO  c.t.h.WorkerThread - [worker.1]: 1331 ms 	10 sources.
+15:59:44.449 INFO  c.t.h.WorkerThread - [worker.3]: 1356 ms 	8 sources.
+15:59:45.273 INFO  c.t.h.Hydra$ - Hydra compiling: 2181 ms
+15:59:45.273 INFO  worker.0 - Total time in late files: 253 ms in 25 late files
+15:59:45.273 INFO  worker.1 - Total time in late files: 319 ms in 8 late files
+15:59:45.273 INFO  worker.2 - Total time in late files: 338 ms in 27 late files
+15:59:45.274 INFO  worker.3 - Total time in late files: 594 ms in 11 late files
+15:59:51.601 INFO  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - Outline parse 38 files in 1 roots. took 23 ms.
+15:59:51.604 INFO  c.t.h.Hydra$ - Hydra Scala version: 2.12.3-hydra17
+15:59:51.604 INFO  c.t.h.Hydra$ - Hydra version:       0.9.3
+15:59:51.605 INFO  c.t.h.SourcePartitioner$ - No automatically balanced partition file /Users/etorreborre/projects/scala/fpinscalabe/.hydra/guide/test/partition.hydra exist yet. Using plain partition strategy.
+15:59:51.609 INFO  c.t.h.Hydra$ - [worker.0]: Starting worker with 10 files.
+15:59:51.609 INFO  c.t.h.Hydra$ - [worker.1]: Starting worker with 10 files.
+15:59:51.609 INFO  c.t.h.Hydra$ - [worker.2]: Starting worker with 10 files.
+15:59:51.609 INFO  c.t.h.Hydra$ - [worker.3]: Starting worker with 8 files.
+15:59:52.994 INFO  c.t.h.WorkerThread - [worker.1]: 1385 ms 	10 sources.
+15:59:53.110 INFO  c.t.h.WorkerThread - [worker.3]: 1495 ms 	8 sources.
+15:59:53.952 INFO  c.t.h.Hydra$ - Hydra compiling: 2343 ms
+15:59:53.953 INFO  worker.0 - Total time in late files: 331 ms in 25 late files
+15:59:53.953 INFO  worker.1 - Total time in late files: 434 ms in 8 late files
+15:59:53.953 INFO  worker.2 - Total time in late files: 302 ms in 27 late files
+15:59:53.953 INFO  worker.3 - Total time in late files: 690 ms in 11 late files
+16:00:04.244 INFO  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - Outline parse 38 files in 1 roots. took 19 ms.
+16:00:04.249 INFO  c.t.h.Hydra$ - Hydra Scala version: 2.12.3-hydra17
+16:00:04.249 INFO  c.t.h.Hydra$ - Hydra version:       0.9.3
+16:00:04.250 INFO  c.t.h.SourcePartitioner$ - No automatically balanced partition file /Users/etorreborre/projects/scala/fpinscalabe/.hydra/guide/test/partition.hydra exist yet. Using plain partition strategy.
+16:00:04.254 INFO  c.t.h.Hydra$ - [worker.0]: Starting worker with 10 files.
+16:00:04.254 INFO  c.t.h.Hydra$ - [worker.1]: Starting worker with 10 files.
+16:00:04.254 INFO  c.t.h.Hydra$ - [worker.2]: Starting worker with 10 files.
+16:00:04.254 INFO  c.t.h.Hydra$ - [worker.3]: Starting worker with 8 files.
+16:00:05.896 INFO  c.t.h.WorkerThread - [worker.1]: 1642 ms 	10 sources.
+16:00:06.099 INFO  c.t.h.WorkerThread - [worker.3]: 1843 ms 	8 sources.
+16:00:07.215 INFO  c.t.h.Hydra$ - Hydra compiling: 2961 ms
+16:00:07.215 INFO  worker.0 - Total time in late files: 477 ms in 25 late files
+16:00:07.216 INFO  worker.1 - Total time in late files: 441 ms in 8 late files
+16:00:07.216 INFO  worker.2 - Total time in late files: 383 ms in 27 late files
+16:00:07.216 INFO  worker.3 - Total time in late files: 841 ms in 11 late files
+16:00:57.965 INFO  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - Outline parse 38 files in 1 roots. took 27 ms.
+16:00:57.970 INFO  c.t.h.Hydra$ - Hydra Scala version: 2.12.3-hydra17
+16:00:57.970 INFO  c.t.h.Hydra$ - Hydra version:       0.9.3
+16:00:57.971 INFO  c.t.h.SourcePartitioner$ - No automatically balanced partition file /Users/etorreborre/projects/scala/fpinscalabe/.hydra/guide/test/partition.hydra exist yet. Using plain partition strategy.
+16:00:57.975 INFO  c.t.h.Hydra$ - [worker.0]: Starting worker with 10 files.
+16:00:57.976 INFO  c.t.h.Hydra$ - [worker.1]: Starting worker with 10 files.
+16:00:57.976 INFO  c.t.h.Hydra$ - [worker.2]: Starting worker with 10 files.
+16:00:57.976 INFO  c.t.h.Hydra$ - [worker.3]: Starting worker with 8 files.
+16:01:01.234 INFO  c.t.h.WorkerThread - [worker.1]: 3247 ms 	10 sources.
+16:01:01.477 INFO  c.t.h.WorkerThread - [worker.3]: 3494 ms 	8 sources.
+16:01:03.052 INFO  c.t.h.Hydra$ - Hydra compiling: 5077 ms
+16:01:03.053 INFO  worker.0 - Total time in late files: 773 ms in 25 late files
+16:01:03.053 INFO  worker.1 - Total time in late files: 984 ms in 8 late files
+16:01:03.053 INFO  worker.2 - Total time in late files: 800 ms in 27 late files
+16:01:03.053 INFO  worker.3 - Total time in late files: 1553 ms in 11 late files
+16:01:24.215 INFO  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - Outline parse 38 files in 1 roots. took 20 ms.
+16:01:24.220 INFO  c.t.h.Hydra$ - Hydra Scala version: 2.12.3-hydra17
+16:01:24.220 INFO  c.t.h.Hydra$ - Hydra version:       0.9.3
+16:01:24.221 INFO  c.t.h.SourcePartitioner$ - No automatically balanced partition file /Users/etorreborre/projects/scala/fpinscalabe/.hydra/guide/test/partition.hydra exist yet. Using plain partition strategy.
+16:01:24.225 INFO  c.t.h.Hydra$ - [worker.0]: Starting worker with 10 files.
+16:01:24.225 INFO  c.t.h.Hydra$ - [worker.1]: Starting worker with 10 files.
+16:01:24.225 INFO  c.t.h.Hydra$ - [worker.2]: Starting worker with 10 files.
+16:01:24.225 INFO  c.t.h.Hydra$ - [worker.3]: Starting worker with 8 files.
+16:01:26.351 INFO  c.t.h.WorkerThread - [worker.1]: 2124 ms 	10 sources.
+16:01:26.464 INFO  c.t.h.WorkerThread - [worker.3]: 2228 ms 	8 sources.
+16:01:28.101 INFO  c.t.h.Hydra$ - Hydra compiling: 3876 ms
+16:01:28.102 INFO  worker.0 - Total time in late files: 497 ms in 25 late files
+16:01:28.103 INFO  worker.1 - Total time in late files: 634 ms in 8 late files
+16:01:28.103 INFO  worker.2 - Total time in late files: 739 ms in 27 late files
+16:01:28.103 INFO  worker.3 - Total time in late files: 1020 ms in 11 late files
+16:02:01.703 INFO  c.t.h.c.c.ParsedLogicalPackage$OutlineParseCompiler$$anon$1 - Outline parse 38 files in 1 roots. took 12 ms.
+16:02:01.705 INFO  c.t.h.Hydra$ - Hydra Scala version: 2.12.3-hydra17
+16:02:01.705 INFO  c.t.h.Hydra$ - Hydra version:       0.9.3
+16:02:01.706 INFO  c.t.h.SourcePartitioner$ - No automatically balanced partition file /Users/etorreborre/projects/scala/fpinscalabe/.hydra/guide/test/partition.hydra exist yet. Using plain partition strategy.
+16:02:01.707 INFO  c.t.h.Hydra$ - [worker.0]: Starting worker with 10 files.
+16:02:01.707 INFO  c.t.h.Hydra$ - [worker.1]: Starting worker with 10 files.
+16:02:01.707 INFO  c.t.h.Hydra$ - [worker.2]: Starting worker with 10 files.
+16:02:01.707 INFO  c.t.h.Hydra$ - [worker.3]: Starting worker with 8 files.
+16:02:02.619 INFO  c.t.h.WorkerThread - [worker.1]: 909 ms 	10 sources.
+16:02:02.652 INFO  c.t.h.WorkerThread - [worker.3]: 944 ms 	8 sources.
+16:02:03.158 INFO  c.t.h.Hydra$ - Hydra compiling: 1451 ms
+16:02:03.158 INFO  worker.0 - Total time in late files: 188 ms in 25 late files
+16:02:03.158 INFO  worker.1 - Total time in late files: 208 ms in 8 late files
+16:02:03.159 INFO  worker.2 - Total time in late files: 267 ms in 27 late files
+16:02:03.159 INFO  worker.3 - Total time in late files: 340 ms in 11 late files

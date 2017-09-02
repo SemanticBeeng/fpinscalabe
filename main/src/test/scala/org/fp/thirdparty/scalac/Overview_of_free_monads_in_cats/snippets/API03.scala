@@ -10,7 +10,7 @@ trait API03 extends API02 {
   import cats.free.Free
   import cats.Inject
 
-  object Logo extends API02.Logo {
+//  object Logo extends API02.Logo {
 
     //object dsl {
 /*@todo
@@ -41,7 +41,7 @@ trait API03 extends API02 {
       }
 */
     //}
-  }
+//  }
 
   // 8<--
   //object Logo extends Logo

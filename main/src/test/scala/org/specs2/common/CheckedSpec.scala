@@ -3,6 +3,7 @@ package org.specs2.common
 import org.specs2._
 import org.specs2.execute._
 import org.specs2.matcher.MatchResult
+import org.specs2.specification.core.Env
 //
 import org.scalacheck.Properties
 
@@ -24,8 +25,11 @@ trait CheckedSpec { self : ScalaCheck =>
   def check[T](m: MatchResult[T]): Result =
     AsResult(m)
 
-  def run(specification: Specification) =
-    "Verification output:\n" + org.specs2.runner.TextRunner.run(specification).output
+  def run(specification: Specification) = {
+    val env = Env()
+    try "Verification output:\n" + org.specs2.runner.TextRunner.run(specification)(env).output
+    finally env.shutdown
+  }
 
 }
 
