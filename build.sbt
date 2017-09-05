@@ -124,6 +124,7 @@ lazy val compilationSettings = Seq(
         "-Ywarn-unused-import:false",
         //"-Yno-adapted-args",
         "-Ywarn-numeric-widen",
+        "-Xlint:-unused",         // https://stackoverflow.com/a/43965697/4032515
         //"-Ywarn-unused:locals",
         "-Ywarn-value-discard",
         "-deprecation:false", "-Xcheckinit", "-unchecked", "-feature", "-language:_"),
