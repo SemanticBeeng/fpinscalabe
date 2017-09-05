@@ -386,7 +386,53 @@ ${snippet{
       }
   }}
 
+The last step is to add an interpreter for `PencilInstruction` and join it with previous one which is very
+easy thanks to functions offered by ${Cats.md}.
+
+${snippet{
+    // 8<--
+    import cats.{Id,~>}
+
+    import API03._
+    import LogoPencilInstructions._
+    // 8<--
+
+    object PenInterpreterId extends (PencilInstruction ~> Id) {
+
+      def apply[A](fa: PencilInstruction[A]): Id[A] = fa match {
+        case PencilDown(p) => println(s"start drawing at $p")
+        case PencilUp(p) => println(s"stop drawing at $p")
+      }
+    }
+  }}
+
+This is our second interpreter and the code merging it with the existing one looks like this
+
+${snippet{
+    // 8<--
+    import cats.data.EitherK
+    import API02.LogoInstructions._
+    import API03.LogoPencilInstructions._
+    // 8<--
+
+    type LogoApp[A] = EitherK[Instruction, PencilInstruction, A]
+  }}
+
+As we can see, combining two sets of instruction is fairly easy. Mixing another one will be very similar, you just
+need to add another $coProduct which takes as type parameters the `LogoApp` and the other instruction set.
+Still, each of these DSLs can work separately and can be easily tested. That is a big advantage.
+
+Summary
+####
+
+Summing up, $freeMonad is definitely concept that make it possible to write functional code in easy and composable way.
+What is also very useful it helps you define your domain language and then just use it without bothering about implementation details.
+The code is readable and easily testable.
+
+The most difficult part is to grasp the theory and definitions that stays behind Free Monad. But it’s worth learning.
+
 """.stripMargin
+
 
   implicit override def snippetParams[T]: SnippetParams[T] = defaultSnippetParameters[T].copy(evalCode = true).offsetIs(-4)
 }
