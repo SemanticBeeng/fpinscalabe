@@ -72,10 +72,6 @@ Let’s say we want to get from `point (0,0)` to `point (10,10)`. The code looks
 ${snippet{
     /**/
     // 8<--
-    import API02._
-    //import Logo.dsl._
-    import cats.implicits._
-
     import API02.Base._
     import API02.LogoInstructions._
     import API02.dsl._
@@ -122,11 +118,8 @@ Let’s use it to write our own interpreter.
 ${snippet{
     /**/
     // 8<--
-    import API02.Base._
     import API02.LogoInstructions._
-    //import API02.dsl._
 
-    //type Id[A] = A
     // 8<--
     import cats.{Id, ~>}
 
@@ -157,7 +150,6 @@ To run the program we need to simply $operator_foldMap it using the interpreter 
 
 ${snippet{
     // 8<--
-    import API02._
     import API02.Base._
     import API02.LogoInstructions._
     import API02.dsl._
@@ -202,13 +194,10 @@ Let’s implement it.
 
 ${snippet{
     // 8<--
-    import API02._
     import API02.Base._
     import API02.LogoInstructions._
-    //import API02.dsl._
 
     import cats.~>
-    import cats.free.Free
     // 8<--
 
     object InterpretOpt extends (Instruction ~> Option) {
@@ -233,17 +222,14 @@ And now if we run the program with such definition
 
 ${snippet{
     // 8<--
-    import cats.{Id, ~>}
     import cats.free.Free
 
-    import API02._
     import API02.Base._
     import API02.LogoInstructions._
-    //import API02.dsl._
     // 8<--
 
     val program2: (Position => Free[Instruction, Unit]) = {
-      //import org.fp.thirdparty.scalac.Overview_of_free_monads_in_cats.Computations._
+      import org.fp.thirdparty.scalac.Overview_of_free_monads_in_cats.Computations._
 
       s: Position =>
         for {
@@ -277,7 +263,6 @@ ${snippet{
     // 8<--
     import API02._
     import Base._
-    import LogoInstructions._
     // 8<--
 
     sealed trait PencilInstruction[A]
@@ -304,7 +289,6 @@ Let’s define our common type. ($coProduct is renamed to EitherK)
 ${snippet{
 
     // 8<--
-    import API02._
     import API02.Base._
     import API02.LogoInstructions._
 
