@@ -229,28 +229,19 @@ ${snippet{
     import API02.LogoInstructions._
     // 8<--
 
-    def program(start: Position)(implicit M: dsl.Moves[Instruction]): Free[Instruction, Unit] = {
+    implicit val M: dsl.Moves[Instruction] = null
+    val program : (Position ⇒ Free[Instruction, Unit]) = {
       import M._
-        for {
-          p1 <- forward(start, 10)
-          p2 <- right_(p1, Degree(90))
-          p3 <- forward(p2, 10)
-          p4 <- backward(p3, 20)//Here the computation stops, because result will be None
-          _  <- showPosition(p4)
-        } yield ()
+
+      start: Position ⇒
+      for {
+        p1 <- forward(start, 10)
+        p2 <- right_(p1, Degree(90))
+        p3 <- forward(p2, 10)
+        p4 <- backward(p3, 20)//Here the computation stops, because result will be None
+        _  <- showPosition(p4)
+      } yield ()
     }
-//    val program2: (Position => Free[Instruction, Unit]) = {
-//      import org.fp.thirdparty.scalac.Overview_of_free_monads_in_cats.Computations._
-//
-//      s: Position =>
-//        for {
-//          p1 <- forward(s, 10)
-//          p2 <- right_(p1, Degree(90))
-//          p3 <- forward(p2, 10)
-//          p4 <- backward(p3, 20)//Here the computation stops, because result will be None
-//          _  <- showPosition(p4)
-//        } yield ()
-//    }
   }}
 
 It’ll not print the position, so we achieved our goal.
