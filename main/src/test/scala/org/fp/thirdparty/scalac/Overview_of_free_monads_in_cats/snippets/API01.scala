@@ -5,12 +5,15 @@ package org.fp.thirdparty.scalac.Overview_of_free_monads_in_cats.snippets
   */
 trait API01 {
 
-  case class Position(x: Double, y: Double, heading: Degree)
-  case class Degree(private val d: Int) {
-    val value = d % 360
+  trait Base {
+    case class Position(x: Double, y: Double, heading: Degree)
+    case class Degree(private val d: Int) {
+      val value = d % 360
+    }
   }
 
-  trait Logo {
+  trait LogoInstructions {
+    import Base._
 
     sealed trait Instruction[A]
     case class Forward(position: Position, length: Int) extends Instruction[Position]
@@ -21,7 +24,8 @@ trait API01 {
   }
 
   // 8<--
-  object Logo extends Logo
+  object LogoInstructions extends LogoInstructions
+  object Base extends Base
   // 8<--
 }
 

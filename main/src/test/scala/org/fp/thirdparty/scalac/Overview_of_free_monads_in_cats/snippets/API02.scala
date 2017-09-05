@@ -1,6 +1,7 @@
 package org.fp.thirdparty.scalac.Overview_of_free_monads_in_cats.snippets
 
-import scala.language.implicitConversions
+
+import scala.language.{higherKinds, implicitConversions}
 
 /**
   *
@@ -8,20 +9,22 @@ import scala.language.implicitConversions
 trait API02 extends API01 {
 
   import cats.free.Free
-  import cats.Id
+  import cats.{Id, InjectK}
 
-  import Logo._
+  import Base._
+  import LogoInstructions._
 
-  //object dsl {
-    implicit def liftPosition[P](i: Instruction[P]): Free[Instruction, P] = Free.liftF(i)
-    //@todo implicit def runInstruction(i: Free[Instruction, Position]): Id[Position] = i.run
+  object dsl {
+    //import {API02.Position => Position}
 
-    def forward(pos: Position, l: Int): Free[Instruction, Position] = Free.liftF(Forward(pos, l))
-    def backward(pos: Position, l: Int): Free[Instruction, Position] = Free.liftF(Backward(pos, l))
-    def left_(pos: Position, degree: Degree): Free[Instruction, Position] = Free.liftF(RotateLeft(pos, degree))
-    def right_(pos: Position, degree: Degree): Free[Instruction, Position] = Free.liftF(RotateRight(pos, degree))
-    def showPosition(pos: Position): Free[Instruction, Unit] = Free.liftF(ShowPosition(pos))
-  //}
+    class Moves[F[_]](implicit I: InjectK[Instruction, F]) {
+      def forward(pos: Position, l: Int): Free[F, Position] = Free.inject[Instruction, F](Forward(pos, l))
+      def backward(pos: Position, l: Int): Free[F, Position] = Free.inject[Instruction, F](Backward(pos, l))
+      def left(pos: Position, l: Degree): Free[F, Position] = Free.inject[Instruction, F](RotateLeft(pos, l))
+      def right_(pos: Position, l: Degree): Free[F, Position] = Free.inject[Instruction, F](RotateRight(pos, l))
+      def showPosition(pos: Position): Free[F, Unit] = Free.inject[Instruction, F](ShowPosition(pos))
+    }
+  }
 }
 
 // 8<--

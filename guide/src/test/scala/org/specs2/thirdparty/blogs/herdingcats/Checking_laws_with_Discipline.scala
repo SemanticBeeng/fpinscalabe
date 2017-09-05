@@ -3,6 +3,7 @@ package org.specs2.thirdparty.blogs.herdingcats
 import org.fp.concepts._
 import org.fp.resources._
 import org.fp.bookmarks._
+import org.fp.resources.impl.Resource
 
 import scala.language.higherKinds
 
@@ -22,8 +23,8 @@ import org.specs2.execute.Snippet._
 object Checking_laws_with_Discipline extends UserGuidePage {
   def is = s"Checking laws with Discipline".title ^ s2"""
 
-The compiler can't check for the laws, but ${Cats.md} ships with a `FunctorLaws` trait that describes this in code
-https://github.com/typelevel/cats/blob/6785e6f856dc08fa31081013be27345aa5fe6d8e/laws/src/main/scala/cats/laws/FunctorLaws.scala:
+The compiler can't check for the laws, but ${Cats.md} ships with a $functorLaws trait that describes this in code
+https://github.com/typelevel/cats/blob/6785e6f856dc08fa31081013be27345aa5fe6d8e/laws/src/main/scala/cats/laws/FunctorLaws.scala"}:
 
 ${snippet{
     /**/
@@ -32,7 +33,7 @@ ${snippet{
     import cats.laws.{InvariantLaws, IsEq, IsEqArrow}
 
     /**
-      * Laws that must be obeyed by any [[functor]].
+      * Laws that must be obeyed by any [[functor]]: [[lawIdentity]], [[lawComposition]], etc.
       */
     trait FunctorLaws[F[_]] extends InvariantLaws[F] {
       implicit override def F: Functor[F]

@@ -73,20 +73,23 @@ ${snippet{
     /**/
     // 8<--
     import API02._
-    import API02.Logo._
-    //import API02.dsl._
-    import org.specs2.matcher.{EitherBaseMatchers => _, _}
+    //import Logo.dsl._
+    import cats.implicits._
+
+    import API02.Base._
+    import API02.LogoInstructions._
+    import API02.dsl._
 
     // 8<--
     import cats.free.Free
 
-    val program: (Position => Free[Instruction, Position]) = {
-      start: Position =>
-        for {
-          p1 <- forward(start, 10)
-          p2 <- right_(p1, Degree(90))
-          p3 <- forward(p2, 10)
-        } yield p3
+    def program(start: Position)(implicit M: Moves[Instruction]): Free[Instruction, Position] = {
+      import M._
+      for {
+        p1 <- forward(start, 10)
+        p2 <- right_(p1, Degree(90))
+        p3 <- forward(p2, 10)
+      } yield p3
     }
 }}
 
@@ -119,25 +122,24 @@ Let’s use it to write our own interpreter.
 ${snippet{
     /**/
     // 8<--
-    import API02._
-    import API02.Logo._
+    import API02.Base._
+    import API02.LogoInstructions._
     //import API02.dsl._
 
     //type Id[A] = A
     // 8<--
     import cats.{Id, ~>}
-    import cats.free.Free
 
     object InterpreterId extends (Instruction ~> Id) {
-      //import Computations._
+      import org.fp.thirdparty.scalac.Overview_of_free_monads_in_cats.Computations._
 
-      override def apply(fa: Instruction[Position]): Id[Position] = fa match {
+      override def apply[A](fa: Instruction[A]): Id[A] = fa match {
 
         case Forward(p, length) => forward(p, length)
         case Backward(p, length) => backward(p, length)
         case RotateLeft(p, degree) => left_(p, degree)
         case RotateRight(p, degree) => right_(p, degree)
-        case ShowPosition(p) => println(s"showing position $p"); p
+        case ShowPosition(p) => showPosition(p)
       }
     }
   }}
@@ -156,20 +158,29 @@ To run the program we need to simply $operator_foldMap it using the interpreter 
 ${snippet{
     // 8<--
     import API02._
-    import API02.Logo._
-    //import API02.dsl._
+    import API02.Base._
+    import API02.LogoInstructions._
+    import API02.dsl._
 
     import cats.free.Free
-
-    val program: (Position => Free[Instruction, Position]) = {
-      start: Position =>
-        for {
-          p1 <- forward(start, 10)
-          p2 <- right_(p1, Degree(90))
-          p3 <- forward(p2, 10)
-        } yield p3
-    }
     // 8<--
+
+   def program(start: Position)(implicit M: Moves[Instruction]): Free[Instruction, Position] = {
+      import M._
+      for {
+        p1 <- forward(start, 10)
+        p2 <- right_(p1, Degree(90))
+        p3 <- forward(p2, 10)
+      } yield p3
+    }
+//    val program: (Position => Free[Instruction, Position]) = {
+//      start: Position =>
+//        for {
+//          p1 <- forward(start, 10)
+//          p2 <- right(p1, Degree(90))
+//          p3 <- forward(p2, 10)
+//        } yield p3
+//    }
 //@todo
 //    val startPosition = Position(0.0, 0.0, Degree(0))
 //
@@ -192,25 +203,27 @@ Let’s implement it.
 ${snippet{
     // 8<--
     import API02._
-    import API02.Logo._
+    import API02.Base._
+    import API02.LogoInstructions._
     //import API02.dsl._
 
-    import cats.{Id, ~>}
+    import cats.~>
     import cats.free.Free
     // 8<--
 
     object InterpretOpt extends (Instruction ~> Option) {
-      //import Computations._
-      val nonNegative: (Position) => Option[Position] = {
+      import org.fp.thirdparty.scalac.Overview_of_free_monads_in_cats.Computations._
+
+      val nonNegative: (Position => Option[Position]) = {
         p => if (p.x >= 0 &&p.y >= 0) Some(p) else None
       }
 
-      override def apply (fa: Instruction[Position]) = fa match {
+      override def apply[A] (fa: Instruction[A]): Option[A] = fa match {
         case Forward(p, length) => nonNegative(forward(p, length))
         case Backward(p, length) => nonNegative(backward(p, length))
         case RotateLeft(p, degree) => Some(left_(p, degree))
         case RotateRight(p, degree) => Some(right_(p, degree))
-        case ShowPosition(p) => Some(println(s"showing position $p")); p
+        case ShowPosition(p) => Some(showPosition(p))
       }
     }
   }}
@@ -224,11 +237,14 @@ ${snippet{
     import cats.free.Free
 
     import API02._
-    import API02.Logo._
+    import API02.Base._
+    import API02.LogoInstructions._
     //import API02.dsl._
     // 8<--
 
     val program2: (Position => Free[Instruction, Unit]) = {
+      //import org.fp.thirdparty.scalac.Overview_of_free_monads_in_cats.Computations._
+
       s: Position =>
         for {
           p1 <- forward(s, 10)
@@ -260,6 +276,8 @@ First thing is defining `PencilInstruction`.
 ${snippet{
     // 8<--
     import API02._
+    import Base._
+    import LogoInstructions._
     // 8<--
 
     sealed trait PencilInstruction[A]
@@ -287,7 +305,8 @@ ${snippet{
 
     // 8<--
     import API02._
-    import API02.Logo._
+    import API02.Base._
+    import API02.LogoInstructions._
 
     sealed trait PencilInstruction[A]
     case class PencilUp(position: Position) extends PencilInstruction[Unit]
@@ -305,10 +324,10 @@ To do this we have to change our lifting methods - instead of using `Free.liftF`
 
 ${snippet{
     import cats.free.Free
-    import cats.Inject
+    import cats.InjectK
 
-    final class FreeInjectPartiallyApplied[F[_], G[_]] private[free] {
-      def apply[A](fa: F[A])(implicit I : Inject[F, G]): Free[G, A] =
+    final class FreeInjectPartiallyApplied[F[_], G[_]] /*private[free]*/ {
+      def apply[A](fa: F[A])(implicit I: InjectK[F, G]): Free[G, A] =
         Free.liftF(I.inj(fa))
     }
 

@@ -1,27 +1,31 @@
 import sbt._
 import Keys._
-import org.scalajs.sbtplugin.ScalaJSPlugin.AutoImport._
 
 object versions {
 
   val scala = "2.12.3"
-  val scalaz = "7.2.15"
-  val cats = "1.0.0-MF"
 
-  val tagsoup = "1.2"
+  val scalaCheck = "1.13.5"
+  val discipline = "0.7.3"
 
   val scalaMacrosParadise = "2.1.0"
   val kindProjector = "0.9.4"
   val simulacrum = "0.11.0"
+  val tagsoup = "1.2"
+
+  val scalaz = "7.2.15"
+  val cats = "1.0.0-MF"
+  val shapeless = "2.3.2"
+
+  val fs2 = "10.0-M6"
+  val doobie = "0.5.0-M6"
+
   /**
     * from @etorreborre: "The problem comes from the fact that I think you are checking laws with scalaz-scalacheck-bindings
     * which depends on scalacheck 1.12.5 only.
     * One alternative would be to use cats only and the typelevel discipline project to check laws."
     */
   val specs2 = "4.0.0-RC4"
-  val scalaCheck = "1.13.5"
-  val discipline = "0.7.3"
-  val shapeless = "2.3.2"
 }
 
 object depends {
