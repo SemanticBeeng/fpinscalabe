@@ -167,7 +167,7 @@ ${snippet{
     }
 
 //@todo
-    // 8<--
+    // 8<-- DUPLICATE CODE --
     import API02.LogoInstructions._
     import API02.dsl
 
@@ -185,7 +185,7 @@ ${snippet{
         case ShowPosition(p) => showPosition(p)
       }
     }
-    // 8<--
+    // 8<-- DUPLICATE CODE --
 
     val startPosition = Position(0.0, 0.0, Degree(0))
     val interpreter: Instruction ~> Id = InterpreterId
