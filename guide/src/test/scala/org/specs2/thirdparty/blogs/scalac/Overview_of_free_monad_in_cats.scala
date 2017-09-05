@@ -12,6 +12,7 @@ import org.specs2.common.SnippetHelper._
 import org.specs2.execute.SnippetParams
 
 import org.fp.thirdparty.scalac.Overview_of_free_monads_in_cats.snippets.{API01, API02, API03}
+import org.fp.thirdparty.scalac.Overview_of_free_monads_in_cats.Computations
 
 /**
   *
@@ -82,12 +83,13 @@ ${snippet{
     import M._
     // 8<--
 
-    val program : (Position ⇒ Free[Instruction, Position]) = (start: Position) ⇒ {
-      for {
-        p1 <- forward(start, 10)
-        p2 <- right_(p1, Degree(90))
-        p3 <- forward(p2, 10)
-      } yield p3
+    val program : (Position ⇒ Free[Instruction, Position]) =
+      (start: Position) ⇒ {
+        for {
+          p1 <- forward(start, 10)
+          p2 <- right_(p1, Degree(90))
+          p3 <- forward(p2, 10)
+        } yield p3
     }
 }}
 
@@ -121,7 +123,6 @@ ${snippet{
     /**/
     // 8<--
     import API02.LogoInstructions._
-    import org.fp.thirdparty.scalac.Overview_of_free_monads_in_cats.Computations
 
     // 8<--
     import cats.{Id, ~>}
@@ -169,11 +170,9 @@ ${snippet{
       } yield p3
     }
 
-//@todo
     // 8<-- DUPLICATE CODE --
     import API02.LogoInstructions._
     import API02.dsl
-    import org.fp.thirdparty.scalac.Overview_of_free_monads_in_cats.Computations
 
     import cats.{Id, ~>}
 
@@ -194,7 +193,7 @@ ${snippet{
     val startPosition = Position(0.0, 0.0, Degree(0))
     val interpreter: Instruction ~> Id = InterpreterId
 
-    implicit val M: dsl.Moves[Instruction] = null
+    implicit val M: dsl.Moves[Instruction] = null //@todo
     program(startPosition).foldMap(InterpreterId)
   }}
 
@@ -215,7 +214,6 @@ ${snippet{
     // 8<--
     import API02.Base._
     import API02.LogoInstructions._
-      import org.fp.thirdparty.scalac.Overview_of_free_monads_in_cats.Computations
 
     import cats.~>
     // 8<--
@@ -247,11 +245,12 @@ ${snippet{
     import API02.Base._
     import API02.dsl
     import API02.LogoInstructions._
-    // 8<--
 
     implicit val M: dsl.Moves[Instruction] = null
+    import M._
+    // 8<--
+
     val program : (Position ⇒ Free[Instruction, Unit]) = {
-      import M._
 
       start: Position ⇒
       for {
@@ -270,7 +269,7 @@ We can easily think about another interpreter that could be implemented for this
 
 ### Composing
 
-$freeMonad-s are a really powerful tool. One of the reasons is composition.
+$freeMonad-s are a really powerful tool. One of the reasons is $functionComposition.
 
 Our example is rather simple, but you can imagine that you’ve built a whole instruction set for your business logic.
 It is completely separated from other code in application.
@@ -302,11 +301,10 @@ $coProduct requires two $typeConstructor-s and type that will be inserted into t
 
 ${snippet{
 
-
-    final case class Coproduct[F[_], G[_], A](run: F[A] Either G[A])
+    final case class EitherK[F[_], G[_], A](run: F[A] Either G[A])
   }}
 
-Let’s define our common type. ($coProduct is renamed to EitherK)
+Let’s define our common type. ($coProduct is renamed to `EitherK` in ${Cats.md})
 
 ${snippet{
 
@@ -327,12 +325,14 @@ In application we will be using `LogoApp` as a whole set of instructions.
 To make the mixing of these two ASTs possible we need to be able to lift both of them to $coProduct type.
 
 To do this we have to change our lifting methods - instead of using `Free.liftF` method we will use an injecting function.
+See also $functionLifting and $functorLifting.
 
 ${snippet{
     import cats.free.Free
     import cats.InjectK
 
     final class FreeInjectPartiallyApplied[F[_], G[_]] /*private[free]*/ {
+
       def apply[A](fa: F[A])(implicit I: InjectK[F, G]): Free[G, A] =
         Free.liftF(I.inj(fa))
     }
@@ -349,38 +349,41 @@ These classes will take type parameter, which will be corresponding to the $coPr
 This is what our Logo definition will look like
 
 ${incl[API02]}
+${incl[API03]}
 
-Moves and PencilActions will be implicitly needed in our program.
+`Moves` and `PencilActions` will be implicitly needed in our program.
 They gonna be parametrized by our `LogoApp` type, and will have all methods lifted to `Free` that will be operating on the `LogoApp`.
 
 That means we can mix them in one $forComprehension expression. Now our program definition will look like this:
 
 ${snippet{
-//    // 8<--
-//    import cats.{Id, ~>}
-//    import cats.free.Free
-//    import cats.data.Coproduct
-//
-//    import API03._
-//    import API03.Logo._
-//    //import API03.Logo.dsl._
-//
-//    type LogoApp[A] = Coproduct[Instruction, PencilInstruction, A]
-//    // 8<--
-//
-//    def program(implicit M: Moves[LogoApp], P: PencilActions[LogoApp]): (Position => Free[LogoApp, Unit]) = {
-//      import M._, P._
-//      s: Position =>
-//        for {
-//          p1 <- forward(s, 10)
-//          p2 <- right(p1, Degree(90))
-//          _  <- pencilUp(p2)
-//          p3 <- forward(p2, 10)
-//          _  <- pencilDown(p3)
-//          p4 <- backward(p3, 20)
-//          _  <- showPosition(p4)
-//        } yield ()
-//    }
+    // 8<--
+    import cats.free.Free
+    import cats.data.EitherK
+
+    import API02.Base._
+    import API02.LogoInstructions._
+    import API02.{dsl ⇒ dsl1}
+    import API03.LogoPencilInstructions._
+    import API03.{dsl ⇒ dsl2}
+
+    type LogoApp[A] = EitherK[Instruction, PencilInstruction, A]
+    // 8<--
+
+    def program(implicit M: dsl1.Moves[LogoApp], P: dsl2.PencilActions[LogoApp]): (Position => Free[LogoApp, Unit]) =
+      (start: Position) => {
+        import M._, P._
+
+          for {
+            p1 <- forward(start, 10)
+            p2 <- right_(p1, Degree(90))
+            _  <- pencilUp(p2)
+            p3 <- forward(p2, 10)
+            _  <- pencilDown(p3)
+            p4 <- backward(p3, 20)
+            _  <- showPosition(p4)
+          } yield ()
+      }
   }}
 
 """.stripMargin

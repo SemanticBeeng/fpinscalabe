@@ -11,11 +11,9 @@ trait API02 extends API01 {
   import cats.free.Free
   import cats.{Id, InjectK}
 
-  import Base._
-  import LogoInstructions._
-
   object dsl {
-    //import {API02.Position => Position}
+    import Base._
+    import LogoInstructions._
 
     class Moves[F[_]](implicit I: InjectK[Instruction, F]) {
       def forward(pos: Position, l: Int): Free[F, Position] = Free.inject[Instruction, F](Forward(pos, l))
@@ -29,9 +27,4 @@ trait API02 extends API01 {
 
 // 8<--
 object API02 extends API02
-
-trait Computations {
-
-}
-
 // 8<--

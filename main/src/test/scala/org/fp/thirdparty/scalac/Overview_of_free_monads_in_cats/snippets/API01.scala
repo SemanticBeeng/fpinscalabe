@@ -24,8 +24,8 @@ trait API01 {
   }
 
   // 8<--
-  object LogoInstructions extends LogoInstructions
   object Base extends Base
+  object LogoInstructions extends LogoInstructions
   // 8<--
 }
 
