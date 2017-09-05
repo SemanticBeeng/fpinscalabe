@@ -22,6 +22,10 @@ trait API02 extends API01 {
       def right_(pos: Position, l: Degree): Free[F, Position] = Free.inject[Instruction, F](RotateRight(pos, l))
       def showPosition(pos: Position): Free[F, Unit] = Free.inject[Instruction, F](ShowPosition(pos))
     }
+
+    object Moves {
+      implicit def moves[F[_]](implicit I: InjectK[Instruction, F]): Moves[F] = new Moves[F]
+    }
   }
 }
 

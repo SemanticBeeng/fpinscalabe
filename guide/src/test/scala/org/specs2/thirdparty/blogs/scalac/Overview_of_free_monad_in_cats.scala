@@ -172,7 +172,6 @@ ${snippet{
 
     // 8<-- DUPLICATE CODE --
     import API02.LogoInstructions._
-    import API02.dsl
 
     import cats.{Id, ~>}
 
@@ -193,7 +192,6 @@ ${snippet{
     val startPosition = Position(0.0, 0.0, Degree(0))
     val interpreter: Instruction ~> Id = InterpreterId
 
-    implicit val M: dsl.Moves[Instruction] = null //@todo
     program(startPosition).foldMap(InterpreterId)
   }}
 
