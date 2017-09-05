@@ -76,11 +76,13 @@ ${snippet{
     import API02.LogoInstructions._
     import API02.dsl
 
-    // 8<--
     import cats.free.Free
 
-    def program(start: Position)(implicit M: dsl.Moves[Instruction]): Free[Instruction, Position] = {
-      import M._
+    implicit val M: dsl.Moves[Instruction] = null
+    import M._
+    // 8<--
+
+    val program : (Position ⇒ Free[Instruction, Position]) = (start: Position) ⇒ {
       for {
         p1 <- forward(start, 10)
         p2 <- right_(p1, Degree(90))
@@ -100,7 +102,7 @@ Another advantage is that we don’t worry how it is computed. We are just expre
 
 At this moment we have our program description, but we want to execute it. In order to do that a $naturalTransformation is needed.
 It’s a function that can transform one $typeConstructor into another one. A $naturalTransformation from `F` to `G` is often written as `F[_] ~> G[_]`.
-What is important, is that we have to provide implicit conversion from `G` to a `Monad[G]`.
+What is important, is that we have to provide $implicitConversion from `G` to a `Monad[G]`.
 
 It’s possible to have multiple interpreters, e.g. one for testing and another one for production.
 This is very useful when we create an AST for interacting with a database or some other external service.
@@ -119,12 +121,13 @@ ${snippet{
     /**/
     // 8<--
     import API02.LogoInstructions._
+    import org.fp.thirdparty.scalac.Overview_of_free_monads_in_cats.Computations
 
     // 8<--
     import cats.{Id, ~>}
 
     object InterpreterId extends (Instruction ~> Id) {
-      import org.fp.thirdparty.scalac.Overview_of_free_monads_in_cats.Computations._
+      import Computations._
 
       override def apply[A](fa: Instruction[A]): Id[A] = fa match {
 
@@ -170,11 +173,12 @@ ${snippet{
     // 8<-- DUPLICATE CODE --
     import API02.LogoInstructions._
     import API02.dsl
+    import org.fp.thirdparty.scalac.Overview_of_free_monads_in_cats.Computations
 
     import cats.{Id, ~>}
 
     object InterpreterId extends (Instruction ~> Id) {
-      import org.fp.thirdparty.scalac.Overview_of_free_monads_in_cats.Computations._
+      import Computations._
 
       override def apply[A](fa: Instruction[A]): Id[A] = fa match {
 
@@ -211,12 +215,13 @@ ${snippet{
     // 8<--
     import API02.Base._
     import API02.LogoInstructions._
+      import org.fp.thirdparty.scalac.Overview_of_free_monads_in_cats.Computations
 
     import cats.~>
     // 8<--
 
     object InterpretOpt extends (Instruction ~> Option) {
-      import org.fp.thirdparty.scalac.Overview_of_free_monads_in_cats.Computations._
+      import Computations._
 
       val nonNegative: (Position => Option[Position]) = {
         p => if (p.x >= 0 &&p.y >= 0) Some(p) else None

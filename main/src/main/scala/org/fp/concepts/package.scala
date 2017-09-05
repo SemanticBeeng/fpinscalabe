@@ -9,6 +9,7 @@ package object concepts {
   val bookmarks = "$$bookmarks$$"
 
   //
+  val implicitConversion = "[implicit conversion]"
   val partialFunction = "[partial function]"
   val selfType = "self-type"
   val ad_hocPolymorphism = "[ad-hoc polymorphism]"
