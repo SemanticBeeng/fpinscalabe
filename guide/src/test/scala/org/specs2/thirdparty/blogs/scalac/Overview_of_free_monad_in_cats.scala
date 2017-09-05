@@ -165,18 +165,33 @@ ${snippet{
         p3 <- forward(p2, 10)
       } yield p3
     }
-//    val program: (Position => Free[Instruction, Position]) = {
-//      start: Position =>
-//        for {
-//          p1 <- forward(start, 10)
-//          p2 <- right(p1, Degree(90))
-//          p3 <- forward(p2, 10)
-//        } yield p3
-//    }
+
 //@todo
-//    val startPosition = Position(0.0, 0.0, Degree(0))
-//
-//    program(startPosition).foldMap(InterpreterId)
+    // 8<--
+    import API02.LogoInstructions._
+    import API02.dsl
+
+    import cats.{Id, ~>}
+
+    object InterpreterId extends (Instruction ~> Id) {
+      import org.fp.thirdparty.scalac.Overview_of_free_monads_in_cats.Computations._
+
+      override def apply[A](fa: Instruction[A]): Id[A] = fa match {
+
+        case Forward(p, length) => forward(p, length)
+        case Backward(p, length) => backward(p, length)
+        case RotateLeft(p, degree) => left_(p, degree)
+        case RotateRight(p, degree) => right_(p, degree)
+        case ShowPosition(p) => showPosition(p)
+      }
+    }
+    // 8<--
+
+    val startPosition = Position(0.0, 0.0, Degree(0))
+    val interpreter: Instruction ~> Id = InterpreterId
+
+    implicit val M: dsl.Moves[Instruction] = null
+    program(startPosition).foldMap(InterpreterId)
   }}
 
 The result of this operation will be just a `Position` because last the instruction of program was forward and we yielded the result of it.
