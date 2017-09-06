@@ -8,10 +8,24 @@ package object concepts {
   val keyPoint = "$$key point$$"
   val bookmarks = "$$bookmarks$$"
 
-  //
-  val implicitConversion = "[implicit conversion]"
+  /**
+    * About functions
+    */
+  val functionComposition = "[function composition]"
+  val functionOverloading = "[function overloading]"
+  val functionLifting = "[function lifting]"
   val partialFunction = "[partial function]"
   val functionPartialApplication = "[function partial application]"
+
+  /**
+    * About types
+    */
+  val typeClass = "[type class]"
+  val typeVariable = "[type variable]"
+  val existentialType = "[existential type (fp)]"
+  val phantomType = "[phantom type (fp)]"
+
+  val typeClassInstance = "[type class instance]"
 
   /**
     * [[org.fp.resources.impl.Resource]]
@@ -19,17 +33,21 @@ package object concepts {
     *
     * [[org.fp.bookmarks.ann_stackOverflow_typeLambdaAndBenefits_bkm1]]
     */
-  val currying = "[currying]"
+  val typeCurrying = "[type currying]"
   val selfType = "self-type"
-  val ad_hocPolymorphism = "[ad-hoc polymorphism]"
-  val functionOverloading = "[function overloading]"
-  val glueObject = "[glue object]"
 
   /**
     * [[org.fp.resources.impl.Resource]]
     * https://hyp.is/iJIsfC2GEeam8q-I4gf9FA/archive.is/KAdCc
     */
   val structuralType = "[structural type]"
+
+  val pathDependentType = "[path dependent type]"
+
+  val taggedType = "[tagged type]"
+
+  val constructor = "[constructor]"
+  val typeConstructor = "[type constructor]"
 
   /**
     * [[resources.typeLevel_TypeParamsAndMembers]]
@@ -48,34 +66,52 @@ package object concepts {
     */
   val typeMember = "[type member]"
 
+  val typeKind = "[type kind (fp)]"
+
   /**
-    * [[resources.stackOverflow_typeLambdaAndBenefits]]
+    * [[resources.so_typeLambdaAndBenefits]]
     *
     * @see [[typeConstructor]]
     * @see [[higherKindedType]]
     * @see [[typeMember]]
     * @see [[typeParameter]]
     * @see [[structuralType]]
-    * @see [[currying]]
+    * @see [[typeCurrying]]
     * @see [[partialFunction]]
     * @see [[functionPartialApplication]]
     *
     */
   val typeLambda = "[type lambda]"
 
-  //
-  val constructor = "[constructor]"
-  /**
+  val typeProjection = "[type projection (fp)]"
+
+    /**
     * [[org.fp.resources.impl.Resource]]
     * https://hyp.is/SEDtCJLOEeejFN-_hdbysw/stackoverflow.com/questions/8736164/what-are-type-lambdas-in-scala-and-what-are-their-benefits
     */
-  val typeConstructor = "[type constructor]"
-  val typeClass = "[type class]"
-  val typeClassInstance = "[type class instance]"
-  val companionObject = "[companion object]"
-  val taggedType = "[tagged type]"
   val higherKindedType = "[higher-Kinded type]"
-  val forComprehension = "[for comprehension]"
+
+  val implicitConversion = "[implicit conversion]"
+
+  /**
+    * about polymorphism
+    */
+
+   val ad_hocPolymorphism = "[ad-hoc polymorphism]"
+   val companionObject = "[companion object]"
+   val glueObject = "[glue object]"
+
+  /**
+    * about control flow
+    */
+   val forComprehension = "[for comprehension]"
+
+    val effect = "[effect (fp)]"
+
+  /**
+    * About category theory
+    */
+
   //
   val semigroup = "[semigroup]"
   val monoid = "[monoid]"
@@ -105,8 +141,6 @@ package object concepts {
   /**
     * @todo related to [[operator_lift]]
     */
-  val functionLifting = "[function lifting]"
-  val functionComposition = "[function composition]"
   val functorComposition = "[functor composition]"
   val functorLifting = "[functor lifting]"
 

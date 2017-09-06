@@ -93,6 +93,10 @@ package object bookmarks {
   val ann_ScalazValidation3 = Annotation(misc, "http://codegists.com/snippet/scala/validationscala_mathhun_scala")
 
 
-  val ann_stackOverflow_typeLambdaAndBenefits_bkm1 = Annotation(stackOverflow_typeLambdaAndBenefits,
+  val ann_stackOverflow_typeLambdaAndBenefits_bkm1 = Annotation(so_typeLambdaAndBenefits,
     "https://hyp.is/jKZ0hpLJEeepFbP9qNSaEw/stackoverflow.com/questions/8736164/what-are-type-lambdas-in-scala-and-what-are-their-benefits")
+
+  val ann_cakeSolutions_ExistentialTypesInScala_bkm1 = Annotation(cakeSolutions_ExistentialTypesInScala,
+    "https://hyp.is/mLbLNJLzEeeDzEtRoAGGBA/archive.is/i17zj")
+
 }

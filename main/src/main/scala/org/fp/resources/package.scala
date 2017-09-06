@@ -92,8 +92,8 @@ package object resources {
 
   val typeLevel_TypeParamsAndMembers = Resource[blog]("Type members are [almost] type parameters", "https://typelevel.org/blog/2015/07/13/type-members-parameters.html")
 
-  val stackOverflow_typeLambdaAndBenefits = Resource[blog]("Type lambadas and benefits", "https://stackoverflow.com/questions/8736164/what-are-type-lambdas-in-scala-and-what-are-their-benefits")
+  val so_typeLambdaAndBenefits = Resource[blog]("Type lambadas and benefits", "https://stackoverflow.com/questions/8736164/what-are-type-lambdas-in-scala-and-what-are-their-benefits")
 
-
+  val cakeSolutions_ExistentialTypesInScala = Resource[blog]("Existential types in Scala", "http://archive.is/i17zj")
 }
 
