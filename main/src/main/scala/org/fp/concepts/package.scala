@@ -17,7 +17,7 @@ package object concepts {
     * [[org.fp.resources.impl.Resource]]
     * https://en.wikipedia.org/wiki/Currying
     *
-    * [[resources.stackOverflow_typeLambdaAndBenefits_bkm1]]
+    * [[org.fp.bookmarks.ann_stackOverflow_typeLambdaAndBenefits_bkm1]]
     */
   val currying = "[currying]"
   val selfType = "self-type"
