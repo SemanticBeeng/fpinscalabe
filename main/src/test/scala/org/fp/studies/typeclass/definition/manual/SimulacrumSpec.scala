@@ -18,7 +18,7 @@ object SimulacrumSpec extends org.specs2.Specification with Snippets {
 
 ### The conventional steps of defining a modular $typeClass in Scala used to look like:
 
- * Define $typeClass contract trait Foo.
+ * Define $typeClass contract `trait Foo`.
  * Define a $companionObject Foo with a helper method apply that acts like implicitly, and a way of defining Foo instances typically from a function.
  * Define FooOps class that defines unary or binary operators.
  * Define FooSyntax trait that implicitly provides FooOps from a Foo instance.
