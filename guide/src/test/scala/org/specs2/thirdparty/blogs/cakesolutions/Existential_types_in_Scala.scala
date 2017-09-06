@@ -155,10 +155,12 @@ and capturing it as part of the trait.
 $keyPoint This means that, unlike before, we can't pass any random type anymore:
 
 ${snippet{
+  //8<--
   import Snip04.AllowedType._
   import Snip05._
 
   import java.time.Instant
+  //8<--
 
   MkAnyAllowedType("Hello"): AnyAllowedType
   MkAnyAllowedType(1: Int): AnyAllowedType
@@ -173,6 +175,51 @@ ${snippet{
 
 Now we have our `AnyAllowedType` defined. Let's see it in action by defining `safeBind`.
 
+${snippet{
 
+  //8<--
+  trait Code {
+    import Snip04.AllowedType._
+    import Snip05._
+    trait Statement
+  //8<--
+
+    def bind(args: Any*): Statement
+
+    def safeBind(any: AnyAllowedType*): Statement =
+      bind(any.map(ex => ex.evidence.toObject(ex.value)):_*)
+  //8<--
+  }
+  //8<--
+}}
+
+Note that we still don't know what the type of `ex.value` is (just like before).
+However, we do know that it is the same type as the evidence `ex.evidence`.
+That means that all functions, that are part of the evidence (ie: $typeClass), match the type of `ex.value`!
+
+$keyPoint So our knowledge of `ex.value` has expanded from, "all we know is that it exists" to "we know it exists AND that it implements the $typeClass `AllowedType`".
+
+Finally, when we go to use safeBind, we do as such:
+
+${snippet{
+
+  //8<--
+  trait Code {
+    import Snip04.AllowedType._
+    import Snip05._
+    trait Statement
+    import java.time.Instant
+
+    def bind(args: Any*): Statement
+
+    def safeBind(any: AnyAllowedType*): Statement =
+      bind(any.map(ex => ex.evidence.toObject(ex.value)):_*)
+  //8<--
+
+    safeBind(MkAnyAllowedType(1), MkAnyAllowedType("Hello"), MkAnyAllowedType(Instant.now()))
+  //8<--
+  }
+  //8<--
+}}
 """
 }
