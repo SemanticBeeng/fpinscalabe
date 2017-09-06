@@ -196,7 +196,7 @@ ${snippet{
   }}
 
 The result of this operation will be just a `Position` because last the instruction of program was forward and we yielded the result of it.
-When we look at the definition of `Forward` we can see that it extends `Instruction[Position]` and that type parameter specifies that we will
+When we look at the definition of `Forward` we can see that it extends `Instruction[Position]` and that $typeParameter specifies that we will
 have a value of `Position` type as result.
 
 ### Another Interpreter
@@ -291,7 +291,7 @@ ${snippet{
   }}
 
 The problem with the program type is that `PencilInstruction` and `Instruction` don’t have a common supertype, and they shouldn’t have.
-We need to define some type that will be either former or latter of these two type constructors and still be able to pass them type parameter.
+We need to define some type that will be either former or latter of these two type constructors and still be able to pass them $typeParameter.
 
 Luckily, there is a $coProduct, which is made exactly for such tasks. It’s a wrapper for `Xor` type ($disjunction), which is more or less the same thing as Scala’s `Either`.
 
@@ -342,7 +342,7 @@ ${snippet{
 It basically means that we can lift our `Instruction` or `PencilInstruction` set into the $coProduct which is the superset of both of them.
 
 Because we want to be flexible about the $coProduct types we will define classes wrapping our DSL.
-These classes will take type parameter, which will be corresponding to the $coProduct.
+These classes will take $typeParameter, which will be corresponding to the $coProduct.
 
 This is what our Logo definition will look like
 
@@ -417,7 +417,7 @@ ${snippet{
   }}
 
 As we can see, combining two sets of instruction is fairly easy. Mixing another one will be very similar, you just
-need to add another $coProduct which takes as type parameters the `LogoApp` and the other instruction set.
+need to add another $coProduct which takes as $typeParameter-s the `LogoApp` and the other instruction set.
 Still, each of these DSLs can work separately and can be easily tested. That is a big advantage.
 
 Summary

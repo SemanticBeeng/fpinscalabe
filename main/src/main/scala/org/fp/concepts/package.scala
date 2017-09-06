@@ -16,6 +16,8 @@ package object concepts {
   /**
     * [[org.fp.resources.impl.Resource]]
     * https://en.wikipedia.org/wiki/Currying
+    *
+    * [[resources.stackOverflow_typeLambdaAndBenefits_bkm1]]
     */
   val currying = "[currying]"
   val selfType = "self-type"
@@ -30,8 +32,7 @@ package object concepts {
   val structuralType = "[structural type]"
 
   /**
-    * [[org.fp.resources.impl.Resource]]
-    * https://typelevel.org/blog/2015/07/13/type-members-parameters.html
+    * [[resources.typeLevel_TypeParamsAndMembers]]
     *
     * @see [[higherKindedType]]
     * @see [[typeMember]]
@@ -48,9 +49,7 @@ package object concepts {
   val typeMember = "[type member]"
 
   /**
-    * [[org.fp.resources.impl.Resource]]
-    * https://stackoverflow.com/questions/8736164/what-are-type-lambdas-in-scala-and-what-are-their-benefits
-    * https://hyp.is/jKZ0hpLJEeepFbP9qNSaEw/stackoverflow.com/questions/8736164/what-are-type-lambdas-in-scala-and-what-are-their-benefits
+    * [[resources.stackOverflow_typeLambdaAndBenefits]]
     *
     * @see [[typeConstructor]]
     * @see [[higherKindedType]]

@@ -1,6 +1,6 @@
 package org.fp
 
-import org.fp.resources.intf.ResourceType.{book, blog, framework, ResourceTypeVal}
+import org.fp.resources.intf.ResourceType._
 
 //import scala.reflect.ClassTag
 
@@ -19,6 +19,7 @@ package object resources {
       trait book extends ResourceTypeVal
       trait framework extends ResourceTypeVal
       trait project extends ResourceTypeVal
+      trait hypothesis extends ResourceTypeVal
 
       //val resourceTypes = Seq(blog, book, framework, project)
     }
@@ -89,5 +90,13 @@ package object resources {
   val cakeSolutions = Resource[blog]("Cake Solutions", "http://www.cakesolutions.net/")
 
   val misc = Resource[blog]("Misc sources", "")
+
+  val typeLevel_TypeParamsAndMembers = Resource[blog]("Type members are [almost] type parameters", "https://typelevel.org/blog/2015/07/13/type-members-parameters.html")
+
+  val stackOverflow_typeLambdaAndBenefits = Resource[blog]("Type lambadas and benefits", "https://stackoverflow.com/questions/8736164/what-are-type-lambdas-in-scala-and-what-are-their-benefits")
+
+  val stackOverflow_typeLambdaAndBenefits_bkm1 = Resource[hypothesis]("Type lambadas and benefits", "https://hyp.is/jKZ0hpLJEeepFbP9qNSaEw/stackoverflow.com/questions/8736164/what-are-type-lambdas-in-scala-and-what-are-their-benefits")
+
+
 }
 
