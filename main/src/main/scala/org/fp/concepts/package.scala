@@ -11,18 +11,65 @@ package object concepts {
   //
   val implicitConversion = "[implicit conversion]"
   val partialFunction = "[partial function]"
+  val functionPartialApplication = "[function partial application]"
+
+  /**
+    * [[org.fp.resources.impl.Resource]]
+    * https://en.wikipedia.org/wiki/Currying
+    */
+  val currying = "[currying]"
   val selfType = "self-type"
   val ad_hocPolymorphism = "[ad-hoc polymorphism]"
   val functionOverloading = "[function overloading]"
   val glueObject = "[glue object]"
 
   /**
-    * @todo https://hyp.is/iJIsfC2GEeam8q-I4gf9FA/archive.is/KAdCc
+    * [[org.fp.resources.impl.Resource]]
+    * https://hyp.is/iJIsfC2GEeam8q-I4gf9FA/archive.is/KAdCc
     */
-  val structuralType = "structural type"
+  val structuralType = "[structural type]"
+
+  /**
+    * [[org.fp.resources.impl.Resource]]
+    * https://typelevel.org/blog/2015/07/13/type-members-parameters.html
+    *
+    * @see [[higherKindedType]]
+    * @see [[typeMember]]
+    *
+    */
+  val typeParameter = "[type parameter]"
+
+  /**
+    * [[org.fp.resources.impl.Resource]]
+    *
+    * @see [[higherKindedType]]
+    * @see [[typeParameter]]
+    */
+  val typeMember = "[type member]"
+
+  /**
+    * [[org.fp.resources.impl.Resource]]
+    * https://stackoverflow.com/questions/8736164/what-are-type-lambdas-in-scala-and-what-are-their-benefits
+    * https://hyp.is/jKZ0hpLJEeepFbP9qNSaEw/stackoverflow.com/questions/8736164/what-are-type-lambdas-in-scala-and-what-are-their-benefits
+    *
+    * @see [[typeConstructor]]
+    * @see [[higherKindedType]]
+    * @see [[typeMember]]
+    * @see [[typeParameter]]
+    * @see [[structuralType]]
+    * @see [[currying]]
+    * @see [[partialFunction]]
+    * @see [[functionPartialApplication]]
+    *
+    */
+  val typeLambda = "[type lambda]"
 
   //
   val constructor = "[constructor]"
+  /**
+    * [[org.fp.resources.impl.Resource]]
+    * https://hyp.is/SEDtCJLOEeejFN-_hdbysw/stackoverflow.com/questions/8736164/what-are-type-lambdas-in-scala-and-what-are-their-benefits
+    */
   val typeConstructor = "[type constructor]"
   val typeClass = "[type class]"
   val typeClassInstance = "[type class instance]"
