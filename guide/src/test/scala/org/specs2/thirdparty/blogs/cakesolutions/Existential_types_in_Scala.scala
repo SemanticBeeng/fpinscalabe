@@ -4,9 +4,10 @@ import org.fp.concepts._
 import org.fp.bookmarks._
 //
 import org.specs2.ugbase.UserGuidePage
-import org.fp.thirdparty.cakesolutions.Existential_types_in_Scala.snippets.{Snip01, Snip02, Snip03, Snip04, Snip05}
 import org.specs2.common.SnippetHelper._
 import org.specs2.execute.SnippetParams
+//
+import org.fp.thirdparty.cakesolutions.Existential_types_in_Scala.snippets._
 
 import scala.language.existentials
 import scala.language.higherKinds
