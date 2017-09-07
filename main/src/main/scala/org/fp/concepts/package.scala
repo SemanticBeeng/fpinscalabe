@@ -22,6 +22,7 @@ package object concepts {
     */
   val typeClass = "[type class]"
   val typeVariable = "[type variable]"
+  val typeAlias = "[type alias]"
   val existentialType = "[existential type (fp)]"
   val phantomType = "[phantom type (fp)]"
 

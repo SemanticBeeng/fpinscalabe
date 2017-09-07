@@ -2,14 +2,14 @@ package org.specs2.thirdparty.blogs.cakesolutions
 
 import org.fp.concepts._
 import org.fp.bookmarks._
-import org.fp.thirdparty.cakesolutions.Existential_types_in_Scala.snippets.{Snip04, Snip05}
 //
 import org.specs2.ugbase.UserGuidePage
-import org.fp.thirdparty.cakesolutions.Existential_types_in_Scala.snippets.{Snip01, Snip02, Snip03}
+import org.fp.thirdparty.cakesolutions.Existential_types_in_Scala.snippets.{Snip01, Snip02, Snip03, Snip04, Snip05}
 import org.specs2.common.SnippetHelper._
 import org.specs2.execute.SnippetParams
 
 import scala.language.existentials
+import scala.language.higherKinds
 
 /**
   * For [[org.fp.resources.cakeSolutions_ExistentialTypesInScala]]
@@ -200,6 +200,7 @@ That means that all functions, that are part of the evidence (ie: $typeClass), m
 $keyPoint So our knowledge of `ex.value` has expanded from, "all we know is that it exists" to "we know it exists AND that it implements the $typeClass `AllowedType`".
 
 Finally, when we go to use safeBind, we do as such:
+And it works!
 
 ${snippet{
 
@@ -217,9 +218,165 @@ ${snippet{
   //8<--
 
     safeBind(MkAnyAllowedType(1), MkAnyAllowedType("Hello"), MkAnyAllowedType(Instant.now()))
+
+    // Does not compile, no instance of AllowedType for User
+    // safeBind(MkAnyAllowedType(1), MkAnyAllowedType(user)) //
   //8<--
   }
   //8<--
 }}
+
+Now we are essentially done, we just need to wrap our values in `MkAnyAllowedType` and the compiler will do the rest (or yell).
+
+However, there are some extra tweaks we can make to make our interface better.
+
+##### Making an `AllowedType` instance for `AnyAllowedType`
+
+You many have noticed that it is awkward to call functions in `ex.evidence`
+
+  `ex.evidence.toObject(ex.value)`
+
+We can make this better by creating an instance for `AllowedType`:
+
+${snippet{
+  //8<--
+  trait Code {
+    import Snip03._
+    import Snip04.AllowedType._
+    import Snip05._
+  //8<--
+
+    object AnyAllowedType {
+      implicit val anyAllowedInst: AllowedType[AnyAllowedType] =
+        AllowedType.instance(ex => ex.evidence.toJavaType(ex.value))
+    }
+
+    // Now we can simply do
+    val ex: AnyAllowedType = MkAnyAllowedType("Hello")
+      // @todo AllowedType[AnyAllowedType].toObject(ex)
+  //8<--
+  }
+  //8<--
+}}
+
+##### Using $implicitConversion-s to avoid wrapping
+
+Having to do this manual wrapping can become old fast:
+
+  `safeBind(MkAnyAllowedType(1), MkAnyAllowedType("Hello"), …)`
+
+
+We can actually avoid it by using an $implicitConversion:
+
+${snippet{
+  //8<--
+  trait Code{
+    import Snip03._
+    import Snip04.AllowedType._
+    import Snip05._
+  //8<--
+    object AnyAllowedType {
+      implicit def anyAllowedToAny[A: AllowedType](a: A): AnyAllowedType =
+        MkAnyAllowedType(a)
+    }
+  }
+}}
+
+Now we can simply call:
+
+  `safeBind(1, "Hello", Instant.now(), true, …)`
+
+And passing `user` will fail, like before.
+
+##### Generalize AnyAllowedType
+
+When we created `AnyAllowedType`, we made it for the $typeClass `AllowedType`.
+Does this mean that we need to make a new `AnyX` for every X $typeClass we have?
+Nope, we do not. We can generalize `AnyAllowedType` to work for ANY $typeClass.
+
+This would require a simple modification:
+
+${snippet{
+  trait Code {
+    // data TCBox tc = forall a. tc a => TCBox a
+    sealed trait TCBox[TC[_]] {
+      type T
+      val value: T
+      val evidence: TC[T]
+    }
+
+    private case class MkTCBox[A, TC[_]](value: A)(implicit val evidence: TC[A])
+      extends TCBox[TC] {
+      type T = A
+    }
+  }
+}}
+
+Now, instead of hard-coding it to `AllowedType`, we take the $typeClass as a `type TC[_]`.
+We still take a `TC[A]` implicitly in `MkTCBox` along with the value. Note though that `TC[_]` isn't $existentialType, nor $phantomType,
+it is just a common $typeVariable. A `TCBox[TC]` is, essentially, a "TypeClass Box" for the typeclass "TC".
+
+Our $implicitConversion can also be translated:
+
+${snippet{
+  //8<--
+  sealed trait TCBox[TC[_]] {
+    type T
+    val value: T
+    val evidence: TC[T]
+  }
+
+  case class MkTCBox[A, TC[_]](value: A)(implicit val evidence: TC[A])
+    extends TCBox[TC] {
+    type T = A
+  }
+  //8<--
+
+  object TCBox {
+
+    def apply[T, TC[_]](value: T)(implicit ev: TC[T]): TCBox[TC] =
+      MkTCBox(value)
+
+    /**
+     * Allows for case matching with evidence
+     */
+    def unapply[TC[_]](t: TCBox[TC]): Option[(t.T, TC[t.T])] =
+      Some(t.value -> t.evidence)
+
+    // If `A` implements the type class `TC`, then `A` can be wrapped by
+    // `TCBox[TC]` if it is expected. This allows for automatic lifting of
+    // types into TCBox.
+    implicit def anyToBox[TC[_], A: TC](v: A): TCBox[TC] = TCBox(v)
+  }
+
+  //8<--
+    import Snip03._
+    import Snip04.AllowedType._
+    import Snip05._
+  //8<--
+
+  object Example {
+    def bind(objs: Object*): Unit = ()
+
+    type AnyAllowedType = TCBox[AllowedType]
+    // @todo
+//    def toObj(t: AnyAllowedType) = AllowedType[AnyAllowedType].toObject(t)
+//
+//    def bindT(objs: AnyAllowedType*): Unit =
+//      bind(objs.map(toObj):_*)
+//
+//    def f = bindT(123, "Hello", true)
+  }
+}}
+
+Finally, a simple $typeAlias type `AnyAllowedType = TCBox[AllowedType]` would make everything we have written before keep working.
+
+##### Conclusion
+
+$existentialType-s don't seem that useful when first encountered, but they can be quite powerful when mixed with the correct restrictions.
+
+The use case we presented is one of the simpler uses but they can be as complex or as simple as your use case requires them to be.
+
+S: you can find all the code we just wrote for TCBox here: https://gist.github.com/pjrt/269ddd1d8036374c648dbf6d52fb388f
 """
 }
