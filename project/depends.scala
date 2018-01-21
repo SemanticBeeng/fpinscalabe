@@ -3,7 +3,7 @@ import Keys._
 
 object versions {
 
-  val scala = "2.12.4"
+  val scala = "2.11.12"
 
   val scalaCheck = "1.13.5"
   val discipline = "0.8"
@@ -15,10 +15,10 @@ object versions {
 
   val shapeless = "2.3.3"
 
-  val scalaz = "7.2.15"
+  val scalaz = "7.2.18"
 
   val cats = "1.0.1"
-  val catsEffect = "0.5"
+  val catsEffect = "0.8"
   val catsMtl = "0.2.2"
   val catsMouse = "0.16"
 

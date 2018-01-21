@@ -47,7 +47,7 @@ lazy val fpinscalabe = Project(
         depends.scalaz(/*scalazVersion.value*/) ++
         depends.cats() ++
         depends.fs2() ++
-        //depends.frameless() ++
+        depends.frameless() ++
         depends.discipline(scalaVersion.value) ++
         depends.specs2(specs2Version.value)
         //scalacOptions in codata := Seq("-feature", "-language:_"),
@@ -122,7 +122,11 @@ lazy val compilationSettings = Seq(
         "-Ywarn-unused-import:false",
         //"-Yno-adapted-args",
         "-Ywarn-numeric-widen",
-        "-Xlint:-unused",         // https://stackoverflow.com/a/43965697/4032515
+        /**
+          * #todo put this back when upgrading (back) to [[versions.scala]]  2.12
+          */
+        //"-Xlint:-unused",         // https://stackoverflow.com/a/43965697/4032515
+        "-Xlint",                   // https://github.com/scala/bug/issues/10270#issuecomment-295338382
         //"-Ywarn-unused:locals",
         "-Ywarn-value-discard",
         "-deprecation:false", "-Xcheckinit", "-unchecked", "-feature", "-language:_"),
