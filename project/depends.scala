@@ -2,6 +2,7 @@ import sbt._
 import Keys._
 
 object versions {
+
   val scala = "2.12.4"
 
   val scalaCheck = "1.13.5"
@@ -25,6 +26,8 @@ object versions {
   val fs2cats = "0.5.0"
   val fs2scalaz = "0.3.0"
 
+  val frameless = "0.4.0"
+
   val doobie = "0.5.0-M6"
 
   /**
@@ -46,19 +49,6 @@ object depends {
 
   def reflect(scalaVersion: String) = Seq("org.scala-lang" % "scala-reflect" % scalaVersion)
 
-  def specs2(specs2Version: String) =
-    Seq("org.specs2"        %% "specs2-core",
-        "org.specs2"        %% "specs2-form",
-        "org.specs2"        %% "specs2-html",
-        "org.specs2"        %% "specs2-markdown",
-        "org.specs2"        %% "specs2-scalacheck").map(_ % specs2Version)
-
-  def scalaz(/*scalazVersion: String*/) =
-    Seq("org.scalaz"      %% "scalaz-core",
-        "org.scalaz"      %% "scalaz-effect",
-        "org.scalaz"      %% "scalaz-concurrent",
-        "org.scalaz"      %% "scalaz-scalacheck-binding").map(_ % versions.scalaz)
-
   //  def scalaParser(scalaVersion: String) =
 //    PartialFunction.condOpt(CrossVersion.partialVersion(scalaVersion)){
 //      case Some((2, scalaMajor)) if scalaMajor >= 11 =>
@@ -77,27 +67,11 @@ object depends {
     else
       "org.spire-math" % "kind-projector" % versions.kindProjector cross CrossVersion.binary
 
-  def scalacheck(scalaVersion: String) =
-    Seq("org.scalacheck" %% "scalacheck"    % versions.scalaCheck)
-
-  def discipline(scalaVersion: String) =
-    Seq(  "org.typelevel" %% "discipline" % versions.discipline)
-
   def simulacrum(scalaVersion: String) =
     Seq("com.github.mpilquist" %% "simulacrum" % versions.simulacrum)
 
-  //lazy val mockito       = Seq("org.mockito"    %  "mockito-core"  % "1.9.5")
-  //lazy val junit         = Seq("junit"          %  "junit"         % "4.12")
-  //lazy val hamcrest      = Seq("org.hamcrest"   %  "hamcrest-core" % "1.3")
-
   def shapeless(scalaVersion: String) =
     Seq("com.chuusai" %% "shapeless" % versions.shapeless)
-
-  def fs2() =
-    Seq("co.fs2" %% "fs2-core" % versions.fs2,
-        "co.fs2" %% "fs2-io" % versions.fs2,
-        "co.fs2" %% "fs2-cats" % versions.fs2cats,
-        "co.fs2" %% "fs2-scalaz" % versions.fs2scalaz)
 
   def cats() =
     Seq("org.typelevel" %% "cats-kernel",
@@ -110,6 +84,22 @@ object depends {
     Seq("org.typelevel" %% "cats-mtl-core").map(_ % versions.catsMtl)
     Seq("org.typelevel" %% "mouse").map(_ % versions.catsMouse)
 
+ def scalaz(/*scalazVersion: String*/) =
+    Seq("org.scalaz"    %% "scalaz-core",
+        "org.scalaz"    %% "scalaz-effect",
+        "org.scalaz"    %% "scalaz-concurrent",
+        "org.scalaz"    %% "scalaz-scalacheck-binding").map(_ % versions.scalaz)
+
+  def fs2() =
+    Seq("co.fs2" %% "fs2-core" % versions.fs2,
+        "co.fs2" %% "fs2-io" % versions.fs2,
+        "co.fs2" %% "fs2-cats" % versions.fs2cats,
+        "co.fs2" %% "fs2-scalaz" % versions.fs2scalaz)
+
+  def frameless() =
+    Seq("org.typelevel" %% "frameless-core",
+        "org.typelevel" %% "frameless-dataset",
+        "org.typelevel" %% "frameless-cats").map(_ % versions.frameless)
 
 //  lazy val pegdown = Seq("org.pegdown" % "pegdown" % "1.2.1")
 
@@ -123,6 +113,23 @@ object depends {
     else  */
     Seq(compilerPlugin("org.scalamacros" %% "paradise"    % versions.scalaMacrosParadise cross CrossVersion.full)/*,
                        "org.scalamacros" %% "quasiquotes" % versions.scalaMacrosParadise*/)
+
+  def scalacheck(scalaVersion: String) =
+    Seq("org.scalacheck" %% "scalacheck"    % versions.scalaCheck)
+
+  def discipline(scalaVersion: String) =
+    Seq(  "org.typelevel" %% "discipline" % versions.discipline)
+
+  //lazy val mockito       = Seq("org.mockito"    %  "mockito-core"  % "1.9.5")
+  //lazy val junit         = Seq("junit"          %  "junit"         % "4.12")
+  //lazy val hamcrest      = Seq("org.hamcrest"   %  "hamcrest-core" % "1.3")
+
+  def specs2(specs2Version: String) =
+    Seq("org.specs2"        %% "specs2-core",
+        "org.specs2"        %% "specs2-form",
+        "org.specs2"        %% "specs2-html",
+        "org.specs2"        %% "specs2-markdown",
+        "org.specs2"        %% "specs2-scalacheck").map(_ % specs2Version)
 
   lazy val resolvers =
     Seq(updateOptions := updateOptions.value.withCachedResolution(true)) ++ {
