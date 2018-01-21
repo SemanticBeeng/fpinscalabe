@@ -12,9 +12,12 @@ object versions {
   val simulacrum = "0.11.0"
   val tagsoup = "1.2"
 
-  val scalaz = "7.2.15"
-  val cats = "1.0.1"
   val shapeless = "2.3.3"
+
+  val scalaz = "7.2.15"
+
+  val cats = "1.0.1"
+  val catsEffect = "0.5"
 
   val fs2 = "0.10.0-RC1"
   val fs2cats = "0.5.0"
@@ -68,7 +71,7 @@ object depends {
 
   def kindp(scalaVersion: String) =
     if (scalaVersion startsWith "2.12.0-M4")
-      "org.spire-math" % "kind-projector_2.12.0-M3" % "0.7.1"
+      "org.spire-math" % "kind-projector_2.12.0-M3" % versions.kindProjector
     else
       "org.spire-math" % "kind-projector" % versions.kindProjector cross CrossVersion.binary
 
@@ -100,7 +103,8 @@ object depends {
         "org.typelevel" %% "cats-core",
         "org.typelevel" %% "cats-laws",
         "org.typelevel" %% "cats-free",
-        "org.typelevel" %% "cats-testkit").map(_ % versions.cats)
+        "org.typelevel" %% "cats-testkit").map(_ % versions.cats) ++
+    Seq("org.typelevel" %% "cats-effect").map(_ % versions.catsEffect)
 
 //  lazy val pegdown = Seq("org.pegdown" % "pegdown" % "1.2.1")
 
