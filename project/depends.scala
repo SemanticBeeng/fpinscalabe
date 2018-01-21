@@ -18,6 +18,8 @@ object versions {
 
   val cats = "1.0.1"
   val catsEffect = "0.5"
+  val catsMtl = "0.2.2"
+  val catsMouse = "0.16"
 
   val fs2 = "0.10.0-RC1"
   val fs2cats = "0.5.0"
@@ -71,7 +73,7 @@ object depends {
 
   def kindp(scalaVersion: String) =
     if (scalaVersion startsWith "2.12.0-M4")
-      "org.spire-math" % "kind-projector_2.12.0-M3" % versions.kindProjector
+      "org.spire-math" % "kind-projector" % versions.kindProjector
     else
       "org.spire-math" % "kind-projector" % versions.kindProjector cross CrossVersion.binary
 
@@ -82,7 +84,7 @@ object depends {
     Seq(  "org.typelevel" %% "discipline" % versions.discipline)
 
   def simulacrum(scalaVersion: String) =
-    Seq("com.github.mpilquist" % "simulacrum_2.12" % versions.simulacrum)
+    Seq("com.github.mpilquist" %% "simulacrum" % versions.simulacrum)
 
   //lazy val mockito       = Seq("org.mockito"    %  "mockito-core"  % "1.9.5")
   //lazy val junit         = Seq("junit"          %  "junit"         % "4.12")
@@ -105,6 +107,9 @@ object depends {
         "org.typelevel" %% "cats-free",
         "org.typelevel" %% "cats-testkit").map(_ % versions.cats) ++
     Seq("org.typelevel" %% "cats-effect").map(_ % versions.catsEffect)
+    Seq("org.typelevel" %% "cats-mtl-core").map(_ % versions.catsMtl)
+    Seq("org.typelevel" %% "mouse").map(_ % versions.catsMouse)
+
 
 //  lazy val pegdown = Seq("org.pegdown" % "pegdown" % "1.2.1")
 
