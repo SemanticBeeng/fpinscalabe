@@ -37,20 +37,16 @@ lazy val fpinscalabe = Project(
       Seq(
         name := "FPinScalaByExample",
         libraryDependencies ++=
-        depends.scalaz(scalazVersion.value) ++
         depends.shapeless(scalaVersion.value) ++
         depends.simulacrum(scalaVersion.value) ++
-        depends.catsCore ++
-        depends.catsKernel ++
-        depends.catsMacros ++
-        depends.catsLaws ++
-        depends.catsFree ++
         //depends.scalaParser(scalaVersion.value) ++
         //depends.scalaXML(scalaVersion.value) ++
         depends.reflect(scalaVersion.value) ++
         depends.paradise(scalaVersion.value) ++
         depends.discipline(scalaVersion.value) ++
         depends.scalacheck(scalaVersion.value) ++
+        depends.scalaz(/*scalazVersion.value*/) ++
+        depends.cats() ++
         depends.specs2(specs2Version.value)
         //scalacOptions in codata := Seq("-feature", "-language:_"),
         // packagedArtifacts := Map.empty

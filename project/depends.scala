@@ -2,22 +2,24 @@ import sbt._
 import Keys._
 
 object versions {
-
-  val scala = "2.12.3"
+  val scala = "2.12.4"
 
   val scalaCheck = "1.13.5"
-  val discipline = "0.7.3"
+  val discipline = "0.8"
 
   val scalaMacrosParadise = "2.1.0"
-  val kindProjector = "0.9.4"
+  val kindProjector = "0.9.5"
   val simulacrum = "0.11.0"
   val tagsoup = "1.2"
 
   val scalaz = "7.2.15"
-  val cats = "1.0.0-MF"
-  val shapeless = "2.3.2"
+  val cats = "1.0.1"
+  val shapeless = "2.3.3"
 
-  val fs2 = "10.0-M6"
+  val fs2 = "0.10.0-RC1"
+  val fs2cats = "0.5.0"
+  val fs2scalaz = "0.3.0"
+
   val doobie = "0.5.0-M6"
 
   /**
@@ -25,13 +27,13 @@ object versions {
     * which depends on scalacheck 1.12.5 only.
     * One alternative would be to use cats only and the typelevel discipline project to check laws."
     */
-  val specs2 = "4.0.0-RC4"
+  val specs2 = "4.0.2"
 }
 
 object depends {
 
   lazy val specs2Version = settingKey[String]("defines the current specs2 version")
-  lazy val scalazVersion = settingKey[String]("defines the current scalaz version")
+  // lazy val scalazVersion = settingKey[String]("defines the current scalaz version")
 
   //lazy val classycle = Seq("org.specs2" % "classycle" % "1.4.3")
 
@@ -46,11 +48,11 @@ object depends {
         "org.specs2"        %% "specs2-markdown",
         "org.specs2"        %% "specs2-scalacheck").map(_ % specs2Version)
 
-  def scalaz(scalazVersion: String) =
+  def scalaz(/*scalazVersion: String*/) =
     Seq("org.scalaz"      %% "scalaz-core",
         "org.scalaz"      %% "scalaz-effect",
         "org.scalaz"      %% "scalaz-concurrent",
-        "org.scalaz"      %% "scalaz-scalacheck-binding").map(_ % scalazVersion)
+        "org.scalaz"      %% "scalaz-scalacheck-binding").map(_ % versions.scalaz)
 
   //  def scalaParser(scalaVersion: String) =
 //    PartialFunction.condOpt(CrossVersion.partialVersion(scalaVersion)){
@@ -84,13 +86,21 @@ object depends {
   //lazy val hamcrest      = Seq("org.hamcrest"   %  "hamcrest-core" % "1.3")
 
   def shapeless(scalaVersion: String) =
-    Seq("com.chuusai" %% "shapeless" % "2.3.2")
+    Seq("com.chuusai" %% "shapeless" % versions.shapeless)
 
-  def catsCore = Seq("org.typelevel" %% "cats-core" % versions.cats)
-  def catsKernel = Seq("org.typelevel" %% "cats-kernel" % versions.cats)
-  def catsMacros = Seq("org.typelevel" %% "cats-macros" % versions.cats)
-  def catsLaws = Seq("org.typelevel" %% "cats-laws" % versions.cats)
-  def catsFree = Seq("org.typelevel" %% "cats-free" % versions.cats)
+  def fs2() =
+    Seq("co.fs2" %% "fs2-core" % versions.fs2,
+        "co.fs2" %% "fs2-io" % versions.fs2,
+        "co.fs2" %% "fs2-cats" % versions.fs2cats,
+        "co.fs2" %% "fs2-scalaz" % versions.fs2scalaz)
+
+  def cats() =
+    Seq("org.typelevel" %% "cats-kernel",
+        "org.typelevel" %% "cats-macros",
+        "org.typelevel" %% "cats-core",
+        "org.typelevel" %% "cats-laws",
+        "org.typelevel" %% "cats-free",
+        "org.typelevel" %% "cats-testkit").map(_ % versions.cats)
 
 //  lazy val pegdown = Seq("org.pegdown" % "pegdown" % "1.2.1")
 

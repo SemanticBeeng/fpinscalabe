@@ -36,12 +36,12 @@ package object laws {
 
       import cats.Semigroup
       import cats.instances.all._
-      import cats.kernel.laws.GroupLaws
+      import cats.kernel.laws.discipline._
 
       import org.scalacheck.{Gen, Arbitrary}
       implicit val arbMyType: Arbitrary[Int] = Arbitrary(Gen.choose(1, 20))
 
-      val rs1 = GroupLaws[Int].semigroup(Semigroup[Int])
+      val rs1 = SemigroupTests[Int](Semigroup[Int]).semigroup
       check(rs1.all)
     }
   }
