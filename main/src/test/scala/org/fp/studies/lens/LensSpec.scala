@@ -36,7 +36,7 @@ import monocle.macros.syntax.lens._
 
 class LensSpec extends org.specs2.Specification /*with MonocleSuite *//*with TextDsl with AutoExamples*/ {
 
-    @Lenses case class Address(streetNumber: Int, streetName: String)
+    @Lenses case class Address(streetNumber: Int, streetName: String, city: Option[String] = None)
     @Lenses case class Person(name: String, age: Int, address: Address)
 
     object Manual { // Lens created manually (i.e. without macro)
@@ -55,6 +55,25 @@ class LensSpec extends org.specs2.Specification /*with MonocleSuite *//*with Tex
 
     val john = Person("John", 30, Address(126, "High Street"))
 
+    @Lenses case class Company(addresses: List[Address], name: String)
+    @Lenses case class Employee(name: String, age: Int, address: Address, company: Company, id: String)
+
+    val company1 = Company(List(Address(126, "High Street", Some("city1"))), "acme")
+    val jane = Employee("Jane", 40, Address(200, "Main Street"), company1, "id230")
+
+    object NestedOptional {
+        import monocle.function._
+        import monocle.function.all._
+        import monocle.Traversal
+        import monocle.std.option._
+        import monocle.std.list._
+        import monocle.std.function._
+
+
+        //trait a extends EachFunctions
+        val company = Company.addresses composeTraversal each composeLens Address.city composePrism monocle.std.option.some
+    }
+
     def is = s2"""
 
       s"$keyPoint Using $lens in different alternative ways.:".p:
@@ -65,6 +84,8 @@ class LensSpec extends org.specs2.Specification /*with MonocleSuite *//*with Tex
 
       s"$keyPoint Using $lens with nested properties:".p:
         ${ GenLens[Person](_.address.streetName).get(john) must_== "High Street"  }
-    """
 
+      s"$keyPoint Using $lens with nested optinal properties:".p:
+        ${ NestedOptional.company.getAll(jane.company) must_== List("city1") }
+"""
 }
