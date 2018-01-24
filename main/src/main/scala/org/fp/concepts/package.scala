@@ -136,6 +136,7 @@ package object concepts {
   val KleisliArrow = "[Kleisli arrow]"
   val KleisliFunction = "[Kleisli function]"
   val coProduct = "[coproduct]"
+  val lens = "[lens]"
   val freeMonad = "[free monad]"
   val naturalTransformation = "[natural transformation]"
 
