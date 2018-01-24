@@ -58,11 +58,13 @@ class LensSpec extends org.specs2.Specification /*with MonocleSuite *//*with Tex
     def is = s2"""
 
       s"$keyPoint Using $lens in different alternative ways.:".p:
+        ${ Manual._name.get(john)   must_== "John"  }
+        ${ Semi.name.get(john)      must_== "John"  }
+        ${ Person.name.get(john)    must_== "John"  }
+        ${ john.lens(_.name).get    must_== "John"  }
 
-      ${ Manual._name.get(john) must_== "John"  }
-      ${ Semi.name.get(john)    must_== "John"  }
-      ${ Person.name.get(john)  must_== "John"  }
-      ${ john.lens(_.name).get  must_== "John"  }
+      s"$keyPoint Using $lens with nested properties:".p:
+        ${ GenLens[Person](_.address.streetName).get(john) must_== "High Street"  }
     """
 
 }
