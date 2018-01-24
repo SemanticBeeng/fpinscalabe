@@ -28,6 +28,8 @@ object versions {
 
   val frameless = "0.4.0"
 
+  val monocle = "1.5.0"
+
   val doobie = "0.5.0-M6"
 
   /**
@@ -83,6 +85,14 @@ object depends {
     Seq("org.typelevel" %% "cats-effect").map(_ % versions.catsEffect)
     Seq("org.typelevel" %% "cats-mtl-core").map(_ % versions.catsMtl)
     Seq("org.typelevel" %% "mouse").map(_ % versions.catsMouse)
+
+  def monocle() =
+    Seq("com.github.julien-truffaut"  %%  "monocle-core",
+        "com.github.julien-truffaut"  %%  "monocle-generic",
+        "com.github.julien-truffaut"  %%  "monocle-macro",
+        "com.github.julien-truffaut"  %%  "monocle-state",
+        "com.github.julien-truffaut"  %%  "monocle-refined").map(_ % versions.monocle) ++
+    Seq("com.github.julien-truffaut"  %%  "monocle-law").map(_ % versions.monocle % Test)
 
  def scalaz(/*scalazVersion: String*/) =
     Seq("org.scalaz"    %% "scalaz-core",

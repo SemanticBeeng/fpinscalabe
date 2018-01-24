@@ -48,6 +48,7 @@ lazy val fpinscalabe = Project(
         depends.cats() ++
         depends.fs2() ++
         depends.frameless() ++
+        depends.monocle() ++
         depends.discipline(scalaVersion.value) ++
         depends.specs2(specs2Version.value)
         //scalacOptions in codata := Seq("-feature", "-language:_"),
