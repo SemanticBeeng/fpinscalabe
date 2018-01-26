@@ -200,6 +200,7 @@ package object concepts {
   val lawHomomorphism = "[homomorphism law]"
   val lawInterchange = "[interchange law]"
   val lawMapping = "[mapping law]" //@todo ??
+  val lawFusion = "[fusion law]"
 
   /**
     * [[lawAssociativity]]

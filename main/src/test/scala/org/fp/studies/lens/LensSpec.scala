@@ -61,7 +61,11 @@ class LensSpec extends org.specs2.Specification /*with MonocleSuite *//*with Tex
     val company1 = Company(List(Address(126, "High Street", Some("city1"))), "acme")
     val jane = Employee("Jane", 40, Address(200, "Main Street"), company1, "id230")
 
-    object NestedOptional {
+  /**
+    * #resource https://groups.google.com/forum/#!topic/scala-monocle/QSjmBQYrelQ
+    * @todo [[lawFusion]] example
+    */
+  object NestedOptional {
         import monocle.function._
         import monocle.function.all._
         import monocle.Traversal
@@ -71,7 +75,7 @@ class LensSpec extends org.specs2.Specification /*with MonocleSuite *//*with Tex
 
 
         //trait a extends EachFunctions
-        val company = Company.addresses composeTraversal each composeLens Address.city composePrism monocle.std.option.some
+        val companyCities = Company.addresses composeTraversal each composeLens Address.city composePrism monocle.std.option.some
     }
 
     def is = s2"""
@@ -86,6 +90,7 @@ class LensSpec extends org.specs2.Specification /*with MonocleSuite *//*with Tex
         ${ GenLens[Person](_.address.streetName).get(john) must_== "High Street"  }
 
       s"$keyPoint Using $lens with nested optinal properties:".p:
-        ${ NestedOptional.company.getAll(jane.company) must_== List("city1") }
+        ${ NestedOptional.companyCities.getAll(jane.company) must_== List("city1") }
+
 """
 }
