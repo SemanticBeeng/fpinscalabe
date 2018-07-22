@@ -221,6 +221,7 @@ package object concepts {
   val monadicContext = "[monadic context]"
   val monadicFunction = "[monadic function]"
   val monadicBind = "[monadic bind]"
+  val monadicComposition = "[monadic composition]"
   val monadTransformer = "[monad transformer]"
   val optionTransformer = "[Option transformer]"
   val eitherTransformer = "[Either transformer]"

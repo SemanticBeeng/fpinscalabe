@@ -1,6 +1,8 @@
 package io.yields.platform.orchestration.shared
 
-
+import org.fp.concepts._
+import org.fp.bookmarks._
+///
 import org.specs2.ugbase.UserGuidePage
 
 import scala.concurrent.Await
@@ -109,7 +111,12 @@ object Spark_fp_mix extends UserGuidePage {
   def computeAvg2(df: DataFrame)(implicit session: SparkSession): Coeval[Double] =
     Coeval(df.agg(f.avg("value")).head().getDouble(0))
 
+  /**
+    *
+    */
   def is = s"Scala and FP - do they mix".title ^ s2"""
+
+  Wrapping Spark with $monadicComposition :
 
   ${snippet{
   /**
