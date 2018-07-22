@@ -47,6 +47,8 @@ lazy val fpinscalabe = Project(
         depends.scalaz(/*scalazVersion.value*/) ++
         depends.cats() ++
         depends.fs2() ++
+        depends.monix() ++
+        depends.spark() ++
         depends.frameless() ++
         depends.monocle() ++
         depends.discipline(scalaVersion.value) ++

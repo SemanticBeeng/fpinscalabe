@@ -47,6 +47,7 @@ package object laws {
       import syntax.functor._
       import std.list._
       import std.function._
+      //import org.specs2.matcher.{Expectable => _}
 
       val f = (_: Int) * 3
       val g = (_: Int) + 1

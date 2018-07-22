@@ -78,13 +78,22 @@ package object resources {
   val learningScalazFromLearningScalaz = Resource[blog]("Learning Scalaz from Learning Scalaz", "https://earldouglas.com/notes/learning-scalaz.html")
   val herdingCats = Resource[blog]("Herding Cats", "http://eed3si9n.com/herding-cats/")
 
+  /**
+    * @todo - write spec
+    */
+  val herdingCats_Cartesian = Resource[blog]("Herding Cats - Cartesian", "http://archive.is/4z2JF")
+
   val timperrett = Resource[blog]("timperrett blog", "http://timperrett.com/")
 
   val scalaWithCats = Resource[book]("Advanced scala with Cats", "[Noel Welsh, Dave Gurnell] Advanced scala with Cats.pdf")
 
   val stackOverflow = Resource[blog]("Stack overflow", "http://stackoverflow.com/")
 
-  val casualMiracles = Resource[blog]("Casual Miracles", "http://www.casualmiracles.com")
+  val casualMiracles_Small_Example_of_Kleisli_Arrows = Resource[blog]("A Small Example of Kleisli Arrows", "http://www.casualmiracles.com")
+  /**
+    * @todo create spec
+    */
+  val casualMiracles_ApplicativeFunctorWithScalaz = Resource[blog]("A Small Example of Applicative Functors with Scalaz", "http://archive.is/fokMo")
 
   val cakeSolutions = Resource[blog]("Cake Solutions", "http://www.cakesolutions.net/")
 
@@ -95,5 +104,6 @@ package object resources {
   val so_typeLambdaAndBenefits = Resource[blog]("Type lambadas and benefits", "https://stackoverflow.com/questions/8736164/what-are-type-lambdas-in-scala-and-what-are-their-benefits")
 
   val cakeSolutions_ExistentialTypesInScala = Resource[blog]("Existential types in Scala", "http://archive.is/i17zj")
+
 }
 

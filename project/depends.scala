@@ -17,20 +17,24 @@ object versions {
 
   val scalaz = "7.2.18"
 
-  val cats = "1.0.1"
-  val catsEffect = "0.8"
-  val catsMtl = "0.2.2"
-  val catsMouse = "0.16"
+  val cats = "1.1.0"
+  val catsEffect = "1.0.0-RC"
+  val catsMtl = "0.2.3"
+  val catsMouse = "0.17"
 
   val fs2 = "0.10.0-RC1"
   val fs2cats = "0.5.0"
   val fs2scalaz = "0.3.0"
 
-  val frameless = "0.4.0"
+  val frameless = "0.6.1"
 
   val monocle = "1.5.0"
 
   val doobie = "0.5.0-M6"
+
+  val monix = "3.0.0-RC1" // newer than "3.0.0-8084549"
+
+  val spark = "2.3.0"
 
   /**
     * from @etorreborre: "The problem comes from the fact that I think you are checking laws with scalaz-scalacheck-bindings
@@ -106,10 +110,24 @@ object depends {
         "co.fs2" %% "fs2-cats" % versions.fs2cats,
         "co.fs2" %% "fs2-scalaz" % versions.fs2scalaz)
 
+  def spark() =
+    Seq(
+      "org.apache.spark" %% "spark-core",
+      "org.apache.spark" %% "spark-sql",
+      "org.apache.spark" %% "spark-streaming",
+      "org.apache.spark" %% "spark-hive"
+    ).map(_ % versions.spark)
+
   def frameless() =
     Seq("org.typelevel" %% "frameless-core",
         "org.typelevel" %% "frameless-dataset",
         "org.typelevel" %% "frameless-cats").map(_ % versions.frameless)
+
+    def monix() = Seq(
+      "io.monix" %% "monix-eval" % versions.monix,
+      "io.monix" %% "monix-execution" % versions.monix,
+      "io.monix" %% "monix-reactive" % versions.monix
+    )
 
 //  lazy val pegdown = Seq("org.pegdown" % "pegdown" % "1.2.1")
 

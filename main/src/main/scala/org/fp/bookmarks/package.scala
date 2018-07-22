@@ -67,16 +67,16 @@ package object bookmarks {
   val ann_applicativeLaws = Annotation(scalaWithCats, "[bkm] 9439935") //todo: find a way to link
 
   /**
-    * Bookmarks for [[casualMiracles]]
+    * Bookmarks for [[casualMiracles_Small_Example_of_Kleisli_Arrows]]
     */
-  val ann_KleisliArrow2 = Annotation(casualMiracles, "https://hyp.is/klP4klJtEeao35P5f-9vBg/archive.is/WwkrC")
+  val ann_KleisliArrow2 = Annotation(casualMiracles_Small_Example_of_Kleisli_Arrows, "https://hyp.is/klP4klJtEeao35P5f-9vBg/archive.is/WwkrC")
 
   /**
     * Bookmarks for [[cakeSolutions]]
     */
-  val ann_KleisliArrow3 = Annotation(casualMiracles, "https://hyp.is/TTdeWFJ2EearsYMHkxbVyw/archive.is/qPpZB")
-  val ann_KleisliArrow4 = Annotation(casualMiracles, "https://hyp.is/eBN9VlMQEeax8dMxrFKStg/archive.is/9Olg3")
-  val ann_KleisliArrow5 = Annotation(casualMiracles, "https://hyp.is/GpSn3lMSEea2IJPt4U3nuA/archive.is/9Olg3")
+  val ann_KleisliArrow3 = Annotation(casualMiracles_Small_Example_of_Kleisli_Arrows, "https://hyp.is/TTdeWFJ2EearsYMHkxbVyw/archive.is/qPpZB")
+  val ann_KleisliArrow4 = Annotation(casualMiracles_Small_Example_of_Kleisli_Arrows, "https://hyp.is/eBN9VlMQEeax8dMxrFKStg/archive.is/9Olg3")
+  val ann_KleisliArrow5 = Annotation(casualMiracles_Small_Example_of_Kleisli_Arrows, "https://hyp.is/GpSn3lMSEea2IJPt4U3nuA/archive.is/9Olg3")
 
 
   /**
