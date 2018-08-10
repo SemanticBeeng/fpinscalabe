@@ -19,6 +19,7 @@ package object resources {
       trait book extends ResourceTypeVal
       trait framework extends ResourceTypeVal
       trait project extends ResourceTypeVal
+      trait snippet extends ResourceTypeVal
 
       //val resourceTypes = Seq(blog, book, framework, project)
     }
@@ -105,5 +106,6 @@ package object resources {
 
   val cakeSolutions_ExistentialTypesInScala = Resource[blog]("Existential types in Scala", "http://archive.is/i17zj")
 
+  val caseClassAttributesWithShapeless = Resource[snippet]("Get a list of all case class attributes with shapeless", "https://gist.github.com/lunaryorn/4b7becbea955ae909af7426d2e2e166c")
 }
 
