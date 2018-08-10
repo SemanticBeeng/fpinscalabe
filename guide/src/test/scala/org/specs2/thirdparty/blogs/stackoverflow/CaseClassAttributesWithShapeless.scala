@@ -27,9 +27,9 @@ final case class Message(id: Int, title: String, body: String)
 /**
   * #resource [[caseClassAttributesWithShapeless]]
   */
-object typeclass_rumtime extends UserGuidePage {
+object CaseClassAttributesWithShapeless extends UserGuidePage {
 
-  def is = s"How to get type class at runtime".title ^ s2"""
+  def is = s"Get a list of all case class attributes with shapeless".title ^ s2"""
 
 ${snippet{
 
