@@ -57,6 +57,6 @@ class CaseClassAttributesWithShapeless extends org.specs2.mutable.Spec with Auto
     val message = Message(10, "foo", "bar")
     val attributes = toAttributes(message)
 
-    attributes must_== List("id", "title", "bodyss")
+    attributes must_== List("id", "title", "body")
   }
 }
