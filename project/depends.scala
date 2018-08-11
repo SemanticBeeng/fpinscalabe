@@ -41,7 +41,7 @@ object versions {
     * which depends on scalacheck 1.12.5 only.
     * One alternative would be to use cats only and the typelevel discipline project to check laws."
     */
-  val specs2 = "4.0.2"
+  val specs2 = "4.3.3"
 }
 
 object depends {
