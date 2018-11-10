@@ -15,14 +15,14 @@ object versions {
 
   val shapeless = "2.3.3"
 
-  val scalaz = "7.2.18"
+  val scalaz = "7.2.27"
 
-  val cats = "1.1.0"
-  val catsEffect = "1.0.0-RC"
-  val catsMtl = "0.2.3"
+  val cats = "1.4.0"
+  val catsEffect = "1.0.0"
+  val catsMtl = "0.4.0"
   val catsMouse = "0.17"
 
-  val fs2 = "0.10.0-RC1"
+  val fs2 = "1.0.0"
   val fs2cats = "0.5.0"
   val fs2scalaz = "0.3.0"
 
@@ -34,7 +34,7 @@ object versions {
 
   val monix = "3.0.0-RC1" // newer than "3.0.0-8084549"
 
-  val spark = "2.3.0"
+  val spark = "2.3.1"
 
   /**
     * from @etorreborre: "The problem comes from the fact that I think you are checking laws with scalaz-scalacheck-bindings
@@ -90,7 +90,7 @@ object depends {
     Seq("org.typelevel" %% "cats-mtl-core").map(_ % versions.catsMtl)
     Seq("org.typelevel" %% "mouse").map(_ % versions.catsMouse)
 
-  def monocle() =
+  def monocle() : Seq[ModuleID] =
     Seq("com.github.julien-truffaut"  %%  "monocle-core",
         "com.github.julien-truffaut"  %%  "monocle-generic",
         "com.github.julien-truffaut"  %%  "monocle-macro",
@@ -98,11 +98,11 @@ object depends {
         "com.github.julien-truffaut"  %%  "monocle-refined").map(_ % versions.monocle) ++
     Seq("com.github.julien-truffaut"  %%  "monocle-law").map(_ % versions.monocle % Test)
 
- def scalaz(/*scalazVersion: String*/) =
+ def scalaz(/*scalazVersion: String*/) : Seq[ModuleID] =
     Seq("org.scalaz"    %% "scalaz-core",
         "org.scalaz"    %% "scalaz-effect",
-        "org.scalaz"    %% "scalaz-concurrent",
-        "org.scalaz"    %% "scalaz-scalacheck-binding").map(_ % versions.scalaz)
+        "org.scalaz"    %% "scalaz-concurrent").map(_ % versions.scalaz) ++
+    Seq("org.scalaz"    %% "scalaz-scalacheck-binding").map(_ % (versions.scalaz + "-scalacheck-1.14") % Test)
 
   def fs2() =
     Seq("co.fs2" %% "fs2-core" % versions.fs2,
