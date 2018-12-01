@@ -6,11 +6,13 @@ object versions {
   val scala = "2.11.12"
 
   val scalaCheck = "1.13.5"
-  val discipline = "0.8"
+  val discipline = "0.9.0"
 
   val scalaMacrosParadise = "2.1.0"
-  val kindProjector = "0.9.5"
-  val simulacrum = "0.11.0"
+  val kindProjector = "0.9.9"
+  val simulacrum = "0.13.0"
+  val machinist = "0.6.5" // #todo add examples
+
   val tagsoup = "1.2"
 
   val shapeless = "2.3.3"

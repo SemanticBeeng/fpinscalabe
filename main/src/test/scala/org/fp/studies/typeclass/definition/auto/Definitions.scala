@@ -7,7 +7,7 @@ package org.fp.studies.typeclass.definition.auto
 trait Definitions {
 
 // 8<---
-  import simulacrum._
+  import simulacrum.typeclass
 
   @typeclass trait CanTruthy[A] { self =>
     /** Return true, if `a` is truthy. */
