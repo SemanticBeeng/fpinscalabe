@@ -26,7 +26,7 @@ package object dfault {
 
     }
 
-    s"$keyPoint Example of using $FunctionArrow with Function1"
+    s"$keyPoint Example of using $functionArrow with Function1"
 
     s"$bookmarks $ann_Arrow1".p
     eg {
@@ -37,19 +37,19 @@ package object dfault {
 
       import SomeFunctions._
 
-      s"Applying first on the $FunctionArrow.".p
+      s"Applying first on the $functionArrow.".p
       (plus1.first apply (7, "abc")) must_=== (8, "abc")
 
-      s"Applying second on the $FunctionArrow.".p
+      s"Applying second on the $functionArrow.".p
       (plus1.second apply ("def", 14)) must_=== ("def", 15)
 
-      s"Combine plus1 and rev on the $FunctionArrow to apply across both elements of a pair.".p
+      s"Combine plus1 and rev on the $functionArrow to apply across both elements of a pair.".p
       (plus1 *** rev apply (7, "abc")) must_=== (8, "cba")
 
-      s"Perform both plus1 and times2 on a value using the $FunctionArrow".p
+      s"Perform both plus1 and times2 on a value using the $functionArrow".p
       (plus1 &&& times2 apply 7) must_=== (8, 14)
 
-      s"Perform plus1 on a pair using the $FunctionArrow".p
+      s"Perform plus1 on a pair using the $functionArrow".p
       (plus1.product apply (9, 99)) must_=== (10, 100)
     }
 

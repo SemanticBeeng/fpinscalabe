@@ -11,6 +11,22 @@ package object concepts {
   /**
     * About functions
     */
+  /**
+    * A function of a [[higherKindedType]]: `apply`  takes a [[typeParameter]]
+    *
+    * #todo https://typelevel.org/cats/datatypes/functionk.html
+    * _"https://hyp.is/I0BaVPV3EeiGuZuiqzEnfg/typelevel.org/cats/datatypes/functionk.html"_
+    * "interpreters for [[freeMonad]] and [[freeApplicative]]s are represented as [[functionK]] instances"
+    *
+    * @see [[functionLambda]]
+    * @see [[functionValue]]
+    * @see [[naturalTransformation]]
+    * @see [[parametricPolymorphicFunction]]
+    * @see [[functorK]]
+    */
+  val functionK = s"[functionK]"
+  val functionLambda = "[function lambda]"
+  val functionValue = "[function value]"
   val functionComposition = "[function composition]"
   val functionOverloading = "[function overloading]"
   val functionLifting = "[function lifting]"
@@ -99,6 +115,14 @@ package object concepts {
     */
 
    val ad_hocPolymorphism = "[ad-hoc polymorphism]"
+   val polymorphicLambdaValue = "[polymorphic lambda value]"
+   val polymorphicFunctionType = "[polymorphic function type]"
+   /**
+     * @see [[typeParameter]]
+     */
+   val parametricPolymorphism = "[parametric polymorphism]"
+   val parametricPolymorphicFunction = "[parametric polymorphic function]"
+
    val companionObject = "[companion object]"
    val glueObject = "[glue object]"
 
@@ -131,13 +155,22 @@ package object concepts {
   val applicativeBuilder = "[applicative builder]"
   val applicativeValue = "[applicative value]"
   val traverseFunctor = "[traverse]"
-  val Arrow = "[arrow]"
-  val FunctionArrow = "[function arrow]"
+  /**
+    * #todo https://github.com/typelevel/cats-tagless/blob/master/core/src/main/scala/cats/tagless/FunctorK.scala
+    */
+  val functorK = "[FunctorK]"
+  val arrow = "[arrow]"
+  val functionArrow = "[function arrow]"
   val KleisliArrow = "[Kleisli arrow]"
   val KleisliFunction = "[Kleisli function]"
   val coProduct = "[coproduct]"
   val lens = "[lens]"
   val freeMonad = "[free monad]"
+  val freeApplicative = "[free applicative]"
+
+  /**
+    * Morphism between [[functor]]s
+    */
   val naturalTransformation = "[natural transformation]"
 
   /**

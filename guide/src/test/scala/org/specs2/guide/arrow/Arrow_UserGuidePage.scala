@@ -11,7 +11,7 @@ object Arrow_UserGuidePage extends UserGuidePage {
 
   def is = "Arrow example".title ^ s2"""
 
-### ${concepts.Arrow} .... Examples for a ${concepts.Arrow} ${concepts.functionComposition} with ${resources.Scalaz.md} and ${resources.Cats.md} in
+### ${concepts.arrow} .... Examples for a ${concepts.arrow} ${concepts.functionComposition} with ${resources.Scalaz.md} and ${resources.Cats.md} in
  * ${link(arrow.operators.dfault.Spec1)}
 
 }
