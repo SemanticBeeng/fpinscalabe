@@ -19,12 +19,12 @@ object versions {
 
   val scalaz = "7.2.27"
 
-  val cats = "1.4.0"
-  val catsEffect = "1.0.0"
+  val cats = "1.6.0"
+  val catsEffect = "1.2.0"
   val catsMtl = "0.4.0"
   val catsMouse = "0.17"
 
-  val fs2 = "1.0.0"
+  val fs2 = "1.0.3"
   val fs2cats = "0.5.0"
   val fs2scalaz = "0.3.0"
 

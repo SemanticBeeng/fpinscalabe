@@ -51,7 +51,7 @@ package object concepts {
     * [[org.fp.bookmarks.ann_stackOverflow_typeLambdaAndBenefits_bkm1]]
     */
   val typeCurrying = "[type currying]"
-  val selfType = "self-type"
+  val selfType = "[self type]"
 
   /**
     * [[org.fp.resources.impl.Resource]]
